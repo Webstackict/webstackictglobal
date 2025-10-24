@@ -7,11 +7,11 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .cardWrapper {
+  & .cardWrapper {
     position: relative;
     transition: transform 0.3s;
 
-    .badge {
+    & .badge {
       position: absolute;
       top: -1rem;
       left: 50%;
@@ -24,7 +24,7 @@
     }
   }
 
-  .gradientBorder {
+  & .gradientBorder {
     border-radius: 1.5rem;
     padding: 1px;
     border: var(--card-border);
@@ -35,32 +35,32 @@
       box-shadow: var(--box-shadow-hover);
     }
 
-    .inner {
+    & .inner {
       background: var(--cohorts-card-bg);
       border-radius: 1.5rem;
       padding: 2.5rem;
       text-align: center;
 
-      .iconWrapper {
+      & .iconWrapper {
         display: inline-block;
         padding: 1rem;
         border-radius: 1rem;
         margin-bottom: 1rem;
       }
 
-      .title {
+      & .title {
         font-size: 1.875rem;
         font-weight: 700;
         color: var(--white);
         margin-bottom: 0.5rem;
       }
 
-      .subtitle {
+      & .subtitle {
         color: var(--gray-text-400);
         font-size: 1rem;
       }
 
-      .price {
+      & .price {
         margin: 2rem 0;
         font-size: 3rem;
         font-weight: 900;
@@ -72,25 +72,25 @@
         }
       }
 
-      .features {
+      & .features {
         text-align: left;
         margin-bottom: 2rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
 
-        .feature {
+        & .feature {
           display: flex;
           align-items: center;
           color: var(--gray-text-400);
 
-          svg {
+          & svg {
             margin-right: 0.75rem;
           }
         }
       }
 
-      .button {
+      & .button {
         width: 100%;
         color: var(--white);
         font-weight: 700;

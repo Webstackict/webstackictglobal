@@ -8,13 +8,13 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .header {
+  & .header {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
   }
 
-  .iconBox {
+  & .iconBox {
     width: 4rem;
     height: 4rem;
     border-radius: 1rem;
@@ -24,33 +24,33 @@
     margin-right: 1rem;
   }
 
-  .icon {
+  & .icon {
     font-size: 1.25rem;
     color: var(--white);
   }
 
-  .title {
+  & .title {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--white);
   }
 
-  .subtitle {
+  & .subtitle {
     color: var(--gray-text-500);
   }
 
-  .topics {
+  & .topics {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .topic {
+  & .topic {
     display: flex;
     align-items: flex-start;
   }
 
-  .topicIcon {
+  & .topicIcon {
     width: 2.5rem;
     height: 2.2rem;
     border-radius: 9999px;
@@ -62,13 +62,13 @@
     font-weight: 600;
   }
 
-  .topicTitle {
+  & .topicTitle {
     color: var(--white);
     font-weight: 600;
     margin-bottom: 0.5rem;
   }
 
-  .topicDesc {
+  & .topicDesc {
     color: var(--gray-text-500);
     font-size: 0.875rem;
   }

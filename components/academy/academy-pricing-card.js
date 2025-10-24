@@ -26,7 +26,7 @@ export default function AcademyPricingCard({
             <span className={classes.price}>
               {currencyFormatter.format(department.fee)}
             </span>
-            <span className={classes.currency}>NGN</span>
+            {/* <span className={classes.currency}>NGN</span> */}
           </div>
           <p className={classes.priceSub}>
             Complete {department.duration} months intensive program

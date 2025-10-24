@@ -25,32 +25,32 @@
     border-color: rgba(60, 166, 252, 0.4);
   }
 
-  .faqHeader {
+  & .faqHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    h3 {
+    & h3 {
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--white);
     }
 
-    .icon {
+    & .icon {
       color: var(--teal-400);
       font-size: 1rem;
       transition: transform 0.3s ease;
     }
 
-    .iconActive {
+    & .iconActive {
       transform: rotate(180deg);
     }
   }
 
-  .faqContent {
+  & .faqContent {
     margin-top: 1rem;
 
-    p {
+    & p {
       color: var(--gray-text-400);
       line-height: 1.6;
       font-size: 1rem;

@@ -29,7 +29,7 @@
       }
     }
 
-    .label {
+    & .label {
       color: var(--gray-text-400);
       font-size: 1rem;
     }

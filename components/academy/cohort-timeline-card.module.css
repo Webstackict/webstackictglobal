@@ -2,23 +2,22 @@
   font-size: 1.875rem;
   font-weight: 700;
   color: var(--gray-text-400);
-      margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 .cohortList {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  
   /* Early Bird */
-  .earlyBird {
+  & .earlyBird {
     background: rgba(59, 130, 246, 0.1);
     padding: 1.5rem;
     border-radius: 1rem;
     border: 1px solid rgba(59, 130, 246, 0.2);
   }
 
-  .earlyBirdHeader {
+  & .earlyBirdHeader {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
@@ -31,28 +30,28 @@
     }
   }
 
-  .earlyBirdHeader i {
+  & .earlyBirdHeader i {
     color: #fb923c;
     margin-right: 0.5rem;
   }
 
-  .earlyBirdText {
+  & .earlyBirdText {
     color: var(--gray-text-400);
     margin-bottom: 0.75rem;
   }
 
-  .earlyBirdPrice {
+  & .earlyBirdPrice {
     display: flex;
     align-items: center;
   }
 
-  .discountPrice {
+  & .discountPrice {
     color: var(--teal-500);
     font-weight: 700;
     font-size: 1.5rem;
   }
 
-  .oldPrice {
+  & .oldPrice {
     color: var(--gray-text-500);
     text-decoration: line-through;
     margin-left: 0.5rem;

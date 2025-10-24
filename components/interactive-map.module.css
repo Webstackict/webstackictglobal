@@ -13,7 +13,7 @@
     box-shadow: var(--box-shadow-hover);
   }
 
-  .mapContainer {
+  & .mapContainer {
     height: 500px;
     border-radius: 1rem;
     background: linear-gradient(to right, #110f37, #1a1850);
@@ -28,7 +28,7 @@
     }
   }
 
-  .overlay {
+  & .overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -38,7 +38,7 @@
     );
   }
 
-  .content {
+  & .content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +49,7 @@
     z-index: 10;
   }
 
-  .iconWrapper {
+  & .iconWrapper {
     width: 6rem;
     height: 6rem;
     border-radius: 9999px;
@@ -64,18 +64,18 @@
     }
   }
 
-  .title {
+  & .title {
     font-size: 1.5rem;
     font-weight: 700;
 
     color: var(--white);
   }
 
-  .text {
+  & .text {
     color: var(--gray-text-400);
   }
 
-  .button {
+  & .button {
     background: var(--contact-bg-gradient);
     color: var(--white);
     display: flex;
@@ -89,21 +89,21 @@
     width: fit-content;
     transition: all 0.3s ease;
     cursor: pointer;
+
+    &:hover {
+      box-shadow: var(--contact-box-shadow-hover);
+      transform: translateY(-2px);
+    }
   }
 
-  .button:hover {
-    box-shadow: var(--contact-box-shadow-hover);
-    transform: translateY(-2px);
-  }
-
-  .circle1,
+  & .circle1,
   .circle2,
   .circle3 {
     position: absolute;
     border-radius: 9999px;
   }
 
-  .circle1 {
+  & .circle1 {
     top: 2.5rem;
     left: 2.5rem;
     width: 1rem;
@@ -111,7 +111,7 @@
     background: var(--teal-500);
   }
 
-  .circle2 {
+  & .circle2 {
     bottom: 4rem;
     right: 5rem;
     width: 0.75rem;
@@ -119,7 +119,7 @@
     background: var(--purple-400);
   }
 
-  .circle3 {
+  & .circle3 {
     top: 50%;
     right: 2.5rem;
     width: 1.25rem;
@@ -127,7 +127,7 @@
     background: rgba(60, 166, 252, 0.5);
   }
 
-  .mapIframe {
+  & .mapIframe {
     width: 100%;
     height: 100%;
     border-radius: 16px;

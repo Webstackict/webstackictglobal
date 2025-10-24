@@ -11,7 +11,7 @@
     box-shadow: var(--box-shadow-hover);
   }
 
-  .iconBox {
+  & .iconBox {
     width: 3rem;
     height: 3rem;
     border-radius: 0.5rem;
@@ -24,19 +24,19 @@
     font-size: 1.2rem;
   }
 
-  h4 {
+  & h4 {
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
   }
 
-  p {
+  & p {
     color: var(--gray-text-500);
     font-size: 0.95rem;
     line-height: 1.6;
   }
-  .contactDetail {
-    color: var( --teal-400);
+  & .contactDetail {
+    color: var(--teal-400);
     font-weight: 600;
   }
 }

@@ -3,7 +3,7 @@
   grid-template-columns: 1fr;
   gap: 2rem;
 
-  .card {
+  & .card {
     background: var(--charcoal-blue-500);
     border-radius: 1.5rem;
     padding: 2rem;
@@ -18,20 +18,20 @@
     }
   }
 
-  .header {
+  & .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
   }
 
-  .title {
+  & .title {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--white);
   }
 
-  .badge {
+  & .badge {
     display: flex;
     align-items: center;
     gap: 0.25rem;
@@ -41,44 +41,44 @@
     font-weight: 600;
   }
 
-  .badgeIcon {
+  & .badgeIcon {
     font-size: 0.6rem;
     margin-right: 0.25rem;
   }
 
-  .infoSection {
+  & .infoSection {
     margin-bottom: 1.5rem;
   }
 
-  .infoRow {
+  & .infoRow {
     display: flex;
     justify-content: space-between;
     font-size: 0.875rem;
     margin-bottom: 0.75rem;
   }
 
-  .label {
+  & .label {
     color: var(--gray-text-500);
   }
 
-  .progressBarWrapper {
+  & .progressBarWrapper {
     margin-bottom: 1rem;
   }
 
-  .progressBarBg {
+  & .progressBarBg {
     background: var(--gray-bg);
     height: 0.75rem;
     border-radius: 9999px;
     overflow: hidden;
   }
 
-  .progressBarFill {
+  & .progressBarFill {
     height: 100%;
     border-radius: 9999px;
     transition: width 0.3s ease;
   }
 
-  .footerText {
+  & .footerText {
     text-align: center;
     color: var(--gray-text-400);
     font-size: 0.875rem;

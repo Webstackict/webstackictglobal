@@ -33,7 +33,7 @@
     }
   }
 
-  .iconContainer {
+  & .iconContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,11 +41,11 @@
     height: 3rem;
     border-radius: 10px;
   }
-  svg {
+  & svg {
     width: 1.5rem;
   }
 
-  p {
+  & p {
     font-size: 0.9rem;
   }
 }
