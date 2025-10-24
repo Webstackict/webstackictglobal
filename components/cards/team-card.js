@@ -14,8 +14,8 @@ export default function TeamCard({ member, size = null, ...props }) {
   const BadgeIcon = iconsConfig[member.icon];
   return (
     <motion.div
-      className={`${classes.card} ${size ? size : undefined}`}
       {...props}
+      className={`${classes.teamCard} ${size ? size : undefined}`}
     >
       <div className={classes.imageWrapper}>
         <div className={classes.imageContainer}>

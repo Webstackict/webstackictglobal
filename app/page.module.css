@@ -1,13 +1,13 @@
 .benefitsSection {
   text-align: center;
 
-  h3 {
+  & h3 {
     font-size: 1.75rem;
     font-weight: 700;
     margin-bottom: 2rem;
   }
 
-  .benefitsGrid {
+  & .benefitsGrid {
     @media (min-width: 768px) {
       grid-template-columns: repeat(3, 1fr);
     }
