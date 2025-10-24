@@ -10,7 +10,7 @@
   height: 100dvh;
   width: 40vw;
   min-width: 20rem;
-  padding: 5rem 1rem 1rem 1rem;
+  padding: 5rem 2rem 1rem 2rem;
   z-index: 999;
 
   & > svg {
@@ -22,8 +22,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2.5rem;
-    font-size: 1.2rem;
+    gap: 3rem;
+    font-size: 1.5rem;
   }
 
   & .link {
@@ -50,6 +50,7 @@
     background: var(--midnight-blue-500);
     width: 100%;
     overflow: hidden;
+    gap: 1rem;
 
     padding: 0;
 
