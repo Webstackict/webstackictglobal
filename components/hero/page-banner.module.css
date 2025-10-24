@@ -1,7 +1,6 @@
-.heroSection {
+.pageBannerSection {
   position: relative;
   overflow: hidden;
-
   padding: 8rem 2rem 4rem;
   background: linear-gradient(to right, #110f37, #1e293b, #110f37);
 
@@ -14,14 +13,14 @@
     /* z-index: 1; */
   }
 
-  .bgDecor {
+  & .bgDecor {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
 
-    .circle1 {
+    & .circle1 {
       position: absolute;
       top: 5rem;
       left: 5rem;
@@ -33,7 +32,7 @@
       animation: float 6s ease-in-out infinite;
     }
 
-    .circle2 {
+    & .circle2 {
       position: absolute;
       bottom: 5rem;
       right: 5rem;
@@ -47,21 +46,21 @@
     }
   }
 
-  .container {
+  & .container {
     position: relative;
     z-index: 2;
     max-width: 80rem;
     margin: 0 auto;
     text-align: center;
 
-    h1 {
+    & h1 {
       font-size: 4.5rem;
       font-weight: 900;
       color: var(--white);
       margin: 1.5rem 0;
       line-height: 1.1;
 
-      span {
+      & span {
         background: var(--gradient-text);
         background-clip: text;
         -webkit-background-clip: text;
@@ -70,7 +69,7 @@
       }
     }
 
-    p {
+    & p {
       font-size: 1.5rem;
       color: var(--gray-text-400);
       margin-bottom: 3rem;
@@ -80,4 +79,3 @@
     }
   }
 }
-

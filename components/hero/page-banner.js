@@ -22,7 +22,7 @@ export default function PageBanner({
     }
   }, []);
   return (
-    <section className={classes.heroSection}>
+    <section className={classes.pageBannerSection}>
       <div className={classes.bgDecor}>
         <div className={classes.circle1}></div>
         <div className={classes.circle2}></div>
