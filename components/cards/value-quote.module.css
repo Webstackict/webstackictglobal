@@ -1,0 +1,36 @@
+.ValueQuoteContainer {
+  text-align: center;
+  margin-top: 5rem;
+ 
+
+  .glassBox {
+    display: inline-block;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: var(--card-border);
+    background: var(--charcoal-blue-500);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+     transition: all 0.4s ease;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--box-shadow-hover);
+    }
+  }
+
+  .heading {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--gray-text-400);
+  }
+
+  .paragraph {
+    color: var(--gray-text-500);
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.625;
+  }
+}

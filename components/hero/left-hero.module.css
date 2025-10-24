@@ -1,0 +1,64 @@
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+
+  & .tagline {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    width: fit-content;
+
+    & > span {
+      font-size: 0.875rem;
+    }
+
+    & > svg {
+      color: var(--blue-400);
+      margin-right: 0.5rem;
+    }
+  }
+
+  & .heroTitle {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  & .gradientText {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: block;
+  }
+
+  & .heroDescription {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.25rem;
+    color: var(--gray-text-400);
+    max-width: 32rem;
+    line-height: 1.6;
+    min-height: 8rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .left {
+    align-items: center;
+    & .heroTitle {
+      text-align: center;
+    }
+
+    & .heroDescription {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}

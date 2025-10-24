@@ -1,0 +1,51 @@
+.heroSection {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 1.5rem 4rem;
+  background: var(--hero-bg);
+  color: var(--white);
+
+  & .heroBackground {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  & .heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+  }
+
+  & .heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: var(--hero-overlay);
+  }
+
+  & .heroContent {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  & .heroGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    & .heroGrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.immersiveHero {
+  background: var(--charcoal-blue-400);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: var(--card-border);
+  transition: all 0.3s ease;
+  box-shadow: var(--box-shadow-blue);
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+
+  & .glowBorder {
+    border: var(--card-border);
+    box-shadow: var(--box-shadow-blue);
+  }
+
+  & .previewTitle {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+}

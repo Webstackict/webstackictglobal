@@ -1,0 +1,108 @@
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8rem;
+  height: 8rem;
+  background: linear-gradient(to left, #3b82f6, transparent);
+  opacity: 0.2;
+}
+
+.innerContent {
+  position: relative;
+  z-index: 10;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--gray-text-400);
+  }
+
+  .priceSection {
+    margin-bottom: 2rem;
+  }
+
+  .priceRow {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 3.75rem;
+    font-weight: 900;
+    color: var(--gray-text-400);
+  }
+
+  .currency {
+    color: var(--gray-text-500);
+    margin-left: 0.5rem;
+  }
+
+  .priceSub {
+    color: var(--gray-text-500);
+  }
+
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .featureItem {
+    display: flex;
+    align-items: center;
+    color: var(--gray-text-500);
+
+    & svg {
+      color: #4ade80;
+      margin-right: 0.75rem;
+    }
+  }
+
+  .paymentOptions {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+  }
+
+  .paymentOptions h4 {
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .paymentGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .paymentCard {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .paymentTitle {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .paymentHighlight {
+    color: var(--teal-500);
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .paymentSub {
+    color: var(--gray-text-500);
+  }
+}

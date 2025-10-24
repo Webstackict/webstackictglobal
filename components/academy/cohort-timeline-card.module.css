@@ -1,0 +1,60 @@
+.cohortTimelineTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--gray-text-400);
+      margin-bottom: 2rem;
+}
+.cohortList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  
+  /* Early Bird */
+  .earlyBird {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .earlyBirdHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: var(--white);
+    font-weight: 600;
+
+    & svg {
+      color: var(--orange-400);
+      margin-right: 0.75rem;
+    }
+  }
+
+  .earlyBirdHeader i {
+    color: #fb923c;
+    margin-right: 0.5rem;
+  }
+
+  .earlyBirdText {
+    color: var(--gray-text-400);
+    margin-bottom: 0.75rem;
+  }
+
+  .earlyBirdPrice {
+    display: flex;
+    align-items: center;
+  }
+
+  .discountPrice {
+    color: var(--teal-500);
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .oldPrice {
+    color: var(--gray-text-500);
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+  }
+}

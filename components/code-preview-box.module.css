@@ -1,0 +1,73 @@
+.previewBox {
+  background-color: var(--charcoal-blue-500);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  & .previewHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  & .previewTopic {
+    font-size: 0.875rem;
+    color: var(--gray-text-500);
+  }
+
+  & .liveBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & .liveDot {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--hot-pink-400);
+    border-radius: 50%;
+  }
+
+  & .liveText {
+    font-size: 0.75rem;
+    color: var(--gray-text-500);
+  }
+
+  & .codeBlock {
+    font-family: monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+.codePreviwBoxStudentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  & .studentItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & .avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+
+  & .studentName {
+    font-size: 0.75rem;
+    color: var(--gray-text-500);
+  }
+}
+
+.codePreviewFooter {
+  text-align: center;
+  & > span {
+    font-size: 0.875rem;
+  }
+}

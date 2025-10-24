@@ -1,0 +1,992 @@
+<iframe title="wireframe-tJdnKGNH7s7iOQEe2VAI" srcdoc="&lt;html&gt;&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;script src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;&lt;script&gt;
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif']
+            }
+          }
+        }
+      };
+    &lt;/script&gt;
+    &lt;script&gt; window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js&quot; crossorigin=&quot;anonymous&quot; referrerpolicy=&quot;no-referrer&quot;&gt;&lt;/script&gt;
+    
+    &lt;style&gt;
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+        .glassmorphism { 
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-border {
+            box-shadow: 0 0 20px rgba(60, 166, 252, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #3ca6fc, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(60, 166, 252, 0.5);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #110f37 0%, #1a1850 50%, #2a2870 100%);
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(17, 15, 55, 0.9) 0%, rgba(26, 24, 80, 0.8) 100%);
+        }
+    &lt;/style&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin=&quot;&quot;&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;amp;display=swap&quot;&gt;&lt;style&gt;
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  &lt;/style&gt;&lt;/head&gt;
+&lt;body class=&quot;bg-gray-900 text-white overflow-x-hidden&quot;&gt;
+
+&lt;!-- Header Navigation --&gt;
+&lt;header id=&quot;header&quot; class=&quot;fixed top-0 w-full z-50 glassmorphism border-b border-gray-800&quot;&gt;
+    &lt;nav class=&quot;max-w-7xl mx-auto px-6 py-4&quot;&gt;
+        &lt;div class=&quot;flex items-center justify-between&quot;&gt;
+            &lt;div class=&quot;flex items-center space-x-12&quot;&gt;
+                &lt;div class=&quot;text-2xl font-bold gradient-text&quot;&gt;WEBSTACK&lt;/div&gt;
+                &lt;div class=&quot;hidden lg:flex items-center space-x-8&quot;&gt;
+                    &lt;div class=&quot;relative group&quot;&gt;
+                        &lt;button class=&quot;text-gray-300 hover:text-white flex items-center space-x-1 transition-colors&quot;&gt;
+                            &lt;span&gt;Programs&lt;/span&gt;
+                            &lt;i class=&quot;fa-solid fa-chevron-down text-xs&quot;&gt;&lt;/i&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;relative group&quot;&gt;
+                        &lt;button class=&quot;text-gray-300 hover:text-white flex items-center space-x-1 transition-colors&quot;&gt;
+                            &lt;span&gt;Services&lt;/span&gt;
+                            &lt;i class=&quot;fa-solid fa-chevron-down text-xs&quot;&gt;&lt;/i&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;text-gray-300 hover:text-white transition-colors cursor-pointer&quot;&gt;About&lt;/span&gt;
+                    &lt;span class=&quot;text-gray-300 hover:text-white transition-colors cursor-pointer&quot;&gt;Community&lt;/span&gt;
+                    &lt;span class=&quot;text-gray-300 hover:text-white transition-colors cursor-pointer&quot;&gt;Resources&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;flex items-center space-x-4&quot;&gt;
+                &lt;span class=&quot;text-gray-300 hover:text-white transition-colors cursor-pointer&quot;&gt;Sign In&lt;/span&gt;
+                &lt;span class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all hover-glow cursor-pointer&quot;&gt;
+                    Get Started
+                &lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;!-- Hero Section --&gt;
+&lt;section id=&quot;hero-section&quot; class=&quot;hero-gradient pt-24 pb-16 px-6 h-[900px] relative overflow-hidden&quot;&gt;
+    &lt;div class=&quot;absolute inset-0&quot;&gt;
+        &lt;img class=&quot;w-full h-full object-cover opacity-20&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/098a301275-17fc37a3ca371ad63e71.png&quot; alt=&quot;futuristic tech workspace with coding screens and digital elements, dark blue gradient&quot;&gt;
+        &lt;div class=&quot;absolute inset-0 bg-gradient-to-r from-blue-900/50 to-purple-900/30&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;max-w-7xl mx-auto relative z-10&quot;&gt;
+        &lt;div class=&quot;grid lg:grid-cols-2 gap-16 items-center h-full&quot;&gt;
+            &lt;div class=&quot;space-y-8&quot;&gt;
+                &lt;div class=&quot;inline-flex items-center px-4 py-2 rounded-full glassmorphism glow-border&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-rocket text-blue-400 mr-2&quot;&gt;&lt;/i&gt;
+                    &lt;span class=&quot;text-sm font-medium&quot;&gt;Africa's Premier Tech Training Hub&lt;/span&gt;
+                &lt;/div&gt;
+                
+                &lt;h1 class=&quot;text-7xl font-black leading-tight&quot;&gt;
+                    Build Your
+                    &lt;span class=&quot;gradient-text block&quot;&gt;Tech Future&lt;/span&gt;
+                    in Africa
+                &lt;/h1&gt;
+                
+                &lt;p class=&quot;text-xl text-gray-300 leading-relaxed max-w-lg&quot;&gt;
+                    Join WEBSTACK's premium training programs and transform your career with hands-on experience in web development, data science, cybersecurity, and emerging technologies.
+                &lt;/p&gt;
+                
+                &lt;div class=&quot;flex items-center space-x-6&quot;&gt;
+                    &lt;button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg hover-glow transition-all&quot;&gt;
+                        Join Our Next Cohort
+                    &lt;/button&gt;
+                    &lt;button class=&quot;glassmorphism border border-gray-600 hover:border-blue-400 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover-glow&quot;&gt;
+                        Explore Programs
+                    &lt;/button&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;flex items-center space-x-8 pt-8&quot;&gt;
+                    &lt;div class=&quot;text-center&quot;&gt;
+                        &lt;div class=&quot;text-3xl font-bold gradient-text&quot;&gt;5,000+&lt;/div&gt;
+                        &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Students Trained&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;text-center&quot;&gt;
+                        &lt;div class=&quot;text-3xl font-bold gradient-text&quot;&gt;95%&lt;/div&gt;
+                        &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Job Placement Rate&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;text-center&quot;&gt;
+                        &lt;div class=&quot;text-3xl font-bold gradient-text&quot;&gt;50+&lt;/div&gt;
+                        &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Partner Companies&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;relative&quot;&gt;
+                &lt;div class=&quot;floating-animation&quot;&gt;
+                    &lt;div class=&quot;glassmorphism rounded-3xl p-8 glow-border&quot;&gt;
+                        &lt;div class=&quot;space-y-6&quot;&gt;
+                            &lt;div class=&quot;flex items-center justify-between&quot;&gt;
+                                &lt;h3 class=&quot;text-xl font-bold&quot;&gt;Live Coding Session&lt;/h3&gt;
+                                &lt;div class=&quot;w-3 h-3 bg-green-400 rounded-full animate-pulse&quot;&gt;&lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;bg-gray-900/50 rounded-lg p-4 font-mono text-sm&quot;&gt;
+                                &lt;div class=&quot;text-blue-400&quot;&gt;const buildFuture = () =&amp;gt; {&lt;/div&gt;
+                                &lt;div class=&quot;text-white ml-4&quot;&gt;return 'Success at WEBSTACK';&lt;/div&gt;
+                                &lt;div class=&quot;text-blue-400&quot;&gt;}&lt;/div&gt;
+                            &lt;/div&gt;
+                            &lt;div class=&quot;flex items-center justify-between text-sm&quot;&gt;
+                                &lt;span class=&quot;text-gray-400&quot;&gt;124 students online&lt;/span&gt;
+                                &lt;span class=&quot;text-green-400&quot;&gt;Next: Data Structures&lt;/span&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Ongoing Cohorts Section --&gt;
+&lt;section id=&quot;ongoing-cohorts&quot; class=&quot;py-20 px-6 bg-gray-900&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;Active Training &lt;span class=&quot;gradient-text&quot;&gt;Cohorts&lt;/span&gt;&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400 max-w-3xl mx-auto&quot;&gt;Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid lg:grid-cols-4 md:grid-cols-2 gap-8&quot;&gt;
+            &lt;div class=&quot;card-gradient rounded-2xl p-8 glow-border hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-code text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;bg-green-500 text-white text-xs px-3 py-1 rounded-full&quot;&gt;Open&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-3&quot;&gt;Full-Stack Web Development&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Master React, Node.js, databases, and deployment with real-world projects.&lt;/p&gt;
+                &lt;div class=&quot;space-y-3 mb-8&quot;&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Start Date:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;Jan 15, 2025&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Duration:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;6 months&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Fee:&lt;/span&gt;
+                        &lt;span class=&quot;text-blue-400 font-bold&quot;&gt;$2,500&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Spots Left:&lt;/span&gt;
+                        &lt;span class=&quot;text-orange-400&quot;&gt;8/30&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button class=&quot;w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-colors&quot;&gt;
+                    Enroll Now
+                &lt;/button&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;card-gradient rounded-2xl p-8 glow-border hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-chart-line text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;bg-green-500 text-white text-xs px-3 py-1 rounded-full&quot;&gt;Open&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-3&quot;&gt;Data Science &amp;amp; Analytics&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Learn Python, ML, AI, and data visualization with industry datasets.&lt;/p&gt;
+                &lt;div class=&quot;space-y-3 mb-8&quot;&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Start Date:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;Jan 22, 2025&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Duration:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;5 months&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Fee:&lt;/span&gt;
+                        &lt;span class=&quot;text-blue-400 font-bold&quot;&gt;$2,200&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Spots Left:&lt;/span&gt;
+                        &lt;span class=&quot;text-green-400&quot;&gt;15/25&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button class=&quot;w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors&quot;&gt;
+                    Enroll Now
+                &lt;/button&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;card-gradient rounded-2xl p-8 glow-border hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-shield-halved text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;bg-red-500 text-white text-xs px-3 py-1 rounded-full&quot;&gt;Closed&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-3&quot;&gt;Cybersecurity Specialist&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Ethical hacking, network security, and incident response training.&lt;/p&gt;
+                &lt;div class=&quot;space-y-3 mb-8&quot;&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Start Date:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;Feb 5, 2025&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Duration:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;4 months&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Fee:&lt;/span&gt;
+                        &lt;span class=&quot;text-blue-400 font-bold&quot;&gt;$2,800&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Spots Left:&lt;/span&gt;
+                        &lt;span class=&quot;text-red-400&quot;&gt;0/20&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button class=&quot;w-full bg-gray-600 text-gray-400 py-3 rounded-lg font-semibold cursor-not-allowed&quot;&gt;
+                    Waitlist Only
+                &lt;/button&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;card-gradient rounded-2xl p-8 glow-border hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center justify-between mb-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-mobile-screen-button text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;span class=&quot;bg-yellow-500 text-black text-xs px-3 py-1 rounded-full&quot;&gt;Starting Soon&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-3&quot;&gt;Mobile App Development&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Build native iOS and Android apps with React Native and Flutter.&lt;/p&gt;
+                &lt;div class=&quot;space-y-3 mb-8&quot;&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Start Date:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;Feb 12, 2025&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Duration:&lt;/span&gt;
+                        &lt;span class=&quot;text-white&quot;&gt;5 months&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Fee:&lt;/span&gt;
+                        &lt;span class=&quot;text-blue-400 font-bold&quot;&gt;$2,400&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;flex justify-between&quot;&gt;
+                        &lt;span class=&quot;text-gray-400&quot;&gt;Spots Left:&lt;/span&gt;
+                        &lt;span class=&quot;text-green-400&quot;&gt;22/30&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;button class=&quot;w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors&quot;&gt;
+                    Reserve Spot
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Services Overview Section --&gt;
+&lt;section id=&quot;services-overview&quot; class=&quot;py-20 px-6 bg-gradient-to-br from-gray-900 via-blue-900/20 to-purple-900/20&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;Our &lt;span class=&quot;gradient-text&quot;&gt;Premium Services&lt;/span&gt;&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400 max-w-3xl mx-auto&quot;&gt;Comprehensive tech solutions designed to accelerate your growth and success in the digital economy.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid lg:grid-cols-3 md:grid-cols-2 gap-8&quot;&gt;
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-graduation-cap text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Premium Training Programs&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Intensive, hands-on training in cutting-edge technologies with industry mentors and real-world projects.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-blue-400 mr-2&quot;&gt;&lt;/i&gt; Expert-led curriculum&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-blue-400 mr-2&quot;&gt;&lt;/i&gt; Project-based learning&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-blue-400 mr-2&quot;&gt;&lt;/i&gt; Career placement support&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-blue-400 mr-2&quot;&gt;&lt;/i&gt; Lifetime access to community&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-rocket text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Startup Incubation&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Turn your tech ideas into successful businesses with our comprehensive incubation program.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-green-400 mr-2&quot;&gt;&lt;/i&gt; Business model development&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-green-400 mr-2&quot;&gt;&lt;/i&gt; Funding connections&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-green-400 mr-2&quot;&gt;&lt;/i&gt; Technical mentorship&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-green-400 mr-2&quot;&gt;&lt;/i&gt; Market validation support&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-building text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Premium Coworking&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;State-of-the-art workspace designed for tech professionals and startups to thrive and collaborate.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-purple-400 mr-2&quot;&gt;&lt;/i&gt; High-speed fiber internet&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-purple-400 mr-2&quot;&gt;&lt;/i&gt; Meeting rooms &amp;amp; event spaces&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-purple-400 mr-2&quot;&gt;&lt;/i&gt; 24/7 access&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-purple-400 mr-2&quot;&gt;&lt;/i&gt; Networking events&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-code text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Project Outsourcing&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;High-quality development services for businesses looking to build robust digital solutions.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-orange-400 mr-2&quot;&gt;&lt;/i&gt; Full-stack development&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-orange-400 mr-2&quot;&gt;&lt;/i&gt; Mobile app development&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-orange-400 mr-2&quot;&gt;&lt;/i&gt; Data analytics solutions&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-orange-400 mr-2&quot;&gt;&lt;/i&gt; Ongoing maintenance&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-user-tie text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Executive Mentorship&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;One-on-one guidance from industry leaders to accelerate your career and business growth.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-cyan-400 mr-2&quot;&gt;&lt;/i&gt; Personalized career roadmap&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-cyan-400 mr-2&quot;&gt;&lt;/i&gt; Industry connections&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-cyan-400 mr-2&quot;&gt;&lt;/i&gt; Leadership development&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-cyan-400 mr-2&quot;&gt;&lt;/i&gt; Strategic planning&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-users text-2xl text-white&quot;&gt;&lt;/i&gt;
+                &lt;/div&gt;
+                &lt;h3 class=&quot;text-2xl font-bold mb-4&quot;&gt;Corporate Training&lt;/h3&gt;
+                &lt;p class=&quot;text-gray-400 mb-6&quot;&gt;Upskill your team with customized training programs tailored to your business needs.&lt;/p&gt;
+                &lt;ul class=&quot;space-y-2 text-sm text-gray-300&quot;&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-yellow-400 mr-2&quot;&gt;&lt;/i&gt; Custom curriculum design&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-yellow-400 mr-2&quot;&gt;&lt;/i&gt; On-site or remote delivery&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-yellow-400 mr-2&quot;&gt;&lt;/i&gt; Progress tracking&lt;/li&gt;
+                    &lt;li class=&quot;flex items-center&quot;&gt;&lt;i class=&quot;fa-solid fa-check text-yellow-400 mr-2&quot;&gt;&lt;/i&gt; Certification programs&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Why Choose WEBSTACK Section --&gt;
+&lt;section id=&quot;why-choose-webstack&quot; class=&quot;py-20 px-6 bg-gray-900&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;grid lg:grid-cols-2 gap-16 items-center&quot;&gt;
+            &lt;div&gt;
+                &lt;h2 class=&quot;text-5xl font-bold mb-8&quot;&gt;Why &lt;span class=&quot;gradient-text&quot;&gt;WEBSTACK&lt;/span&gt; Leads Africa's Tech Revolution&lt;/h2&gt;
+                &lt;p class=&quot;text-xl text-gray-400 mb-12&quot;&gt;We're not just another training company. We're building the future of African tech talent with world-class programs and unmatched support.&lt;/p&gt;
+                
+                &lt;div class=&quot;space-y-8&quot;&gt;
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-star text-xl&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;World-Class Instructors&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Learn from industry veterans with experience at Google, Microsoft, Amazon, and leading African tech companies.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-project-diagram text-xl&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Real-World Projects&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Build production-ready applications that solve actual business problems and showcase your skills to employers.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-handshake text-xl&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Career Placement Guarantee&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;95% job placement rate within 6 months of graduation, with average salary increases of 200-400%.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-globe-africa text-xl&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Pan-African Network&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Join a thriving community of 5,000+ alumni across 15+ African countries building the continent's digital future.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;relative&quot;&gt;
+                &lt;div class=&quot;glassmorphism rounded-3xl p-8 glow-border&quot;&gt;
+                    &lt;div class=&quot;grid grid-cols-2 gap-6&quot;&gt;
+                        &lt;div class=&quot;text-center p-6 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl&quot;&gt;
+                            &lt;div class=&quot;text-4xl font-bold gradient-text mb-2&quot;&gt;5,000+&lt;/div&gt;
+                            &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Graduates&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;text-center p-6 bg-gradient-to-br from-green-600/20 to-teal-600/20 rounded-2xl&quot;&gt;
+                            &lt;div class=&quot;text-4xl font-bold gradient-text mb-2&quot;&gt;95%&lt;/div&gt;
+                            &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Job Placement&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;text-center p-6 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-2xl&quot;&gt;
+                            &lt;div class=&quot;text-4xl font-bold gradient-text mb-2&quot;&gt;15+&lt;/div&gt;
+                            &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Countries&lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;text-center p-6 bg-gradient-to-br from-orange-600/20 to-red-600/20 rounded-2xl&quot;&gt;
+                            &lt;div class=&quot;text-4xl font-bold gradient-text mb-2&quot;&gt;$50k+&lt;/div&gt;
+                            &lt;div class=&quot;text-sm text-gray-400&quot;&gt;Avg Salary&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class=&quot;mt-8 space-y-4&quot;&gt;
+                        &lt;div class=&quot;flex items-center justify-between p-4 bg-gray-800/50 rounded-lg&quot;&gt;
+                            &lt;span class=&quot;text-sm&quot;&gt;Industry Recognition&lt;/span&gt;
+                            &lt;div class=&quot;flex space-x-1&quot;&gt;
+                                &lt;i class=&quot;fa-solid fa-star text-yellow-400&quot;&gt;&lt;/i&gt;
+                                &lt;i class=&quot;fa-solid fa-star text-yellow-400&quot;&gt;&lt;/i&gt;
+                                &lt;i class=&quot;fa-solid fa-star text-yellow-400&quot;&gt;&lt;/i&gt;
+                                &lt;i class=&quot;fa-solid fa-star text-yellow-400&quot;&gt;&lt;/i&gt;
+                                &lt;i class=&quot;fa-solid fa-star text-yellow-400&quot;&gt;&lt;/i&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;flex items-center justify-between p-4 bg-gray-800/50 rounded-lg&quot;&gt;
+                            &lt;span class=&quot;text-sm&quot;&gt;Student Satisfaction&lt;/span&gt;
+                            &lt;span class=&quot;text-green-400 font-bold&quot;&gt;98.5%&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;flex items-center justify-between p-4 bg-gray-800/50 rounded-lg&quot;&gt;
+                            &lt;span class=&quot;text-sm&quot;&gt;Course Completion&lt;/span&gt;
+                            &lt;span class=&quot;text-blue-400 font-bold&quot;&gt;94%&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Success Stories Section --&gt;
+&lt;section id=&quot;success-stories&quot; class=&quot;py-20 px-6 bg-gradient-to-br from-gray-900 via-blue-900/10 to-purple-900/10&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;Success &lt;span class=&quot;gradient-text&quot;&gt;Stories&lt;/span&gt;&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400 max-w-3xl mx-auto&quot;&gt;Real transformations from our alumni who are now leading tech innovation across Africa and beyond.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid lg:grid-cols-3 gap-8&quot;&gt;
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg&quot; alt=&quot;Amara Okafor&quot; class=&quot;w-16 h-16 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h3 class=&quot;text-xl font-bold&quot;&gt;Amara Okafor&lt;/h3&gt;
+                        &lt;p class=&quot;text-blue-400&quot;&gt;Senior Full-Stack Developer at Paystack&lt;/p&gt;
+                        &lt;div class=&quot;flex text-yellow-400 mt-1&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300 mb-6&quot;&gt;&quot;WEBSTACK transformed my career completely. From being a marketing graduate with zero coding experience to landing a senior developer role at Paystack in just 8 months. The hands-on projects and mentorship were invaluable.&quot;&lt;/p&gt;
+                &lt;div class=&quot;flex items-center justify-between text-sm text-gray-400&quot;&gt;
+                    &lt;span&gt;Lagos, Nigeria&lt;/span&gt;
+                    &lt;span&gt;Web Development Cohort 2023&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg&quot; alt=&quot;Kwame Asante&quot; class=&quot;w-16 h-16 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h3 class=&quot;text-xl font-bold&quot;&gt;Kwame Asante&lt;/h3&gt;
+                        &lt;p class=&quot;text-purple-400&quot;&gt;Data Scientist at Microsoft Africa&lt;/p&gt;
+                        &lt;div class=&quot;flex text-yellow-400 mt-1&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300 mb-6&quot;&gt;&quot;The Data Science program at WEBSTACK gave me the skills and confidence to transition from finance to tech. Now I'm building AI solutions for Microsoft's African operations. The community support continues even after graduation.&quot;&lt;/p&gt;
+                &lt;div class=&quot;flex items-center justify-between text-sm text-gray-400&quot;&gt;
+                    &lt;span&gt;Accra, Ghana&lt;/span&gt;
+                    &lt;span&gt;Data Science Cohort 2023&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 hover-glow transition-all&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg&quot; alt=&quot;Fatima Hassan&quot; class=&quot;w-16 h-16 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h3 class=&quot;text-xl font-bold&quot;&gt;Fatima Hassan&lt;/h3&gt;
+                        &lt;p class=&quot;text-green-400&quot;&gt;Cybersecurity Consultant &amp;amp; Entrepreneur&lt;/p&gt;
+                        &lt;div class=&quot;flex text-yellow-400 mt-1&quot;&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                            &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300 mb-6&quot;&gt;&quot;WEBSTACK's cybersecurity program and incubation support helped me start my own security consultancy. I now protect businesses across East Africa from cyber threats. The practical approach made all the difference.&quot;&lt;/p&gt;
+                &lt;div class=&quot;flex items-center justify-between text-sm text-gray-400&quot;&gt;
+                    &lt;span&gt;Nairobi, Kenya&lt;/span&gt;
+                    &lt;span&gt;Cybersecurity Cohort 2022&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;text-center mt-12&quot;&gt;
+            &lt;button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg hover-glow transition-all&quot;&gt;
+                Read More Success Stories
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Testimonials Carousel Section --&gt;
+&lt;section id=&quot;testimonials-carousel&quot; class=&quot;py-20 px-6 bg-gray-900&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;What Our &lt;span class=&quot;gradient-text&quot;&gt;Community&lt;/span&gt; Says&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400&quot;&gt;Hear from students, graduates, and partner companies about their WEBSTACK experience.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid lg:grid-cols-2 gap-8&quot;&gt;
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 glow-border&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg&quot; alt=&quot;David Chen&quot; class=&quot;w-12 h-12 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h4 class=&quot;font-bold&quot;&gt;David Chen&lt;/h4&gt;
+                        &lt;p class=&quot;text-sm text-gray-400&quot;&gt;CTO, TechCorp Africa&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;ml-auto flex text-yellow-400&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300&quot;&gt;&quot;We've hired 12 WEBSTACK graduates in the past year. Their technical skills and problem-solving abilities are exceptional. They come job-ready with real project experience.&quot;&lt;/p&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 glow-border&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg&quot; alt=&quot;Sarah Okonkwo&quot; class=&quot;w-12 h-12 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h4 class=&quot;font-bold&quot;&gt;Sarah Okonkwo&lt;/h4&gt;
+                        &lt;p class=&quot;text-sm text-gray-400&quot;&gt;Current Student, Data Science&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;ml-auto flex text-yellow-400&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300&quot;&gt;&quot;The curriculum is incredibly comprehensive and the instructors are world-class. I'm already getting job offers and I'm only halfway through the program!&quot;&lt;/p&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 glow-border&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg&quot; alt=&quot;Michael Banda&quot; class=&quot;w-12 h-12 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h4 class=&quot;font-bold&quot;&gt;Michael Banda&lt;/h4&gt;
+                        &lt;p class=&quot;text-sm text-gray-400&quot;&gt;Mobile Developer, Startup Founder&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;ml-auto flex text-yellow-400&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300&quot;&gt;&quot;WEBSTACK didn't just teach me to code - they helped me launch my fintech startup. The incubation program and network connections were game-changers.&quot;&lt;/p&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;glassmorphism rounded-2xl p-8 glow-border&quot;&gt;
+                &lt;div class=&quot;flex items-center space-x-4 mb-6&quot;&gt;
+                    &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg&quot; alt=&quot;Grace Mwangi&quot; class=&quot;w-12 h-12 rounded-full object-cover&quot;&gt;
+                    &lt;div&gt;
+                        &lt;h4 class=&quot;font-bold&quot;&gt;Grace Mwangi&lt;/h4&gt;
+                        &lt;p class=&quot;text-sm text-gray-400&quot;&gt;Security Analyst, Bank of Africa&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;ml-auto flex text-yellow-400&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                        &lt;i class=&quot;fa-solid fa-star&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;p class=&quot;text-gray-300&quot;&gt;&quot;The cybersecurity program was intense but incredibly rewarding. I went from IT support to leading security initiatives at one of Africa's largest banks.&quot;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Industry Partnerships Section --&gt;
+&lt;section id=&quot;industry-partnerships&quot; class=&quot;py-20 px-6 bg-gradient-to-br from-gray-900 via-purple-900/10 to-blue-900/10&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;Trusted by &lt;span class=&quot;gradient-text&quot;&gt;Industry Leaders&lt;/span&gt;&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400 max-w-3xl mx-auto&quot;&gt;Our partnerships with leading companies ensure our curriculum stays cutting-edge and our graduates get the best opportunities.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center&quot;&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/cea27c438f-9e335d05eecd2cd656ce.png&quot; alt=&quot;Google logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/7a825d874e-81c6c48ff1d5dcfada1d.png&quot; alt=&quot;Microsoft logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/7556a578a8-0314adb06db60fb32eda.png&quot; alt=&quot;Amazon AWS logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/7dba2e618b-32280d4f14e57e54777b.png&quot; alt=&quot;Meta Facebook logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/0b45b4a34e-ceedfa23cad6d61c664e.png&quot; alt=&quot;Paystack logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/6c3230cf5c-cdfe64f2529eaff35f00.png&quot; alt=&quot;Flutterwave logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/8f3ef85a84-103613fbd161dcdcd41d.png&quot; alt=&quot;Andela logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/50f277d4ed-0f3bb96adbe57d9433f3.png&quot; alt=&quot;Jumia logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/9eacaeea98-57678cb870a3d6185379.png&quot; alt=&quot;Kuda Bank logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/c3ca398880-472cf87fbf9429a3b134.png&quot; alt=&quot;PiggyVest logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/9c90e9b645-70652cadfb4c2b47a0ff.png&quot; alt=&quot;Twiga Foods logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;glassmorphism rounded-xl p-6 flex items-center justify-center hover-glow transition-all&quot;&gt;
+                &lt;img class=&quot;h-12 w-auto opacity-80 hover:opacity-100 transition-opacity&quot; src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/041860588f-8cf5387be72397b25d18.png&quot; alt=&quot;M-Pesa logo clean minimal&quot;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;text-center mt-16&quot;&gt;
+            &lt;h3 class=&quot;text-2xl font-bold mb-8&quot;&gt;Partnership Benefits&lt;/h3&gt;
+            &lt;div class=&quot;grid md:grid-cols-3 gap-8&quot;&gt;
+                &lt;div class=&quot;glassmorphism rounded-xl p-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-handshake text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h4 class=&quot;text-xl font-bold mb-3&quot;&gt;Direct Hiring Pipeline&lt;/h4&gt;
+                    &lt;p class=&quot;text-gray-400&quot;&gt;Priority access to our top graduates with guaranteed interview opportunities.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;glassmorphism rounded-xl p-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-cogs text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h4 class=&quot;text-xl font-bold mb-3&quot;&gt;Custom Training Programs&lt;/h4&gt;
+                    &lt;p class=&quot;text-gray-400&quot;&gt;Tailored curriculum development to meet your specific technology needs.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;glassmorphism rounded-xl p-6&quot;&gt;
+                    &lt;div class=&quot;w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-lightbulb text-xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h4 class=&quot;text-xl font-bold mb-3&quot;&gt;Innovation Collaboration&lt;/h4&gt;
+                    &lt;p class=&quot;text-gray-400&quot;&gt;Co-create solutions and mentor our startup incubation program.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Learning Experience Section --&gt;
+&lt;section id=&quot;learning-experience&quot; class=&quot;py-20 px-6 bg-gray-900&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;text-center mb-16&quot;&gt;
+            &lt;h2 class=&quot;text-5xl font-bold mb-6&quot;&gt;Immersive &lt;span class=&quot;gradient-text&quot;&gt;Learning Experience&lt;/span&gt;&lt;/h2&gt;
+            &lt;p class=&quot;text-xl text-gray-400 max-w-3xl mx-auto&quot;&gt;Our methodology combines theoretical knowledge with practical application, ensuring you're ready for real-world challenges.&lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid lg:grid-cols-2 gap-16 items-center&quot;&gt;
+            &lt;div class=&quot;space-y-8&quot;&gt;
+                &lt;div class=&quot;glassmorphism rounded-2xl p-6 hover-glow transition-all&quot;&gt;
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;span class=&quot;text-xl font-bold&quot;&gt;1&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Foundation Building&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Master the fundamentals with interactive lessons, coding challenges, and peer collaboration.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;glassmorphism rounded-2xl p-6 hover-glow transition-all&quot;&gt;
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;span class=&quot;text-xl font-bold&quot;&gt;2&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Project Development&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Build real applications solving actual business problems with guidance from industry mentors.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;glassmorphism rounded-2xl p-6 hover-glow transition-all&quot;&gt;
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;span class=&quot;text-xl font-bold&quot;&gt;3&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Industry Integration&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Internships, hackathons, and direct collaboration with our partner companies.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                
+                &lt;div class=&quot;glassmorphism rounded-2xl p-6 hover-glow transition-all&quot;&gt;
+                    &lt;div class=&quot;flex items-start space-x-4&quot;&gt;
+                        &lt;div class=&quot;w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center flex-shrink-0&quot;&gt;
+                            &lt;span class=&quot;text-xl font-bold&quot;&gt;4&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div&gt;
+                            &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Career Launch&lt;/h3&gt;
+                            &lt;p class=&quot;text-gray-400&quot;&gt;Portfolio optimization, interview preparation, and job placement support.&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;relative&quot;&gt;
+                &lt;div class=&quot;glassmorphism rounded-3xl p-8 glow-border&quot;&gt;
+                    &lt;h3 class=&quot;text-2xl font-bold mb-6 text-center&quot;&gt;Live Classroom Preview&lt;/h3&gt;
+                    &lt;div class=&quot;bg-gray-800 rounded-xl p-6 mb-6&quot;&gt;
+                        &lt;div class=&quot;flex items-center justify-between mb-4&quot;&gt;
+                            &lt;span class=&quot;text-sm text-gray-400&quot;&gt;React Components Masterclass&lt;/span&gt;
+                            &lt;div class=&quot;flex items-center space-x-2&quot;&gt;
+                                &lt;div class=&quot;w-2 h-2 bg-red-500 rounded-full&quot;&gt;&lt;/div&gt;
+                                &lt;span class=&quot;text-xs text-gray-400&quot;&gt;LIVE&lt;/span&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;space-y-2 font-mono text-sm&quot;&gt;
+                            &lt;div class=&quot;text-blue-400&quot;&gt;function UserProfile({ user }) {&lt;/div&gt;
+                            &lt;div class=&quot;text-white ml-4&quot;&gt;return (&lt;/div&gt;
+                            &lt;div class=&quot;text-green-400 ml-8&quot;&gt;&amp;lt;div className=&quot;profile&quot;&amp;gt;&lt;/div&gt;
+                            &lt;div class=&quot;text-white ml-12&quot;&gt;{user.name}&lt;/div&gt;
+                            &lt;div class=&quot;text-green-400 ml-8&quot;&gt;&amp;lt;/div&amp;gt;&lt;/div&gt;
+                            &lt;div class=&quot;text-white ml-4&quot;&gt;);&lt;/div&gt;
+                            &lt;div class=&quot;text-blue-400&quot;&gt;}&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;grid grid-cols-3 gap-4 mb-6&quot;&gt;
+                        &lt;div class=&quot;flex items-center space-x-2&quot;&gt;
+                            &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg&quot; alt=&quot;Student&quot; class=&quot;w-8 h-8 rounded-full&quot;&gt;
+                            &lt;span class=&quot;text-xs text-gray-400&quot;&gt;John K.&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;flex items-center space-x-2&quot;&gt;
+                            &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg&quot; alt=&quot;Student&quot; class=&quot;w-8 h-8 rounded-full&quot;&gt;
+                            &lt;span class=&quot;text-xs text-gray-400&quot;&gt;Sarah M.&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;flex items-center space-x-2&quot;&gt;
+                            &lt;img src=&quot;https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg&quot; alt=&quot;Student&quot; class=&quot;w-8 h-8 rounded-full&quot;&gt;
+                            &lt;span class=&quot;text-xs text-gray-400&quot;&gt;Mike O.&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;text-center&quot;&gt;
+                        &lt;span class=&quot;text-sm text-green-400&quot;&gt;28 students actively coding&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Call to Action Section --&gt;
+&lt;section id=&quot;cta-section&quot; class=&quot;py-20 px-6 bg-gradient-to-br from-blue-900 via-purple-900 to-gray-900&quot;&gt;
+    &lt;div class=&quot;max-w-4xl mx-auto text-center&quot;&gt;
+        &lt;h2 class=&quot;text-6xl font-black mb-8 gradient-text&quot;&gt;Ready to Transform Your Future?&lt;/h2&gt;
+        &lt;p class=&quot;text-xl text-gray-300 mb-12 max-w-2xl mx-auto&quot;&gt;Join thousands of successful graduates who've launched their tech careers with WEBSTACK. Your journey to becoming a world-class developer starts here.&lt;/p&gt;
+        
+        &lt;div class=&quot;glassmorphism rounded-3xl p-12 glow-border mb-12&quot;&gt;
+            &lt;div class=&quot;grid md:grid-cols-3 gap-8 mb-8&quot;&gt;
+                &lt;div class=&quot;text-center&quot;&gt;
+                    &lt;div class=&quot;w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-calendar-check text-2xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Next Cohort Starts&lt;/h3&gt;
+                    &lt;p class=&quot;text-2xl font-bold gradient-text&quot;&gt;January 15, 2025&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;text-center&quot;&gt;
+                    &lt;div class=&quot;w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-users text-2xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Early Bird Discount&lt;/h3&gt;
+                    &lt;p class=&quot;text-2xl font-bold gradient-text&quot;&gt;Save 30%&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;text-center&quot;&gt;
+                    &lt;div class=&quot;w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4&quot;&gt;
+                        &lt;i class=&quot;fa-solid fa-clock text-2xl&quot;&gt;&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;h3 class=&quot;text-xl font-bold mb-2&quot;&gt;Limited Time&lt;/h3&gt;
+                    &lt;p class=&quot;text-2xl font-bold gradient-text&quot;&gt;7 Days Left&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div class=&quot;space-y-6&quot;&gt;
+                &lt;button class=&quot;bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-4 rounded-xl font-bold text-xl hover-glow transition-all&quot;&gt;
+                    Join Our Next Cohort - Save 30%
+                &lt;/button&gt;
+                &lt;p class=&quot;text-sm text-gray-400&quot;&gt;No commitment required • Free consultation included&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;grid md:grid-cols-2 gap-6&quot;&gt;
+            &lt;button class=&quot;glassmorphism border border-gray-600 hover:border-blue-400 text-white px-8 py-4 rounded-xl font-semibold transition-all hover-glow&quot;&gt;
+                Schedule a Free Consultation
+            &lt;/button&gt;
+            &lt;button class=&quot;glassmorphism border border-gray-600 hover:border-green-400 text-white px-8 py-4 rounded-xl font-semibold transition-all hover-glow&quot;&gt;
+                Download Program Brochure
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Footer --&gt;
+&lt;footer id=&quot;footer&quot; class=&quot;bg-gray-900 border-t border-gray-800 py-16 px-6&quot;&gt;
+    &lt;div class=&quot;max-w-7xl mx-auto&quot;&gt;
+        &lt;div class=&quot;grid lg:grid-cols-5 md:grid-cols-2 gap-8&quot;&gt;
+            &lt;div class=&quot;lg:col-span-2&quot;&gt;
+                &lt;div class=&quot;text-3xl font-bold gradient-text mb-6&quot;&gt;WEBSTACK&lt;/div&gt;
+                &lt;p class=&quot;text-gray-400 mb-6 max-w-md&quot;&gt;Empowering Africa's next generation of tech professionals with world-class training, mentorship, and career opportunities.&lt;/p&gt;
+                &lt;div class=&quot;flex space-x-4&quot;&gt;
+                    &lt;span class=&quot;w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer&quot;&gt;
+                        &lt;i class=&quot;fa-brands fa-twitter&quot;&gt;&lt;/i&gt;
+                    &lt;/span&gt;
+                    &lt;span class=&quot;w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer&quot;&gt;
+                        &lt;i class=&quot;fa-brands fa-linkedin&quot;&gt;&lt;/i&gt;
+                    &lt;/span&gt;
+                    &lt;span class=&quot;w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer&quot;&gt;
+                        &lt;i class=&quot;fa-brands fa-instagram&quot;&gt;&lt;/i&gt;
+                    &lt;/span&gt;
+                    &lt;span class=&quot;w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors cursor-pointer&quot;&gt;
+                        &lt;i class=&quot;fa-brands fa-youtube&quot;&gt;&lt;/i&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;div&gt;
+                &lt;h3 class=&quot;text-white font-semibold mb-6&quot;&gt;Programs&lt;/h3&gt;
+                &lt;ul class=&quot;space-y-3&quot;&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Web Development&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Data Science&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Cybersecurity&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Mobile Development&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Cloud Computing&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;AI/Machine Learning&lt;/span&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div&gt;
+                &lt;h3 class=&quot;text-white font-semibold mb-6&quot;&gt;Services&lt;/h3&gt;
+                &lt;ul class=&quot;space-y-3&quot;&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Corporate Training&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Startup Incubation&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Coworking Space&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Project Outsourcing&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Mentorship&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Career Services&lt;/span&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+            
+            &lt;div&gt;
+                &lt;h3 class=&quot;text-white font-semibold mb-6&quot;&gt;Company&lt;/h3&gt;
+                &lt;ul class=&quot;space-y-3&quot;&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;About Us&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Our Team&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Careers&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Partners&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;News &amp;amp; Events&lt;/span&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;span class=&quot;text-gray-400 hover:text-white transition-colors cursor-pointer&quot;&gt;Contact Us&lt;/span&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class=&quot;border-t border-gray-800 mt-12 pt-8&quot;&gt;
+            &lt;div class=&quot;flex flex-col md:flex-row justify-between items-center&quot;&gt;
+                &lt;div class=&quot;text-gray-400 text-sm&quot;&gt;
+                    © 2024 WEBSTACK. All rights reserved.
+                &lt;/div&gt;
+                &lt;div class=&quot;flex space-x-6 mt-4 md:mt-0&quot;&gt;
+                    &lt;span class=&quot;text-gray-400 hover:text-white text-sm transition-colors cursor-pointer&quot;&gt;Privacy Policy&lt;/span&gt;
+                    &lt;span class=&quot;text-gray-400 hover:text-white text-sm transition-colors cursor-pointer&quot;&gt;Terms of Service&lt;/span&gt;
+                    &lt;span class=&quot;text-gray-400 hover:text-white text-sm transition-colors cursor-pointer&quot;&gt;Cookie Policy&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/footer&gt;
+
+
+&lt;/body&gt;&lt;/html&gt;" frameborder="0" class="w-full h-max overflow-visible border-2 border-carbon-300 border-solid rounded-lg" style="width: 1440px; height: 8060px; min-height: 1024px;"></iframe>

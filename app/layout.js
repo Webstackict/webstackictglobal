@@ -1,15 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
+import "@/lib/styles/colors.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import MainHeader from "@/components/main-header";
+import CTASection from "@/components/cta/call-to-action-section";
+import Footer from "@/components/footer";
+import MainSidebarContextProvider from "@/store/main-sidebar-context";
 
 export const metadata = {
   title: "Create Next App",
@@ -19,8 +15,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body>
+        <MainSidebarContextProvider>
+          <MainHeader />
+          {children}
+
+          <Footer />
+          <Toaster />
+        </MainSidebarContextProvider>
       </body>
     </html>
   );

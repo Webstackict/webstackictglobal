@@ -1,0 +1,40 @@
+.buttonGroup {
+  display: flex;
+  gap: 1.5rem;
+
+  & .primaryBtn {
+    background: var(--blue-400);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  & .primaryBtn:hover {
+    background: var(--blue-500);
+    box-shadow: var(--box-shadow-blue);
+  }
+
+  & .secondaryBtn {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  & .secondaryBtn:hover {
+    border-color: var(--blue-400);
+    box-shadow: var(--box-shadow-blue);
+  }
+}
+
+.pageBannerButtons {
+  justify-content: center;
+}

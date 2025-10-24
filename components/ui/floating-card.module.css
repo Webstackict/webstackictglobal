@@ -1,0 +1,104 @@
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+  }
+
+  & .floating {
+    animation: float 4s ease-in-out infinite;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  & .codingCard {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 532px;
+    gap: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  & .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .liveDot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--green-400);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  & .codeBox {
+    background: var(--midnight-blue-400);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+
+  & .codeBlue {
+    color: var(--teal-400);
+  }
+
+  & .codeWhite {
+    color: var(--white);
+    margin-left: 1rem;
+  }
+
+  & .cardFooter {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+  }
+
+  & .footerLeft {
+    color: var(--gray-text-500);
+  }
+
+  & .footerRight {
+    color: var(--green-400);
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    & .floating {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

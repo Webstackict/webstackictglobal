@@ -1,0 +1,45 @@
+.logoCard {
+  background: var(--charcoal-blue-500);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  border: var(--card-border);
+
+  &:hover {
+    box-shadow: 0 0 15px var(--cta-down-btn-hover);
+    transform: translateY(-3px);
+  }
+
+  img {
+    height: 3rem;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+  }
+  svg {
+    width: 1.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

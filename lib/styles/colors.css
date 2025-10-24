@@ -1,0 +1,83 @@
+:root {
+  --blue-300: rgba(34, 116, 197, 0.2);
+  --blue-400: #2563eb;
+  --blue-500: #1d4ed8;
+  --green-300: rgba(34, 197, 94, 0.2);
+  --green-400: #22c55e;
+  --green-500: #16a34a;
+  --purple-300: rgba(168, 85, 247, 0.2);
+  --purple-400: #9333ea;
+  --red-300: rgba(247, 85, 85, 0.2);
+  --red-400: #dc2626;
+  --orange-300: rgba(197, 121, 34, 0.2);
+  --orange-400: #f97316;
+  --yellow-300: rgba(247, 223, 85, 0.2);
+  --yellow-400: #eab308;
+  --hot-pink-300: #ec4899;
+  --hot-pink-400: #ef4444;
+  --dodger-blue: rgba(60, 166, 252, 0.3);
+  --charcoal-blue-400: #1f2937;
+  --charcoal-blue-500: rgb(25, 36, 50);
+  --midnight-blue-300: rgba(60, 166, 252, 0.2);
+  --midnight-blue-400: rgba(17, 24, 39, 0.5);
+  --midnight-blue-500: #111827;
+  --teal-400: #60a5fa;
+  --teal-500: #3ca6fc;
+  --white: #fff;
+  --gray-text-400: #d1d5db;
+  --gray-text-500: #9ca3af;
+  --gray-text-700: #4b5563;
+  --gradient-text: linear-gradient(90deg, #3b82f6, #a855f7);
+
+  /* border */
+  --card-border: 1px solid rgba(96, 165, 250, 0.2);
+
+  /* box-shadow */
+  --box-shadow-blue: 0 0 25px rgba(37, 99, 235, 0.6);
+  --box-shadow-hover: 0 0 20px rgba(96, 165, 250, 0.3);
+  --avatar-box-shadow: 0 0 20px rgba(60, 166, 252, 0.3);
+
+  /* hero */
+  --hero-bg: linear-gradient(135deg, #110f37 0%, #1a1850 50%, #2a2870 100%);
+  --hero-overlay: linear-gradient(
+    to right,
+    rgb(30 58 138 / 0.5),
+    rgb(88 28 135 / 0.3)
+  );
+
+  /* cohorts card */
+  --cohorts-card-bg: linear-gradient(
+    135deg,
+    rgba(17, 15, 55, 0.9) 0%,
+    rgba(26, 24, 80, 0.8) 100%
+  );
+  --cohorts-card-box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
+
+  /* contact */
+
+  --contact-bg-gradient: linear-gradient(to bottom right, #3ca6fc, #5fb8ff);
+  --contact-box-shadow: 0 0 20px rgba(60, 166, 252, 0.3);
+  --contact-box-shadow-hover: 0 0 35px rgba(60, 166, 252, 0.4);
+
+  /* sections */
+  --light-section-bg: linear-gradient(
+    to bottom right,
+    #111827,
+    rgb(30 58 138 / 0.2),
+    rgb(88 28 135 / 0.2)
+  );
+
+  /* progres-bar bg */
+  --gray-bg: #374151;
+
+  /* cts */
+  --cta-bg: linear-gradient(to bottom right, #1e3a8a, #4c1d95, #111827);
+  --cta-heading: linear-gradient(135deg, #3ca6fc, #ffffff);
+  --cta-card-bg: rgba(255, 255, 255, 0.08);
+  --cta-card-border: rgba(255, 255, 255, 0.1);
+  --cta-gradient-btn: linear-gradient(to right, #2563eb, #7e22ce);
+  --cta-gradient-btn-hover: linear-gradient(to right, #1d4ed8, #6b21a8);
+  --cta-down-btn: rgba(255, 255, 255, 0.05);
+  --cta-down-btn-color: rgba(255, 255, 255, 0.755);
+  --cta-down-btn-hover: rgba(59, 130, 246, 0.5);
+}

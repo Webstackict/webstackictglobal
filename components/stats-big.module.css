@@ -1,0 +1,37 @@
+.statsSection {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  & .stat {
+    .number {
+      font-size: 2.25rem; /* text-4xl */
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+
+      &.blue {
+        color: #3ca6fc;
+      }
+      &.purple {
+        color: #c084fc;
+      }
+      &.green {
+        color: #34d399;
+      }
+      &.orange {
+        color: #fb923c;
+      }
+    }
+
+    .label {
+      color: var(--gray-text-400);
+      font-size: 1rem;
+    }
+  }
+}

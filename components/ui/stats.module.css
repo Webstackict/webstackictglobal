@@ -1,0 +1,23 @@
+.stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 2rem;
+
+  & .statItem {
+    text-align: center;
+  }
+
+  & .statNumber {
+    font-size: 1.875rem;
+    font-weight: 700;
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  & .statLabel {
+    font-size: 0.875rem;
+    color: var(--gray-text-500);
+  }
+}

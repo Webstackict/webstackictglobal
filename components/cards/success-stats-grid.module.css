@@ -1,0 +1,69 @@
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 80rem;
+  margin: 0 auto 4rem;
+
+  .card {
+    background: var(--charcoal-blue-500);
+    backdrop-filter: blur(10px);
+    border: var(--card-border);
+    border-radius: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+    transition: all 0.4s ease;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    & .cardIcon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: var(--avatar-box-shadow);
+    }
+
+    & i {
+      color: var(--white);
+      font-size: 1.5rem;
+    }
+
+    & .cardNumber {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+
+    & .cardTitle {
+      color: var(--gray-text-400);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    & .cardText {
+      color: var(--gray-text-500);
+      line-height: 1.6;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

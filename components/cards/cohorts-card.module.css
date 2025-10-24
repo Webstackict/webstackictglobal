@@ -1,0 +1,97 @@
+.card {
+  background: var(--charcoal-blue-500);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: var(--card-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+
+  & .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  & .iconBox {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .iconBox i {
+    font-size: 1.25rem;
+  }
+
+  & .cardTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-transform: capitalize;
+  }
+
+  & .cardText {
+    color: var(--gray-text-500);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  & .details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  & .details div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  & .details span:first-child {
+    color: var(--gray-text-500);
+  }
+
+  & .fee {
+    color: var(--teal-400);
+    font-weight: 700;
+  }
+
+  & .btn {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--white);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: none;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+  }
+
+  & .disabledBtn {
+    width: 100%;
+    background-color: var(--gray-text-700);
+    color: var(--gray-text-500);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: not-allowed;
+  }
+
+}

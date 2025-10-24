@@ -1,95 +1,113 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import CardGrid from "@/components/cards/card-grid";
+import ImmersiveCardGrid from "@/components/cards/immersive-card-grid";
+import PartnershipsGrid from "@/components/cards/partnerships-grid";
+import ServicesCardGrid from "@/components/cards/services-card-grid";
+import TestimonialGrid from "@/components/cards/testimonial-grid";
+import CTASection from "@/components/cta/call-to-action-section";
+
+import classes from "./page.module.css";
+
+import HeroSection from "@/components/hero/hero-section";
+
+import Section from "@/components/section";
+
+import { benefits } from "@/lib/contents/partnershipsData";
+import { successStories } from "@/lib/contents/testimonialData";
+import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
+
+import { departments } from "@/lib/contents/dept-and-cohorts";
+import { partnerLogos } from "@/lib/contents/partnershipsData";
+import BenefitsGrid from "@/components/cards/benefits-grid";
+import SeeMoreButton from "@/components/ui/see-more-button";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <HeroSection />
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <Section
+        label="ongoing-cohorts-registration"
+        title={
+          <>
+            Ongoing Cohorts <span className="gradientText">Registration</span>
+          </>
+        }
+        subtitle="Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available."
+      >
+        <CardGrid items={departments} />
+        <SeeMoreButton href="/programs/academy">
+          View all Departments
+        </SeeMoreButton>
+      </Section>
+      <Section
+        label="services"
+        title={
+          <>
+            Our <span className="gradientText">Premuim Services</span>
+          </>
+        }
+        subtitle="Comprehensive tech solutions designed to accelerate your growth and success in the digital economy."
+        sectionBgColor="sectionLightBlue"
+      >
+        <ServicesCardGrid />
+      </Section>
+      <Section
+        label="why choose us"
+        title={
+          <>
+            Immersive <span className="gradientText">Learning Experience</span>
+          </>
+        }
+        subtitle="Our methodology combines theoretical knowledge with practical application, ensuring you're ready for real-world challenges."
+      >
+        <ImmersiveCardGrid />
+      </Section>
+      <Section
+        label="testimonials"
+        title={
+          <>
+            Successs <span className="gradientText">Stories</span>
+          </>
+        }
+        subtitle="Real transformations from our alumni who are now leading tech innovation across Africa and beyond."
+        sectionBgColor="sectionLightBlue"
+      >
+        <TestimonialGrid testimonials={successStories} />
+      </Section>
+
+      <Section
+        label="partnerships"
+        title={
+          <>
+            Trusted by <span className="gradientText">Industry Leaders</span>
+          </>
+        }
+        subtitle="Our partnerships with leading companies ensure our curriculum stays cutting-edge and our graduates get the best opportunities."
+      >
+        <PartnershipsGrid items={partnerLogos} />
+        <div className={classes.benefitsSection}>
+          <h3>Partnership Benefits</h3>
+          <BenefitsGrid className={classes.benefitsGrid} items={benefits} />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </Section>
+
+      <CTASection
+        label="home"
+        title={
+          <>
+            Ready{" "}
+            <span className="gradientText">
+              to Transform Your <br /> Future?
+            </span>
+          </>
+        }
+        subtitle="   Join thousands of successful graduates who've launched their tech
+          careers with WEBSTACK. Your journey to becoming a world-class
+          developer starts here."
+        ctaHighlights={ctaHomeHighlights}
+        primaryBtnText="Join Our Next Cohort"
+        primaryBtnRoute="/programs/academy"
+      />
+    </>
   );
 }

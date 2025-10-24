@@ -1,0 +1,42 @@
+.benefitCard {
+  background: var(--charcoal-blue-500);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  border: var(--card-border);
+  text-align: center;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-hover);
+  }
+
+  .iconBox {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: var(--gray-text-500);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .contactDetail {
+    color: var( --teal-400);
+    font-weight: 600;
+  }
+}

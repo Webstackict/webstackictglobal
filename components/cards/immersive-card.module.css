@@ -1,0 +1,44 @@
+.immersiveCard {
+  background: var(--charcoal-blue-500);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: var(--card-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+
+  & .cardContent {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  & .iconBox {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  & .iconNumber {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  & .cardTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  & .cardText {
+    color: var(--gray-text-500);
+    line-height: 1.6;
+  }
+}

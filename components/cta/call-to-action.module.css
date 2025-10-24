@@ -1,0 +1,105 @@
+.section {
+  padding: 5rem 1.5rem;
+  background: var(--cta-bg);
+
+  & .container {
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  & .heading {
+    font-size: 3.75rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    background: var(--cta-heading);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  & .subtext {
+    font-size: 1.25rem;
+    color: var(--gray-text-400);
+    margin: 0 auto 3rem auto;
+    max-width: 36rem;
+  }
+
+  & .card {
+    background: var(--cta-card-bg);
+    backdrop-filter: blur(16px);
+    border-radius: 1.5rem;
+    box-shadow: 0 0 20px var(--dodger-blue);
+    padding: 3rem;
+    border: 1px solid var(--cta-card-border);
+    margin-bottom: 3rem;
+
+    & .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    & .buttonWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    & .primaryButton {
+      background: var(--cta-gradient-btn);
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 0.75rem;
+      border: none;
+      font-size: 1.25rem;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--cta-gradient-btn-hover);
+        box-shadow: var(--box-shadow-blue);
+      }
+    }
+
+    & .smallText {
+      font-size: 0.875rem;
+      color: var(--gray-text-500);
+    }
+  }
+
+  & .actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+
+    & .secondaryButtonBlue,
+    .secondaryButtonGreen {
+      background: var(--cta-down-btn);
+      border: none;
+      border: 1px solid var(--gray-text-700);
+      color: var(--cta-down-btn-color);
+      padding: 1.2rem 2rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 10px var(--cta-down-btn-hover);
+      }
+    }
+
+    & .secondaryButtonBlue:hover {
+      border-color: var(--teal-400);
+    }
+
+    & .secondaryButtonGreen:hover {
+      border-color: var(--green-500);
+    }
+  }
+}

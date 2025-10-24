@@ -1,0 +1,14 @@
+.badge {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-transform: capitalize;
+
+  & svg {
+    font-size: inherit;
+  }
+}

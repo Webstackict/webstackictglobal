@@ -1,42 +1,236 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+    /* outline: 2px solid red; */
+    box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  font-size: clamp(12px, 2.5vw, 16px);
+  background-color: var(--midnight-blue-500);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+body {
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+
+}
+
+ul {
+  list-style: none;
+}
+
+/* Glassmorphism Effect */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(60, 166, 252, 0.3);
+}
+
+.gradientText {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* badges */
+
+.open {
+  background-color: var(--green-300);
+  color: var(--green-400);
+}
+.active {
+  background-color: var(--green-300);
+  color: var(--green-400);
+}
+
+.closed {
+  background-color: var(--red-300);
+  color: var(--red-400);
+}
+
+.soon {
+  background-color: var(--yellow-300);
+  color: var(--yellow-400);
+}
+
+.final-week {
+  background-color: var(--purple-300);
+  color: var(--purple-400);
+}
+
+.networking {
+  background-color: var(--blue-300);
+  color: var(--blue-400);
+}
+
+.refreshment {
+  background-color: var(--orange-300);
+  color: var(--orange-400);
+}
+.premium {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+/* icon color  */
+
+.blue {
+  color: var(--blue-400);
+}
+
+.purple {
+  color: var(--purple-400);
+}
+
+.pink {
+  color: var(--hot-pink-300);
+}
+
+.red {
+  color: var(--red-400) !important;
+}
+
+.green {
+  color: var(--green-500);
+}
+
+.orange {
+  color: var(--orange-400);
+}
+
+.yellow {
+  color: var(--yellow-400);
+}
+
+/* icon bg flat */
+
+.blue-bg {
+  background-color: var(--blue-400);
+}
+
+.purple-bg {
+  background-color: var(--purple-400);
+}
+
+.pink-bg {
+  background-color: var(--hot-pink-300);
+}
+
+.red-bg {
+  background-color: var(--red-400);
+}
+
+.green-bg {
+  background-color: var(--green-500);
+}
+
+.orange-bg {
+  background-color: var(--orange-400);
+}
+
+.yellow-bg {
+  background-color: var(--yellow-400);
+}
+
+.teal-flat-bg {
+  background-color: var(--teal-500);
+}
+.gray-bg {
+  background-color: var(--midnight-blue-500);
+}
+
+/* icon bg gradient */
+
+.bluePurple-bg {
+  background: linear-gradient(to bottom right, #3b82f6, #9333ea);
+}
+.greenTeal-bg {
+  background: linear-gradient(to bottom right, #22c55e, #0d9488);
+}
+.purplePink-bg {
+  background: linear-gradient(to bottom right, #a855f7, #ec4899);
+}
+.orangeRed-bg {
+  background: linear-gradient(to bottom right, #f97316, #dc2626);
+}
+.cyanBlue-bg {
+  background: linear-gradient(to bottom right, #06b6d4, #2563eb);
+}
+.yellowOrange-bg {
+  background: linear-gradient(to bottom right, #eab308, #f97316);
+}
+
+.teal-bg {
+  background: linear-gradient(to right, #0d9488, #0f766e);
+}
+
+.blueWhite-bg {
+  background: linear-gradient(to bottom right, #3ca6fc, #5fb8ff);
+}
+
+/* borders color  */
+
+.blue-border {
+  border: 1px solid var(--blue-400) !important;
+}
+
+.purple-border {
+  border: 1px solid var(--purple-400) !important;
+}
+
+.pink-border {
+  border: 1px solid var(--hot-pink-300) !important;
+}
+
+.red-border {
+  border: 1px solid var(--red-400) !important;
+}
+
+.green-border {
+  border: 1px solid var(--green-500) !important;
+}
+
+.orange-border {
+  border: 1px solid var(--orange-400) !important;
+}
+
+.yellow-border {
+  border: 1px solid var(--yellow-400) !important;
+}
+.yellow-border {
+  border: 1px solid var(--t) !important;
+}
+
+/* card */
+.card {
+  background: var(--charcoal-blue-500);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border: var(--card-border);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    background: var(--charcoal-blue-400);
+    box-shadow: var(--box-shadow-hover);
+    transform: translateY(-4px);
   }
+}
+
+/* highlight */
+
+.highlight-section {
+  background: #fff59d12 !important;
+  transition: all 1s ease-in-out;
+}
+
+/* section bg */
+
+.sectionLightBlue {
+  background: var(--light-section-bg);
 }

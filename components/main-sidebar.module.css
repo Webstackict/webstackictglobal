@@ -1,0 +1,100 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background: var(--midnight-blue-500);
+  position: fixed;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  height: 100dvh;
+  width: 40vw;
+  min-width: 20rem;
+  padding: 5rem 1rem 1rem 1rem;
+  z-index: 999;
+
+  & > svg {
+    align-self: flex-end;
+    color: var(--white);
+    cursor: pointer;
+  }
+  & .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  & .link {
+    color: var(--gray-text-400);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    text-decoration: none;
+  }
+
+  & .link:hover {
+    color: var(--white);
+  }
+
+  & .dropdownWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  & .dropdown {
+    display: flex;
+    flex-direction: column;
+    background: var(--midnight-blue-500);
+    width: 100%;
+    overflow: hidden;
+
+    padding: 0;
+
+    & li {
+      &:hover {
+        color: var(--white);
+        background: var(--charcoal-blue-500);
+      }
+    }
+
+    & a {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem;
+      color: var(--gray-text-400);
+      text-decoration: none;
+      width: 100%;
+    }
+  }
+
+  & .dropdownBtn {
+    color: var(--gray-text-400);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font: inherit;
+    padding: 0;
+    transition: color 0.2s ease;
+  }
+
+  & .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  & .getStarted {
+    background-color: var(--blue-400);
+    font-size: 1rem;
+  }
+
+  & .getStarted:hover {
+    background-color: var(--blue-500);
+    box-shadow: var(--box-shadow-blue);
+  }
+}
