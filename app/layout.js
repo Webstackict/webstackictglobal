@@ -9,7 +9,16 @@ import MainSidebarContextProvider from "@/store/main-sidebar-context";
 export const metadata = {
   title: "Webstack-ICT-Global",
   description: "Africa's Premier Tech Hub",
-
+  openGraph: {
+    images: [
+      {
+        url: "https://webstack-ict-global.vercel.app/logo/webstack-logo-dark.png",
+        width: 100,
+        height: 100,
+        alt: "Webstack Banner",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
