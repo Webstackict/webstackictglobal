@@ -19,11 +19,6 @@ export const metadata = {
       },
     ],
   },
-  // twitter: {
-  //   card: "summary",
-  //   title: department.name,
-  //   description: department.description,
-  // },
 };
 
 export default function RootLayout({ children }) {

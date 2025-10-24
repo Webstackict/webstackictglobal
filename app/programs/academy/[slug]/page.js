@@ -35,14 +35,14 @@ export async function generateMetadata({ params }) {
       description: department.description,
       url: `https://webstack-ict-global.vercel.app/programs/academy/${deptSlug}`,
       siteName: "WEBSTACK-ICT-GLOBAL",
-      // images: [
-      //   {
-      //     url: "https://webstack-ict-global.vercel.app/logo/webstack-logo-dark.png",
-      //     width: 160,
-      //     height: 50,
-      //     alt: "Webstack Banner",
-      //   },
-      // ],
+      images: [
+        {
+          url: "https://webstack-ict-global.vercel.app/logo/webstack-logo-dark.png",
+          width: 160,
+          height: 50,
+          alt: "Webstack Banner",
+        },
+      ],
       locale: "en_US",
       type: "article",
     },
