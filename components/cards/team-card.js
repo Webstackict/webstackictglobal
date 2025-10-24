@@ -10,12 +10,12 @@ const CalendarIcon = iconsConfig["calendar"];
 const AwardIcon = iconsConfig["award"];
 const BriefcaseIcon = iconsConfig["briefcase"];
 
-export default function TeamCard({ member, size = null, ...props }) {
+export default function TeamCard({ member, ...props }) {
   const BadgeIcon = iconsConfig[member.icon];
   return (
     <motion.div
       {...props}
-      className={`${classes.teamCard} ${size ? size : undefined}`}
+      className={classes.teamCard}
     >
       <div className={classes.imageWrapper}>
         <div className={classes.imageContainer}>

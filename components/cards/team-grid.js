@@ -4,7 +4,7 @@ import classes from "./team-grid.module.css";
 
 import TeamCard from "./team-card";
 
-import { containerVarients, childVarients } from "@/lib/animations";
+import {containerVarients, childVarients } from "@/lib/animations";
 
 export default function TeamGrid({ team, className }) {
   const gridTemplate = `${className} ${classes.teamGrid}`;
@@ -14,10 +14,16 @@ export default function TeamGrid({ team, className }) {
       variants={containerVarients}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true }}
     >
       {team.map((member, index) => {
-        return <TeamCard key={member.name + index} member={member} variants={childVarients}  />;
+        return (
+          <TeamCard
+            key={member.name + index}
+            member={member}
+            variants={childVarients}
+          />
+        );
       })}
     </motion.div>
   );
