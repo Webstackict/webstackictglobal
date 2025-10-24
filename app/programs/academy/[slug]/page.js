@@ -88,7 +88,7 @@ export default async function DepartmentDetails({ params }) {
         label="pricing-and-timeline"
         title={
           <>
-            Pricing <span className="gradientText">& Timeline</span>
+            Pricing <span className="gradientText">&amp; Timeline</span>
           </>
         }
         subtitle="Transparent pricing with flexible payment options and upcoming cohort dates"

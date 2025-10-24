@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import classes from "./activities-grid.module.css";
 import { activities } from "@/lib/contents/activitiesData";
 import { containerVarients, childVarients } from "@/lib/animations";
+import Image from "next/image";
 export default function ActivitiesGrid() {
   return (
     <motion.div
@@ -18,7 +19,14 @@ export default function ActivitiesGrid() {
           className={classes.card}
           variants={childVarients}
         >
-          <img src={activity.image} alt={activity.alt} />
+          <div className={classes.imageContainer}>
+            <Image
+              src={activity.image}
+              alt={activity.alt}
+              fill
+              sizes="(min-width: 1024px) 33.33vw, (min-width: 768px) 50vw, 100vw"
+            />
+          </div>
           <div className={classes.cardContent}>
             <h3>{activity.title}</h3>
             <p>{activity.description}</p>

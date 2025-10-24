@@ -16,7 +16,7 @@ export default function Footer() {
           <div className={classes.brandSection}>
             <div className={classes.brandTitle}>WEBSTACK</div>
             <p className={classes.brandText}>
-              Empowering Africa's next generation of tech professionals with
+              Empowering Africa&apos;s next generation of tech professionals with
               world-class training, mentorship, and career opportunities.
             </p>
 

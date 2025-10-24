@@ -106,6 +106,13 @@ ul {
   color: var(--yellow-400);
 }
 
+.teal {
+  color: var(--teal-400);
+}
+.white {
+  color: var(--white);
+}
+
 /* icon bg flat */
 
 .blue-bg {

@@ -134,7 +134,7 @@ export default function About() {
           <>
             Ready{" "}
             <span className="gradientText">
-              Ready to Join Africa's <br /> Tech Revolution?
+              Ready to Join Africa&apos;s <br /> Tech Revolution?
             </span>
           </>
         }

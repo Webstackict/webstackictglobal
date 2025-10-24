@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import classes from "./team-card.module.css";
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
+import Image from "next/image";
 
 const SchoolIcon = iconsConfig["school"];
 const CalendarIcon = iconsConfig["calendar"];
@@ -17,7 +18,16 @@ export default function TeamCard({ member, size = null, ...props }) {
       {...props}
     >
       <div className={classes.imageWrapper}>
-        <img src={member.image} alt={member.name} className={classes.avatar} />
+        <div className={classes.imageContainer}>
+          <Image
+            src={member.image}
+            alt={member.name}
+            className={classes.avatar}
+            fill
+            sizes="100px"
+            priority
+          />
+        </div>
         <div className={`${classes.iconBadge} ${member.badgeColor}`}>
           <BadgeIcon />
         </div>

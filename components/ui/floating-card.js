@@ -27,7 +27,7 @@ function FloatingCard() {
               const buildFuture = () =&gt; {"{"}
             </div>
             <div className={classes.codeWhite}>
-              return 'Success at WEBSTACK';
+              return &apos;Success at WEBSTACK&apos;;
             </div>
             <div className={classes.codeBlue}>{"}"}</div>
           </div>

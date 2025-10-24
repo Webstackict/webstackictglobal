@@ -1,3 +1,4 @@
+import Image from "next/image";
 import classes from "./code-preview-box.module.css";
 
 import { studentsData } from "@/lib/contents/learningData";
@@ -17,20 +18,18 @@ export default function CodePreviewBox() {
         </div>
 
         <div className={classes.codeBlock}>
-          <div className={classes.blue}>
+          <div className="teal">
             function UserProfile(&#123; user &#125;) &#123;
           </div>
-          <div className={classes.white}>&nbsp;&nbsp;return (</div>
-          <div className={classes.green}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className="profile"&gt;
+          <div className="white">&nbsp;&nbsp;return (</div>
+          <div className="green">
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=&quot;profile&quot;&gt;
           </div>
-          <div className={classes.white}>
+          <div className="white">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#123;user.name&#125;
           </div>
-          <div className={classes.green}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;
-          </div>
-          <div className={classes.white}>&nbsp;&nbsp;);</div>
+          <div className="green">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;</div>
+          <div className="white">&nbsp;&nbsp;);</div>
           <div className={classes.blue}>&#125;</div>
         </div>
       </div>
@@ -38,11 +37,15 @@ export default function CodePreviewBox() {
       <div className={classes.codePreviwBoxStudentGrid}>
         {studentsData.map((student) => (
           <div key={student.name} className={classes.studentItem}>
-            <img
-              src={student.img}
-              alt={student.name}
-              className={classes.avatar}
-            />
+            <div className={classes.imageContainer}>
+              <Image
+                src={student.img}
+                alt={student.name}
+                className={classes.avatar}
+                fill
+                sizes="32px"
+              />
+            </div>
             <span className={classes.studentName}>{student.name}</span>
           </div>
         ))}

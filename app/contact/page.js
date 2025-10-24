@@ -18,7 +18,7 @@ export default function Contact() {
       <PageBanner
         title={
           <>
-            Let's{" "}
+            Let&apos;s{" "}
             <span>
               Connect and <br /> Innovate
             </span>
@@ -91,7 +91,7 @@ export default function Contact() {
         label="FAQ "
         title={
           <>
-            Frequently <span className="gradientText">Askes Questions</span>
+            Frequently <span className="gradientText">Asked Questions</span>
           </>
         }
         subtitle="Everything you need to know about our services."

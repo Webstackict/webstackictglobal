@@ -118,7 +118,7 @@ export default function Academy() {
         label="FAQ "
         title={
           <>
-            Frequently <span className="gradientText">Askes Questions</span>
+            Frequently <span className="gradientText">Asked Questions</span>
           </>
         }
         subtitle="Everything you need to know about our services."

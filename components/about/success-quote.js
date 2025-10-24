@@ -30,7 +30,7 @@ export default function SuccessQuote() {
             style={{ borderLeftColor: story.theme }}
             variants={childVarients}
           >
-            <p className={classes.quote}>"{story.text}"</p>
+            <p className={classes.quote}>&quot;{story.text}&quot;</p>
             <div className={classes.author} style={{ color: story.theme }}>
               - {story.name}
             </div>

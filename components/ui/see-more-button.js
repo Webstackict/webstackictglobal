@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import nProgress from "nprogress";
 import { useTransition } from "react";
 
-const RightArrow = motion(iconsConfig["rightArrow"]);
+const RightArrow = motion.create(iconsConfig["rightArrow"]);
 
 export default function SeeMoreButton({ children, href }) {
   const router = useRouter();
