@@ -139,12 +139,12 @@ export default function MainSidebar() {
             Contact
           </LinkWithProgress>
         </div>
-        <div className={classes.right}>
+        {/* <div className={classes.right}>
           <Link href="#" className={classes.link}>
             Sign In
           </Link>
           <SmallButton className={classes.getStarted}>Get Started</SmallButton>
-        </div>
+        </div> */}
       </motion.div>
     </>
   );

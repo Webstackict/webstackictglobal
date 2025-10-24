@@ -126,7 +126,7 @@
     color: var(--white);
     font-weight: 700;
     font-size: 1.125rem;
-    padding: 1.25rem 2rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 9999px;
     border: none;
     cursor: pointer;

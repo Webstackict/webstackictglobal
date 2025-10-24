@@ -7,7 +7,7 @@
 }
 
 html {
-  font-size: clamp(12px, 2.5vw, 16px);
+  font-size: clamp(10px, 2vw, 16px);
   background-color: var(--midnight-blue-500);
 }
 
