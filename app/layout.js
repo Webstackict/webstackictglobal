@@ -9,6 +9,9 @@ import MainSidebarContextProvider from "@/store/main-sidebar-context";
 export const metadata = {
   title: "Webstack-ICT-Global",
   description: "Africa's Premier Tech Hub",
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     images: [
       {
