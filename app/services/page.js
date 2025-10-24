@@ -19,6 +19,12 @@ import Tagline from "@/components/ui/tagline";
 import { clientTestimonials } from "@/lib/contents/testimonialData";
 import { ctaServicesHighlights } from "@/lib/contents/call-to-actionData";
 
+export const metadata = {
+  title: "Our Services at Webstack",
+  description:
+    "Empowering Africa's Tech Ecosystem through comprehensive training, incubation, and cutting-edge technology solutions",
+};
+
 export default function Services() {
   return (
     <>

@@ -20,6 +20,12 @@ import LearningModesGrid from "@/components/academy/learning-modes";
 import ValueQuote from "@/components/cards/value-quote";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
 
+export const metadata = {
+  title: "Learn Top Tech Skills at Webstack",
+  description:
+    "Explore our departments and enroll in your next cohort. Transform your career with Africa's most comprehensive tech training programs.",
+};
+
 export default function Academy() {
   return (
     <>

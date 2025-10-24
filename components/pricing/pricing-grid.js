@@ -5,6 +5,8 @@ import { pricingData } from "@/lib/contents/pricingData";
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import { containerVarients, childVarients } from "@/lib/animations";
+import { currencyFormatter } from "@/util/util";
+import LinkWithProgress from "../ui/Link-with-progress";
 
 export default function PricingGrid() {
   const CheckIcon = iconsConfig["check"];
@@ -42,7 +44,10 @@ export default function PricingGrid() {
                 <p className={classes.subtitle}>{plan.subtitle}</p>
 
                 <div className={classes.price}>
-                  {plan.price}
+                  {plan.price !== "Custom"
+                    ? currencyFormatter.format(plan.price)
+                    : plan.price}
+
                   <div className={classes.perMonth}>{plan.period}</div>
                 </div>
 
@@ -55,11 +60,26 @@ export default function PricingGrid() {
                   ))}
                 </div>
 
-                <button
-                  className={`${classes.button} ${plan.theme.background}`}
-                >
-                  {plan.buttonText}
-                </button>
+                {plan.price !== "Custom" ? (
+                  // <button
+                  //   className={`${classes.button} ${plan.theme.background}`}
+                  // >
+                  //   {plan.buttonText}
+                  // </button>
+                  <LinkWithProgress
+                    href={`/contact#contact-form`}
+                    className={`${classes.button} ${plan.theme.background}`}
+                  >
+                    {plan.buttonText}
+                  </LinkWithProgress>
+                ) : (
+                  <LinkWithProgress
+                    href={`/contact#contact-form`}
+                    className={`${classes.button} ${plan.theme.background}`}
+                  >
+                    {plan.buttonText}
+                  </LinkWithProgress>
+                )}
               </div>
             </div>
           </motion.div>

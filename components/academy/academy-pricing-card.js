@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import Badge from "../ui/badge";
 import classes from "./academy-pricing-card.module.css";
+import { currencyFormatter } from "@/util/util";
 
 const CheckIcon = iconsConfig["check"];
 
@@ -22,7 +23,9 @@ export default function AcademyPricingCard({
 
         <div className={classes.priceSection}>
           <div className={classes.priceRow}>
-            <span className={classes.price}>{department.fee}</span>
+            <span className={classes.price}>
+              {currencyFormatter.format(department.fee)}
+            </span>
             <span className={classes.currency}>NGN</span>
           </div>
           <p className={classes.priceSub}>
@@ -44,7 +47,9 @@ export default function AcademyPricingCard({
           <div className={classes.paymentGrid}>
             <div className={classes.paymentCard}>
               <p className={classes.paymentTitle}>Full Payment</p>
-              <p className={classes.paymentHighlight}>{department.fee}</p>
+              <p className={classes.paymentHighlight}>
+                {currencyFormatter.format(department.fee)}
+              </p>
             </div>
 
             {/* {pricingData.paymentOptions.map((option, i) => (

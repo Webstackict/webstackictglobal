@@ -12,6 +12,12 @@ import InteractiveMap from "@/components/interactive-map";
 import FaqSection from "@/components/FAQ/faq";
 import { faqDataContacts } from "@/lib/contents/faqData";
 
+export const metadata = {
+  title: "Let's Connect at Webstack",
+  description:
+    "Join Africa's premier tech community. Whether you're looking to learn, collaborate, or innovate, we're here to support your journey in technology.",
+};
+
 export default function Contact() {
   return (
     <>
@@ -96,7 +102,7 @@ export default function Contact() {
         }
         subtitle="Everything you need to know about our services."
       >
-        <FaqSection faqData={faqDataContacts}/>
+        <FaqSection faqData={faqDataContacts} />
       </Section>
     </>
   );

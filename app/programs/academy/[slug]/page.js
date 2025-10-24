@@ -23,6 +23,29 @@ import { faqData } from "@/lib/contents/faqData";
 import { graduateTestiomnials } from "@/lib/contents/testimonialData";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
 
+export async function generateMetadata({ params }) {
+  const deptSlug = (await params).slug;
+  const department = departments.find((dept) => dept.slug === deptSlug);
+
+  return {
+    title: `Study ${department.name} at WEBSTACK-ICT-GLOBAL`,
+    description: department.description,
+    openGraph: {
+      title: `Registration is Ongoing for ${department.name} | WEBSTACK-ICT-GLOBAL`,
+      description: department.description,
+      url: `https://webstack-ict-global.vercel.app/programs/academy/${deptSlug}`,
+      siteName: "WEBSTACK-ICT-GLOBAL",
+      locale: "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: department.name,
+      description: department.description,
+    },
+  };
+}
+
 export default async function DepartmentDetails({ params }) {
   const deptSlug = (await params).slug;
 

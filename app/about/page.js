@@ -17,6 +17,12 @@ import SuccessQuote from "@/components/about/success-quote";
 import CTASection from "@/components/cta/call-to-action-section";
 import { ctaABoutHighlights } from "@/lib/contents/call-to-actionData";
 
+export const metadata = {
+  title: "Our Story at Webstack",
+  description:
+    "WEBSTACK is pioneering the transformation of Africa's digital landscape through world-class training, innovation hubs,  and community-driven tech excellence. We're not just teaching code; we're building the next generation of tech leaders.",
+};
+
 export default function About() {
   return (
     <>

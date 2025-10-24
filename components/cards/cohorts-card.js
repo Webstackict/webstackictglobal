@@ -1,3 +1,4 @@
+import { currencyFormatter } from "@/util/util";
 import Badge from "../ui/badge";
 import LinkWithProgress from "../ui/Link-with-progress";
 import classes from "./cohorts-card.module.css";
@@ -53,7 +54,7 @@ export default function Cohortscard({
         </div>
         <div>
           <span>Fee:</span>
-          <span className={classes.fee}>{fee}</span>
+          <span className={classes.fee}>{currencyFormatter.format(fee)}</span>
         </div>
         {!isDeparmentsPage && (
           <div>

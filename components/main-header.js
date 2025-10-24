@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState, use } from "react";
 import nProgress from "nprogress";
 import { motion, AnimatePresence } from "framer-motion";
+
+import logoImg from '../assets/Webstack Logo white.png';
 
 import classes from "./main-header.module.css";
 
@@ -13,6 +16,7 @@ import { iconsConfig } from "@/lib/icons/iconsConfig";
 import MainSidebar from "./main-sidebar";
 import { MainSidebarContext } from "@/store/main-sidebar-context";
 import { usePathname } from "next/navigation";
+
 
 const AngleDown = motion.create(iconsConfig["angleDown"]);
 const Menu = motion.create(iconsConfig["hamburger"]);
@@ -60,9 +64,11 @@ function MainHeader() {
         <nav>
           <div>
             <div className={classes.left}>
+                <LinkWithProgress href="/"> 
               <div className={classes.logo}>
-                <LinkWithProgress href="/"> WEBSTACK</LinkWithProgress>
+                <Image src={logoImg} alt="logo" fill sizes="165px" priority/>
               </div>
+                </LinkWithProgress>
               <div className={classes.links}>
                 <LinkWithProgress
                   href="/"

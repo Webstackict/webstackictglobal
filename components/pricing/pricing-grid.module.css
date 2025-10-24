@@ -105,6 +105,13 @@
           transform: scale(1.05);
         }
       }
+
+      & > a {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        text-decoration: none;
+      }
     }
   }
 }

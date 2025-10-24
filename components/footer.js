@@ -1,4 +1,5 @@
 import classes from "./footer.module.css";
+import logoImg from "../assets/Webstack Logo white.png";
 
 import {
   socialLinks,
@@ -7,6 +8,7 @@ import {
 } from "@/lib/contents/footerData";
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -14,10 +16,12 @@ export default function Footer() {
       <div className={classes.container}>
         <div className={classes.grid}>
           <div className={classes.brandSection}>
-            <div className={classes.brandTitle}>WEBSTACK</div>
+            <div className={classes.brandTitle}>
+              <Image src={logoImg} alt="logo" fill sizes="200px" priority />
+            </div>
             <p className={classes.brandText}>
-              Empowering Africa&apos;s next generation of tech professionals with
-              world-class training, mentorship, and career opportunities.
+              Empowering Africa&apos;s next generation of tech professionals
+              with world-class training, mentorship, and career opportunities.
             </p>
 
             <div className={classes.socials}>
