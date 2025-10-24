@@ -10,7 +10,7 @@ export const metadata = {
   title: "Webstack-ICT-Global",
   description: "Africa's Premier Tech Hub",
   icons: {
-    icon: "/favicon.ico", // ✅ this restores the favicon
+    icon: "https://webstack-ict-global.vercel.app/favicon.ico", // ✅ this restores the favicon
   },
   openGraph: {
     images: [
