@@ -9,24 +9,15 @@ import MainSidebarContextProvider from "@/store/main-sidebar-context";
 export const metadata = {
   title: "Webstack-ICT-Global",
   description: "Africa's Premier Tech Hub",
-  icons: {
-    icon: "https://webstack-ict-global.vercel.app/favicon.ico", // ✅ this restores the favicon
-  },
-  openGraph: {
-    images: [
-      {
-        url: "https://webstack-ict-global.vercel.app/logo/webstack-logo-dark.png",
-        width: 160,
-        height: 50,
-        alt: "Webstack Banner",
-      },
-    ],
-  },
+
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body>
         <MainSidebarContextProvider>
           <MainHeader />
