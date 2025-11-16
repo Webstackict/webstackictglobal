@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export async function signup(prevState, formData) {
   const email = formData.get("email");
@@ -33,7 +33,7 @@ export async function signup(prevState, formData) {
 
   const cookieStore = await cookies();
 
-  const supabase = createServerClient(supabaseURL, supabaseKey, {
+  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -47,6 +47,20 @@ export async function signup(prevState, formData) {
   });
 
   try {
+    const { data: userRaw, error: listError } =
+      await supabase.auth.admin.listUsers({
+        filter: `email=eq.${email}`,
+      });
+
+    const users = userRaw.users;
+
+    const user = users.find((u) => u.email === email);
+  
+
+    if (user) {
+      throw new Error("User already registered");
+    }
+
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
@@ -87,7 +101,7 @@ export async function signin(prevState, formData) {
 
   const cookieStore = await cookies();
 
-  const supabase = createServerClient(supabaseURL, supabaseKey, {
+  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll();
@@ -101,6 +115,19 @@ export async function signin(prevState, formData) {
   });
 
   try {
+    const { data: userRaw, error: listError } =
+      await supabase.auth.admin.listUsers({
+        filter: `email=eq.${email}`,
+      });
+
+    const users = userRaw.users;
+
+    const user = users.find((u) => u.email === email);
+ 
+    if (!user) {
+      throw new Error("Invalid login credentials");
+    }
+
     const { error: signinError } = await supabase.auth.signInWithPassword({
       email,
       password,

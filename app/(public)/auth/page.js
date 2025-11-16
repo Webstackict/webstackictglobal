@@ -78,10 +78,11 @@ export default function Login() {
       } catch (error) {
         if (error.message === "User already registered") {
           toast.error(`${error.message}! Sign in instead`);
+          router.push("/auth");
           return;
         }
         if (error.message === "Invalid login credentials") {
-          toast.error(`${error.message}`);
+          toast.error(`${"Invalid email or password"}`);
           return;
         }
         if (error.message === "Email not confirmed") {
