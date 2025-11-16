@@ -72,6 +72,7 @@ export default function GalleryGrid({ galleryData }) {
                   } ${classes[`row${index === 0 ? 2 : 1}`]}`}
                   style={{
                     height: index === 0 ? "100%" : spanValues[item.span].height,
+                    minHeight: index === 0 ? "400px" : "200px",
                   }}
                   layout
                   initial={{ opacity: 0, y: 20 }}
