@@ -66,8 +66,8 @@ export default async function VerifyEmail({ searchParams }) {
           <div id="login-header" className={classes.header}>
             <h1>Verify Email</h1>
             <p>
-              A confirmation link has been sent to your {email}. Click the link
-              in your email to verify. Then comeback ad proceed.
+              A confirmation link has been sent to {email}. Click the link
+              in your email to verify. You will be redirected to the login screen.
             </p>
 
             <div className={classes.verifyButtonsContainer}>
@@ -80,12 +80,12 @@ export default async function VerifyEmail({ searchParams }) {
               >
                 Resend Link
               </ResendButton>
-              <LinkWithProgress
+              {/* <LinkWithProgress
                 href="/dashboard"
                 className={classes.proceedButton}
               >
                 Proceed to Dashboard
-              </LinkWithProgress>
+              </LinkWithProgress> */}
             </div>
           </div>
         </div>

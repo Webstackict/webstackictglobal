@@ -11,6 +11,12 @@ import Tagline from "@/components/ui/tagline";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
 import EventCategoriesWrapper from "@/components/serverWrappers/event-categories-wrapper";
 
+export const metadata = {
+  title: "Relive Our Lively Moments",
+  description:
+    "Explore the highlights from our transformative bootcamps, inspiring demo days, competitive hackathons, and vibrant community events that shape Africa's tech future.",
+};
+
 export default function Gallery() {
   return (
     <>
