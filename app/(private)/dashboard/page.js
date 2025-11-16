@@ -18,7 +18,7 @@ export default async function Dashboard() {
   console.log("user", user);
 
   if (!user) {
-    redirect("/auth");
+    redirect("/auth/email-verify");
   }
 
   return (

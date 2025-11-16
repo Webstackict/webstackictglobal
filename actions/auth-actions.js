@@ -53,17 +53,6 @@ export async function signup(prevState, formData) {
 
     if (signUpError) throw signUpError;
 
-    // const user = data.user;
-    // if (!user) throw new Error("User not created.");
-
-    // const { error: profileError } = await supabase
-    //   .from("user_profile")
-    //   .insert({ user_id: user.id });
-
-    // if (profileError) {
-    //   await supabase.auth.admin.deleteUser(user.id);
-    //   throw profileError;
-    // }
   } catch (error) {
     console.error("Supabase", error.message);
     throw error;

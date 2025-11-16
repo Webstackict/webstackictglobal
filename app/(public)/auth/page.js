@@ -15,9 +15,10 @@ const SecurityIcon = iconsConfig["security"];
 const EyeIcon = iconsConfig["eye"];
 const EmailIcon = iconsConfig["email"];
 const LockIcon = iconsConfig["lock"];
-const TelIcon = iconsConfig["phoneCall"];
+const EyeOffIcon = iconsConfig["eyeOff"];
 
 export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const mode = searchParams.get("mode") || "login";
@@ -59,8 +60,13 @@ export default function Login() {
         const res = await authAction(prevState, formData);
 
         if (!res.errors) {
-          router.replace("/dashboard");
-          toast.success(res.message);
+          if (mode === "signup") {
+            router.push(`/auth/email-verify?email=${inputs.email}`);
+            toast.success(res.message);
+          } else {
+            router.replace("/dashboard");
+            toast.success(res.message);
+          }
 
           return {};
         }
@@ -169,7 +175,7 @@ export default function Login() {
               </label>
               <div className={classes.inputWrapper}>
                 <input
-                  type="password"
+                  type={!showPassword ? "password" : "text"}
                   id="password"
                   placeholder="Enter your password"
                   name="password"
@@ -178,7 +184,17 @@ export default function Login() {
                   className={errors?.password ? "error-background" : undefined}
                 />
                 <button type="button" className={classes.eyeButton}>
-                  <EyeIcon className={classes.eyeButton} />
+                  {!showPassword ? (
+                    <EyeIcon
+                      className={classes.eyeButton}
+                      onClick={() => setShowPassword(true)}
+                    />
+                  ) : (
+                    <EyeOffIcon
+                      className={classes.eyeButton}
+                      onClick={() => setShowPassword(false)}
+                    />
+                  )}
                 </button>
               </div>
               {errors?.password && (
@@ -212,9 +228,6 @@ export default function Login() {
                       errors?.confirmPassword ? "error-background" : undefined
                     }
                   />
-                  <button type="button" className={classes.eyeButton}>
-                    <EyeIcon className={classes.eyeButton} />
-                  </button>
                 </div>
                 {errors?.confirmPassword && (
                   <p className="error-message">{errors.confirmPassword}</p>
