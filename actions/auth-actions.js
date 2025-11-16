@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerClient } from "@supabase/ssr";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -52,12 +53,11 @@ export async function signup(prevState, formData) {
     });
 
     if (signUpError) throw signUpError;
-
   } catch (error) {
     console.error("Supabase", error.message);
     throw error;
   }
-
+  revalidatePath("/");
   return {
     success: true,
     message:
@@ -110,6 +110,8 @@ export async function signin(prevState, formData) {
     console.error("Supabase", error.message);
     throw error;
   }
+
+  revalidatePath("/");
 
   return {
     success: true,
