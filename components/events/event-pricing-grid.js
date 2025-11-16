@@ -13,12 +13,14 @@ import { registerEvent } from "@/lib/db/register-event";
 import { UserContext } from "@/store/user-context";
 import { toast } from "sonner";
 import { supabase } from "@/lib/db/supabaseClient";
+import { useRouter } from "next/navigation";
 
 const CheckIcon = iconsConfig["check"];
 const FireIcon = iconsConfig["fire"];
 const TicketIcon = iconsConfig["ticket"];
 
 export default function EventPricingGrid({ event, isPassed, isRegistered }) {
+  const router = useRouter();
   const { user } = use(UserContext);
   const { id: userId } = user;
   const [ispanding, startTransition] = useTransition();
