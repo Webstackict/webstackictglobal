@@ -10,13 +10,19 @@ import ActivitiesGrid from "@/components/about/activities-grid";
 import StatsBig from "@/components/stats-big";
 import BenefitsGrid from "@/components/cards/benefits-grid";
 
-import { coreValues, successStats, timelineData } from "@/lib/contents/aboutData";
+import {
+  coreValues,
+  successStats,
+  timelineData,
+} from "@/lib/contents/aboutData";
 import ValueQuote from "@/components/cards/value-quote";
 import SuccessStatsGrid from "@/components/cards/success-stats-grid";
 import SuccessQuote from "@/components/about/success-quote";
 import CTASection from "@/components/cta/call-to-action-section";
 import { ctaABoutHighlights } from "@/lib/contents/call-to-actionData";
 import { activities } from "@/lib/contents/activitiesData";
+import { Suspense } from "react";
+import PastEventsWrapper from "@/components/serverWrappers/past-events-wrapper";
 
 export const metadata = {
   title: "Our Story at Webstack",
@@ -59,7 +65,7 @@ export default function About() {
         subtitle="From a small training center to Africa's leading tech hub, our story is one of 
                   relentless pursuit of excellence, community building, and technological advancement."
       >
-        <Timeline  timeline={timelineData}/>
+        <Timeline timeline={timelineData} />
       </Section>
       <Section
         label="leaders"
@@ -97,7 +103,9 @@ export default function About() {
                      From intensive training sessions to hackathons and networking events, we're building Africa's most dynamic tech ecosystem."
         sectionBgColor="sectionLightBlue"
       >
-        <ActivitiesGrid activities={activities}/>
+        <Suspense fallback={<p>Loading Upcoming Events</p>}>
+          <PastEventsWrapper />
+        </Suspense>
         <StatsBig />
       </Section>
 
