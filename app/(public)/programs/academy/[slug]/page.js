@@ -107,7 +107,7 @@ export default async function DepartmentDetails({ params }) {
     isUserEnrolled = isEnrolled.length > 0;
 
     if (isEnrolled.length > 0) {
-      paymentStatus = isEnrolled.payment_status === "paid";
+      paymentStatus = isEnrolled[0].payment_status === "paid";
     }
   }
 
