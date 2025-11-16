@@ -2,8 +2,9 @@
 
 * {
   margin: 0;
-    /* outline: 2px solid red; */
-    box-sizing: border-box;
+  /* outline: 2px solid red; */
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 html {
@@ -12,9 +13,7 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
   overflow-x: hidden;
-
 }
 
 ul {
@@ -35,10 +34,59 @@ ul {
   -webkit-background-clip: text;
   color: transparent;
 }
+.heroGradientText {
+  background: var(--gradient-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: block;
+}
 
 /* badges */
 
+.live-badge {
+  background-color: var(--red-400);
+}
+.blue-badge {
+  background-color: var(--blue-300);
+  color: var(--blue-400);
+}
+
+.green-badge {
+  background-color: var(--green-300);
+  color: var(--green-400);
+}
+
+.red-badge {
+  background-color: var(--red-300);
+  color: var(--red-400);
+}
+
+.yellow-badge {
+  background-color: var(--yellow-300);
+  color: var(--yellow-400);
+}
+
+.purple-badge {
+  background-color: var(--purple-300);
+  color: var(--purple-400);
+}
+
+.orange-badge {
+  background-color: var(--orange-300);
+  color: var(--orange-400);
+}
+
+.teal-badge {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
 .open {
+  background-color: var(--green-300);
+  color: var(--green-400);
+}
+.enrolling {
   background-color: var(--green-300);
   color: var(--green-400);
 }
@@ -208,8 +256,8 @@ ul {
 .yellow-border {
   border: 1px solid var(--yellow-400) !important;
 }
-.yellow-border {
-  border: 1px solid var(--t) !important;
+.teal-border {
+  border: 1px solid var(--teal-400) !important;
 }
 
 /* card */
@@ -240,4 +288,52 @@ ul {
 
 .sectionLightBlue {
   background: var(--light-section-bg);
+}
+
+
+
+.data-fetching-error {
+  color: var(--red-400);
+  text-align: center;
+}
+
+.no-data {
+  color: var(--gray-text-500);
+  text-align: center;
+}
+
+.no-data-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.error-message {
+  color: var(--red-400) !important;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+}
+.error-background {
+  background: var(--red-300) !important;
+}
+
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notify-banner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--red-400);
 }

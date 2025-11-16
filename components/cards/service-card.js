@@ -1,9 +1,9 @@
 import classes from "./service-card.module.css";
 import CheckIcon from "@mui/icons-material/Check";
 
-import { iconsConfig } from "@/lib/icons/iconsConfig";
 import SmallButton from "../ui/small-button";
 import LinkWithProgress from "../ui/Link-with-progress";
+import IconRenderer from "../ui/icon-rederer";
 
 export default function ServiceCard({
   title,
@@ -12,13 +12,14 @@ export default function ServiceCard({
   icon,
   theme,
 }) {
-  const ServiceIcon = iconsConfig[icon];
+  // const ServiceIcon = iconsConfig[icon];
   const isTitle = title.includes("training programs");
 
   return (
     <div className={classes.card}>
       <div className={`${classes.icon} ${theme.background}`}>
-        <ServiceIcon />
+        <IconRenderer iconName={icon}/>
+    
       </div>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -39,7 +40,7 @@ export default function ServiceCard({
           </LinkWithProgress>
         ) : (
           <LinkWithProgress className={theme.background} href="/contact#contact-form">
-            Apply Now
+            Get Quote
           </LinkWithProgress>
         )}
       </div>

@@ -25,6 +25,22 @@
     max-width: 532px;
     gap: 1.5rem;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & .eventCard {
+    border-radius: 1.5rem;
+    width: 100%;
+    height: 30rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  & .eventHero {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   & .cardHeader {

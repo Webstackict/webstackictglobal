@@ -1,0 +1,185 @@
+.eventPricingGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  & .includedCard {
+    background: var(--charcoal-blue-500);
+    backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    border: var(--card-border);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    & .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    & .list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    & .item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      & .iconWrapper {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        & svg {
+          color: var(--white);
+          font-size: 0.75rem;
+        }
+      }
+
+      & .text {
+        color: var(--gray-text-400);
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  & .pricingWrapper {
+    text-align: center;
+
+    & .pricingCard {
+      background: var(--charcoal-blue-500);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: var(--card-border);
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow: var(--box-shadow-hover);
+      }
+
+      & .priceContainer {
+        margin-bottom: 1.5rem;
+
+        & .price {
+          font-size: 2.5rem;
+          font-weight: 900;
+          background: var(--gradient-text);
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+        }
+
+        & .perPerson {
+          font-size: 1.5rem;
+          color: var(--gray-text-400);
+          margin-left: 0.5rem;
+        }
+      }
+
+      & .availability {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+
+        & .seatsLeft {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.5rem 1rem;
+          border-radius: 9999px;
+          font-size: 0.875rem;
+          font-weight: 500;
+          width: fit-content;
+          & svg {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+
+      & .registerBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background: var(--blue-400);
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--white);
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          background: var(--blue-500);
+          box-shadow: var(--box-shadow-hover);
+        }
+
+        & svg {
+          margin-right: 0.75rem;
+        }
+      }
+
+      & .note {
+        color: var(--gray-text-500);
+        font-size: 0.875rem;
+      }
+    }
+
+    & .statsRow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      & > div {
+        display: flex;
+        align-items: center;
+      }
+
+      & .statBlock {
+        text-align: center;
+
+        & .statValue {
+          font-size: 1.875rem;
+          font-weight: 700;
+          color: var(--teal-500);
+          margin-bottom: 0.25rem;
+        }
+
+        & .statLabel {
+          color: var(--gray-text-500);
+          font-size: 0.875rem;
+        }
+      }
+
+      & .divider {
+        width: 1px;
+        height: 3rem;
+        background: var(--gray-text-400);
+        margin-left: 2rem;
+      }
+    }
+  }
+}

@@ -2,15 +2,10 @@
 import { motion } from "framer-motion";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./see-more-button.module.css";
-import { useRouter } from "next/navigation";
-import nProgress from "nprogress";
-import { useTransition } from "react";
 
 const RightArrow = motion.create(iconsConfig["rightArrow"]);
 
-export default function SeeMoreButton({ children, href }) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+export default function SeeMoreButton({ children, ...props }) {
   const buttonVariants = {
     rest: { color: "var(--blue-500)", transition: { duration: 0.2 } },
     hover: { color: "var(--white)", transition: { duration: 0.3 } },
@@ -21,14 +16,6 @@ export default function SeeMoreButton({ children, href }) {
     hover: { x: 5, transition: { duration: 0.3 } },
   };
 
-  function handleButtonClick() {
-    if (href) {
-      nProgress.start();
-
-      startTransition(() => router.push(href));
-    }
-  }
-
   return (
     <motion.div className={classes.buttonWrapper}>
       <motion.button
@@ -37,7 +24,7 @@ export default function SeeMoreButton({ children, href }) {
         initial="rest"
         whileHover="hover"
         animate="rest"
-        onClick={handleButtonClick}
+        {...props}
       >
         {children}
         <RightArrow

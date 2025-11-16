@@ -1,0 +1,103 @@
+& .accountForm {
+  background: var(--charcoal-blue-500);
+  border-radius: 1.5rem;
+  border: var(--card-border);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--box-shadow-blue);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 3rem;
+
+  & .row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  & .field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  & label {
+    color: var(--gray-text-400);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  & input {
+    padding: 1rem 1.5rem;
+    background: var(--charcoal-blue-500);
+    border: var(--card-border);
+    border-radius: 1rem;
+    color: var(--white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: var(--teal-500);
+      box-shadow: var(--box-shadow-blue);
+    }
+
+    &::placeholder {
+      color: var(--gray-text-500);
+    }
+  }
+
+  & .email {
+    color: var(--gray-text-500);
+
+    &:focus {
+      outline: none;
+      border-color: transparent;
+      border: var(--card-border);
+      box-shadow: unset;
+    }
+  }
+
+  & .note {
+    font-size: 0.85rem;
+    color: var(--gray-text-500);
+    margin-top: 0.3rem;
+  }
+
+  & .passwordSection {
+    border: none;
+    /* margin-top: 2rem; */
+  }
+
+  & .passwordSection legend {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+
+  & .saveButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+    border-radius: 0.5rem;
+    background: var(--blue-400);
+    box-shadow: 0 0 8px var(--teal-500);
+    border: none;
+    transition: all 0.3s;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  & .saveButton:hover {
+    background: var(--blue-500);
+    box-shadow: var(--box-shadow-blue);
+  }
+}

@@ -4,8 +4,11 @@ import { MainSidebarContext } from "@/store/main-sidebar-context";
 import HeroButtons from "./hero-buttons";
 import classes from "./page-banner.module.css";
 import { use, useEffect } from "react";
+import QuickNav from "../ui/quick-nav";
+import GallerStats from "../gallery/gallery-stats";
 
 export default function PageBanner({
+  label = null,
   title,
   subtitle,
   tagline,
@@ -21,6 +24,7 @@ export default function PageBanner({
       setIsMainSidebar(false);
     }
   }, []);
+
   return (
     <section className={classes.pageBannerSection}>
       <div className={classes.bgDecor}>
@@ -68,6 +72,8 @@ export default function PageBanner({
           primaryBtnRoute={primaryBtnRoute}
           secondaryBtnRoute={secondaryBtnRoute}
         />
+
+        {label === "gallery" && <GallerStats />}
       </div>
     </section>
   );

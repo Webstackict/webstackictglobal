@@ -98,7 +98,7 @@ export default function ContactForm() {
           <div className={classes.inputGroup}>
             <label className={classes.label}>First Name *</label>
             <input
-              className={` ${errors?.firstName && classes.errorBackground} ${
+              className={` ${errors?.firstName && "error-background"} ${
                 classes.input
               }`}
               id="firstName"
@@ -109,13 +109,13 @@ export default function ContactForm() {
               value={formInputs.firstName}
             />
             {errors?.firstName && (
-              <p className={classes.errorMessage}>{errors.firstName}</p>
+              <p className="error-message ">{errors.firstName}</p>
             )}
           </div>
           <div className={classes.inputGroup}>
             <label className={classes.label}>Last Name *</label>
             <input
-              className={` ${errors?.firstName && classes.errorBackground} ${
+              className={` ${errors?.firstName && "error-background"} ${
                 classes.input
               }`}
               id="lastName"
@@ -126,7 +126,7 @@ export default function ContactForm() {
               value={formInputs.lastName}
             />
             {errors?.lastName && (
-              <p className={classes.errorMessage}>{errors.lastName}</p>
+              <p className="error-message ">{errors.lastName}</p>
             )}
           </div>
         </div>
@@ -140,20 +140,18 @@ export default function ContactForm() {
               name="email"
               type="email"
               placeholder="your.email@example.com"
-              className={` ${errors?.firstName && classes.errorBackground} ${
+              className={` ${errors?.firstName && "error-background"} ${
                 classes.input
               }`}
               onChange={handleChange}
               value={formInputs.email}
             />
-            {errors?.email && (
-              <p className={classes.errorMessage}>{errors.email}</p>
-            )}
+            {errors?.email && <p className="error-message ">{errors.email}</p>}
           </div>
           <div className={classes.inputGroup}>
             <label className={classes.label}>Phone Number</label>
             <input
-              className={` ${errors?.firstName && classes.errorBackground} ${
+              className={` ${errors?.firstName && "error-background"} ${
                 classes.input
               }`}
               id="tel"
@@ -163,9 +161,7 @@ export default function ContactForm() {
               onChange={handleChange}
               value={formInputs.tel}
             />
-            {errors?.tel && (
-              <p className={classes.errorMessage}>{errors.tel}</p>
-            )}
+            {errors?.tel && <p className="error-message ">{errors.tel}</p>}
           </div>
         </div>
 
@@ -183,7 +179,7 @@ export default function ContactForm() {
               value={formInputs.companyName}
             />
             {errors?.companyName && (
-              <p className={classes.errorMessage}>{errors.companyName}</p>
+              <p className="error-message ">{errors.companyName}</p>
             )}
           </div>
           <div className={classes.inputGroup}>
@@ -207,7 +203,7 @@ export default function ContactForm() {
               </select>
 
               {errors?.inquiryType && (
-                <p className={classes.errorMessage}>{errors.inquiryType}</p>
+                <p className="error-message ">{errors.inquiryType}</p>
               )}
             </div>
           </div>
@@ -219,7 +215,7 @@ export default function ContactForm() {
           <textarea
             rows="6"
             placeholder="Tell us more about your inquiry, project, or how we can help you..."
-            className={` ${errors?.firstName && classes.errorBackground} ${
+            className={` ${errors?.firstName && "error-background"} ${
               classes.textarea
             }`}
             id="message"
@@ -228,7 +224,7 @@ export default function ContactForm() {
             value={formInputs.message}
           ></textarea>
           {errors?.message && (
-            <p className={classes.errorMessage}>{errors.message}</p>
+            <p className="error-message ">{errors.message}</p>
           )}
         </div>
 

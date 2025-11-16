@@ -149,6 +149,6 @@
     font-size: 1rem;
   }
   & .errorBackground {
-    background: var(--red-300);
+    background: var(--red-300) !important;
   }
 }

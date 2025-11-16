@@ -1,0 +1,18 @@
+.eventDetailPill {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+
+
+  & svg {
+    color: var(--teal-500);
+    margin-right: 0.75rem;
+    font-size: 1.1em;
+  }
+
+  & span {
+    color: var(--white);
+    font-weight: 500;
+  }
+}

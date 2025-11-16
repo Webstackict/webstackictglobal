@@ -1,6 +1,8 @@
+'use client'
+
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./badge.module.css";
-export default function Badge({ title, icon = null }) {
+export default function Badge({ title, icon = null, eventBagdeStyle=null, ...props }) {
   const string = title;
   const className = string.replace(" ", "-");
 
@@ -11,8 +13,8 @@ export default function Badge({ title, icon = null }) {
   }
 
   return (
-    <span className={`${className} ${classes.badge}`}>
-     {icon !== null && <Icon />}
+    <span className={` ${eventBagdeStyle} ${className} ${classes.badge}`} {...props}>
+      {icon !== null && <Icon />}
       {title}
     </span>
   );

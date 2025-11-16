@@ -1,9 +1,9 @@
+
 import { currencyFormatter } from "@/util/util";
 import Badge from "../ui/badge";
 import LinkWithProgress from "../ui/Link-with-progress";
 import classes from "./cohorts-card.module.css";
-
-import { iconsConfig } from "@/lib/icons/iconsConfig";
+import IconRenderer from "../ui/icon-rederer";
 
 export default function Cohortscard({
   label,
@@ -19,10 +19,8 @@ export default function Cohortscard({
   departmentIcon,
   departmentTheme,
 }) {
-  const isStatus = status === "open";
+  const isStatus = spotsLeft === 0;
   const isDeparmentsPage = label === "departments";
-
-  const DepartmentIcon = iconsConfig[departmentIcon];
 
   let spotsLeftColor = "green";
 
@@ -36,7 +34,7 @@ export default function Cohortscard({
     <div className={classes.card}>
       <div className={classes.cardHeader}>
         <div className={`${classes.iconBox} ${departmentTheme}`}>
-          <DepartmentIcon />
+          <IconRenderer iconName={departmentIcon} />
         </div>
         <Badge title={status} />
       </div>
@@ -69,16 +67,16 @@ export default function Cohortscard({
       {!isDeparmentsPage ? (
         <LinkWithProgress
           href={`/programs/academy/${slug}#pricing-and-timeline`}
-          className={`${
-            isStatus ? classes.btn : classes.disabledBtn
-          }  ${departmentTheme}`}
+          className={`${!isStatus ? classes.btn : classes.disabledBtn}  ${
+            departmentTheme || "inherit"
+          }`}
         >
-          {isStatus ? "Enroll Now" : "Cohort Full"}
+          {!isStatus ? "Enroll Now" : "Cohort Full"}
         </LinkWithProgress>
       ) : (
         <LinkWithProgress
           href={`/programs/academy/${slug}`}
-          className={`${classes.btn} ${departmentTheme}`}
+          className={`${classes.btn} ${departmentTheme || "inherit"}`}
         >
           View Details
         </LinkWithProgress>

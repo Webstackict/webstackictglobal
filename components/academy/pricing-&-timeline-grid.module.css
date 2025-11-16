@@ -28,6 +28,23 @@
         box-shadow: var(--box-shadow-hover);
       }
     }
+    & button {
+      background: var(--blue-500);
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      width: fit-content;
+      color: var(--white);
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+      border: none;
+      text-decoration: none;
+      &:hover {
+        box-shadow: var(--box-shadow-hover);
+      }
+    }
   }
 
   @media (min-width: 1024px) {

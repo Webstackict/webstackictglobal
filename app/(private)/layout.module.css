@@ -1,0 +1,17 @@
+.dashboard {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+/* import Main from "@/components/dashboard/main";
+import classes from "./layout.module.css";
+
+export default function DashboardPagesLayout({ children }) {
+  return (
+    <div className={classes.dashboard}>
+      <Main>{children}</Main>
+    </div>
+  );
+} */

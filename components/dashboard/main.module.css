@@ -1,0 +1,19 @@
+.dashboardSection {
+  margin-left: 18rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+  @media (max-width: 1200px) {
+    .dashboardSection {
+   margin-left: 17rem;
+  }
+  }
+
+@media (max-width: 1024px) {
+  .dashboardSection {
+    margin-left: unset;
+  }
+}

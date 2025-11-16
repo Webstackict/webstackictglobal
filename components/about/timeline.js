@@ -1,9 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import classes from "./timeline.module.css";
-import { timelineData } from "@/lib/contents/aboutData";
 
-export default function Timeline() {
+export default function Timeline({ timeline }) {
   return (
     <div className={classes.timelineWrapper}>
       <motion.div
@@ -18,7 +17,7 @@ export default function Timeline() {
       ></motion.div>
 
       <div className={classes.timelineContainer}>
-        {timelineData.map((item, index) => (
+        {timeline.map((item, index) => (
           <div
             key={index}
             className={`${classes.timelineItem} ${
@@ -37,7 +36,9 @@ export default function Timeline() {
                   }}
                   viewport={{ once: true, amount: 0.5 }}
                 >
-                  <div className={classes.year}>{item.year}</div>
+                  <div className={classes.year}>
+                    {item.year || `${item.start_time} - ${item.stop_time}`}
+                  </div>
                   <h3 className={classes.title}>{item.title}</h3>
                   <p className={classes.description}>{item.description}</p>
                 </motion.div>
@@ -69,7 +70,9 @@ export default function Timeline() {
                   }}
                   viewport={{ once: true, amount: 0.5 }}
                 >
-                  <div className={classes.year}>{item.year}</div>
+                  <div className={classes.year}>
+                    {item.year || `${item.start_time} - ${item.stop_time}`}
+                  </div>
                   <h3 className={classes.title}>{item.title}</h3>
                   <p className={classes.description}>{item.description}</p>
                 </motion.div>

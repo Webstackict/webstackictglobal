@@ -7,7 +7,23 @@ import LeftHero from "./left-hero";
 import { use, useEffect } from "react";
 import { MainSidebarContext } from "@/store/main-sidebar-context";
 
-export default function HeroSection() {
+export default function HeroSection({
+  label = null,
+  taglineText,
+  taglineIcon,
+  heroImage,
+  title,
+  description,
+  date,
+  startTime,
+  dismisalTime,
+  venue,
+  primaryBtnText,
+  secondaryBtnText,
+  primaryBtnRoute,
+  secondaryBtnRoute,
+  image = null,
+}) {
   const { isMainSidebar, setIsMainSidebar } = use(MainSidebarContext);
 
   useEffect(() => {
@@ -20,17 +36,32 @@ export default function HeroSection() {
       <div className={classes.heroBackground}>
         <Image
           className={classes.heroImage}
-          src="https://storage.googleapis.com/uxpilot-auth.appspot.com/098a301275-17fc37a3ca371ad63e71.png"
+          src={heroImage}
           alt="futuristic tech workspace with coding screens and digital elements, dark blue gradient"
           fill
         />
-        <div className={classes.heroOverlay}></div>
+        {!label && <div className={classes.heroOverlay}></div>}
       </div>
 
       <div className={classes.heroContent}>
         <div className={classes.heroGrid}>
-          <LeftHero />
-          <FloatingCard />
+          <LeftHero
+            label={label}
+            taglineText={taglineText}
+            taglineIcon={taglineIcon}
+            title={title}
+            description={description}
+            date={date}
+            startTime={startTime}
+            dismisalTime={dismisalTime}
+            venue={venue}
+            primaryBtnText={primaryBtnText}
+            secondaryBtnText={secondaryBtnText}
+            primaryBtnRoute={primaryBtnRoute}
+            secondaryBtnRoute={secondaryBtnRoute}
+          />
+
+          {!label && <FloatingCard image={image} />}
         </div>
       </div>
     </section>

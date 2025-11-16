@@ -1,0 +1,151 @@
+/* CompletedCourses.module.css */
+.completedCourses {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+
+  & .courseCard {
+    background: var(--charcoal-blue-500);
+    backdrop-filter: blur(16px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    color: var(--white);
+
+    border: var(--card-border);
+    transition: all 0.3s ease;
+    &:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+  }
+
+  & .courseHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  & .courseIcon {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, var(--teal-500), #60d5ff);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px var(--teal-500);
+    flex-shrink: 0;
+  }
+
+  & .courseInfo {
+    flex: 1;
+  }
+
+  & .courseTitleWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  & .courseTitleWrapper h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  & .courseDesc {
+    color: var(--gray-text-500);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  & .courseMeta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    color: var(--gray-text-500);
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & svg {
+      font-size: 1rem;
+      width: 1rem;
+    }
+  }
+
+  & .courseFooter {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  & .certificateInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & .certificateIcon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(60, 166, 252, 0.125);
+    color: var(--teal-500);
+  }
+
+  & .downloadButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(60, 166, 252, 0.125);
+    color: var(--teal-500);
+    border: 1px solid rgba(60, 166, 252, 0.25);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  & .downloadButton:hover {
+    background: rgba(60, 166, 252, 0.18);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  & .completedCourses {
+    padding: 1.5rem 0;
+  }
+}
+@media (max-width: 1130px) {
+  & .completedCourses {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  & .completedCourses {
+    & .courseHeader {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    & .courseInfo {
+      width: 100%;
+    }
+  }
+}

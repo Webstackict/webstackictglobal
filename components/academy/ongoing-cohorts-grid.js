@@ -1,53 +1,27 @@
+import { calculateProgress } from "@/util/util";
 import Badge from "../ui/badge";
 import classes from "./ongoing-cohorts-grid.module.css";
 
-export default function OngoingCohortsGrid({ ongoingCohorts }) {
-  const calculateProgress = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const today = new Date();
-
-    if (today < start)
-      return {
-        progressPercent: 0,
-        totalWeeks: 0,
-        currentWeek: 0,
-        isFinalWeek: false,
-      };
-    if (today > end)
-      return {
-        progressPercent: 100,
-        totalWeeks: 0,
-        currentWeek: 0,
-        isFinalWeek: false,
-      };
-
-    const totalDays = (end - start) / (1000 * 60 * 60 * 24);
-    const elapsedDays = (today - start) / (1000 * 60 * 60 * 24);
-
-    const totalWeeks = Math.ceil(totalDays / 7);
-    const currentWeek = Math.ceil(elapsedDays / 7);
-
-    const isFinalWeek = totalWeeks - currentWeek < 1;
-
-    return {
-      progressPercent: Math.round((elapsedDays / totalDays) * 100),
-      totalWeeks,
-      currentWeek,
-      isFinalWeek,
-    };
-  };
+export default function OngoingCohortsGrid({ ongoingCohorts = [] }) {
+  if (ongoingCohorts.length === 0)
+    return (
+      <p className="no-data">
+        No active cohorts! Active cohorts will appear here as soon as
+        registration ends.
+      </p>
+    );
 
   return (
     <div className={classes.grid}>
       {ongoingCohorts.map((cohort, i) => {
         const { progressPercent, totalWeeks, currentWeek, isFinalWeek } =
-          calculateProgress(cohort.startDate, cohort.endDate);
+          calculateProgress(cohort.start_date, cohort.graduation_date);
+        const cohortName = `${cohort.department_name} Cohort ${cohort.cohort_number}`;
 
         return (
           <div key={i} className={`${classes.card}`}>
             <div className={classes.header}>
-              <h3 className={classes.title}>{cohort.name}</h3>
+              <h3 className={classes.title}>{cohortName}</h3>
               <Badge
                 title={isFinalWeek ? "final week" : "active"}
                 icon={"circle"}
@@ -57,11 +31,13 @@ export default function OngoingCohortsGrid({ ongoingCohorts }) {
             <div className={classes.infoSection}>
               <div className={classes.infoRow}>
                 <span className={classes.label}>Started:</span>
-                <span>{cohort.started}</span>
+                <span>{cohort.start_date}</span>
               </div>
               <div className={classes.infoRow}>
                 <span className={classes.label}>Students</span>
-                <span>{cohort.numberOfStudents}</span>
+                <span>
+                  {cohort.number_enrolled} / {cohort.max_size}
+                </span>
               </div>
               <div className={classes.infoRow}>
                 <span className={classes.label}>Progress</span>

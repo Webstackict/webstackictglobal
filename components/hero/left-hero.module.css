@@ -46,6 +46,15 @@
     max-width: 32rem;
     line-height: 1.6;
     min-height: 8rem;
+    
+  }
+
+  & .detailsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1.125rem;
   }
 }
 

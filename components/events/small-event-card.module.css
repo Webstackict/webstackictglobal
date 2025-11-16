@@ -1,0 +1,105 @@
+& .smallCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--charcoal-blue-400);
+  border-radius: 1rem;
+  padding: 0 0 1.5rem 0;
+  border: var(--card-border);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  &:hover {
+    box-shadow: var(--box-shadow-hover);
+    & img {
+      scale: 1.1;
+    }
+  }
+
+  & .smallHeader {
+    display: flex;
+    justify-content: space-between;
+    top: 1rem;
+    left: 1rem;
+    width: 90%;
+    position: absolute;
+    z-index: 2;
+  }
+
+  & .date {
+    background: rgba(0, 0, 0, 0.5);
+    /* padding: 0.5rem 1rem; */
+    color: var(--white);
+    font-size: 0.875rem;
+  }
+
+  & .smallBadge {
+    color: var(--white) !important;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 10rem;
+
+    & img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+       transition: all 0.3s ease;
+    }
+  }
+
+  & .smallTitle,
+  .smallDesc,
+  .smallButton {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
+
+  & .smallTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+
+  /* & .smallDate {
+    color: var(--gray-text-500);
+    font-size: 0.9rem;
+  } */
+
+  & .smallDesc {
+    color: var(--gray-text-400);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  & .smallButton {
+    color: var(--white) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 85%;
+    border: 1px solid var(--blue-400);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: var(--blue-400);
+      color: var(--white);
+    }
+  }
+}

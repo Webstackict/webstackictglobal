@@ -121,7 +121,9 @@ export default function MainSidebar() {
                   </li>
 
                   <li>
-                    <LinkWithProgress href="#">Events</LinkWithProgress>
+                    <LinkWithProgress href="/programs/events">
+                      Events
+                    </LinkWithProgress>
                   </li>
                 </motion.ul>
               )}
@@ -137,6 +139,9 @@ export default function MainSidebar() {
           </LinkWithProgress>
           <LinkWithProgress href="/contact" className={classes.link}>
             Contact
+          </LinkWithProgress>
+          <LinkWithProgress href="/gallery" className={classes.link}>
+            Gallery
           </LinkWithProgress>
         </div>
         {/* <div className={classes.right}>

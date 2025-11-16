@@ -1,0 +1,90 @@
+
+
+.homeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  /* margin: auto; */
+
+  & .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--charcoal-blue-500);
+    border: var(--card-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    gap: 2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  & .header {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      background: var(--midnight-blue-400);
+    }
+  }
+
+  & .iconBox {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 0.5rem;
+    background: var(--midnight-blue-400);
+  }
+
+  & .badge {
+    padding: 0.25rem 0.75rem;
+  }
+
+  & .title {
+    width: 100%;
+    height: 1rem;
+  }
+
+  & .title {
+    width: 100%;
+    height: 4rem;
+  }
+
+  & .cohortDetailes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .detail {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & .left,
+  .right {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+/* @media (max-width: 1240px) {
+  .homeGrid {
+    box-sizing: border-box;
+    padding: 0 2rem;
+    width: 100%;
+  }
+}
+@media (max-width: 1025px) {
+  .productGrid,
+  .homeGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 778px) {
+  .productGrid,
+  .homeGrid {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+} */

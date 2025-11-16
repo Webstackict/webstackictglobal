@@ -1,0 +1,103 @@
+.galleryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 668px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .galleryItem {
+    width: 100%;
+  }
+
+  & .col1 {
+    grid-column: span 1;
+    @media (max-width: 668px) {
+      grid-column: span 2;
+    }
+  }
+  & .col2 {
+    grid-column: span 2;
+  }
+  & .col3 {
+    grid-column: span 3;
+  }
+  & .col4 {
+    grid-column: span 4;
+  }
+
+  & .row1 {
+    grid-row: span 1;
+  }
+  & .row2 {
+    grid-row: span 2;
+  }
+
+  & .card {
+    position: relative;
+    background: rgba(31, 41, 55, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    overflow: hidden;
+    height: 100%;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 0 25px rgba(60, 166, 252, 0.4);
+      transform: translateY(-3px);
+    }
+  }
+
+  & .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  & .overlayContent {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    transition: opacity 0.3s ease;
+  }
+
+  & .card:hover .overlayContent {
+    opacity: 1;
+  }
+
+  & .title {
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+
+  & .date {
+    color: #d1d5db;
+    font-size: 0.875rem;
+  }
+
+  & .location {
+    font-size: 0.875rem;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1024px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+}

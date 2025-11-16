@@ -1,8 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
 import classes from "./small-button.module.css";
-export default function SmallButton({ children, className, ...props }) {
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import nProgress from "nprogress";
+export default function SmallButton({ children, className, href, ...props }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const buttonStyle = `${className} ${classes.button}`;
+  function handleClick() {
+    nProgress.start();
+    startTransition(() => router.push(href));
+  }
   return (
     <motion.button
       {...props}
@@ -10,6 +19,7 @@ export default function SmallButton({ children, className, ...props }) {
       whileHover={{
         scale: 1.05,
       }}
+      onClick={handleClick}
     >
       {children}
     </motion.button>

@@ -1,0 +1,43 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--midnight-blue-500);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: var(--card-border);
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & h2 {
+    color: var(--white);
+    font-size: 1.75rem;
+    font-weight: 700;
+    /* text-transform: capitalize; */
+  }
+
+  & p {
+    color: var(--gray-text-500);
+    margin-top: 0.25rem;
+  }
+
+  & .dashboardHamburgerMenu {
+    display: none;
+    color: var(--dodger-blue);
+    cursor: pointer;
+    @media (max-width: 1024px) {
+      display: block;
+    }
+  }
+
+  & .closeIcon {
+    color: var(--dodger-blue);
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
+
+}

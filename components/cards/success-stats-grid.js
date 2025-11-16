@@ -4,9 +4,8 @@ import { containerVarients, childVarients } from "@/lib/animations";
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./success-stats-grid.module.css";
-import { successStats } from "@/lib/contents/aboutData";
 
-export default function SuccessStatsGrid() {
+export default function SuccessStatsGrid({ data, label = null }) {
   return (
     <motion.div
       className={classes.statsGrid}
@@ -15,7 +14,7 @@ export default function SuccessStatsGrid() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {successStats.map((stat) => {
+      {data.map((stat) => {
         const Icon = iconsConfig[stat.icon];
         return (
           <motion.div
@@ -26,11 +25,17 @@ export default function SuccessStatsGrid() {
             <div className={`${classes.cardIcon} ${stat.theme.background}`}>
               <Icon />
             </div>
-            <div className={`${classes.cardNumber} ${stat.theme.color}`}>
-              {stat.number}
-            </div>
-            <h3 className={classes.cardTitle}>{stat.title}</h3>
-            <p className={classes.cardText}>{stat.description}</p>
+            {label !== "event-categories" && (
+              <div className={`${classes.cardNumber} ${stat.theme.color}`}>
+                {stat.number}
+              </div>
+            )}
+            <h3 className={classes.cardTitle}>{stat.title || stat.name}</h3>
+            {label !== "event-categories" && (
+              <>
+                <p className={classes.cardText}>{stat.description}</p>
+              </>
+            )}
           </motion.div>
         );
       })}

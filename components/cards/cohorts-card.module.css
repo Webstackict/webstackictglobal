@@ -4,6 +4,7 @@
   padding: 2rem;
   border: var(--card-border);
   transition: all 0.3s ease;
+  height: fit-content;
 
   &:hover {
     box-shadow: var(--box-shadow-hover);
@@ -40,6 +41,11 @@
     color: var(--gray-text-500);
     margin-bottom: 1.5rem;
     line-height: 1.5;
+    display: -webkit-box;
+    line-clamp: 5;
+    -webkit-line-clamp: 5; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   & .details {
@@ -93,5 +99,4 @@
     font-weight: 600;
     cursor: not-allowed;
   }
-
 }

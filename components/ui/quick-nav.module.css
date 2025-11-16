@@ -1,0 +1,163 @@
+/* Section Container */
+.qickNav {
+
+  padding: 2rem 0;
+
+  /* Inner container */
+  & .container {
+    display: flex;
+    width: 100%;
+    /* margin: 0 auto; */
+    align-items: center;
+    @media (min-width: 768px) {
+      padding: 0 2rem;
+    }
+  }
+
+  /* Wrapper (flex) */
+  & .wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 2rem; */
+  }
+
+  & .buttonGrouprapper {
+    position: relative;
+    width: 65%;
+  }
+
+  & .buttonGrouprapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70px;
+    height: 100%;
+    background: linear-gradient(
+      to left,
+      var(--midnight-blue-500),
+      rgba(0, 0, 0, 0)
+    );
+    pointer-events: none;
+  }
+  & .buttonGrouprapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      var(--midnight-blue-500),
+      rgba(0, 0, 0, 0)
+    );
+    pointer-events: none;
+  }
+
+  /* Button group */
+  & .buttonGroup {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    overflow-x: scroll;
+    box-shadow: inset -20px 0 20px -10px rgba(0, 0, 0, 0.5);
+    padding: 0 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  & .buttonGroup::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Nav buttons */
+  & .navButton {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+
+  & .navButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  & .active {
+    background: var(--blue-400);
+    color: var(--white);
+  }
+
+  /* Right-side group (search + filter) */
+  & .rightGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 31%;
+  }
+
+  /* Search wrapper */
+  & .searchWrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Search input */
+  & .searchInput {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 9999px;
+    padding: 0.75rem 2.5rem 0.75rem 1.5rem;
+    width: 100%;
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  & .searchInput:focus {
+    border-color: var(--teal-400);
+  }
+
+  /* Search icon */
+  & .searchIcon {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--teal-400);
+    pointer-events: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  /* Filter button */
+  & .filterButton {
+    padding: 0.65rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    & svg {
+      color: var(--teal-400);
+      width: 1.2rem;
+    }
+  }
+}

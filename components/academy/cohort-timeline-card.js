@@ -17,21 +17,21 @@ export default function CohortTimelineCard({
       <div className={classes.cohortList}>
         <CohortTimelineItem
           title="Start Date"
-          date={department.nextCohort}
+          date={department.next_cohort}
           info={`${department.duration} months intensive program`}
           icon="calendar"
           theme="greenTeal-bg"
         />
         <CohortTimelineItem
           title="Enrollment Deadline"
-          date={department.enrollmentDeadline}
-          info={`Limited to ${department.maxSize} students`}
+          date={department.enrollment_deadline}
+          info={`Limited to ${department.max_size} students`}
           icon="clock"
           theme="orangeRed-bg"
         />
         <CohortTimelineItem
           title="Graduation"
-          date={department.graduationDate}
+          date={department.graduation_date}
           info="Portfolio & job placement"
           icon="school"
           theme="greenTeal-bg"
@@ -43,7 +43,7 @@ export default function CohortTimelineCard({
             <span>Registeration is Ongoing</span>
           </div>
           <p className={classes.earlyBirdText}>
-            Enroll before {department.enrollmentDeadline}!
+            Enroll before {department.enrollment_deadline}!
           </p>
 
           {/* <button></button> */}

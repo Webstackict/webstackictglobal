@@ -1,3 +1,4 @@
+'use client'
 import classes from "./footer.module.css";
 import logoImg from "../assets/Webstack Logo white.png";
 

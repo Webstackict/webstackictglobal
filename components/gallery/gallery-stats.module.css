@@ -1,0 +1,37 @@
+.galleryStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--teal-400);
+  margin-top: 3rem;
+
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  & .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--teal-400);
+  }
+
+  & .icon {
+    font-size: 1.5rem;
+  }
+
+  & .text {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  & .divider {
+    width: 1px;
+    height: 2rem;
+    background-color: var(--gray-text-700);
+    margin-left: 0.5rem;
+  }
+}

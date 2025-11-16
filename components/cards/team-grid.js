@@ -4,9 +4,9 @@ import classes from "./team-grid.module.css";
 
 import TeamCard from "./team-card";
 
-import {containerVarients, childVarients } from "@/lib/animations";
+import { containerVarients, childVarients } from "@/lib/animations";
 
-export default function TeamGrid({ team, className }) {
+export default function TeamGrid({ team, className, label }) {
   const gridTemplate = `${className} ${classes.teamGrid}`;
   return (
     <motion.div
@@ -19,9 +19,10 @@ export default function TeamGrid({ team, className }) {
       {team.map((member, index) => {
         return (
           <TeamCard
-            key={member.name + index}
+            key={member.id || index}
             member={member}
             variants={childVarients}
+            label={label}
           />
         );
       })}

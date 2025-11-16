@@ -9,47 +9,55 @@ const SchoolIcon = iconsConfig["school"];
 const CalendarIcon = iconsConfig["calendar"];
 const AwardIcon = iconsConfig["award"];
 const BriefcaseIcon = iconsConfig["briefcase"];
+const ExperienceIcon = iconsConfig["motion"];
 
-export default function TeamCard({ member, ...props }) {
-  const BadgeIcon = iconsConfig[member.icon];
+export default function TeamCard({ member, label = null, ...props }) {
+  let BadgeIcon;
+
+  if (!label) {
+    BadgeIcon = iconsConfig[member.icon];
+  }
+
   return (
-    <motion.div
-      {...props}
-      className={classes.teamCard}
-    >
+    <motion.div {...props} className={classes.teamCard}>
       <div className={classes.imageWrapper}>
         <div className={classes.imageContainer}>
           <Image
-            src={member.image}
-            alt={member.name}
+            src={member.image_url || member.image}
+            alt="avatar"
             className={classes.avatar}
             fill
             sizes="100px"
             priority
           />
         </div>
-        <div className={`${classes.iconBadge} ${member.badgeColor}`}>
-          <BadgeIcon />
-        </div>
+        {!label && (
+          <div className={`${classes.iconBadge} ${member.badgeColor}`}>
+            <BadgeIcon />
+          </div>
+        )}
       </div>
-      <h3 className={classes.title}>{member.name}</h3>
+      <h3 className={classes.title}>{member.fullname}</h3>
       <p className={classes.role}>{member.role}</p>
       <div className={classes.details}>
         <p>
           <SchoolIcon /> {member.education}
         </p>
         <p>
-          <BriefcaseIcon /> {member.experience}
+          <BriefcaseIcon /> {member.profession}
+        </p>
+        <p>
+          <ExperienceIcon /> {member.experience}
         </p>
 
         {member.award && (
           <p>
-            <AwardIcon /> {member.award}
+            <AwardIcon /> {member.awards}
           </p>
         )}
 
         <p>
-          <CalendarIcon /> {member.years}
+          <CalendarIcon /> {member.experience_years} years of experience
         </p>
       </div>
       <p className={classes.description}>{member.bio}</p>

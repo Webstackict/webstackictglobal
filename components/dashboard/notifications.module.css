@@ -1,0 +1,69 @@
+/* notifications.module.css (scoped CSS module) */
+
+.notifications {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+
+  & ul {
+    list-style: none;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      width: 80%;
+    }
+  }
+
+  & .notification {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: var(--card-border);
+    background: var(--charcoal-blue-500);
+    margin-bottom: 10px;
+    box-shadow: var(--box-shadow-blue);
+    transition: transform 150ms ease, background 150ms ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      background: var(--charcoal-blue-400);
+      box-sizing: var(--box-shadow-hover);
+    }
+  }
+
+  & .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & strong {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--gray-text-400);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    & span {
+      font-size: 0.75rem;
+      color: var(--gray-text-700);
+    }
+  }
+
+  & .message {
+    font-size: 13px;
+    line-height: 1.2;
+    color: var(--gray-text-500);
+  }
+}
