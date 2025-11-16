@@ -20,7 +20,7 @@ export default function EventExperience({ experiences,  quickInfo }) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <h3 className={classes.title}>What You'll Experience</h3>
+        <h3 className={classes.title}>What You&apos;ll Experience</h3>
         <div className={classes.experienceList}>
           {experiences.map((item, index) => (
             <div key={index} className={classes.experienceItem}>

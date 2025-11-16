@@ -108,7 +108,7 @@ export default function EventPricingGrid({ event, isPassed, isRegistered }) {
     >
       {/* Included Section */}
       <motion.div className={classes.includedCard}>
-        <h3 className={classes.title}>What's Included</h3>
+        <h3 className={classes.title}>What&apos;s Included</h3>
         <div className={classes.list}>
           {event.included.map((item, index) => (
             <div key={index} className={classes.item}>

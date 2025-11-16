@@ -6,6 +6,7 @@ import { formatDate } from "@/util/util";
 import { use, useEffect, useState } from "react";
 import { FilterContext } from "@/store/filter-context";
 import SeeMoreButton from "../ui/see-more-button";
+import Image from "next/image";
 
 const spanValues = [
   { col: 1, height: "12rem" },
@@ -77,11 +78,15 @@ export default function GalleryGrid({ galleryData }) {
                   animate={{ opacity: 1, y: 0 }}
                 >
                   <div className={classes.card}>
-                    <img
-                      src={item.image_url}
-                      alt="highlight-image"
-                      className={classes.image}
-                    />
+                    <div className={classes.imageWrapper}>
+                      <Image
+                        src={item.image_url}
+                        alt="highlight-image"
+                        className={classes.image}
+                        fill
+                        sizes="(min-width: 1024) 50vw, 100vw"
+                      />
+                    </div>
                     <div className={classes.overlayContent}>
                       <h3 className={classes.title}>{item.title}</h3>
                       <p className={classes.date}>
