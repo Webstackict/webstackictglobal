@@ -85,7 +85,7 @@ export default function EventPricingGrid({ event, isPassed, isRegistered }) {
           user_id: userId,
           title: "Event Registration",
           message:
-            "You have successfully registered for this event, we hope to see you soon",
+            `You have successfully registered for the ${event.name} event. See you there!`,
         });
 
       if (errorNotificatiosData) throw errorNotificatiosData;

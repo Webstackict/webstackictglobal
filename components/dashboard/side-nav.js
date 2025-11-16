@@ -11,6 +11,8 @@ import Image from "next/image";
 import { logout } from "@/actions/logout";
 import { NotificationsContext } from "@/store/notifications-context";
 import { use } from "react";
+import { toast } from "sonner";
+import { UserContext } from "@/store/user-context";
 
 const {
   settings: Settings,
@@ -38,6 +40,7 @@ const links = [
 ];
 
 export default function SideNav() {
+  const { setUser } = use(UserContext);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -52,7 +55,20 @@ export default function SideNav() {
   // );
 
   async function handleLogoutClick() {
-    const res = await logout();
+    try {
+      const res = await logout();
+      setUser({
+        id: "",
+        email: "",
+        fullName: "",
+        displayName: "",
+        phone: "",
+        authProviders: "",
+      });
+    } catch (error) {
+      console.error(error.message);
+      toast.error("Something went wrong, please try again");
+    }
 
     router.replace("/auth");
   }

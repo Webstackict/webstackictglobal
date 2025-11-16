@@ -10,7 +10,7 @@ export default function UserContextProvider({ userDetails, children }) {
     email: userDetails?.email || "",
     fullName: userDetails?.fullName || "",
     displayName: userDetails?.displayName || "",
-    phone: userDetails?.phone,
+    phone: userDetails?.phone || "",
     authProviders: userDetails?.authProviders || "",
   });
 

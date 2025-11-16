@@ -11,6 +11,7 @@ import Image from "next/image";
 import { DashboardSidebarContext } from "@/store/dashboard-sidebar-context";
 import { logout } from "@/actions/logout";
 import { NotificationsContext } from "@/store/notifications-context";
+import { UserContext } from "@/store/user-context";
 
 const {
   settings: Settings,
@@ -29,6 +30,7 @@ const links = [
 ];
 
 export default function SideNavMobile() {
+  const { setUser } = use(UserContext);
   const { isDashboardSidebar, setIsDashboardSidebar } = use(
     DashboardSidebarContext
   );
@@ -45,8 +47,22 @@ export default function SideNavMobile() {
   //   (n) => n.status === "pending"
   // );
 
+
   async function handleLogoutClick() {
-    const res = await logout();
+    try {
+      const res = await logout();
+      setUser({
+        id: "",
+        email: "",
+        fullName: "",
+        displayName: "",
+        phone: "",
+        authProviders: "",
+      });
+    } catch (error) {
+      console.error(error.message);
+      toast.error("Something went wrong, please try again");
+    }
 
     router.replace("/auth");
   }
