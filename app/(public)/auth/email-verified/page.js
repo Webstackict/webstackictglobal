@@ -2,9 +2,10 @@
 import classes from "../page.module.css";
 
 import LinkWithProgress from "@/components/ui/Link-with-progress";
+import { iconsConfig } from "@/lib/icons/iconsConfig";
 import { motion, AnimatePresence } from "framer-motion";
 
-const MotionIcon = motion.create("badgeCheck");
+const MotionIcon = motion.create(iconsConfig["badgeCheck"]);
 export default async function VerifyEmail() {
   return (
     <section id="login-main" className={classes.authSection}>
