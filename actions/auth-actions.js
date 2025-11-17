@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
+const Next_Base_URL = process.env.NEXT_PUBLIC_SITE_URL;
 export async function signup(prevState, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
@@ -55,7 +55,6 @@ export async function signup(prevState, formData) {
     const users = userRaw.users;
 
     const user = users.find((u) => u.email === email);
-  
 
     if (user) {
       throw new Error("User already registered");
@@ -64,7 +63,9 @@ export async function signup(prevState, formData) {
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-    });
+    },    {
+        redirectTo: `${Next_Base_URL}/auth/email-verified`,
+      });
 
     if (signUpError) throw signUpError;
   } catch (error) {
@@ -123,7 +124,7 @@ export async function signin(prevState, formData) {
     const users = userRaw.users;
 
     const user = users.find((u) => u.email === email);
- 
+
     if (!user) {
       throw new Error("Invalid login credentials");
     }

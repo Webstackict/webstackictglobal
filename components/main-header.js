@@ -285,6 +285,7 @@ function MainHeader({ user }) {
                     type: "spring",
                     duration: 0.5,
                   }}
+                  
                 >
                   <LinkWithProgress href="/dashboard">
                     <div className={classes.avatarContainer}>

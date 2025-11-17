@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import LinkWithProgress from "@/components/ui/Link-with-progress";
 import ResendButton from "@/components/ui/resend-link-button";
 import AutoRefreshIfVerified from "@/components/poll/autorefreshVerification";
+import IconRenderer from "@/components/ui/icon-rederer";
 
 const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -64,30 +65,17 @@ export default async function VerifyEmail({ searchParams }) {
           <div className={classes.glowBar}></div>
 
           <div id="login-header" className={classes.header}>
-        
-
-            <h1>Verify Email</h1>
+            <IconRenderer label="verified-email" iconName="badgeCheck" />
+            <h1>Email Verified Successfully</h1>
             <p>
-              A confirmation link has been sent to {email}. Click the link in
-              your email to verify. You will be redirected to the login screen.
+              Your email has been verified, proceed to login and kickstart your
+              journey!
             </p>
 
             <div className={classes.verifyButtonsContainer}>
-              <ResendButton
-                className={classes.resendButton}
-                email={email}
-                userId={user.id}
-                waitResend={waitResend}
-                lastResend={lastResend}
-              >
-                Resend Link
-              </ResendButton>
-              {/* <LinkWithProgress
-                href="/dashboard"
-                className={classes.proceedButton}
-              >
-                Proceed to Dashboard
-              </LinkWithProgress> */}
+              <LinkWithProgress href="/auth" className={classes.proceedButton}>
+                Proceed to Login
+              </LinkWithProgress>
             </div>
           </div>
         </div>
