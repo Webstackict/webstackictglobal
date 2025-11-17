@@ -20,7 +20,7 @@ export default async function VerifyEmail() {
               alt="check-icon"
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 2, type: "spring", bounce: 0.6 }}
+              transition={{ duration: 5, type: "spring", bounce: 0.6 }}
               viewport={{ once: true }}
             />
 
