@@ -6,7 +6,7 @@ import { iconsConfig } from "@/lib/icons/iconsConfig";
 import { motion, AnimatePresence } from "framer-motion";
 import checkIcon from "@/assets/successfull-check.svg";
 
-const MotionIcon = motion.create(iconsConfig["badgeCheck"]);
+
 export default async function VerifyEmail() {
   return (
     <section id="login-main" className={classes.authSection}>
@@ -20,7 +20,7 @@ export default async function VerifyEmail() {
               alt="check-icon"
               initial={{ scale: 0, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, type: "spring", bounce: 0.6 }}
+              transition={{ duration: 2, type: "spring", bounce: 0.6 }}
               viewport={{ once: true }}
             />
 
