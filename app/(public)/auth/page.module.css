@@ -54,9 +54,9 @@
       font-size: 0.9rem;
     }
 
-    & svg {
-      font-size: 3rem;
-      color: var(--teal-500);
+    & img {
+      width: 30px;
+      height: 30px;
     }
   }
 
