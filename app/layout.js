@@ -45,9 +45,9 @@ export default async function GeneralLayout({ children }) {
       userDetails = {
         id: user.id,
         email: user.email,
-        phone: data.phone || "",
-        fullName: data.full_name || user.user_metadata?.full_name || "",
-        displayName: data.display_name || "",
+        phone: user.phone || "",
+        fullName: user.full_name || user.user_metadata?.full_name || "",
+        displayName: user.display_name || "",
         authProviders: user.app_metadata.providers,
       };
     } catch (error) {

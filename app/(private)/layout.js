@@ -18,8 +18,6 @@ export default async function PublicLayout({ children }) {
 
   let userDetails;
 
-       console.log("det", user);
-
   if (user?.id) {
     try {
       const { data, error } = await supabase
