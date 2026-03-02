@@ -54,7 +54,7 @@ export default function DashboardHeader({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [userId]);
+  }, [userId, setUnreadNotifications]);
 
   return (
     <>

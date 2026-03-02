@@ -1,0 +1,50 @@
+
+> webstack@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.12
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 15.4s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/22) ...
+   Generating static pages (5/22) 
+   Generating static pages (10/22) 
+   Generating static pages (16/22) 
+ ✓ Generating static pages (22/22)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                    4.49 kB         204 kB
+├ ƒ /_not-found                             1 kB         105 kB
+├ ƒ /about                               3.43 kB         167 kB
+├ ƒ /account-settings                    5.11 kB         215 kB
+├ ƒ /api/check-verification                143 B         104 kB
+├ ƒ /api/paystack/init                     143 B         104 kB
+├ ƒ /api/paystack/webhook                  143 B         104 kB
+├ ƒ /auth                                9.78 kB         126 kB
+├ ƒ /auth/callback                         143 B         104 kB
+├ ƒ /auth/email-verified                 2.67 kB         157 kB
+├ ƒ /auth/email-verify                   3.29 kB         120 kB
+├ ƒ /contact                              7.7 kB         170 kB
+├ ƒ /dashboard                           5.61 kB         227 kB
+├ ƒ /gallery                             18.7 kB         183 kB
+├ ƒ /notifications                       2.17 kB         205 kB
+├ ƒ /programs/academy                     7.3 kB         173 kB
+├ ƒ /programs/academy/[slug]             6.87 kB         235 kB
+├ ƒ /programs/events                     7.33 kB         172 kB
+├ ƒ /programs/events/[slug]              10.2 kB         237 kB
+├ ○ /robots.txt                            143 B         104 kB
+└ ƒ /services                            4.71 kB         202 kB
++ First Load JS shared by all             104 kB
+  ├ chunks/3131-0bb6d146e5ccdfde.js      46.2 kB
+  ├ chunks/c7879cf7-fabe25011515220e.js  54.2 kB
+  └ other shared chunks (total)          3.22 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

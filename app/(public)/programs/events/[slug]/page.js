@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `${event.name} | WEBSTACK-ICT-GLOBAL`,
         description: event.description,
-        url: `https://webstack-ict-global.vercel.app/programs/events/${eventId}`,
+        url: `/programs/events/${eventId}`,
         siteName: "WEBSTACK-ICT-GLOBAL",
         images: [
           {
@@ -56,6 +56,9 @@ export async function generateMetadata({ params }) {
         ],
         locale: "en_US",
         type: "article",
+      },
+      alternates: {
+        canonical: `/programs/events/${eventId}`,
       },
       twitter: {
         card: "summary",

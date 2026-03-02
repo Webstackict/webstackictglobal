@@ -46,3 +46,18 @@ export function DepartmentsGridSkeleton({ count = 12, label }) {
     </div>
   );
 }
+export function CohortSkeleton({ count = 3 }) {
+  return (
+    <div className={classes.homeGrid}>
+      {[...Array(count)].map((_, index) => (
+        <div className={classes.card} key={index}>
+          <Skeleton height={30} width="60%" style={{ marginBottom: "1rem" }} />
+          <Skeleton count={3} />
+          <div style={{ marginTop: "1rem" }}>
+            <Skeleton height={40} />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}

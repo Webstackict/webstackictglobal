@@ -16,7 +16,7 @@ import ValueQuote from "@/components/cards/value-quote";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
 import DepartmentWrapper from "@/components/serverWrappers/department-wrapper";
 import ActiveCohortsWrapper from "@/components/serverWrappers/active-cohorts-wrapper";
-import { DepartmentsGridSkeleton } from "@/components/ui/loading-skeleton";
+import { DepartmentsGridSkeleton, CohortSkeleton } from "@/components/ui/loading-skeleton";
 
 export const metadata = {
   title: "Learn Top Tech Skills at Webstack",
@@ -58,14 +58,7 @@ export default function Academy() {
         }
         subtitle="Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available."
       >
-        <Suspense
-          fallback={
-            <>
-              {/* <DepartmentsGridSkeleton /> */}
-              <p>Loading Departments</p>
-            </>
-          }
-        >
+        <Suspense fallback={<DepartmentsGridSkeleton />}>
           <DepartmentWrapper
             className={classes.departmentsGrid}
             label="departments"
@@ -82,7 +75,7 @@ export default function Academy() {
         subtitle="Currently running programs and their progress"
         sectionBgColor="sectionLightBlue"
       >
-        <Suspense fallback={<p>Loading Cohorts</p>}>
+        <Suspense fallback={<CohortSkeleton />}>
           <ActiveCohortsWrapper />
         </Suspense>
       </Section>
@@ -111,7 +104,7 @@ export default function Academy() {
         <LearningModesGrid />
         <ValueQuote
           title="Hybrid Option Available"
-          text="Ypu can combine physical and remote learning for maximum flexibility."
+          text="You can combine physical and remote learning for maximum flexibility."
         />
       </Section>
 
@@ -119,7 +112,7 @@ export default function Academy() {
         label="testimonials"
         title={
           <>
-            Successs <span className="gradientText">Stories</span>
+            Success <span className="gradientText">Stories</span>
           </>
         }
         subtitle="Real transformations from our alumni who are now leading tech innovation across Africa and beyond."

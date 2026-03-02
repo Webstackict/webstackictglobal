@@ -1,4 +1,4 @@
-"use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./video-section-grid.module.css";
@@ -23,14 +23,18 @@ export default function VideosSectionGrid() {
           key={index}
           className={classes.card}
           variants={childVarients}
+          aria-label={`Video: ${video.title}`}
         >
           <div className={classes.videoWrapper}>
-            <img
+            <Image
               src={video.thumbnail}
               alt={video.alt}
               className={classes.thumbnail}
+              width={640}
+              height={360}
+              style={{ objectFit: "cover" }}
             />
-            <div className={classes.overlay}>
+            <div className={classes.overlay} aria-hidden="true">
               {/* <div className={classes.playButton}>
                   <PlayIcon />
               </div> */}

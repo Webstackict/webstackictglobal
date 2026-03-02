@@ -31,7 +31,19 @@ function LeftHero({
       layout
       transition={{ duration: 1 }}
     >
-      <Tagline text={taglineText} icon={taglineIcon} />
+      <div className={classes.taglineWrapper}>
+        <Tagline text={taglineText} icon={taglineIcon} />
+        {!label && (
+          <motion.div
+            className={classes.urgencyBadge}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <span className="live-badge">Next Cohort: March 2026</span>
+          </motion.div>
+        )}
+      </div>
 
       <motion.h1
         className={classes.heroTitle}

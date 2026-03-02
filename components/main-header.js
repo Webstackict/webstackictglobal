@@ -74,7 +74,7 @@ function MainHeader({ user }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [userId]);
+  }, [userId, setUnreadNotifications]);
 
   useEffect(() => {
     function handleClick(event) {
@@ -89,7 +89,7 @@ function MainHeader({ user }) {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [setIsDropdown]);
 
   useEffect(() => {
     nProgress.done();
@@ -106,7 +106,13 @@ function MainHeader({ user }) {
             <div className={classes.left}>
               <LinkWithProgress href="/">
                 <div className={classes.logo}>
-                  <Image src={logoImg} alt="logo" fill sizes="165px" priority />
+                  <Image
+                    src={logoImg}
+                    alt="Webstack ICT Global Logo"
+                    fill
+                    sizes="165px"
+                    priority
+                  />
                 </div>
               </LinkWithProgress>
               <div className={classes.links}>
@@ -131,6 +137,9 @@ function MainHeader({ user }) {
                   <motion.button
                     className={classes.dropdownBtn}
                     onClick={handleDropdownClick}
+                    aria-expanded={isDropdown}
+                    aria-haspopup="true"
+                    aria-label="Toggle programs menu"
                     style={
                       path.includes("/programs")
                         ? { color: "var(--teal-400)" }
@@ -167,9 +176,9 @@ function MainHeader({ user }) {
                             style={
                               path.includes("/academy")
                                 ? {
-                                    color: "var(--white)",
-                                    background: "var(--charcoal-blue-500)",
-                                  }
+                                  color: "var(--white)",
+                                  background: "var(--charcoal-blue-500)",
+                                }
                                 : null
                             }
                           >
@@ -183,9 +192,9 @@ function MainHeader({ user }) {
                             style={
                               path.includes("/events")
                                 ? {
-                                    color: "var(--white)",
-                                    background: "var(--charcoal-blue-500)",
-                                  }
+                                  color: "var(--white)",
+                                  background: "var(--charcoal-blue-500)",
+                                }
                                 : null
                             }
                           >
@@ -259,21 +268,34 @@ function MainHeader({ user }) {
                   </SmallButton>
                 )}
 
-                <Menu
-                  className={classes.hamburgerMenu}
+                <button
+                  className={classes.hamburgerMenuButton}
                   onClick={() => setIsMainSidebar(true)}
-                  whileHover={{
-                    scale: 1.1,
-                    transition: {
-                      type: "spring",
-                      duration: 0.3,
-                    },
+                  aria-label="Open navigation menu"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    display: "flex",
+                    alignItems: "center",
                   }}
-                  whileTap={{
-                    scale: 1,
-                    rotate: 180,
-                  }}
-                />
+                >
+                  <Menu
+                    className={classes.hamburgerMenu}
+                    whileHover={{
+                      scale: 1.1,
+                      transition: {
+                        type: "spring",
+                        duration: 0.3,
+                      },
+                    }}
+                    whileTap={{
+                      scale: 1,
+                      rotate: 180,
+                    }}
+                  />
+                </button>
               </div>
             ) : (
               <div className={classes.right}>
@@ -285,7 +307,7 @@ function MainHeader({ user }) {
                     type: "spring",
                     duration: 0.5,
                   }}
-                  
+
                 >
                   <LinkWithProgress href="/dashboard">
                     <div className={classes.avatarContainer}>
@@ -322,7 +344,7 @@ function MainHeader({ user }) {
 
                         <li>
                           <LinkWithProgress href="/account-settings">
-                            <Settings /> Acccount Settings
+                            <Settings /> Account Settings
                           </LinkWithProgress>
                         </li>
                       </motion.ul>
@@ -333,26 +355,40 @@ function MainHeader({ user }) {
                 <LinkWithProgress
                   href="/notifications"
                   className={classes.notificationContainer}
+                  aria-label={`View notifications${unreadNotifications ? ' - You have unread messages' : ''}`}
                 >
                   {unreadNotifications && <div className="notify-banner"></div>}
                   <NotificationIcon className={classes.notificationIcon} />
                 </LinkWithProgress>
 
-                <Menu
-                  className={classes.hamburgerMenu}
+                <button
+                  className={classes.hamburgerMenuButton}
                   onClick={() => setIsMainSidebar(true)}
-                  whileHover={{
-                    scale: 1.1,
-                    transition: {
-                      type: "spring",
-                      duration: 0.3,
-                    },
+                  aria-label="Open navigation menu"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    display: "flex",
+                    alignItems: "center",
                   }}
-                  whileTap={{
-                    scale: 1,
-                    rotate: 180,
-                  }}
-                />
+                >
+                  <Menu
+                    className={classes.hamburgerMenu}
+                    whileHover={{
+                      scale: 1.1,
+                      transition: {
+                        type: "spring",
+                        duration: 0.3,
+                      },
+                    }}
+                    whileTap={{
+                      scale: 1,
+                      rotate: 180,
+                    }}
+                  />
+                </button>
               </div>
             )}
           </div>

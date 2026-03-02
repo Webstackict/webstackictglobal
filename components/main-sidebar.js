@@ -34,7 +34,7 @@ export default function MainSidebar() {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [setIsMainSidebar]);
 
   return (
     <>
@@ -57,21 +57,35 @@ export default function MainSidebar() {
           opacity: 0.5,
         }}
       >
-        <CloseIcon
+        <button
+          className={classes.closeButton}
           onClick={() => setIsMainSidebar(false)}
-          whileHover={{
-            scale: 1.1,
-            rotate: 180,
-            transition: {
-              type: "spring",
-              duration: 0.3,
-            },
+          aria-label="Close navigation menu"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            display: "flex",
+            alignItems: "center",
+            width: "fit-content",
           }}
-          whileTap={{
-            scale: 1,
-            rotate: 90,
-          }}
-        />
+        >
+          <CloseIcon
+            whileHover={{
+              scale: 1.1,
+              rotate: 180,
+              transition: {
+                type: "spring",
+                duration: 0.3,
+              },
+            }}
+            whileTap={{
+              scale: 1,
+              rotate: 90,
+            }}
+          />
+        </button>
         <div className={classes.links}>
           <LinkWithProgress href="/" className={classes.link}>
             Home
@@ -88,6 +102,9 @@ export default function MainSidebar() {
             <button
               className={classes.dropdownBtn}
               onClick={handleDropdownClick}
+              aria-expanded={isDropdown}
+              aria-haspopup="true"
+              aria-label="Toggle programs menu"
             >
               <motion.span
                 animate={isDropdown ? { color: "var(--white)" } : null}

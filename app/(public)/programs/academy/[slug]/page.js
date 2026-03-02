@@ -39,11 +39,11 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: `Registration is Ongoing for ${department.name} | WEBSTACK-ICT-GLOBAL`,
         description: department.description,
-        url: `https://webstack-ict-global.vercel.app/programs/academy/${deptSlug}`,
+        url: `/programs/academy/${deptSlug}`,
         siteName: "WEBSTACK-ICT-GLOBAL",
         images: [
           {
-            url: "https://webstack-ict-global.vercel.app/logo/webstack-logo-dark.png",
+            url: "/logo/webstack-logo-dark.png",
             width: 160,
             height: 50,
             alt: "Webstack Banner",
@@ -51,6 +51,9 @@ export async function generateMetadata({ params }) {
         ],
         locale: "en_US",
         type: "article",
+      },
+      alternates: {
+        canonical: `/programs/academy/${deptSlug}`,
       },
       twitter: {
         card: "summary",

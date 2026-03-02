@@ -18,6 +18,8 @@ import OngoingCohortsEnrollmentsWrapper from "@/components/serverWrappers/ongoin
 import { Suspense } from "react";
 
 
+import CohortSkeleton from "@/components/ui/cohort-skeleton";
+
 export default async function Home() {
 
   return (
@@ -49,7 +51,7 @@ export default async function Home() {
         }
         subtitle="Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available."
       >
-        <Suspense fallback={<p>Loading Data</p>}>
+        <Suspense fallback={<CohortSkeleton />}>
           <OngoingCohortsEnrollmentsWrapper />
         </Suspense>
       </Section>
@@ -57,7 +59,7 @@ export default async function Home() {
         label="services"
         title={
           <>
-            Our <span className="gradientText">Premuim Services</span>
+            Our <span className="gradientText">Premium Services</span>
           </>
         }
         subtitle="Comprehensive tech solutions designed to accelerate your growth and success in the digital economy."
@@ -80,7 +82,7 @@ export default async function Home() {
         label="testimonials"
         title={
           <>
-            Successs <span className="gradientText">Stories</span>
+            Success <span className="gradientText">Stories</span>
           </>
         }
         subtitle="Real transformations from our alumni who are now leading tech innovation across Africa and beyond."

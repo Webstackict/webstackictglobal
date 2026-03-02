@@ -15,7 +15,7 @@ export default function Notifications({ items }) {
   useEffect(() => {
     setNotifications(items);
     setUnreadNotifications(false);
-  }, []);
+  }, [items, setNotifications, setUnreadNotifications]);
 
   return (
     <div className={classes.notifications}>

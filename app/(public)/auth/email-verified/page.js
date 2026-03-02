@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import checkIcon from "@/assets/successfull-check.svg";
 
 
-export default async function VerifyEmail() {
+export default function VerifyEmail() {
   return (
     <section id="login-main" className={classes.authSection}>
       <div className={classes.wrapper}>

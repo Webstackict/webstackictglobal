@@ -11,15 +11,23 @@ import {
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import Image from "next/image";
 
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
         <div className={classes.grid}>
           <div className={classes.brandSection}>
-            <div className={classes.brandTitle}>
-              <Image src={logoImg} alt="logo" fill sizes="200px" priority />
-            </div>
+            <Link href="/" className={classes.brandTitle}>
+              <Image
+                src={logoImg}
+                alt="Webstack ICT Global Logo"
+                fill
+                sizes="200px"
+                priority
+              />
+            </Link>
             <p className={classes.brandText}>
               Empowering Africa&apos;s next generation of tech professionals
               with world-class training, mentorship, and career opportunities.
@@ -29,9 +37,16 @@ export default function Footer() {
               {socialLinks.map((social, index) => {
                 const SocialIcon = iconsConfig[social.icon];
                 return (
-                  <span key={index} className={classes.socialIcon}>
+                  <a
+                    key={index}
+                    href={social.href || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={classes.socialIcon}
+                    aria-label={`Follow us on ${social.icon}`}
+                  >
                     <SocialIcon className={classes.home} />
-                  </span>
+                  </a>
                 );
               })}
             </div>
@@ -43,7 +58,7 @@ export default function Footer() {
               <ul>
                 {section.links.map((link, i) => (
                   <li key={i}>
-                    <span>{link}</span>
+                    <Link href={link.href || "#"}>{link.label || link}</Link>
                   </li>
                 ))}
               </ul>
@@ -53,11 +68,13 @@ export default function Footer() {
 
         <div className={classes.bottomBar}>
           <div className={classes.copy}>
-            © 2024 WEBSTACK. All rights reserved.
+            © {new Date().getFullYear()} WEBSTACK. All rights reserved.
           </div>
           <div className={classes.legalLinks}>
             {legalLinks.map((link, i) => (
-              <span key={i}>{link}</span>
+              <Link key={i} href={link.href || "#"}>
+                {link.label || link}
+              </Link>
             ))}
           </div>
         </div>

@@ -72,6 +72,7 @@ export default function HeroButtons({
         onClick={handlePrimaryButtonClick}
         variants={buttonVariants}
         disabled={primaryBtnRoute === "/"}
+        aria-label={`${primaryBtnText} - Scroll to section`}
       >
         {primaryBtnText}
       </motion.button>
@@ -80,6 +81,7 @@ export default function HeroButtons({
         onClick={handleSecondaryButtonClick}
         variants={buttonVariants}
         disabled={primaryBtnRoute === "/"}
+        aria-label={`${secondaryBtnText} - Go to programs`}
       >
         {secondaryBtnText}
       </motion.button>

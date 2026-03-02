@@ -25,12 +25,11 @@ export default function HeroSection({
   image = null,
 }) {
   const { isMainSidebar, setIsMainSidebar } = use(MainSidebarContext);
-
   useEffect(() => {
     if (isMainSidebar) {
       setIsMainSidebar(false);
     }
-  }, []);
+  }, [isMainSidebar, setIsMainSidebar]);
   return (
     <section id="hero-section" className={classes.heroSection}>
       <div className={classes.heroBackground}>

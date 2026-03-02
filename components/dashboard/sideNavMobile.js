@@ -81,7 +81,7 @@ export default function SideNavMobile() {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [isDashboardSidebar]);
+  }, [isDashboardSidebar, setIsDashboardSidebar]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,7 +89,7 @@ export default function SideNavMobile() {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setIsDashboardSidebar]);
 
   return (
     <AnimatePresence mode="wait">
@@ -121,11 +121,10 @@ export default function SideNavMobile() {
               <LinkWithProgress
                 key={index}
                 href={link.href}
-                className={`${classes.navLink} ${
-                  pathname.includes(link.name.toLowerCase())
-                    ? classes.active
-                    : null
-                }`}
+                className={`${classes.navLink} ${pathname.includes(link.name.toLowerCase())
+                  ? classes.active
+                  : null
+                  }`}
               >
                 <span className={classes.iconBox}>
                   {link.name === "Notifications" && unreadNotifications && (
@@ -142,9 +141,8 @@ export default function SideNavMobile() {
 
           <LinkWithProgress
             href="/account-settings"
-            className={`${classes.navLink} ${
-              pathname.includes("account-settings") && classes.active
-            }`}
+            className={`${classes.navLink} ${pathname.includes("account-settings") && classes.active
+              }`}
           >
             <Settings />
             Account Settings

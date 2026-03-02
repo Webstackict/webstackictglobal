@@ -57,6 +57,7 @@ export default function CTASection({
             <button
               className={classes.primaryButton}
               onClick={handlePrimaryBtnClick}
+              aria-label={`${primaryBtnText} - Accelerate your tech career`}
             >
               {primaryBtnText}
             </button>
@@ -70,12 +71,14 @@ export default function CTASection({
           <button
             className={classes.secondaryButtonBlue}
             onClick={() => router.push("/contact#contact-form")}
+            aria-label="Schedule a Free Consultation via our contact form"
           >
             Schedule a Free Consultation
           </button>
           <button
             className={classes.secondaryButtonGreen}
             onClick={() => router.push("/contact#contact-options")}
+            aria-label="View various ways to reach out to us"
           >
             Ways to Reach Us
           </button>

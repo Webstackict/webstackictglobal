@@ -23,7 +23,7 @@ export default function PageBanner({
     if (isMainSidebar) {
       setIsMainSidebar(false);
     }
-  }, []);
+  }, [isMainSidebar, setIsMainSidebar]);
 
   return (
     <section className={classes.pageBannerSection}>
