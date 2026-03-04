@@ -1,0 +1,55 @@
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.statItem {
+    text-align: center;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.statItem:hover {
+    transform: translateY(-5px);
+}
+
+.number {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.label {
+    font-size: 1.1rem;
+    color: var(--textSecondary);
+    font-weight: 500;
+}
+
+/* Colors from theme or custom */
+.blue {
+    color: #2563eb;
+}
+
+.purple {
+    color: #9333ea;
+}
+
+.green {
+    color: #16a34a;
+}
+
+.orange {
+    color: #ea580c;
+}
+
+@media (min-width: 768px) {
+    .statsGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

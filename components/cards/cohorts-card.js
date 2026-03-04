@@ -43,7 +43,7 @@ export default function Cohortscard({
 
       <div className={classes.details}>
         <div>
-          <span>{!isDeparmentsPage ? " Start Date:" : "Next Cohort:"}</span>
+          <span>{!isDeparmentsPage ? "Start Date:" : "Next Cohort:"}</span>
           <span>{nextCohort}</span>
         </div>
         <div>
@@ -52,24 +52,39 @@ export default function Cohortscard({
         </div>
         <div>
           <span>Fee:</span>
-          <span className={classes.fee}>{currencyFormatter.format(fee)}</span>
+          <span className={classes.fee}>
+            {fee ? currencyFormatter.format(fee) : "TBD"}
+          </span>
         </div>
-        {!isDeparmentsPage && (
-          <div>
-            <span>Spots Left:</span>
-            <span className={spotsLeftColor}>
-              {spotsLeft}/{maxSize}
+      </div>
+
+      {!isDeparmentsPage && (
+        <div className={classes.progressContainer}>
+          <div className={classes.progressLabel}>
+            <span>Enrollment Status</span>
+            <span>
+              {maxSize - spotsLeft}/{maxSize} Seats Filled
             </span>
           </div>
-        )}
-      </div>
+          <div className={classes.progressBar}>
+            <div
+              className={classes.progressFill}
+              style={{
+                width: `${Math.min(
+                  ((maxSize - spotsLeft) / maxSize) * 100,
+                  100
+                )}%`,
+              }}
+            ></div>
+          </div>
+        </div>
+      )}
 
       {!isDeparmentsPage ? (
         <LinkWithProgress
           href={`/programs/academy/${slug}#pricing-and-timeline`}
-          className={`${!isStatus ? classes.btn : classes.disabledBtn}  ${
-            departmentTheme || "inherit"
-          }`}
+          className={`${!isStatus ? classes.btn : classes.disabledBtn}  ${departmentTheme || "inherit"
+            }`}
         >
           {!isStatus ? "Enroll Now" : "Cohort Full"}
         </LinkWithProgress>

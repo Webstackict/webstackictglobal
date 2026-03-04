@@ -53,14 +53,20 @@ export default function Footer() {
           </div>
 
           {footerSections.map((section, index) => (
-            <div key={index} className={classes.section}>
+            <div key={index} className={`${classes.section} ${section.title === "Contact" ? classes.contactSection : ""}`}>
               <h3>{section.title}</h3>
               <ul>
-                {section.links.map((link, i) => (
-                  <li key={i}>
-                    <Link href={link.href || "#"}>{link.label || link}</Link>
-                  </li>
-                ))}
+                {section.links.map((link, i) => {
+                  const Icon = link.icon ? iconsConfig[link.icon] : null;
+                  return (
+                    <li key={i}>
+                      <Link href={link.href || "#"} className={classes.footerLink}>
+                        {Icon && <Icon className={classes.footerIcon} />}
+                        <span>{link.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -73,7 +79,7 @@ export default function Footer() {
           <div className={classes.legalLinks}>
             {legalLinks.map((link, i) => (
               <Link key={i} href={link.href || "#"}>
-                {link.label || link}
+                {link.label}
               </Link>
             ))}
           </div>

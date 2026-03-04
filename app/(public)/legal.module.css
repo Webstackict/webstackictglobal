@@ -1,0 +1,33 @@
+.legalContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+    color: var(--text-color, #333);
+}
+
+.lastUpdated {
+    font-style: italic;
+    color: var(--gray-text-500);
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--white);
+    border-bottom: 2px solid var(--blue-400);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--gray-text-500);
+}

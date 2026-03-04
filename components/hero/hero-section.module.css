@@ -1,8 +1,11 @@
 .heroSection {
   position: relative;
   overflow: hidden;
-  padding: 8rem 1.5rem 4rem;
+  padding: 10rem 1.5rem 6rem;
   background: var(--hero-bg);
+  background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e3a8a);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
   color: var(--white);
 
   & .heroBackground {
@@ -21,7 +24,20 @@
   & .heroOverlay {
     position: absolute;
     inset: 0;
-    background: var(--hero-overlay);
+    background: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.2), transparent);
+    pointer-events: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+    z-index: 1;
   }
 
   & .heroContent {
@@ -42,10 +58,23 @@
   }
 }
 
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @media (min-width: 1024px) {
   .heroSection {
+    padding: 12rem 1.5rem 8rem;
     & .heroGrid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1.2fr 0.8fr;
     }
   }
 }

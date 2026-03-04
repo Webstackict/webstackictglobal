@@ -3,7 +3,7 @@ import Footer from "@/components/footer";
 import MainSidebarContextProvider from "@/store/main-sidebar-context";
 import FilterContextProvider from "@/store/filter-context";
 import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
-
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 export default async function PublicLayout({ children }) {
   const supabase = await createSupabaseServerClient();
@@ -14,13 +14,12 @@ export default async function PublicLayout({ children }) {
   return (
     <>
       <MainSidebarContextProvider>
-
-          <FilterContextProvider>
-            <MainHeader user={user} />
-            {children}
-            <Footer />
-          </FilterContextProvider>
- 
+        <FilterContextProvider>
+          <MainHeader user={user} />
+          {children}
+          <Footer />
+          <WhatsAppButton />
+        </FilterContextProvider>
       </MainSidebarContextProvider>
     </>
   );

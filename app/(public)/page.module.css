@@ -13,3 +13,29 @@
     }
   }
 }
+
+.viewAllContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background: var(--blue-400);
+  color: var(--white);
+  border-radius: 9999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(60, 166, 252, 0.3);
+}
+
+.viewAllBtn:hover {
+  background: var(--blue-500);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(60, 166, 252, 0.4);
+}

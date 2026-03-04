@@ -2,6 +2,8 @@
 
 import classes from "./stats.module.css";
 import { motion } from "framer-motion";
+import AnimatedCounter from "./animated-counter";
+import { statsData } from "@/lib/contents/statsData";
 
 function Stats() {
   const containerVariants = {
@@ -9,40 +11,37 @@ function Stats() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.3,
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
       },
     },
   };
 
   const childVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: { duration: 0.4, ease: "easeOut" },
     },
   };
+
   return (
     <motion.div
       className={classes.stats}
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
     >
-      <motion.div className={classes.statItem} variants={childVariants}>
-        <div className={classes.statNumber}>5,000+</div>
-        <div className={classes.statLabel}>Students Trained</div>
-      </motion.div>
-      <motion.div className={classes.statItem} variants={childVariants}>
-        <div className={classes.statNumber}>95%</div>
-        <div className={classes.statLabel}>Job Placement Rate</div>
-      </motion.div>
-      <motion.div className={classes.statItem} variants={childVariants}>
-        <div className={classes.statNumber}>50+</div>
-        <div className={classes.statLabel}>Partner Companies</div>
-      </motion.div>
+      {statsData.map((stat) => (
+        <motion.div key={stat.id} className={classes.statItem} variants={childVariants}>
+          <div className={`${classes.statNumber} ${classes[stat.color]}`}>
+            <AnimatedCounter value={stat.number} suffix={stat.suffix} />
+          </div>
+          <div className={classes.statLabel}>{stat.label}</div>
+        </motion.div>
+      ))}
     </motion.div>
   );
 }

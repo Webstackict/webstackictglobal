@@ -2,22 +2,34 @@
   display: flex;
   gap: 2rem;
   padding-top: 2rem;
+}
 
-  & .statItem {
-    text-align: center;
-  }
+.statItem {
+  text-align: center;
+}
 
-  & .statNumber {
-    font-size: 1.875rem;
-    font-weight: 700;
-    background: var(--gradient-text);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
+.statNumber {
+  font-size: 1.875rem;
+  font-weight: 700;
+}
 
-  & .statLabel {
-    font-size: 0.875rem;
-    color: var(--gray-text-500);
-  }
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--gray-text-500);
+}
+
+.blue {
+  color: #2563eb;
+}
+
+.purple {
+  color: #9333ea;
+}
+
+.green {
+  color: #16a34a;
+}
+
+.orange {
+  color: #ea580c;
 }

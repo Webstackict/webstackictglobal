@@ -3,35 +3,44 @@
   gap: 1.5rem;
 
   & .primaryBtn {
-    background: var(--blue-400);
+    background: #2563eb;
     color: var(--white);
     font-weight: 600;
     font-size: 1.125rem;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
-    border: none;
+    padding: 0.875rem 2.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   & .primaryBtn:hover {
-    background: var(--blue-500);
-    box-shadow: var(--box-shadow-blue);
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
   }
 
   & .secondaryBtn {
     color: var(--white);
     font-weight: 600;
     font-size: 1.125rem;
-    padding: 1rem 2rem;
-    border-radius: 0.75rem;
+    padding: 0.875rem 2.25rem;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   & .secondaryBtn:hover {
-    border-color: var(--blue-400);
-    box-shadow: var(--box-shadow-blue);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
   }
 }
 
