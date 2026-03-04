@@ -47,7 +47,6 @@ export default function CTASection({
         <p className={classes.subtext}>{subtitle}</p>
 
         <div className={classes.card}>
-          <h3 className={classes.cardTitle}>Join Our Next Cohort</h3>
           <div className={classes.grid}>
             {ctaHighlights.map((item, index) => (
               <CTACards key={index} content={item} />
