@@ -1,32 +1,43 @@
 .highlight {
   text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   & h3 {
-    color: var(--white);
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    color: var(--gray-text-400);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   & p {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
   }
 
   & .iconWrapper {
     color: var(--white);
-    width: 4rem;
-    height: 4rem;
-    border-radius: 9999px;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem auto;
-    font-size: 1.5rem;
+    margin: 0 auto 1.5rem auto;
+    font-size: 1.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
   }
 
   & .gradientText {
-    background: var(--gradient-text);
+    background: linear-gradient(to bottom, #fff, #94a3b8);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;

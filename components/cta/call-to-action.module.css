@@ -1,105 +1,141 @@
 .section {
-  padding: 5rem 1.5rem;
+  padding: 6rem 1.5rem;
   background: var(--cta-bg);
+  position: relative;
+  overflow: hidden;
 
   & .container {
-    max-width: 64rem;
+    max-width: 80rem;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 2;
   }
 
   & .heading {
-    font-size: 3.75rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
     background: var(--cta-heading);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    letter-spacing: -0.02em;
   }
 
   & .subtext {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     color: var(--gray-text-400);
-    margin: 0 auto 3rem auto;
-    max-width: 36rem;
+    margin: 0 auto 4rem auto;
+    max-width: 42rem;
+    line-height: 1.6;
   }
 
   & .card {
-    background: var(--cta-card-bg);
-    backdrop-filter: blur(16px);
-    border-radius: 1.5rem;
-    box-shadow: 0 0 20px var(--dodger-blue);
-    padding: 3rem;
-    border: 1px solid var(--cta-card-border);
-    margin-bottom: 3rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 2rem;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 4rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: var(--blue-400);
+    }
+
+    & .cardTitle {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--blue-400);
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
 
     & .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-bottom: 4rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
     }
 
     & .buttonWrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
     & .primaryButton {
       background: var(--cta-gradient-btn);
       color: white;
-      padding: 1rem 3rem;
-      border-radius: 0.75rem;
+      padding: 1.25rem 4rem;
+      border-radius: 1rem;
       border: none;
       font-size: 1.25rem;
-      font-weight: 700;
-      transition: all 0.3s ease;
+      font-weight: 800;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer;
+      box-shadow: 0 10px 30px -10px var(--blue-500);
 
       &:hover {
-        background: var(--cta-gradient-btn-hover);
-        box-shadow: var(--box-shadow-blue);
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px -15px var(--blue-500);
       }
     }
 
     & .smallText {
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
       color: var(--gray-text-500);
+      font-weight: 500;
     }
   }
 
   & .actions {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 
     & .secondaryButtonBlue,
     .secondaryButtonGreen {
-      background: var(--cta-down-btn);
-      border: none;
-      border: 1px solid var(--gray-text-700);
-      color: var(--cta-down-btn-color);
-      padding: 1.2rem 2rem;
-      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      border-radius: 1rem;
       font-size: 1rem;
       font-weight: 600;
       transition: all 0.3s ease;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
       &:hover {
-        box-shadow: 0 0 10px var(--cta-down-btn-hover);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
       }
     }
 
     & .secondaryButtonBlue:hover {
-      border-color: var(--teal-400);
+      border-color: var(--blue-400);
+      color: var(--blue-400);
     }
 
     & .secondaryButtonGreen:hover {
-      border-color: var(--green-500);
+      border-color: var(--green-400);
+      color: var(--green-400);
     }
   }
 }
