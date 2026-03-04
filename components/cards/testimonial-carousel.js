@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import classes from "./testimonial-carousel.module.css";
@@ -14,21 +14,25 @@ export default function TestimonialCarousel({ testimonials }) {
         setIsMounted(true);
     }, []);
 
+    const handleNext = useCallback(() => {
+        if (testimonials && testimonials.length > 0) {
+            setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        }
+    }, [testimonials]);
+
+    const handlePrev = useCallback(() => {
+        if (testimonials && testimonials.length > 0) {
+            setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        }
+    }, [testimonials]);
+
     useEffect(() => {
         if (!isMounted) return;
         const timer = setInterval(() => {
             handleNext();
-        }, 8000);
+        }, 5000);
         return () => clearInterval(timer);
-    }, [currentIndex, isMounted]);
-
-    const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    };
+    }, [isMounted, handleNext]);
 
     if (!isMounted || !testimonials || testimonials.length === 0) return null;
 
@@ -47,7 +51,7 @@ export default function TestimonialCarousel({ testimonials }) {
                         className={classes.slide}
                     >
                         <div className={classes.testimonialBox}>
-                            <div className={classes.quoteIcon}>"</div>
+                            <div className={classes.quoteIcon}>&ldquo;</div>
                             <p className={classes.text}>{current.text}</p>
 
                             <div className={classes.profile}>
