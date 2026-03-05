@@ -1,6 +1,20 @@
 .footer {
-  border-top: 1px solid var(--charcoal-blue-400);
-  padding: 4rem 1.5rem;
+  background: var(--midnight-blue-600);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 6rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-400), transparent);
+    opacity: 0.3;
+  }
 
   & .container {
     max-width: 80rem;
@@ -23,9 +37,11 @@
   }
 
   & .brandSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
     @media (max-width: 640px) {
-      display: flex;
-      flex-direction: column;
       align-items: center;
       text-align: center;
       margin-bottom: 2rem;
@@ -33,30 +49,41 @@
 
     & .brandTitle {
       position: relative;
-      margin-bottom: 2rem;
-      width: 14rem;
-      height: 4rem;
+      margin-bottom: 2.5rem;
+      width: 25rem;
+      height: 7rem;
       display: block;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
       & img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 0 12px rgba(0, 150, 255, 0.3));
+        object-position: left;
+        transform: scale(1.4);
+        transform-origin: left center;
+        filter: drop-shadow(0 6px 15px rgba(0, 150, 255, 0.2));
       }
 
       &:hover {
-        transform: scale(1.05);
-        filter: brightness(1.1);
+        transform: scale(1.03);
+        filter: brightness(1.15);
       }
     }
 
     & .brandText {
-      color: var(--gray-text-500);
-      max-width: 28rem;
-      margin-bottom: 1.5rem;
+      color: var(--gray-text-400);
+      max-width: 35rem;
+      margin-bottom: 2rem;
       display: block;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      text-align: left;
+      opacity: 0.9;
+
+      @media (max-width: 640px) {
+        text-align: center;
+      }
     }
 
     & .socials {
@@ -97,11 +124,31 @@
 
     & h3 {
       color: var(--white);
-      font-weight: 600;
-      margin-bottom: 1.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05rem;
+      text-transform: uppercase;
+      position: relative;
+      display: inline-block;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -0.5rem;
+        left: 0;
+        width: 2rem;
+        height: 2px;
+        background: var(--blue-400);
+      }
 
       @media (max-width: 460px) {
         text-align: center;
+
+        &::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
     }
 
@@ -116,21 +163,28 @@
         & .footerLink {
           color: var(--gray-text-500);
           text-decoration: none;
-          transition: color 0.3s;
-          font-size: 0.9375rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          font-size: 1rem;
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.875rem;
+          padding: 0.25rem 0;
 
           &:hover {
             color: var(--white);
+            transform: translateX(5px);
           }
 
           & .footerIcon {
-            width: 1.15rem;
-            height: 1.15rem;
+            width: 1.25rem;
+            height: 1.25rem;
             flex-shrink: 0;
             color: var(--blue-400);
+            transition: transform 0.3s ease;
+          }
+
+          &:hover .footerIcon {
+            transform: scale(1.1);
           }
         }
       }

@@ -1,6 +1,6 @@
 'use client'
 import classes from "./footer.module.css";
-import logoImg from "../assets/Webstack Logo white.png";
+
 
 import {
   socialLinks,
@@ -27,10 +27,10 @@ export default function Footer() {
           <div className={classes.brandSection}>
             <Link href="/" className={classes.brandTitle}>
               <Image
-                src={logoImg}
+                src="/logo/webstack-logo-white.png"
                 alt="Webstack ICT Global Logo"
                 fill
-                sizes="200px"
+                sizes="500px"
                 priority
               />
             </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
                     className={classes.socialIcon}
                     aria-label={`Follow us on ${social.icon}`}
                   >
-                    {isMounted && SocialIcon && <SocialIcon className={classes.home} />}
+                    {SocialIcon && <SocialIcon className={classes.home} />}
                   </a>
                 );
               })}
@@ -67,7 +67,7 @@ export default function Footer() {
                   return (
                     <li key={i}>
                       <Link href={link.href || "#"} className={classes.footerLink}>
-                        {isMounted && Icon && <Icon className={classes.footerIcon} />}
+                        {Icon && <Icon className={classes.footerIcon} />}
                         <span>{link.label}</span>
                       </Link>
                     </li>
@@ -79,8 +79,8 @@ export default function Footer() {
         </div>
 
         <div className={classes.bottomBar}>
-          <div className={classes.copy}>
-            © {isMounted ? new Date().getFullYear() : "2026"} WEBSTACK. All rights reserved.
+          <div className={classes.copy} suppressHydrationWarning>
+            © {new Date().getFullYear()} WEBSTACK. All rights reserved.
           </div>
           <div className={classes.legalLinks}>
             {legalLinks.map((link, i) => (

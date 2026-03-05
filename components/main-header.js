@@ -5,7 +5,7 @@ import { useEffect, useState, use } from "react";
 import nProgress from "nprogress";
 import { motion, AnimatePresence } from "framer-motion";
 
-import logoImg from "../assets/Webstack Logo white.png";
+
 
 import classes from "./main-header.module.css";
 
@@ -107,10 +107,10 @@ function MainHeader({ user }) {
               <LinkWithProgress href="/">
                 <div className={classes.logo}>
                   <Image
-                    src={logoImg}
+                    src="/logo/webstack-logo-white.png"
                     alt="Webstack ICT Global Logo"
                     fill
-                    sizes="165px"
+                    sizes="1000px"
                     priority
                   />
                 </div>
