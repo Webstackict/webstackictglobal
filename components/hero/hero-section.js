@@ -4,9 +4,6 @@ import Image from "next/image";
 import FloatingCard from "../ui/floating-card";
 import classes from "./hero-section.module.css";
 import LeftHero from "./left-hero";
-import { use, useEffect } from "react";
-import { MainSidebarContext } from "@/store/main-sidebar-context";
-
 export default function HeroSection({
   label = null,
   taglineText,
@@ -24,12 +21,6 @@ export default function HeroSection({
   secondaryBtnRoute,
   image = null,
 }) {
-  const { isMainSidebar, setIsMainSidebar } = use(MainSidebarContext);
-  useEffect(() => {
-    if (isMainSidebar) {
-      setIsMainSidebar(false);
-    }
-  }, [isMainSidebar, setIsMainSidebar]);
   return (
     <section id="hero-section" className={classes.heroSection}>
       <div className={classes.heroBackground}>

@@ -1,9 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { MainSidebarContext } from "@/store/main-sidebar-context";
 import HeroButtons from "./hero-buttons";
 import classes from "./page-banner.module.css";
-import { use, useEffect } from "react";
 import QuickNav from "../ui/quick-nav";
 import GallerStats from "../gallery/gallery-stats";
 
@@ -17,14 +15,6 @@ export default function PageBanner({
   primaryBtnRoute,
   secondaryBtnRoute,
 }) {
-  const { isMainSidebar, setIsMainSidebar } = use(MainSidebarContext);
-
-  useEffect(() => {
-    if (isMainSidebar) {
-      setIsMainSidebar(false);
-    }
-  }, [isMainSidebar, setIsMainSidebar]);
-
   return (
     <section className={classes.pageBannerSection}>
       <div className={classes.bgDecor}>

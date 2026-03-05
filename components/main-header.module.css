@@ -43,13 +43,20 @@
 
   & .logo {
     position: relative;
-    width: 10rem;
-    height: 3rem;
+    width: 12rem;
+    height: 3.5rem;
+    transition: all 0.3s ease;
 
     & img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(0, 150, 255, 0.4));
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
     }
   }
 
