@@ -1,4 +1,4 @@
-import IconRenderer from "../ui/icon-rederer";
+import IconRenderer from "../ui/icon-renderer";
 import classes from "./program-card.module.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import LinkWithProgress from "../ui/Link-with-progress";

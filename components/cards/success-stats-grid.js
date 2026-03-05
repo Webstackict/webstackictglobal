@@ -5,7 +5,7 @@ import { containerVarients, childVarients } from "@/lib/animations";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./success-stats-grid.module.css";
 
-export default function SuccessStatsGrid({ data, label = null }) {
+export default function SuccessStatsGrid({ data = [], label = null }) {
   return (
     <motion.div
       className={classes.statsGrid}
@@ -14,7 +14,7 @@ export default function SuccessStatsGrid({ data, label = null }) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {data.map((stat) => {
+      {(data || []).map((stat) => {
         const Icon = iconsConfig[stat.icon];
         return (
           <motion.div

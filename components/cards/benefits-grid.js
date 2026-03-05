@@ -6,7 +6,8 @@ import { containerVarients, childVarients } from "@/lib/animations";
 
 export default function BenefitsGrid({ items, className }) {
   const gridTemplate = `${className} ${classes.benefitsGrid}`;
- 
+  const safeItems = items || [];
+
   return (
     <motion.div
       className={gridTemplate}
@@ -15,7 +16,7 @@ export default function BenefitsGrid({ items, className }) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {items.map((item, index) => (
+      {safeItems.map((item, index) => (
         <BenefitCard key={index} content={item} variants={childVarients} />
       ))}
     </motion.div>

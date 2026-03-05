@@ -24,22 +24,29 @@ export default async function PublicLayout({ children }) {
         .from("user_profile")
         .select("full_name, display_name, phone")
         .eq("user_id", user.id)
-        .single();
-      if (error) throw error;
+        .maybeSingle();
 
-      // console.log("det", data);
+      if (error) {
+        console.error("Supabase user_profile fetch error:", {
+          message: error.message,
+          code: error.code,
+          details: error.details,
+        });
+        throw error;
+      }
 
+      const profile = data || {};
       userDetails = {
         id: user.id,
         email: user.email,
-        phone: data.phone || "",
-        fullName: data.full_name || user.user_metadata?.full_name || "",
-        displayName: data.display_name || "",
+        phone: profile.phone || "",
+        fullName: profile.full_name || user.user_metadata?.full_name || "",
+        displayName: profile.display_name || "",
         authProviders: user.app_metadata.providers,
       };
     } catch (err) {
       console.error("From supabase", err);
-      return;
+      userDetails = null;
     }
   }
 

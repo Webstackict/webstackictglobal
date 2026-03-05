@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "framer-motion";
 
 import classes from './backdrop.module.css'

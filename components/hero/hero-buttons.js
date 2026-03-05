@@ -22,22 +22,37 @@ export default function HeroButtons({
   }
 
   function handlePrimaryButtonClick() {
-    document.getElementById(primaryBtnRoute).scrollIntoView({
-      behavior: "smooth",
-    });
-  }
-  function handleSecondaryButtonClick() {
-    if (secondaryBtnText === "Explore Programs") {
+    if (primaryBtnRoute?.startsWith("/")) {
       nProgress.start();
-
       startTransition(() => {
-        router.push("/programs/academy");
+        router.push(primaryBtnRoute);
       });
       return;
     }
-    document.getElementById(secondaryBtnRoute).scrollIntoView({
-      behavior: "smooth",
-    });
+
+    const element = document.getElementById(primaryBtnRoute);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }
+
+  function handleSecondaryButtonClick() {
+    if (secondaryBtnRoute?.startsWith("/")) {
+      nProgress.start();
+      startTransition(() => {
+        router.push(secondaryBtnRoute);
+      });
+      return;
+    }
+
+    const element = document.getElementById(secondaryBtnRoute);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   }
 
   const containerVariants = {

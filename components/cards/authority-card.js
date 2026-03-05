@@ -1,4 +1,4 @@
-import IconRenderer from "../ui/icon-rederer";
+import IconRenderer from "../ui/icon-renderer";
 import classes from "./authority-card.module.css";
 
 export default function AuthorityCard({ title, description, icon }) {

@@ -1,0 +1,65 @@
+.enrollContainer {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.pageWrapper {
+    padding: 10rem 1.5rem 8rem 1.5rem;
+    min-height: 100vh;
+    background: radial-gradient(circle at top right, rgba(60, 166, 252, 0.05), transparent 400px),
+        radial-gradient(circle at bottom left, rgba(60, 166, 252, 0.05), transparent 400px);
+}
+
+.container {
+    max-width: 64rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 4rem;
+}
+
+.title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.2rem);
+    color: var(--gray-text-400);
+    max-width: 38rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cohortsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .pageWrapper {
+        padding: 8rem 1rem 6rem 1rem;
+    }
+
+    .header {
+        margin-bottom: 2.5rem;
+    }
+}

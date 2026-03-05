@@ -4,7 +4,7 @@ import SeeMoreButtonServer from "../ui/see-more-button server";
 import WaitlistForm from "../ui/WaitlistForm";
 
 export default async function OngoingCohortsEnrollmentsWrapper() {
-  const { data: cohorts, error } = await getEnrollingCohorts();
+  const { data: cohorts, error } = await getEnrollingCohorts(4);
 
   if (error) return <p className="data-fetching-error">Something went wrong</p>;
 

@@ -10,6 +10,8 @@ import LinkWithProgress from "../ui/Link-with-progress";
 const PlayIcon = iconsConfig["play"];
 
 export default function FeaturedEvent({ featuredEvent }) {
+  if (!featuredEvent) return null;
+
   const eventYear = new Date(featuredEvent.event_date).getFullYear();
   const eventDetails = [
     { icon: "calendar", text: formatDate(featuredEvent.event_date) },

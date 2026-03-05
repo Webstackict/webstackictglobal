@@ -63,22 +63,39 @@ export function getDepartmentHighlights(duration, maxSize, jobPlacement) {
   return highlights;
 }
 export function getDepartmentCurriculum(departmentName) {
-  if (departmentName === "full-stack Web Dev") {
+  if (!departmentName) return undefined;
+
+  const dept = departmentName.toLowerCase();
+
+  if (
+    dept === "full-stack web dev" ||
+    dept === "full-stack web development" ||
+    dept === "web development" ||
+    dept === "software engineering"
+  ) {
     return {
       curriculum: webDevCurriculum,
       additionalSkills: webDevAdditionalSkills,
     };
-  } else if (departmentName === "data science & analytics") {
+  } else if (
+    dept === "data science & analytics" ||
+    dept === "data analytics" ||
+    dept === "data science"
+  ) {
     return {
       curriculum: dataScienceCurriculum,
       additionalSkills: dataScienceAdditionalSkills,
     };
-  } else if (departmentName === "cybersecurity") {
+  } else if (dept === "cybersecurity" || dept === "cyber security") {
     return {
       curriculum: cybersecurityCurriculum,
       additionalSkills: cybersecurityAdditionalSkills,
     };
-  } else if (departmentName === "mobile app development") {
+  } else if (
+    dept === "mobile app development" ||
+    dept === "mobile development" ||
+    dept === "app development"
+  ) {
     return {
       curriculum: mobileAppDevCurriculum,
       additionalSkills: mobileDevAppAdditionalSkills,

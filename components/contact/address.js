@@ -16,7 +16,7 @@ export default function AddressGrid() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {contactInfo.map((item, index) => {
+      {(contactInfo || []).map((item, index) => {
         const CardIcon = iconsConfig[item.icon];
         return (
           <motion.div
@@ -44,7 +44,7 @@ export default function AddressGrid() {
             {item.type === "hours" && (
               <>
                 <div className={classes.hours}>
-                  {item.hours.map((hour, i) => (
+                  {(item.hours || []).map((hour, i) => (
                     <div key={i} className={classes.hourRow}>
                       <span>{hour.day}</span>
                       <span>{hour.time}</span>
@@ -60,7 +60,7 @@ export default function AddressGrid() {
 
             {item.type === "support" && (
               <div className={classes.supportList}>
-                {item.channels.map((ch, i) => {
+                {(item.channels || []).map((ch, i) => {
                   const Icon = iconsConfig[ch.icon];
                   return (
                     <div key={i} className={classes.supportItem}>

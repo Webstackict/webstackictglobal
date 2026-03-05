@@ -98,9 +98,8 @@ export default function ContactForm() {
           <div className={classes.inputGroup}>
             <label className={classes.label}>First Name *</label>
             <input
-              className={` ${errors?.firstName && "error-background"} ${
-                classes.input
-              }`}
+              className={` ${errors?.firstName && "error-background"} ${classes.input
+                }`}
               id="firstName"
               name="firstName"
               type="text"
@@ -115,9 +114,8 @@ export default function ContactForm() {
           <div className={classes.inputGroup}>
             <label className={classes.label}>Last Name *</label>
             <input
-              className={` ${errors?.firstName && "error-background"} ${
-                classes.input
-              }`}
+              className={` ${errors?.lastName && "error-background"} ${classes.input
+                }`}
               id="lastName"
               name="lastName"
               type="text"
@@ -140,9 +138,8 @@ export default function ContactForm() {
               name="email"
               type="email"
               placeholder="your.email@example.com"
-              className={` ${errors?.firstName && "error-background"} ${
-                classes.input
-              }`}
+              className={` ${errors?.firstName && "error-background"} ${classes.input
+                }`}
               onChange={handleChange}
               value={formInputs.email}
             />
@@ -151,9 +148,8 @@ export default function ContactForm() {
           <div className={classes.inputGroup}>
             <label className={classes.label}>Phone Number</label>
             <input
-              className={` ${errors?.firstName && "error-background"} ${
-                classes.input
-              }`}
+              className={` ${errors?.firstName && "error-background"} ${classes.input
+                }`}
               id="tel"
               name="tel"
               type="tel"
@@ -215,9 +211,8 @@ export default function ContactForm() {
           <textarea
             rows="6"
             placeholder="Tell us more about your inquiry, project, or how we can help you..."
-            className={` ${errors?.firstName && "error-background"} ${
-              classes.textarea
-            }`}
+            className={` ${errors?.firstName && "error-background"} ${classes.textarea
+              }`}
             id="message"
             name="message"
             onChange={handleChange}

@@ -26,8 +26,6 @@ export default function PricingAndTimelineGrid({
   const nextCohortId = department.next_cohort_id;
   const cohortMaxSize = department.max_size;
 
-  console.log(department);
-
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -129,9 +127,21 @@ export default function PricingAndTimelineGrid({
         .eq("user_id", userId)
         .eq("department_id", departmentId)
         .eq("cohort_id", nextCohortId)
-        .single();
+        .maybeSingle();
 
-      if (error) throw paystackRefError;
+      if (paystackRefError) {
+        console.error("Supabase enrollment lookup error:", {
+          message: paystackRefError.message,
+          code: paystackRefError.code,
+          details: paystackRefError.details,
+        });
+        throw paystackRefError;
+      }
+
+      if (!paystackRefData) {
+        toast.error("Enrollment record not found. Please restart the process.");
+        return;
+      }
 
       const authorizationUrl = paystackRefData.paystack_auth_url;
       const rawDate = paystackRefData.created_at;
@@ -192,6 +202,11 @@ export default function PricingAndTimelineGrid({
         pricingData={pricingData}
         department={department}
         variants={childVarients}
+        isEnrolled={isEnrolled}
+        paymentStatus={paymentStatus}
+        startPayment={startPayment}
+        continuePayment={continuePayment}
+        loading={loading}
       />
 
       {/* Cohort Timeline */}
@@ -200,26 +215,6 @@ export default function PricingAndTimelineGrid({
         department={department}
         variants={childVarients}
       />
-
-      <div className={classes.buttonWrapper}>
-        {!isEnrolled ? (
-          <button onClick={startPayment}>
-            {loading ? "Enrolling..." : "Enroll Now"}
-          </button>
-        ) : isEnrolled && paymentStatus ? (
-          <button
-            onClick={() =>
-              toast.warning("You are already enrolled in this cohort")
-            }
-          >
-            Enrolled
-          </button>
-        ) : (
-          <button onClick={continuePayment}>
-            {loading ? "Enrolling..." : "Continue Enrollment"}
-          </button>
-        )}
-      </div>
     </motion.div>
   );
 }

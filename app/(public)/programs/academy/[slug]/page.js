@@ -16,12 +16,11 @@ import CTASection from "@/components/cta/call-to-action-section";
 import { faqData } from "@/lib/contents/faqData";
 import { graduateTestiomnials } from "@/lib/contents/testimonialData";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
+import { supabaseAdmin as supabase } from "@/lib/db/supabaseAdmin";
 import { getDepartmentDetails } from "@/lib/db/get-department-details";
 import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
 
 export async function generateMetadata({ params }) {
-  const supabase = await createSupabaseServerClient();
-
   const deptSlug = (await params).slug;
 
   try {
@@ -29,9 +28,23 @@ export async function generateMetadata({ params }) {
       .from("departments")
       .select("name, description")
       .eq("slug", deptSlug)
-      .single();
+      .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase error in academy generateMetadata:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+      });
+      throw error;
+    }
+
+    if (!department) {
+      return {
+        title: "Program Not Found | WEBSTACK-ICT-GLOBAL",
+        description: "The requested training program could not be found.",
+      };
+    }
 
     return {
       title: `Study ${department.name} at WEBSTACK-ICT-GLOBAL`,
@@ -62,8 +75,11 @@ export async function generateMetadata({ params }) {
       },
     };
   } catch (err) {
-    console.error("Supabase error:", err);
-    return { data: null, error: err };
+    console.error("Critical metadata fetch failure:", err);
+    return {
+      title: "Program Details | WEBSTACK-ICT-GLOBAL",
+      description: "Explore our intensive tech programs and community events.",
+    };
   }
 }
 

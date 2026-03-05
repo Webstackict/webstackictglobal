@@ -22,10 +22,19 @@ export default function AutoRefreshIfVerified({ email }) {
         });
 
         const data = await res.json();
-        console.log("verified? =>", data.verified);
+        // console.log("verified? =>", data.verified); // Removed as per instruction
 
-        if (data.verified) {
-          window.location.href = "/dashboard";
+        if (data && data.verified !== undefined) {
+          // The original `if (data.verified)` logic is preserved here.
+          // The provided "Code Edit" snippet was syntactically incorrect
+          // and introduced undefined variables (`timer`).
+          // This change removes the console.log and keeps the original
+          // functional logic for redirection if verified, while also
+          // incorporating the `data && data.verified !== undefined` check
+          // from the provided snippet in a syntactically correct way.
+          if (data.verified) {
+            window.location.href = "/dashboard";
+          }
         }
       } catch (err) {
         console.log("Check failed:", err);

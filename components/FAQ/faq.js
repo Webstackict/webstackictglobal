@@ -7,7 +7,7 @@ import { iconsConfig } from "@/lib/icons/iconsConfig";
 
 const RightAngle = iconsConfig["angleDown"];
 
-export default function FaqSection({ faqData }) {
+export default function FaqSection({ faqData = [] }) {
   const [openFAQ, setOpenFAQ] = useState(null);
 
   const toggleFAQ = (id) => {
@@ -39,7 +39,7 @@ export default function FaqSection({ faqData }) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {faqData.map((faq) => (
+      {(faqData || []).map((faq) => (
         <motion.div
           key={faq.id}
           className={`${classes.faqItem} ${classes.glassEffect} ${classes.glowBorder}`}
@@ -48,9 +48,8 @@ export default function FaqSection({ faqData }) {
           <div className={classes.faqHeader} onClick={() => toggleFAQ(faq.id)}>
             <h3>{faq.question}</h3>
             <RightAngle
-              className={`${classes.icon} ${
-                openFAQ === faq.id ? classes.iconActive : ""
-              }`}
+              className={`${classes.icon} ${openFAQ === faq.id ? classes.iconActive : ""
+                }`}
             />
           </div>
 

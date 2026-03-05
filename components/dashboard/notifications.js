@@ -4,7 +4,7 @@ import classes from "./notifications.module.css";
 import { use, useEffect } from "react";
 import { NotificationsContext } from "@/store/notifications-context";
 
-export default function Notifications({ items }) {
+export default function Notifications({ items = [] }) {
   const {
     notifications,
     setNotifications,
@@ -20,7 +20,7 @@ export default function Notifications({ items }) {
   return (
     <div className={classes.notifications}>
       <ul>
-        {items.map((item, i) => (
+        {(items || []).map((item, i) => (
           <li key={i} className={classes.notification}>
             <div className={classes.header}>
               <strong>{item.title}</strong>

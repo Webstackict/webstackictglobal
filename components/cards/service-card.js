@@ -3,7 +3,7 @@ import CheckIcon from "@mui/icons-material/Check";
 
 import SmallButton from "../ui/small-button";
 import LinkWithProgress from "../ui/Link-with-progress";
-import IconRenderer from "../ui/icon-rederer";
+import IconRenderer from "../ui/icon-renderer";
 
 export default function ServiceCard({
   title,
@@ -18,8 +18,8 @@ export default function ServiceCard({
   return (
     <div className={classes.card}>
       <div className={`${classes.icon} ${theme.background}`}>
-        <IconRenderer iconName={icon}/>
-    
+        <IconRenderer iconName={icon} />
+
       </div>
       <h3>{title}</h3>
       <p>{description}</p>

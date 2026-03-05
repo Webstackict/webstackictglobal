@@ -13,7 +13,7 @@ export default function OngoingCohortsGrid({ ongoingCohorts = [] }) {
 
   return (
     <div className={classes.grid}>
-      {ongoingCohorts.map((cohort, i) => {
+      {(ongoingCohorts || []).map((cohort, i) => {
         const { progressPercent, totalWeeks, currentWeek, isFinalWeek } =
           calculateProgress(cohort.start_date, cohort.graduation_date);
         const cohortName = `${cohort.department_name} Cohort ${cohort.cohort_number}`;

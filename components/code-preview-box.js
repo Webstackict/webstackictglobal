@@ -35,7 +35,7 @@ export default function CodePreviewBox() {
       </div>
 
       <div className={classes.codePreviwBoxStudentGrid}>
-        {studentsData.map((student) => (
+        {(studentsData || []).map((student) => (
           <div key={student.name} className={classes.studentItem}>
             <div className={classes.imageContainer}>
               <Image

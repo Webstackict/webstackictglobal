@@ -50,8 +50,6 @@ export default async function VerifyEmail({ searchParams }) {
     redirect("/auth");
   }
 
-  console.log("sxcw", user);
-
   const now = new Date();
   const lastResend = user.confirmation_sent_at;
   const waitResend = lastResend && now - new Date(lastResend) < 60 * 1000;
@@ -64,7 +62,7 @@ export default async function VerifyEmail({ searchParams }) {
           <div className={classes.glowBar}></div>
 
           <div id="login-header" className={classes.header}>
-        
+
 
             <h1>Verify Email</h1>
             <p>

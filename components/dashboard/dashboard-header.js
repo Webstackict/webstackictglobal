@@ -45,7 +45,7 @@ export default function DashboardHeader({
           filter: `user_id=eq.${userId}`,
         },
         (payload) => {
-          console.log("New notification:", payload);
+          setNotifications((prev) => [payload.new, ...prev]);
           setUnreadNotifications(true);
         }
       )

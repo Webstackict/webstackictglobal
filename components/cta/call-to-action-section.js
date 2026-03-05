@@ -18,15 +18,18 @@ export default function CTASection({
   const [isPending, startTransition] = useTransition();
 
   function handlePrimaryBtnClick() {
-    if (label === "home") {
+    if (primaryBtnRoute.startsWith("/")) {
       nProgress.start();
       startTransition(() => router.push(primaryBtnRoute));
       return;
     }
 
-    document.getElementById(primaryBtnRoute).scrollIntoView({
-      behavior: "smooth",
-    });
+    const element = document.getElementById(primaryBtnRoute);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   }
   return (
     <motion.section

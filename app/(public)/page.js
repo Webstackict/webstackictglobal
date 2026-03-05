@@ -37,7 +37,7 @@ export default async function Home() {
         description="Hands-on training in Web Development, Data Analytics, Cybersecurity, Forex trading, Mobile app development and AI Automation with real-world projects and mentorship."
         primaryBtnText="Enroll in Next Cohort"
         secondaryBtnText="Explore Programs"
-        primaryBtnRoute="ongoing-cohorts-registration"
+        primaryBtnRoute="/enroll"
         secondaryBtnRoute="contact-options"
       />
 
@@ -59,7 +59,7 @@ export default async function Home() {
       </Section>
 
       <Section
-        label="ongoing-cohorts-registration"
+        label="enroll"
         title={
           <>
             Ongoing Cohorts <span className="gradientText">Enrollments</span>
@@ -157,7 +157,7 @@ export default async function Home() {
           developer starts here."
         ctaHighlights={ctaHomeHighlights}
         primaryBtnText="Join Our Next Cohort"
-        primaryBtnRoute="/programs/academy"
+        primaryBtnRoute="/enroll"
       />
     </>
   );

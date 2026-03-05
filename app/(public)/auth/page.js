@@ -96,8 +96,6 @@ export default function Login() {
         } else {
           toast.error("Failed to create account, please try again");
         }
-
-        console.log(error);
       }
     },
     {}

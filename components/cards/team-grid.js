@@ -6,7 +6,7 @@ import TeamCard from "./team-card";
 
 import { containerVarients, childVarients } from "@/lib/animations";
 
-export default function TeamGrid({ team, className, label }) {
+export default function TeamGrid({ team = [], className, label }) {
   const gridTemplate = `${className} ${classes.teamGrid}`;
   return (
     <motion.div
@@ -16,7 +16,7 @@ export default function TeamGrid({ team, className, label }) {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      {team.map((member, index) => {
+      {(team || []).map((member, index) => {
         return (
           <TeamCard
             key={member.id || index}

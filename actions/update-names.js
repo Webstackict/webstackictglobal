@@ -32,8 +32,16 @@ export async function updateNames(userId, prevState, formData) {
       .update({ full_name: fullName, display_name: displayName, phone: phone })
       .eq("user_id", userId)
       .select()
-      .single();
-    if (error) throw error;
+      .maybeSingle();
+
+    if (error) {
+      console.error("Supabase query error in updateNames:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+      });
+      throw error;
+    }
     // console.log("new", user);
 
     return {

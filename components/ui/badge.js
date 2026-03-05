@@ -2,9 +2,8 @@
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./badge.module.css";
-export default function Badge({ title, icon = null, eventBagdeStyle=null, ...props }) {
-  const string = title;
-  const className = string.replace(" ", "-");
+export default function Badge({ title, icon = null, eventBagdeStyle = null, ...props }) {
+  const className = title?.replace(/\s+/g, "-") || "";
 
   let Icon;
 

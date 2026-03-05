@@ -44,7 +44,8 @@ export default function ActivitiesGrid({ activities = [] }) {
                 src={
                   activity.image ||
                   activity.event_thumbnails?.image_url ||
-                  activity.highlight_images[0]?.image_url
+                  activity.highlight_images?.[0]?.image_url ||
+                  "/placeholder.png"
                 }
                 alt="activity-image"
                 fill

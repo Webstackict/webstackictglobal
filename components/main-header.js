@@ -65,7 +65,7 @@ function MainHeader({ user }) {
           filter: `user_id=eq.${userId}`,
         },
         (payload) => {
-          console.log('New notification:', payload);
+          setNotifications((prev) => [payload.new, ...prev]);
           setUnreadNotifications(true);
         }
       )
@@ -250,6 +250,17 @@ function MainHeader({ user }) {
                   }
                 >
                   Gallery
+                </LinkWithProgress>
+                <LinkWithProgress
+                  href="/enroll"
+                  className={classes.link}
+                  style={
+                    path.includes("/enroll")
+                      ? { color: "var(--teal-400)" }
+                      : null
+                  }
+                >
+                  Enroll
                 </LinkWithProgress>
               </div>
             </div>

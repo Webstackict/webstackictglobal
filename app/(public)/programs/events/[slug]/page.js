@@ -16,9 +16,9 @@ import EventHighlightsWrapper from "@/components/serverWrappers/event-highlights
 import UpcomingEventsWrapper from "@/components/serverWrappers/upcoming-events-wrapper";
 import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
 
-export async function generateMetadata({ params }) {
-  const supabase = await createSupabaseServerClient();
+import { supabaseAdmin as supabase } from "@/lib/db/supabaseAdmin";
 
+export async function generateMetadata({ params }) {
   const eventId = (await params).slug;
 
   try {
@@ -34,9 +34,23 @@ export async function generateMetadata({ params }) {
         `
       )
       .eq("id", eventId)
-      .single();
+      .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase error in events generateMetadata:", {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+      });
+      throw error;
+    }
+
+    if (!event) {
+      return {
+        title: "Event Not Found | WEBSTACK-ICT-GLOBAL",
+        description: "The requested community event could not be found.",
+      };
+    }
 
     return {
       title: `Study ${event.name} at WEBSTACK-ICT-GLOBAL`,
@@ -48,7 +62,7 @@ export async function generateMetadata({ params }) {
         siteName: "WEBSTACK-ICT-GLOBAL",
         images: [
           {
-            url: event.event_thumbnails.image_url,
+            url: event.event_thumbnails?.image_url || "/logo/webstack-logo-dark.png",
             width: 160,
             height: 50,
             alt: "Webstack Banner",
@@ -67,8 +81,11 @@ export async function generateMetadata({ params }) {
       },
     };
   } catch (err) {
-    console.error("Supabase error:", err);
-    return { data: null, error: err };
+    console.error("Critical events metadata fetch failure:", err);
+    return {
+      title: "Event Details | WEBSTACK-ICT-GLOBAL",
+      description: "Join our exclusive tech events and workshops.",
+    };
   }
 }
 

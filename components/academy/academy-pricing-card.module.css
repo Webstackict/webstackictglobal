@@ -89,6 +89,21 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 1rem;
     border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+
+  & .paymentCard:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: var(--teal-500);
+  }
+
+  & .paymentCard:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 
   & .paymentTitle {

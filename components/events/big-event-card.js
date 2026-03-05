@@ -1,6 +1,6 @@
 import Badge from "../ui/badge";
 import classes from "./big-event-card.module.css";
-import IconRenderer from "../ui/icon-rederer";
+import IconRenderer from "../ui/icon-renderer";
 import { formatDate } from "@/util/util";
 import LinkWithProgress from "../ui/Link-with-progress";
 import Image from "next/image";
@@ -18,7 +18,7 @@ export default function BigEventCard({ event }) {
   return (
     <div className={`${classes.bigEventCard}`}>
       <div className={classes.imageWrapper}>
-        <Image src={event.image_url} alt="event-thumbnail" fill sizes="(min-width: 1024px) 50vh, 100vh"/>
+        <Image src={event.image_url} alt="event-thumbnail" fill sizes="(min-width: 1024px) 50vh, 100vh" />
         <Badge
           title={!isLive ? event.category_name : "Live Event"}
           eventBagdeStyle={`${classes.badge} ${event.category_theme.background}`}

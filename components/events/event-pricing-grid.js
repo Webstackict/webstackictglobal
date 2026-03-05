@@ -112,7 +112,7 @@ export default function EventPricingGrid({ event, isPassed, isRegistered }) {
       <motion.div className={classes.includedCard}>
         <h3 className={classes.title}>What&apos;s Included</h3>
         <div className={classes.list}>
-          {event.included.map((item, index) => (
+          {(event?.included || []).map((item, index) => (
             <div key={index} className={classes.item}>
               <motion.div
                 className={`${classes.iconWrapper} bluePurple-bg`}

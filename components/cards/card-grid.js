@@ -21,12 +21,14 @@ export default function CardGrid({
   const gridTemplate = `${className} ${classes.grid}`;
   return (
     <div className={gridTemplate}>
-      {items.map((item, index) => {
+      {(items || []).map((item, index) => {
         const spotsLeft = item.max_size - item.number_enrolled;
         return (
           <Cohortscard
             key={index}
+            id={item.id}
             label={label}
+            cohortLabel={item.label}
             slug={item.slug}
             departmentName={item.name || item.department_name}
             departmentDescription={item.description}

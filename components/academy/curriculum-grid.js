@@ -9,14 +9,18 @@ export default function CurriculumGrid({ items, department }) {
   return (
     <div className={classes.grid}>
       {items.map((curriculum, idx) => {
-        const CurriculumIcon = iconsConfig[curriculum.icon];
+        const CurriculumIcon = iconsConfig[curriculum.icon] || iconsConfig["code"];
+        const gradient = curriculum.gradient && Array.isArray(curriculum.gradient)
+          ? curriculum.gradient
+          : ["#1e3c72", "#2a5298"]; // Default fallback gradient
+
         return (
           <div key={idx} className="card">
             <div className={classes.header}>
               <div
                 className={classes.iconBox}
                 style={{
-                  background: `linear-gradient(to right, ${curriculum.gradient[0]}, ${curriculum.gradient[1]})`,
+                  background: `linear-gradient(to right, ${gradient[0]}, ${gradient[1]})`,
                 }}
               >
                 <CurriculumIcon className={classes.icon} />
@@ -28,7 +32,7 @@ export default function CurriculumGrid({ items, department }) {
             </div>
 
             <div className={classes.topics}>
-              {curriculum.topics.map((topic, i) => {
+              {(curriculum.topics || []).map((topic, i) => {
                 return (
                   <div key={i} className={classes.topic}>
                     <div

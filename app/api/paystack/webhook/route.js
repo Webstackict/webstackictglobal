@@ -70,9 +70,14 @@ export async function POST(req) {
              `
           )
           .eq("paystack_reference", reference)
-          .single();
+          .maybeSingle();
 
         if (enrollmentError) {
+          console.error("Supabase webhook enrollment error:", {
+            message: enrollmentError.message,
+            code: enrollmentError.code,
+            details: enrollmentError.details,
+          });
           return NextResponse.json(
             { success: false, message: enrollmentError.message },
             { status: 500 }

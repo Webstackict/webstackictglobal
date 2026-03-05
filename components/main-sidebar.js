@@ -1,3 +1,4 @@
+"use client";
 import { use, useEffect } from "react";
 import classes from "./main-sidebar.module.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -26,6 +27,13 @@ export default function MainSidebar() {
   }
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
+  useEffect(() => {
     function handleClick(event) {
       if (!event.target.closest(`.${classes.sidebar}`)) setIsMainSidebar(false);
     }
@@ -42,7 +50,7 @@ export default function MainSidebar() {
       <motion.div
         className={classes.sidebar}
         initial={{
-          x: 500,
+          x: "100%",
           opacity: 0.5,
         }}
         animate={{
@@ -50,10 +58,12 @@ export default function MainSidebar() {
           opacity: 1,
         }}
         transition={{
-          duration: 0.5,
+          type: "spring",
+          damping: 25,
+          stiffness: 200,
         }}
         exit={{
-          x: 500,
+          x: "100%",
           opacity: 0.5,
         }}
       >
@@ -87,7 +97,7 @@ export default function MainSidebar() {
           />
         </button>
         <div className={classes.links}>
-          <LinkWithProgress href="/" className={classes.link}>
+          <LinkWithProgress href="/" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Home
           </LinkWithProgress>
 
@@ -132,13 +142,13 @@ export default function MainSidebar() {
                   exit={{ y: -10, opacity: 0 }}
                 >
                   <li>
-                    <LinkWithProgress href="/programs/academy">
+                    <LinkWithProgress href="/programs/academy" onClick={() => setIsMainSidebar(false)}>
                       Academy
                     </LinkWithProgress>
                   </li>
 
                   <li>
-                    <LinkWithProgress href="/programs/events">
+                    <LinkWithProgress href="/programs/events" onClick={() => setIsMainSidebar(false)}>
                       Events
                     </LinkWithProgress>
                   </li>
@@ -147,17 +157,17 @@ export default function MainSidebar() {
             </AnimatePresence>
           </motion.div>
 
-          <LinkWithProgress href="/services" className={classes.link}>
+          <LinkWithProgress href="/services" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Services
           </LinkWithProgress>
 
-          <LinkWithProgress href="/about" className={classes.link}>
+          <LinkWithProgress href="/about" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             About
           </LinkWithProgress>
-          <LinkWithProgress href="/contact" className={classes.link}>
+          <LinkWithProgress href="/contact" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Contact
           </LinkWithProgress>
-          <LinkWithProgress href="/gallery" className={classes.link}>
+          <LinkWithProgress href="/gallery" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Gallery
           </LinkWithProgress>
         </div>

@@ -96,13 +96,9 @@ export default async function GeneralLayout({ children }) {
     } catch (error) {
       console.error("Supabase data fetch error:", error.message);
       // Fallback UI for internal data errors while keeping layout intact
-      return (
-        <div className="error-container">
-          <p className="data-fetching-error">
-            Unable to load user data. Please refresh the page.
-          </p>
-        </div>
-      );
+      notifications = [];
+      userDetails = null;
+      isUnread = false;
     }
   }
 

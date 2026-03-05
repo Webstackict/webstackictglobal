@@ -10,10 +10,16 @@ import {
 
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import Image from "next/image";
-
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <footer className={classes.footer}>
       <div className={classes.container}>
@@ -39,13 +45,13 @@ export default function Footer() {
                 return (
                   <a
                     key={index}
-                    href={social.href || "#"}
+                    href={social.url || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={classes.socialIcon}
                     aria-label={`Follow us on ${social.icon}`}
                   >
-                    <SocialIcon className={classes.home} />
+                    {isMounted && SocialIcon && <SocialIcon className={classes.home} />}
                   </a>
                 );
               })}
@@ -61,7 +67,7 @@ export default function Footer() {
                   return (
                     <li key={i}>
                       <Link href={link.href || "#"} className={classes.footerLink}>
-                        {Icon && <Icon className={classes.footerIcon} />}
+                        {isMounted && Icon && <Icon className={classes.footerIcon} />}
                         <span>{link.label}</span>
                       </Link>
                     </li>
@@ -74,7 +80,7 @@ export default function Footer() {
 
         <div className={classes.bottomBar}>
           <div className={classes.copy}>
-            © {new Date().getFullYear()} WEBSTACK. All rights reserved.
+            © {isMounted ? new Date().getFullYear() : "2026"} WEBSTACK. All rights reserved.
           </div>
           <div className={classes.legalLinks}>
             {legalLinks.map((link, i) => (

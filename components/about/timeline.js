@@ -17,12 +17,11 @@ export default function Timeline({ timeline }) {
       ></motion.div>
 
       <div className={classes.timelineContainer}>
-        {timeline.map((item, index) => (
+        {(timeline || []).map((item, index) => (
           <div
             key={index}
-            className={`${classes.timelineItem} ${
-              index % 2 === 0 ? classes.left : classes.right
-            }`}
+            className={`${classes.timelineItem} ${index % 2 === 0 ? classes.left : classes.right
+              }`}
           >
             {index % 2 === 0 && (
               <div className={classes.textBlock}>
@@ -46,9 +45,8 @@ export default function Timeline({ timeline }) {
             )}
 
             <motion.div
-              className={`${classes.circle} ${
-                item.glow ? classes.glowBlue : ""
-              }`}
+              className={`${classes.circle} ${item.glow ? classes.glowBlue : ""
+                }`}
               initial={{ opacity: 0 }}
               whileInView={{
                 opacity: 1,

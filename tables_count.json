@@ -1,0 +1,30 @@
+{
+  "cohorts": {
+    "count": 0,
+    "error": null
+  },
+  "departments": {
+    "count": 0,
+    "error": null
+  },
+  "enrollments": {
+    "count": 0,
+    "error": null
+  },
+  "users": {
+    "count": 0,
+    "error": null
+  },
+  "profiles": {
+    "count": 0,
+    "error": null
+  },
+  "events": {
+    "count": 0,
+    "error": null
+  },
+  "waitlist": {
+    "count": 0,
+    "error": null
+  }
+}
