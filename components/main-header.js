@@ -109,20 +109,41 @@ function MainHeader({ user }) {
                   <Image
                     src="/logo/webstack-logo-white.png"
                     alt="Webstack ICT Global Logo"
-                    fill
-                    sizes="1000px"
+                    width={1600}
+                    height={400}
+                    quality={100}
                     priority
+                    unoptimized
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      objectFit: 'contain',
+                      objectPosition: 'left'
+                    }}
                   />
                 </div>
               </LinkWithProgress>
               <div className={classes.links}>
-                <LinkWithProgress
-                  href="/"
-                  className={classes.link}
-                  style={path === "/" ? { color: "var(--teal-400)" } : null}
-                >
-                  Home
-                </LinkWithProgress>
+                {path === "/" ? (
+                  <a
+                    href="/"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.location.reload();
+                    }}
+                    className={classes.link}
+                    style={{ color: "var(--teal-400)" }}
+                  >
+                    Home
+                  </a>
+                ) : (
+                  <LinkWithProgress
+                    href="/"
+                    className={classes.link}
+                  >
+                    Home
+                  </LinkWithProgress>
+                )}
 
                 <motion.div
                   className={classes.dropdownWrapper}

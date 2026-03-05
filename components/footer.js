@@ -29,9 +29,17 @@ export default function Footer() {
               <Image
                 src="/logo/webstack-logo-white.png"
                 alt="Webstack ICT Global Logo"
-                fill
-                sizes="500px"
+                width={1600}
+                height={400}
+                quality={100}
                 priority
+                unoptimized
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain',
+                  objectPosition: 'left'
+                }}
               />
             </Link>
             <p className={classes.brandText}>

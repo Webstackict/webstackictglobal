@@ -42,18 +42,11 @@
   }
 
   & .logo {
-    position: relative;
-    width: 38rem;
-    height: 10rem;
+    display: flex;
+    align-items: center;
+    width: 16rem;
+    height: 4rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    & img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: left;
-      filter: drop-shadow(0 4px 12px rgba(0, 150, 255, 0.25));
-    }
 
     &:hover {
       transform: scale(1.03);
@@ -147,6 +140,26 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+    z-index: 10;
+
+    & .hamburgerMenuButton {
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      pointer-events: auto;
+      color: var(--teal-400);
+
+      & svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
 
     & .notificationContainer {
       position: relative;
@@ -202,5 +215,10 @@
     & .links {
       display: none;
     }
+  }
+
+  .logo {
+    width: 12rem;
+    height: 3.5rem;
   }
 }
