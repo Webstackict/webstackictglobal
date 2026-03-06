@@ -228,6 +228,18 @@ function MainHeader({ user }) {
                 </motion.div>
 
                 <LinkWithProgress
+                  href="/scholarships"
+                  className={classes.link}
+                  style={
+                    path.includes("/scholarships")
+                      ? { color: "var(--teal-400)" }
+                      : null
+                  }
+                >
+                  Scholarships
+                </LinkWithProgress>
+
+                <LinkWithProgress
                   href="/services"
                   className={classes.link}
                   style={

@@ -157,6 +157,10 @@ export default function MainSidebar() {
             </AnimatePresence>
           </motion.div>
 
+          <LinkWithProgress href="/scholarships" className={classes.link} onClick={() => setIsMainSidebar(false)}>
+            Scholarships
+          </LinkWithProgress>
+
           <LinkWithProgress href="/services" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Services
           </LinkWithProgress>

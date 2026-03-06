@@ -14,6 +14,7 @@ import { benefits } from "@/lib/contents/partnershipsData";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
 import { partnerLogos } from "@/lib/contents/partnershipsData";
 import LinkWithProgress from "@/components/ui/Link-with-progress";
+import SmallButton from "@/components/ui/small-button";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import BenefitsGrid from "@/components/cards/benefits-grid";
 import AuthorityGrid from "@/components/cards/authority-grid";
@@ -40,6 +41,21 @@ export default async function Home() {
         primaryBtnRoute="/enroll"
         secondaryBtnRoute="contact-options"
       />
+
+      <div style={{ background: 'var(--charcoal-blue-500)', padding: '4rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at center, rgba(45, 212, 191, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--white)' }}>
+            2026 <span className="gradientText">Scholarship Program</span>
+          </h2>
+          <p style={{ marginBottom: '2rem', color: 'var(--gray-text-400)', fontSize: '1.2rem', lineHeight: '1.6' }}>
+            Apply for a life-changing opportunity to start your career in technology with Africa's leading tech hub. Limited slots available.
+          </p>
+          <SmallButton href="/scholarships" style={{ background: 'var(--blue-500)', fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '50px', boxShadow: '0 10px 25px -5px rgba(0, 150, 255, 0.3)' }}>
+            Apply for Scholarship
+          </SmallButton>
+        </div>
+      </div>
 
       <Section
         label="premium-programs"

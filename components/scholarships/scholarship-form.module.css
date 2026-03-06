@@ -1,0 +1,164 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--charcoal-blue-500);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    border: var(--card-border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.row>div {
+    flex: 1;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.field label {
+    font-weight: 500;
+    color: var(--white);
+    font-size: 0.95rem;
+}
+
+.field label span {
+    color: var(--red-400);
+    /* Required indicator */
+    margin-left: 0.25rem;
+}
+
+.input,
+.select,
+.textarea {
+    padding: 0.875rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--white);
+    transition: all 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: var(--gray-text-500);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--teal-400);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.1);
+}
+
+/* For dropdown options visibility in dark mode */
+.select option {
+    background-color: var(--midnight-blue-500);
+    color: var(--white);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* File Upload Specifics */
+.fileInput {
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.fileInput::file-selector-button {
+    background: var(--blue-500);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.fileInput::file-selector-button:hover {
+    background: var(--blue-600);
+}
+
+.fileHint {
+    font-size: 0.8rem;
+    color: var(--gray-text-500);
+    margin-top: 0.25rem;
+}
+
+.submitBtn {
+    margin-top: 1rem;
+    background: var(--blue-500);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: var(--blue-400);
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.submitBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--charcoal-blue-400);
+}
+
+.errorMsg {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--red-400);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    font-size: 0.95rem;
+}
+
+.successMsg {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.successMsg h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--green-400);
+}
+
+@media (max-width: 640px) {
+    .row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
