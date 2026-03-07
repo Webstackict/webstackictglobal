@@ -95,7 +95,7 @@ export async function POST(req) {
         const { data, error } = await supabase
           .from("enrollments")
           .update({ payment_status: "paid" })
-          .eq("cohort_id", cohortId);
+          .eq("id", enrollmentData.id);
 
         if (error) {
           return NextResponse.json(
@@ -103,6 +103,48 @@ export async function POST(req) {
             { status: 500 }
           );
         }
+
+        // --- REFERRAL COMMISSION LOGIC ---
+        try {
+          const { data: pendingReferral } = await supabase
+            .from("referral_activities")
+            .select("*")
+            .eq("enrollment_id", enrollmentData.id)
+            .eq("status", "pending")
+            .maybeSingle();
+
+          if (pendingReferral) {
+            // Update referral activity to confirmed atomically
+            const { data: updatedRefAct } = await supabase
+              .from("referral_activities")
+              .update({ status: "confirmed" })
+              .eq("id", pendingReferral.id)
+              .eq("status", "pending")
+              .select();
+
+            if (updatedRefAct && updatedRefAct.length > 0) {
+              // Retrieve the referrer details
+              const { data: referrer } = await supabase
+                .from("referrals")
+                .select("*")
+                .eq("user_id", pendingReferral.referrer_id)
+                .maybeSingle();
+
+              if (referrer) {
+                await supabase
+                  .from("referrals")
+                  .update({
+                    total_earned: Number(referrer.total_earned) + Number(pendingReferral.commission_amount),
+                    total_referrals: Number(referrer.total_referrals) + 1
+                  })
+                  .eq("id", referrer.id);
+              }
+            }
+          }
+        } catch (refError) {
+          console.error("Referral webhook error:", refError);
+        }
+        // --- END REFERRAL COMMISSION LOGIC ---
 
         const departmentName = enrollmentData.departments.name;
         const cohortNumber = enrollmentData.cohorts.cohort_number;

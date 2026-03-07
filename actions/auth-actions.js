@@ -63,9 +63,10 @@ export async function signup(prevState, formData) {
     const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
-    },    {
+      options: {
         redirectTo: `${Next_Base_URL}/auth/email-verified`,
-      });
+      }
+    });
 
     if (signUpError) throw signUpError;
   } catch (error) {

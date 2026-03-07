@@ -27,6 +27,11 @@ const links = [
     icon: "notification",
     href: "/notifications",
   },
+  {
+    name: "Referrals",
+    icon: "share",
+    href: "/dashboard/referrals",
+  },
 ];
 
 export default function SideNavMobile() {

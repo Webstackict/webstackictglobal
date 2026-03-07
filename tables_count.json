@@ -1,14 +1,14 @@
 {
   "cohorts": {
-    "count": 0,
+    "count": 5,
     "error": null
   },
   "departments": {
-    "count": 0,
+    "count": 2,
     "error": null
   },
   "enrollments": {
-    "count": 0,
+    "count": 15,
     "error": null
   },
   "users": {

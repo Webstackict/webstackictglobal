@@ -1,0 +1,133 @@
+.detailsGrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .detailsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .detailsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.detailCard {
+    background: var(--charcoal-blue-500);
+    border: var(--card-border);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.detailCard:hover {
+    transform: translateY(-5px);
+    border-color: var(--blue-500);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.detailIcon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.detailCard h3 {
+    color: var(--gray-text-500);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.detailCard p {
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    background: rgba(45, 212, 191, 0.1);
+    color: var(--teal-400);
+    font-size: 0.875rem !important;
+    text-transform: capitalize;
+}
+
+.statusBadge.enrolling {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--blue-400);
+}
+
+.ctaBox {
+    margin-top: 5rem;
+    background: linear-gradient(135deg, var(--charcoal-blue-500) 0%, var(--charcoal-blue-700) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4rem 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaBox::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.ctaBox h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+}
+
+.ctaBox p {
+    color: var(--gray-text-400);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.ctaActions {
+    position: relative;
+    z-index: 1;
+}
+
+.applyBtn {
+    display: inline-block;
+    padding: 1.25rem 3rem;
+    background: var(--blue-500);
+    color: white;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+}
+
+.applyBtn:hover {
+    background: var(--blue-400);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.5);
+}

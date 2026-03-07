@@ -1,0 +1,51 @@
+.container {
+    width: 100%;
+}
+
+.grid {
+    margin-top: 2rem;
+}
+
+.errorContainer {
+    padding: 3rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 1rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.errorText {
+    color: #f87171;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.retryBtn {
+    background: var(--blue-500);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.retryBtn:hover {
+    opacity: 0.9;
+}
+
+.emptyContainer {
+    padding: 4rem;
+    text-align: center;
+    background: var(--charcoal-blue-500);
+    border-radius: 1rem;
+    border: var(--card-border);
+    margin: 2rem 0;
+}
+
+.emptyText {
+    color: var(--gray-text-400);
+    font-size: 1.1rem;
+}

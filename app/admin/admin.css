@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+    --color-admin-bg: #0B0F19;
+    --color-admin-card: #111827;
+    --color-admin-border: #1F2937;
+    --color-admin-text: #F9FAFB;
+    --color-admin-textMuted: #9CA3AF;
+    --color-admin-primary: #3B82F6;
+    --color-admin-primaryHover: #2563EB;
+    --color-admin-success: #10B981;
+    --color-admin-danger: #EF4444;
+    --color-admin-warning: #F59E0B;
+}
+
+/* We intentionally do not use preflight here if it breaks global MUI, but @import tailwindcss includes it. */
+/* If you see MUI breaking, we will need to import utilities only. */

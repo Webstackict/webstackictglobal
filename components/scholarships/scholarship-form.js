@@ -9,29 +9,17 @@ export default function ScholarshipForm() {
     const [success, setSuccess] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
 
+    const departmentList = [
+        { id: "8434defa-ba23-49e8-b04c-d74f07b91cdf", name: "Software Engineering" },
+        { id: "0656a900-ec27-43e1-a43c-db6154b6cf8b", name: "Web Development" }
+    ];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setErrorMsg("");
 
         const formData = new FormData(e.target);
-
-        // Client-side file size validation (5MB) before sending to server
-        const passport = formData.get('passportPhoto');
-        const validId = formData.get('validId');
-        const MAX_SIZE = 5 * 1024 * 1024;
-
-        if (passport && passport.size > MAX_SIZE) {
-            setErrorMsg("Your passport photograph must be less than 5MB.");
-            setIsSubmitting(false);
-            return;
-        }
-
-        if (validId && validId.size > MAX_SIZE) {
-            setErrorMsg("Your valid ID must be less than 5MB.");
-            setIsSubmitting(false);
-            return;
-        }
 
         try {
             const result = await submitScholarshipApplication(formData);
@@ -51,9 +39,9 @@ export default function ScholarshipForm() {
         return (
             <div className={classes.successMsg}>
                 <h3>🎉 Application Received!</h3>
-                <p>Your scholarship application has been successfully submitted.</p>
+                <p>Your scholarship application has been successfully submitted and is being processed.</p>
                 <p style={{ marginTop: '1rem', fontWeight: 'bold' }}>Next Steps:</p>
-                <p>Please check your email shortly. You will receive instructions on how to pay the ₦30,000 application processing fee.</p>
+                <p>Please check your email for a confirmation and further instructions regarding the admission process.</p>
             </div>
         );
     }
@@ -79,8 +67,8 @@ export default function ScholarshipForm() {
                     <input type="tel" id="phone" name="phone" className={classes.input} required placeholder="+234..." />
                 </div>
                 <div className={classes.field}>
-                    <label htmlFor="age">Age <span>*</span></label>
-                    <input type="number" id="age" name="age" className={classes.input} required min="16" max="99" placeholder="e.g. 22" />
+                    <label htmlFor="country">Country</label>
+                    <input type="text" id="country" name="country" className={classes.input} placeholder="e.g. Nigeria" defaultValue="Nigeria" />
                 </div>
             </div>
 
@@ -90,62 +78,46 @@ export default function ScholarshipForm() {
                     <input type="text" id="state" name="state" className={classes.input} required placeholder="e.g. Lagos" />
                 </div>
                 <div className={classes.field}>
-                    <label htmlFor="program">Program of Interest <span>*</span></label>
-                    <select id="program" name="program" className={classes.select} required defaultValue="">
-                        <option value="" disabled>Select a Program...</option>
-                        <option value="Data Analysis">Data Analysis</option>
-                        <option value="Cybersecurity">Cybersecurity</option>
-                        <option value="UI/UX Design">UI/UX Design</option>
-                        <option value="Web Development">Web Development</option>
-                        <option value="Mobile App Development">Mobile App Development</option>
-                        <option value="Forex Trading">Forex Trading</option>
+                    <label htmlFor="departmentId">Department of Interest <span>*</span></label>
+                    <select id="departmentId" name="departmentId" className={classes.select} required defaultValue="">
+                        <option value="" disabled>Select a Department...</option>
+                        {departmentList.map(dept => (
+                            <option key={dept.id} value={dept.id}>{dept.name}</option>
+                        ))}
                     </select>
                 </div>
             </div>
 
+            <div className={classes.row}>
+                <div className={classes.field}>
+                    <label htmlFor="experienceLevel">Experience Level <span>*</span></label>
+                    <select id="experienceLevel" name="experienceLevel" className={classes.select} required defaultValue="">
+                        <option value="" disabled>Select your level...</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div className={classes.field}>
+                    <label htmlFor="linkedinUrl">LinkedIn Profile (URL)</label>
+                    <input type="url" id="linkedinUrl" name="linkedinUrl" className={classes.input} placeholder="https://linkedin.com/in/..." />
+                </div>
+            </div>
+
             <div className={classes.field}>
-                <label htmlFor="reason">Why do you want this scholarship? <span>*</span></label>
+                <label htmlFor="portfolioUrl">Portfolio Website (URL)</label>
+                <input type="url" id="portfolioUrl" name="portfolioUrl" className={classes.input} placeholder="https://..." />
+            </div>
+
+            <div className={classes.field}>
+                <label htmlFor="motivation">Motivation for Scholarship <span>*</span></label>
                 <textarea
-                    id="reason"
-                    name="reason"
+                    id="motivation"
+                    name="motivation"
                     className={classes.textarea}
                     required
                     placeholder="Tell us why you are passionate about tech and how this scholarship will impact your life..."
                 ></textarea>
-            </div>
-
-            <div className={classes.field}>
-                <label htmlFor="hasLaptop">Do you have a laptop? <span>*</span></label>
-                <select id="hasLaptop" name="hasLaptop" className={classes.select} required defaultValue="">
-                    <option value="" disabled>Select Yes or No...</option>
-                    <option value="yes">Yes, I have a laptop</option>
-                    <option value="no">No, I do not have a laptop</option>
-                </select>
-            </div>
-
-            <div className={classes.field}>
-                <label htmlFor="passportPhoto">Upload Passport Photograph <span>*</span></label>
-                <input
-                    type="file"
-                    id="passportPhoto"
-                    name="passportPhoto"
-                    className={classes.fileInput}
-                    accept=".jpg,.jpeg,.png"
-                    required
-                />
-                <p className={classes.fileHint}>Max size: 5MB. Formats: JPG, PNG.</p>
-            </div>
-
-            <div className={classes.field}>
-                <label htmlFor="validId">Upload Valid ID (Optional)</label>
-                <input
-                    type="file"
-                    id="validId"
-                    name="validId"
-                    className={classes.fileInput}
-                    accept=".jpg,.jpeg,.png"
-                />
-                <p className={classes.fileHint}>NIN, Voter's Card, or Passport. Max size: 5MB.</p>
             </div>
 
             <button type="submit" className={classes.submitBtn} disabled={isSubmitting}>

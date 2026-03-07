@@ -125,17 +125,13 @@ function MainHeader({ user }) {
               </LinkWithProgress>
               <div className={classes.links}>
                 {path === "/" ? (
-                  <a
+                  <LinkWithProgress
                     href="/"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.location.reload();
-                    }}
                     className={classes.link}
                     style={{ color: "var(--teal-400)" }}
                   >
                     Home
-                  </a>
+                  </LinkWithProgress>
                 ) : (
                   <LinkWithProgress
                     href="/"

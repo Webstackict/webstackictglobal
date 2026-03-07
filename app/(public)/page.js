@@ -19,7 +19,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import BenefitsGrid from "@/components/cards/benefits-grid";
 import AuthorityGrid from "@/components/cards/authority-grid";
 import ProgramsGrid from "@/components/cards/programs-grid";
-import OngoingCohortsEnrollmentsWrapper from "@/components/serverWrappers/ongoing-cohorts-enrollments-wrapper";
+import OngoingCohorts from "@/components/home/OngoingCohorts";
 import { Suspense } from "react";
 import CohortSkeleton from "@/components/ui/cohort-skeleton";
 
@@ -49,7 +49,7 @@ export default async function Home() {
             2026 <span className="gradientText">Scholarship Program</span>
           </h2>
           <p style={{ marginBottom: '2rem', color: 'var(--gray-text-400)', fontSize: '1.2rem', lineHeight: '1.6' }}>
-            Apply for a life-changing opportunity to start your career in technology with Africa's leading tech hub. Limited slots available.
+            Apply for a life-changing opportunity to start your career in technology with Africa&apos;s leading tech hub. Limited slots available.
           </p>
           <SmallButton href="/scholarships" style={{ background: 'var(--blue-500)', fontSize: '1.1rem', padding: '1rem 2.5rem', borderRadius: '50px', boxShadow: '0 10px 25px -5px rgba(0, 150, 255, 0.3)' }}>
             Apply for Scholarship
@@ -83,9 +83,7 @@ export default async function Home() {
         }
         subtitle="Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available."
       >
-        <Suspense fallback={<CohortSkeleton />}>
-          <OngoingCohortsEnrollmentsWrapper />
-        </Suspense>
+        <OngoingCohorts />
       </Section>
       <Section
         label="why-choose-us-authority"

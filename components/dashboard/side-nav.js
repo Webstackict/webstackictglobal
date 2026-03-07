@@ -37,6 +37,11 @@ const links = [
     icon: "notification",
     href: "/notifications",
   },
+  {
+    name: "Referrals",
+    icon: "share",
+    href: "/dashboard/referrals",
+  },
 ];
 
 export default function SideNav() {
@@ -91,11 +96,10 @@ export default function SideNav() {
               <LinkWithProgress
                 key={index}
                 href={link.href}
-                className={`${classes.navLink} ${
-                  pathname.includes(link.name.toLowerCase())
+                className={`${classes.navLink} ${pathname.includes(link.name.toLowerCase())
                     ? classes.active
                     : null
-                }`}
+                  }`}
               >
                 <span className={classes.iconBox}>
                   {link.name === "Notifications" && unreadNotifications && (
@@ -112,9 +116,8 @@ export default function SideNav() {
 
           <LinkWithProgress
             href="/account-settings"
-            className={`${classes.navLink} ${
-              pathname.includes("account-settings") && classes.active
-            }`}
+            className={`${classes.navLink} ${pathname.includes("account-settings") && classes.active
+              }`}
           >
             <Settings />
             Account Settings
