@@ -90,11 +90,7 @@ export async function POST(request) {
         }, { status: 500 });
     }
 }
-
 export async function GET(request) {
-    const { PrismaClient } = require('@prisma/client');
-    const freshPrisma = new PrismaClient();
-
     try {
         const { searchParams } = new URL(request.url);
         const status = searchParams.get('status');
@@ -104,9 +100,9 @@ export async function GET(request) {
             where.status = status.toLowerCase();
         }
 
-        const applications = await freshPrisma.scholarship_applications.findMany({
+        const applications = await prisma.scholarship_applications.findMany({
             where,
-            orderBy: { created_at: 'desc' }
+            orderBy: { submitted_at: 'desc' }
         });
 
         return NextResponse.json(applications);
@@ -119,7 +115,5 @@ export async function GET(request) {
             error: 'Failed to fetch scholarship applications',
             details: error.message
         }, { status: 500 });
-    } finally {
-        await freshPrisma.$disconnect();
     }
 }
