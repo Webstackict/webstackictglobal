@@ -8,10 +8,10 @@ export default function FormSubmitButton({ children, icon = null, ...props }) {
   return (
     <button type="submit" {...props}>
       {pending ? (
-        "submiting"
+        "Submitting..."
       ) : (
         <>
-          <Icon /> {children}
+          {Icon && <Icon />} {children}
         </>
       )}
     </button>

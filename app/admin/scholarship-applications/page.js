@@ -126,6 +126,7 @@ export default function ScholarshipApplicationsPage() {
                                 <th className="px-6 py-4 font-semibold">Contact Info</th>
                                 <th className="px-6 py-4 font-semibold">Program & Date</th>
                                 <th className="px-6 py-4 font-semibold">Status</th>
+                                <th className="px-6 py-4 font-semibold">Referral</th>
                                 <th className="px-6 py-4 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
@@ -173,6 +174,11 @@ export default function ScholarshipApplicationsPage() {
                                                 {app.status === 'pending' && <Clock className="w-3 h-3" />}
                                                 {app.status === 'rejected' && <XCircle className="w-3 h-3" />}
                                                 {app.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <span className="text-gray-400 font-mono text-xs">
+                                                {app.referral_code || "—"}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-right">
@@ -255,6 +261,12 @@ export default function ScholarshipApplicationsPage() {
                                 <div>
                                     <label className="text-xs text-gray-500 uppercase font-bold tracking-wider">Preferred Program</label>
                                     <p className="text-gray-200 mt-1 font-semibold text-blue-400">{selectedApplication.program}</p>
+                                </div>
+                                <div className="col-span-2">
+                                    <label className="text-xs text-gray-500 uppercase font-bold tracking-wider">Referral Source</label>
+                                    <p className="text-gray-200 mt-1 font-mono text-blue-300">
+                                        {selectedApplication.referral_code || "None (Direct Application)"}
+                                    </p>
                                 </div>
                             </div>
                             <div>

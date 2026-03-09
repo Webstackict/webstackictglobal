@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        "./app/admin/**/*.{js,ts,jsx,tsx,mdx}",
-        "./components/admin/**/*.{js,ts,jsx,tsx,mdx}",
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./modules/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     corePlugins: {
         preflight: false,

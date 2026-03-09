@@ -1,35 +1,71 @@
 import { NextResponse } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
 
-export function middleware(request) {
-    let response;
+export async function middleware(request) {
+    let response = NextResponse.next({
+        request: {
+            headers: request.headers,
+        },
+    });
 
-    // Check if we are trying to access the admin dashboard
-    if (request.nextUrl.pathname.startsWith('/admin')) {
-
-        // Skip middleware for login page
-        if (request.nextUrl.pathname === '/admin/login') {
-            response = NextResponse.next();
-        } else {
-            // Check for our custom JWT cookie
-            const adminToken = request.cookies.get('admin_token');
-
-            // If no token exists, redirect to the admin login page
-            if (!adminToken) {
-                const loginUrl = new URL('/admin/login', request.url);
-                response = NextResponse.redirect(loginUrl);
-            } else if (request.nextUrl.pathname === '/admin') {
-                // If accessing root /admin, redirect to /admin/dashboard
-                const dashboardUrl = new URL('/admin/dashboard', request.url);
-                response = NextResponse.redirect(dashboardUrl);
-            } else {
-                response = NextResponse.next();
-            }
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+        {
+            cookies: {
+                getAll: () => request.cookies.getAll(),
+                setAll: (cookiesToSet) => {
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        request.cookies.set(name, value, options)
+                    );
+                    response = NextResponse.next({
+                        request: {
+                            headers: request.headers,
+                        },
+                    });
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        response.cookies.set(name, value, options)
+                    );
+                },
+            },
         }
-    } else {
-        response = NextResponse.next();
+    );
+
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // 1. Admin Protection
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+        if (request.nextUrl.pathname === '/admin/login') {
+            return response;
+        }
+        const adminToken = request.cookies.get('admin_token');
+        if (!adminToken) {
+            return NextResponse.redirect(new URL('/admin/login', request.url));
+        }
     }
 
-    // Capture referral code from URL if present
+    // 2. Dashboard Protection (Private routes)
+    const isDashboard = request.nextUrl.pathname.startsWith('/dashboard');
+    const isOnboarding = request.nextUrl.pathname.startsWith('/onboarding');
+
+    if ((isDashboard || isOnboarding) && !user) {
+        return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    // 3. Prevent logged-in users from accessing login/signup
+    const isAuthPage = ['/login', '/signup', '/auth'].some(path =>
+        request.nextUrl.pathname.startsWith(path)
+    );
+    if (isAuthPage && user) {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+
+    // 4. Onboarding Redirect
+    if (user && !user.user_metadata?.onboarding_completed && isDashboard) {
+        return NextResponse.redirect(new URL('/onboarding', request.url));
+    }
+
+    // 4. Capture referral code
     const ref = request.nextUrl.searchParams.get('ref');
     if (ref) {
         response.cookies.set('webstack_referral_code', ref, {

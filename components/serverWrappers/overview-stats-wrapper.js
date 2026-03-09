@@ -6,9 +6,11 @@ export default async function OverviewStatsWrapper({ userId }) {
 
   const { data, error } = await getOverviewStats(userId);
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
+  const defaultStats = {
+    attendedEvents: 0,
+    completedDepts: 0,
+    ongoingEnrollments: 0,
+  };
 
-  // console.log('data', data);
-
-  return <OverviewStatsGrid userStats={data} />;
+  return <OverviewStatsGrid userStats={data || defaultStats} />;
 }

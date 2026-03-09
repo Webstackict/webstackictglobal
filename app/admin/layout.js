@@ -20,7 +20,8 @@ import {
     ChevronDown,
     Menu,
     GraduationCap,
-    Share2
+    Share2,
+    UserPlus
 } from "lucide-react";
 
 export default function AdminLayout({ children }) {
@@ -70,6 +71,9 @@ export default function AdminLayout({ children }) {
                             <NavItem href="/admin/cms" icon={LayoutTemplate} label="Website CMS" />
                             <NavItem href="/admin/marketing" icon={Megaphone} label="Marketing" />
                             <NavItem href="/admin/referrals" icon={Share2} label="Referrals" />
+                            <NavItem href="/admin/referrals/requests" icon={Users} label="Affiliate Requests" />
+                            <NavItem href="/admin/referrals/commissions" icon={CreditCard} label="Commissions" />
+                            <NavItem href="/admin/users/invite" icon={UserPlus} label="Invite User" />
                             <NavItem href="/admin/operations" icon={Briefcase} label="Operations" />
                             <NavItem href="/admin/finance" icon={CreditCard} label="Finance" />
                         </div>

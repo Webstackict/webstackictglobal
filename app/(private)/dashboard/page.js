@@ -17,13 +17,21 @@ export default async function Dashboard() {
 
 
   if (!user) {
-    redirect("/auth/email-verify");
+    redirect("/login");
   }
+
+  const { data: profile } = await supabase
+    .from('user_profile')
+    .select('full_name')
+    .eq('user_id', user.id)
+    .maybeSingle();
+
+  const displayName = profile?.full_name || user.user_metadata?.full_name || "Student";
 
   return (
     <>
       <DashboardHeader
-        title=""
+        title={`Welcome, ${displayName} 👋`}
         subtitle="Here's your learning progress overview. Keep growing."
         userId={user.id}
       />
@@ -31,26 +39,20 @@ export default async function Dashboard() {
         <OverviewStatsWrapper userId={user.id} />
       </Section>
       <Section
-        title="Ongoing Departments"
-        description="Track your active learning paths"
+        title="Active Learning Paths"
+        description="Track your active programs and progress"
       >
         <CurrentEnrollmentsWrapper userId={user.id} />
       </Section>
       <Section
-        title="Completed Departments"
+        title="Completed Programs"
         description="Your achievements and earned certificates"
-        buttonText="Enroll New Department"
-        buttonIcon="add"
-        href="/programs/academy"
       >
         <CompletedEnrollmentsWrapper userId={user.id} />
       </Section>
       <Section
         title="Events Attended"
-        description="Your participation history in WEBSTACK events"
-        buttonText="View All Events"
-        buttonIcon="rightArrow"
-        href="/programs/events"
+        description="Your participation history in Webstack events"
       >
         <AttendedEventsWrapper userId={user.id} />
       </Section>

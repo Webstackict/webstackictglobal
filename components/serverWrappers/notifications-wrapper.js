@@ -29,13 +29,9 @@ export default async function NotificationsWrapper() {
 
     if (fetchError) throw fetchError;
 
-    return <Notifications items={items} />;
+    return <Notifications items={items || []} />;
   } catch (error) {
     console.error("Supabase error:", error.message);
-    return (
-      <p className="data-fetching-error">
-        Something went wrong, please try again.
-      </p>
-    );
+    return <Notifications items={[]} />;
   }
 }

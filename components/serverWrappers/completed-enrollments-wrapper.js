@@ -15,8 +15,6 @@ export default async function CompletedEnrollmentsWrapper({ userId }) {
     redirect("/auth");
   }
   const { data, error } = await getUserCompletedCohorts(userId, "completed");
-  // console.log("data", data);
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
-  return <CompletedCoursesGrid enrollments={data} />;
+  return <CompletedCoursesGrid enrollments={data || []} />;
 }

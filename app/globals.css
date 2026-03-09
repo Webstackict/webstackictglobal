@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -18,10 +20,49 @@ ul {
 
 /* Glassmorphism Effect */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.premium-card {
+  background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px rgba(60, 166, 252, 0.3);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 2rem;
+  box-shadow:
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 255, 255, 0.02);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem;
+}
+
+.premium-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  z-index: 1;
+}
+
+.premium-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 30px 60px -12px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(59, 130, 246, 0.1);
 }
 
 .gradientText {
@@ -30,6 +71,7 @@ ul {
   -webkit-background-clip: text;
   color: transparent;
 }
+
 .heroGradientText {
   background: var(--gradient-text);
   background-clip: text;
@@ -43,6 +85,7 @@ ul {
 .live-badge {
   background-color: var(--red-400);
 }
+
 .blue-badge {
   background-color: var(--blue-300);
   color: var(--blue-400);
@@ -82,10 +125,12 @@ ul {
   background-color: var(--green-300);
   color: var(--green-400);
 }
+
 .enrolling {
   background-color: var(--green-300);
   color: var(--green-400);
 }
+
 .active {
   background-color: var(--green-300);
   color: var(--green-400);
@@ -115,6 +160,7 @@ ul {
   background-color: var(--orange-300);
   color: var(--orange-400);
 }
+
 .premium {
   background-color: rgba(59, 130, 246, 0.2);
   color: #3b82f6;
@@ -153,6 +199,7 @@ ul {
 .teal {
   color: var(--teal-400);
 }
+
 .white {
   color: var(--white);
 }
@@ -190,6 +237,7 @@ ul {
 .teal-flat-bg {
   background-color: var(--teal-500);
 }
+
 .gray-bg {
   background-color: var(--midnight-blue-500);
 }
@@ -199,18 +247,23 @@ ul {
 .bluePurple-bg {
   background: linear-gradient(to bottom right, #3b82f6, #9333ea);
 }
+
 .greenTeal-bg {
   background: linear-gradient(to bottom right, #22c55e, #0d9488);
 }
+
 .purplePink-bg {
   background: linear-gradient(to bottom right, #a855f7, #ec4899);
 }
+
 .orangeRed-bg {
   background: linear-gradient(to bottom right, #f97316, #dc2626);
 }
+
 .cyanBlue-bg {
   background: linear-gradient(to bottom right, #06b6d4, #2563eb);
 }
+
 .yellowOrange-bg {
   background: linear-gradient(to bottom right, #eab308, #f97316);
 }
@@ -252,6 +305,7 @@ ul {
 .yellow-border {
   border: 1px solid var(--yellow-400) !important;
 }
+
 .teal-border {
   border: 1px solid var(--teal-400) !important;
 }
@@ -312,6 +366,7 @@ ul {
   margin-top: 0.3rem;
   font-size: 1rem;
 }
+
 .error-background {
   background: var(--red-300) !important;
 }
@@ -332,4 +387,38 @@ ul {
   height: 10px;
   border-radius: 999px;
   background: var(--red-400);
+}
+
+/* Premium Redesign Utilities */
+.glass-card-amber {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+}
+
+.glass-card-red {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+}
+
+.premium-glow-blue {
+  box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.3);
+}
+
+.premium-glow-amber {
+  box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3);
+}
+
+.premium-glow-red {
+  box-shadow: 0 0 40px -10px rgba(239, 68, 68, 0.3);
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

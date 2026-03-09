@@ -6,6 +6,7 @@ export async function updateNames(userId, prevState, formData) {
   const fullName = formData.get("fullName")?.trim() || "";
   const displayName = formData.get("displayName")?.trim() || "";
   const phone = formData.get("phone")?.trim() || "";
+  const photoUrl = formData.get("photoUrl")?.trim() || "";
 
   let errors = {};
 
@@ -29,7 +30,12 @@ export async function updateNames(userId, prevState, formData) {
   try {
     const { data: user, error } = await supabase
       .from("user_profile")
-      .update({ full_name: fullName, display_name: displayName, phone: phone })
+      .update({
+        full_name: fullName,
+        display_name: displayName,
+        phone: phone,
+        photo_url: photoUrl
+      })
       .eq("user_id", userId)
       .select()
       .maybeSingle();

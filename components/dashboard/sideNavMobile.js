@@ -2,12 +2,11 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { use, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import classes from "./sideNavMobile.module.css";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import LinkWithProgress from "../ui/Link-with-progress";
-import logoImg from "@/assets/Webstack Logo white.png";
-import Image from "next/image";
+import Logo from "../ui/logo";
 import { DashboardSidebarContext } from "@/store/dashboard-sidebar-context";
 import { logout } from "@/actions/logout";
 import { NotificationsContext } from "@/store/notifications-context";
@@ -21,22 +20,33 @@ const {
 } = iconsConfig;
 
 const links = [
-  { name: "Dashboard", icon: "chart", href: "/dashboard" },
+  { name: "Dashboard Overview", icon: "chart", href: "/dashboard" },
+  { name: "My Profile", icon: "person", href: "/dashboard/profile" },
+  {
+    name: "Affiliate / Referral Program",
+    icon: "share",
+    href: "/dashboard/referrals",
+  },
+  {
+    name: "Referral History",
+    icon: "clock",
+    href: "/dashboard/referrals/history",
+  },
+  {
+    name: "Earnings",
+    icon: "dollarCoin",
+    href: "/dashboard/referrals/earnings",
+  },
   {
     name: "Notifications",
     icon: "notification",
     href: "/notifications",
   },
-  {
-    name: "Referrals",
-    icon: "share",
-    href: "/dashboard/referrals",
-  },
 ];
 
 export default function SideNavMobile() {
-  const { setUser } = use(UserContext);
-  const { isDashboardSidebar, setIsDashboardSidebar } = use(
+  const { setUser } = useContext(UserContext);
+  const { isDashboardSidebar, setIsDashboardSidebar } = useContext(
     DashboardSidebarContext
   );
   const pathname = usePathname();
@@ -47,7 +57,7 @@ export default function SideNavMobile() {
     setNotifications,
     unreadNotifications,
     setUnreadNotifications,
-  } = use(NotificationsContext);
+  } = useContext(NotificationsContext);
   // const isPendingNotification = notifications.some(
   //   (n) => n.status === "pending"
   // );
@@ -113,9 +123,7 @@ export default function SideNavMobile() {
       >
         <div className={classes.sidebarHeader}>
           <LinkWithProgress href="/">
-            <div>
-              <Image src={logoImg} alt="logo" fill sizes="200px" priority />
-            </div>
+            <Logo />
           </LinkWithProgress>
         </div>
 
@@ -145,12 +153,12 @@ export default function SideNavMobile() {
           {/* <hr /> */}
 
           <LinkWithProgress
-            href="/account-settings"
-            className={`${classes.navLink} ${pathname.includes("account-settings") && classes.active
+            href="/dashboard/settings"
+            className={`${classes.navLink} ${pathname.includes("settings") && classes.active
               }`}
           >
             <Settings />
-            Account Settings
+            Settings
           </LinkWithProgress>
           <button className={`${classes.navLink}`} onClick={handleLogoutClick}>
             <LogOut />

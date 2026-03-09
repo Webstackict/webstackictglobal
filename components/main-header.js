@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 
 import classes from "./main-header.module.css";
+import Logo from "./ui/logo";
 
 import ProgressBar from "./ui/progress-bar";
 import LinkWithProgress from "./ui/Link-with-progress";
@@ -106,21 +107,7 @@ function MainHeader({ user }) {
             <div className={classes.left}>
               <LinkWithProgress href="/">
                 <div className={classes.logo}>
-                  <Image
-                    src="/logo/webstack-logo-white.png"
-                    alt="Webstack ICT Global Logo"
-                    width={1600}
-                    height={400}
-                    quality={100}
-                    priority
-                    unoptimized
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      objectFit: 'contain',
-                      objectPosition: 'left'
-                    }}
-                  />
+                  <Logo />
                 </div>
               </LinkWithProgress>
               <div className={classes.links}>

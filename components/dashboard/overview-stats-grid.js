@@ -51,7 +51,7 @@ export default function OverviewStatsGrid({ userStats = {} }) {
         return (
           <div
             key={stat.id}
-            className={classes.statCard}
+            className={`${classes.statCard} premium-card`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div className={classes.statHeader}>

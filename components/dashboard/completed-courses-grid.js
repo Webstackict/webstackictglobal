@@ -7,6 +7,8 @@ import Badge from "../ui/badge";
 import { formatDate } from "@/util/util";
 import Button from "./button";
 
+import EmptyState from "./empty-state";
+
 const DownloadIcon = iconsConfig["download"];
 const CertificateIcon = iconsConfig["certificate"];
 const CalendarIcon = iconsConfig["calendar"];
@@ -14,10 +16,14 @@ const CalendarIcon = iconsConfig["calendar"];
 export default function CompletedCoursesGrid({ enrollments = [] }) {
   if (enrollments.length < 1) {
     return (
-      <div className="no-data-container">
-        <p className="no-data">You have not completed any courses</p>;
-       
-      </div>
+      <EmptyState
+        icon="certificate"
+        title="No Achievements Yet"
+        description="Your earned certificates and completed programs will appear here once you finish your courses."
+        buttonText="Enroll in a Program"
+        buttonIcon="add"
+        href="/programs/academy"
+      />
     );
   }
 
@@ -28,7 +34,7 @@ export default function CompletedCoursesGrid({ enrollments = [] }) {
         return (
           <div
             key={enrollment.id}
-            className={classes.courseCard}
+            className={`${classes.courseCard} premium-card`}
             style={{ animationDelay: `${idx * 0.1}s` }}
           >
             <div className={classes.courseHeader}>

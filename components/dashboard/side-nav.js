@@ -6,11 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import classes from "./side-nav.module.css";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import LinkWithProgress from "../ui/Link-with-progress";
-import logoImg from "@/assets/Webstack Logo white.png";
-import Image from "next/image";
+import Logo from "../ui/logo";
 import { logout } from "@/actions/logout";
 import { NotificationsContext } from "@/store/notifications-context";
-import { use } from "react";
+import { useContext } from "react";
 import { toast } from "sonner";
 import { UserContext } from "@/store/user-context";
 
@@ -22,30 +21,32 @@ const {
 } = iconsConfig;
 
 const links = [
-  { name: "Dashboard", icon: "chart", href: "/dashboard" },
-  // { name: "My Courses", icon: "school", href: "/dashboard/my-courses" },
-  // { name: "Events", icon: "event", href: "/dashboard/events" },
-  // {
-  //   name: "Certificates",
-  //   icon: "certificate",
-  //   href: "/dashboard/certificates",
-  // },
-  // { name: "My Services", icon: "services", href: "/dashboard/my-services" },
-  // { name: "Achievements", icon: "award", href: "/dashboard/achievements" },
+  { name: "Dashboard Overview", icon: "chart", href: "/dashboard" },
+  { name: "My Profile", icon: "person", href: "/dashboard/profile" },
+  {
+    name: "Affiliate / Referral Program",
+    icon: "share",
+    href: "/dashboard/referrals",
+  },
+  {
+    name: "Referral History",
+    icon: "clock",
+    href: "/dashboard/referrals/history",
+  },
+  {
+    name: "Earnings",
+    icon: "dollarCoin",
+    href: "/dashboard/referrals/earnings",
+  },
   {
     name: "Notifications",
     icon: "notification",
     href: "/notifications",
   },
-  {
-    name: "Referrals",
-    icon: "share",
-    href: "/dashboard/referrals",
-  },
 ];
 
 export default function SideNav() {
-  const { setUser } = use(UserContext);
+  const { setUser } = useContext(UserContext);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -54,7 +55,7 @@ export default function SideNav() {
     setNotifications,
     unreadNotifications,
     setUnreadNotifications,
-  } = use(NotificationsContext);
+  } = useContext(NotificationsContext);
   // const isPendingNotification = notifications.some(
   //   (n) => n.status === "pending"
   // );
@@ -83,9 +84,7 @@ export default function SideNav() {
       <motion.aside className={classes.dashboardSideNav}>
         <div className={classes.sidebarHeader}>
           <LinkWithProgress href="/">
-            <div>
-              <Image src={logoImg} alt="logo" fill sizes="200px" priority />
-            </div>
+            <Logo />
           </LinkWithProgress>
         </div>
 
@@ -96,9 +95,7 @@ export default function SideNav() {
               <LinkWithProgress
                 key={index}
                 href={link.href}
-                className={`${classes.navLink} ${pathname.includes(link.name.toLowerCase())
-                    ? classes.active
-                    : null
+                className={`${classes.navLink} ${pathname === link.href ? classes.active : ""
                   }`}
               >
                 <span className={classes.iconBox}>
@@ -115,12 +112,12 @@ export default function SideNav() {
           {/* <hr /> */}
 
           <LinkWithProgress
-            href="/account-settings"
-            className={`${classes.navLink} ${pathname.includes("account-settings") && classes.active
+            href="/dashboard/settings"
+            className={`${classes.navLink} ${pathname.includes("settings") && classes.active
               }`}
           >
             <Settings />
-            Account Settings
+            Settings
           </LinkWithProgress>
           <button className={`${classes.navLink}`} onClick={handleLogoutClick}>
             <LogOut />

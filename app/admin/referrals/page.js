@@ -73,25 +73,27 @@ export default function AdminReferralsPage() {
 
             {/* Stats Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-[#0a0e17] border border-white/5 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <UsersIcon className="w-16 h-16 text-blue-500" />
+                <div className="premium-card p-6 relative overflow-hidden group hover:border-blue-500/40">
+                    <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-500">
+                        <UsersIcon className="w-24 h-24 text-white -rotate-12 translate-x-4 -translate-y-4" />
                     </div>
                     <div className="relative z-10">
-                        <p className="text-sm font-medium text-gray-400 mb-1">Total Referrals Generated</p>
-                        <h3 className="text-3xl font-bold shadow-sm text-white">{stats.total_referrals}</h3>
+                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Total Network Size</p>
+                        <h3 className="text-4xl font-black text-white tracking-tighter">{stats.total_referrals}</h3>
+                        <p className="text-xs text-gray-500 mt-2 font-medium">Registered affiliate partners</p>
                     </div>
                 </div>
 
-                <div className="bg-[#0a0e17] border border-white/5 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Coins className="w-16 h-16 text-emerald-500" />
+                <div className="premium-card p-6 relative overflow-hidden group hover:border-emerald-500/40">
+                    <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-500">
+                        <Coins className="w-24 h-24 text-white rotate-12 translate-x-4 -translate-y-4" />
                     </div>
                     <div className="relative z-10">
-                        <p className="text-sm font-medium text-gray-400 mb-1">Total Commissions Earned</p>
-                        <h3 className="text-3xl font-bold shadow-sm text-white">
+                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">System-wide Yield</p>
+                        <h3 className="text-4xl font-black text-emerald-400 tracking-tighter">
                             ₦{Number(stats.total_commissions).toLocaleString()}
                         </h3>
+                        <p className="text-xs text-gray-500 mt-2 font-medium">Total commissions processed</p>
                     </div>
                 </div>
             </div>
@@ -135,11 +137,11 @@ export default function AdminReferralsPage() {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="border-b border-white/5 text-sm font-medium text-gray-400 bg-white/[0.02]">
-                                    <th className="px-6 py-4">User</th>
-                                    <th className="px-6 py-4">Referral Code</th>
-                                    <th className="px-6 py-4">Successful Referrals</th>
-                                    <th className="px-6 py-4">Earnings</th>
+                                <tr className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] bg-white/[0.01]">
+                                    <th className="px-8 py-5">Partner Name</th>
+                                    <th className="px-8 py-5">Ref Code</th>
+                                    <th className="px-8 py-5 text-center">Conversions</th>
+                                    <th className="px-8 py-5 text-right">Yield</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5 text-sm text-gray-300">

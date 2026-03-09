@@ -70,6 +70,7 @@ export async function POST(request) {
                 program: preferred_department,
                 reason: motivation,
                 experience_level: experience_level || 'Beginner',
+                referral_code: request.cookies.get('webstack_referral_code')?.value || null,
                 status: 'pending'
             }
         }));

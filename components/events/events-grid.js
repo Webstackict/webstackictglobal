@@ -4,6 +4,8 @@ import BigEventCard from "./big-event-card";
 import classes from "./events-grid.module.css";
 import SmallEventCard from "./small-event-card";
 
+import EmptyState from "../dashboard/empty-state";
+
 export default function EventsGrid({
   label = null,
   upcomingEvents = [],
@@ -11,16 +13,22 @@ export default function EventsGrid({
 }) {
   if (upcomingEvents.length === 0 && !label)
     return (
-      <p className="no-data">No Events available! Events will appear here.</p>
+      <EmptyState
+        icon="calendar"
+        title="No Events Available"
+        description="Check back later for upcoming tech workshops and networking events."
+      />
     );
   if (smallEvents.length === 0 && label === "events-attended")
     return (
-      <div className="no-data-container">
-        <p className="no-data">
-          You have not participated in any Webstack events.
-        </p>
-        ;
-      </div>
+      <EmptyState
+        icon="calendar"
+        title="No Event Activity"
+        description="You haven't participated in any Webstack events yet. Join our upcoming community sessions!"
+        buttonText="Explore Events"
+        buttonIcon="rightArrow"
+        href="/programs/events"
+      />
     );
   return (
     <>

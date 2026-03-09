@@ -6,8 +6,6 @@ import WaitlistForm from "../ui/WaitlistForm";
 export default async function OngoingCohortsEnrollmentsWrapper() {
   const { data: cohorts, error } = await getEnrollingCohorts(4);
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
-
   if (!cohorts || cohorts.length === 0) {
     return <WaitlistForm />;
   }

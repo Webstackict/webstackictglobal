@@ -13,7 +13,6 @@ export default function QuickActions() {
 
   return (
     <div className={classes.quickActions}>
-      <h3 className={classes.title}>Quick Actions</h3>
       <div className={classes.actionsGrid}>
         {actions.map((action, idx) => {
           const Icon = iconsConfig[action.icon];
@@ -21,7 +20,7 @@ export default function QuickActions() {
             <LinkWithProgress
               key={idx}
               href={action.href}
-              className={classes.actionButton}
+              className={`${classes.actionButton} premium-card`}
             >
               <div className={classes.iconWrapper}>
                 <Icon className={classes.icon} />

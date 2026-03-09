@@ -98,6 +98,18 @@ export default function EnrollmentForm({ cohorts = [] }) {
                     </select>
                 </div>
 
+                <div className={classes.inputGroup}>
+                    <label htmlFor="referral_code">Referral Code (Optional)</label>
+                    <input
+                        type="text"
+                        id="referral_code"
+                        name="referral_code"
+                        placeholder="ABC123XYZ"
+                        disabled={isPending}
+                        defaultValue={typeof document !== 'undefined' ? document.cookie.split('; ').find(row => row.startsWith('webstack_referral_code='))?.split('=')[1] : ""}
+                    />
+                </div>
+
                 <button type="submit" className={classes.submitBtn} disabled={isPending}>
                     {isPending ? "Securing Your Seat..." : "Secure My Seat"}
                 </button>

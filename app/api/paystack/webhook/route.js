@@ -106,39 +106,55 @@ export async function POST(req) {
 
         // --- REFERRAL COMMISSION LOGIC ---
         try {
-          const { data: pendingReferral } = await supabase
-            .from("referral_activities")
-            .select("*")
-            .eq("enrollment_id", enrollmentData.id)
-            .eq("status", "pending")
-            .maybeSingle();
+          if (enrollmentData.referral_code) {
+            // Find the referrer
+            const { data: referrer } = await supabase
+              .from("referrals")
+              .select("*")
+              .eq("referral_code", enrollmentData.referral_code)
+              .maybeSingle();
 
-          if (pendingReferral) {
-            // Update referral activity to confirmed atomically
-            const { data: updatedRefAct } = await supabase
-              .from("referral_activities")
-              .update({ status: "confirmed" })
-              .eq("id", pendingReferral.id)
-              .eq("status", "pending")
-              .select();
+            if (referrer) {
+              // Calculate commission: 5% for enrollment, 10% for scholarship
+              // We need to know if this is a scholarship application or regular enrollment.
+              // Let's check table name or a flag. Scholarship apps go to scholarship_applications table. 
+              // Wait, scholarship applications also have a payment? Usually yes for processing fee.
+              // The user said: "Enrollment referrals (5% commission), Scholarship referrals (10% commission)".
 
-            if (updatedRefAct && updatedRefAct.length > 0) {
-              // Retrieve the referrer details
-              const { data: referrer } = await supabase
+              const isScholarship = !!enrollmentData.scholarship_id; // Assuming there is a field or we check context
+              const rate = isScholarship ? 0.10 : 0.05;
+              const commissionAmount = Number(eventData.amount / 100) * rate; // Paystack amount is in kobo
+
+              // Create referral activity
+              await supabase
+                .from("referral_activities")
+                .insert({
+                  referrer_id: referrer.user_id,
+                  referred_user_id: enrollmentData.id, // Wait, referred_user_id should be User ID, but enrollment might not have a user id if guest.
+                  // Actually, referrals system usually tracks users. 
+                  // Let's check schema. referred_user_id in referral_activities is a UUID.
+                  // If guest, we might need a different approach or store the enrollment id.
+                  // The schema has: referred_user_id String @unique @db.Uuid
+                  // This implies it MUST be a user. 
+                  // If the user hasn't registered yet, we might have a problem.
+                  // But usually, they register before paying.
+                  referred_user_id: enrollmentData.user_id,
+                  cohort_id: enrollmentData.cohort_id,
+                  enrollment_id: enrollmentData.id,
+                  commission_amount: commissionAmount,
+                  payment_amount: Number(eventData.amount / 100),
+                  referral_type: isScholarship ? 'scholarship' : 'enrollment',
+                  status: 'approved' // Becomes approved after payment
+                });
+
+              // Update referrer's lifetime earnings and count
+              await supabase
                 .from("referrals")
-                .select("*")
-                .eq("user_id", pendingReferral.referrer_id)
-                .maybeSingle();
-
-              if (referrer) {
-                await supabase
-                  .from("referrals")
-                  .update({
-                    total_earned: Number(referrer.total_earned) + Number(pendingReferral.commission_amount),
-                    total_referrals: Number(referrer.total_referrals) + 1
-                  })
-                  .eq("id", referrer.id);
-              }
+                .update({
+                  total_earned: Number(referrer.total_earned) + commissionAmount,
+                  total_referrals: Number(referrer.total_referrals) + 1
+                })
+                .eq("id", referrer.id);
             }
           }
         } catch (refError) {

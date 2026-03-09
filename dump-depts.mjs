@@ -12,7 +12,7 @@ envContent.split('\n').forEach(line => {
   }
 });
 
-const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+const supabase = createClient(env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_ANON_KEY || env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
 async function dump() {
   const { data, error } = await supabase.from('departments').select('*');

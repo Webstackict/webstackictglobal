@@ -5,19 +5,21 @@ import classes from "./current-enrollments-grid.module.css";
 import { calculateProgress, formatDate } from "@/util/util";
 import Button from "./button";
 
+import EmptyState from "./empty-state";
+
 export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
   // console.log(enrollments);
 
   if (enrollments.length < 1) {
     return (
-      <div className="no-data-container">
-        <p className="no-data">You have no ongoing enrollments</p>;
-        <Button
-          text="Enroll in a Department"
-          icon="add"
-          href="/programs/academy"
-        />
-      </div>
+      <EmptyState
+        icon="laptop-code"
+        title="No Active Programs"
+        description="You haven't enrolled in any learning paths yet. Explore our programs to start your tech journey."
+        buttonText="Enroll in a Program"
+        buttonIcon="add"
+        href="/programs/academy"
+      />
     );
   }
   return (
@@ -30,7 +32,7 @@ export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
         const badgeText =
           enrollment.status === "enrolling" ? "Enrolling" : "Active";
         return (
-          <div key={enrollment.id} className={classes.departmentCard}>
+          <div key={enrollment.id} className={`${classes.departmentCard} premium-card`}>
             <div className={classes.departmentHeader}>
               <div className={classes.departmentInfo}>
                 <div className={classes.departmentIcon}>

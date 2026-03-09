@@ -12,10 +12,9 @@ export default function Section({
   href = null,
   children,
 }) {
-  const hideHeader = label !== "overview-stats" || label !== "quick-action";
   return (
     <section id={label} className={classes.dashboardSection}>
-      {hideHeader ? (
+      {title && (
         <div className={classes.sectionHeader}>
           <div>
             <h3>{title}</h3>
@@ -25,7 +24,7 @@ export default function Section({
             <Button text={buttonText} icon={buttonIcon} href={href} />
           )}
         </div>
-      ) : null}
+      )}
 
       {children}
     </section>

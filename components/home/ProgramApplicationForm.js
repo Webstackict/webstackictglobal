@@ -119,6 +119,19 @@ export default function ProgramApplicationForm({ cohortId, cohortLabel }) {
                     />
                 </div>
 
+                <div className={classes.inputGroup}>
+                    <label htmlFor="referral_code">Referral Code (Optional)</label>
+                    <input
+                        type="text"
+                        id="referral_code"
+                        name="referral_code"
+                        value={formData.referral_code || (typeof document !== 'undefined' ? document.cookie.split('; ').find(row => row.startsWith('webstack_referral_code='))?.split('=')[1] : "")}
+                        onChange={handleChange}
+                        placeholder="ABC123XYZ"
+                        disabled={isLoading}
+                    />
+                </div>
+
                 <button
                     type="submit"
                     className={classes.submitBtn}

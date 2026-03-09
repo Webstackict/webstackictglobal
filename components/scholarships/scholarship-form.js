@@ -110,6 +110,18 @@ export default function ScholarshipForm() {
             </div>
 
             <div className={classes.field}>
+                <label htmlFor="referralCode">Referral Code (Optional)</label>
+                <input
+                    type="text"
+                    id="referralCode"
+                    name="referralCode"
+                    className={classes.input}
+                    placeholder="Enter referral code if any"
+                    defaultValue={typeof document !== 'undefined' ? document.cookie.split('; ').find(row => row.startsWith('webstack_referral_code='))?.split('=')[1] : ""}
+                />
+            </div>
+
+            <div className={classes.field}>
                 <label htmlFor="motivation">Motivation for Scholarship <span>*</span></label>
                 <textarea
                     id="motivation"
