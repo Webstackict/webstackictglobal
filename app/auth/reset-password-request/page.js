@@ -3,7 +3,7 @@
 import { resetPasswordForEmail } from "@/actions/auth-actions";
 import { toast } from "sonner";
 import Link from "next/link";
-import classes from "../page.module.css";
+import styles from "./page.module.css";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import FormSubmitButton from "@/components/ui/form-submit-button";
 
@@ -22,26 +22,24 @@ export default function ResetPasswordRequestPage() {
     }
 
     return (
-        <div className={classes.card}>
-            <div className={classes.glowBar}></div>
-            <div className={classes.header}>
-                <div className={classes.iconBox}><SecurityIcon /></div>
+        <div className={styles.container}>
+            <div className={styles.header}>
                 <h1>Forgot Password?</h1>
                 <p>Enter your email and we'll send you a reset link</p>
             </div>
 
-            <form action={handleAction} className={classes.form}>
-                <div className={classes.field}>
-                    <label htmlFor="email"><EmailIcon /><span>Email Address</span></label>
+            <form action={handleAction} className={styles.form}>
+                <div className={styles.field}>
+                    <label htmlFor="email">Email Address</label>
                     <input type="email" name="email" id="email" required placeholder="name@company.com" />
                 </div>
 
-                <FormSubmitButton className={classes.submitBtn}>
+                <FormSubmitButton className={styles.submitBtn}>
                     Send Reset Link
                 </FormSubmitButton>
             </form>
 
-            <div className={classes.signupRedirect}>
+            <div className={styles.signupRedirect}>
                 <p><Link href="/login">Back to Login</Link></p>
             </div>
         </div>
