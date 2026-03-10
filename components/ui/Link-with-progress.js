@@ -24,7 +24,7 @@ export default function LinkWithProgress({ href, children, ...props }) {
     });
   }
   return (
-    <Link href={"#"} {...props} onClick={handleClick}>
+    <Link href={href} {...props} onClick={handleClick}>
       {children}
     </Link>
   );

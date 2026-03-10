@@ -27,7 +27,7 @@ export default function CMSPage() {
     const mediaList = [
         { name: "hero-bg-2024.jpg", size: "2.4 MB", type: "Image", img: "bg-blue-500/20" },
         { name: "student-interview-01.mp4", size: "45 MB", type: "Video", img: "bg-purple-500/20" },
-        { name: "webstack-logo-white.svg", size: "12 KB", type: "Vector", img: "bg-emerald-500/20" },
+        { name: "webstack-logo-white.png", size: "125 KB", type: "Image", img: "bg-emerald-500/20" },
         { name: "cohort-graduation.jpg", size: "3.1 MB", type: "Image", img: "bg-blue-500/20" },
         { name: "curriculum-syllabus.pdf", size: "1.2 MB", type: "Document", img: "bg-orange-500/20" },
         { name: "instructor-headshots.zip", size: "14 MB", type: "Archive", img: "bg-gray-500/20" }

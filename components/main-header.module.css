@@ -1,20 +1,20 @@
 .header {
   position: fixed;
   top: 0;
-  height: 6rem;
+  height: 9rem;
   width: 100%;
   z-index: 50;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 0 1.5rem;
-  box-sizing: border-box;
+  overflow: visible;
 
   & nav {
     box-sizing: border-box;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 1rem 0;
+    padding: 0;
     height: 100%;
 
     &>div {
@@ -39,24 +39,23 @@
     display: flex;
     align-items: center;
     gap: 3rem;
+    overflow: visible;
+    min-width: 0;
   }
 
   & .logo {
     display: flex;
     align-items: center;
+    height: clamp(50px, 6.5vw, 65px);
     width: auto;
-    max-width: 200px;
-    height: 45px;
+    transform: scale(2);
+    transform-origin: left center;
+    flex-shrink: 0;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     &:hover {
-      transform: scale(1.03);
+      transform: scale(2.06);
       filter: brightness(1.15);
-    }
-
-    & svg {
-      width: 100%;
-      height: 100%;
     }
   }
 
@@ -80,7 +79,7 @@
 
   & .dropdownWrapper {
     position: relative;
-    height: 100px;
+    height: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -218,13 +217,15 @@
 
 @media (max-width: 1024px) {
   .header {
-    & .links {
-      display: none;
-    }
+    height: 6rem;
   }
 
-  .logo {
-    width: 12rem;
-    height: 3.5rem;
+  .header .links {
+    display: none;
+  }
+
+  .header .logo {
+    width: auto;
+    height: clamp(65px, 14vw, 78px);
   }
 }

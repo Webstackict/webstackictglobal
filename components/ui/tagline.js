@@ -19,7 +19,7 @@ function Tagline({ text, icon }) {
         transition: { duration: 0.4, ease: "easeOut" },
       }}
     >
-      <Icon />
+      {Icon && <Icon />}
       <span>{text}</span>
     </motion.div>
   );

@@ -107,7 +107,7 @@ function MainHeader({ user }) {
             <div className={classes.left}>
               <LinkWithProgress href="/">
                 <div className={classes.logo}>
-                  <Logo />
+                  <Logo width="auto" height="100%" style={{ color: "white" }} />
                 </div>
               </LinkWithProgress>
               <div className={classes.links}>

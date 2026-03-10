@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import "./admin.css";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,30 +22,54 @@ import {
     Menu,
     GraduationCap,
     Share2,
-    UserPlus
+    UserPlus,
+    X
 } from "lucide-react";
 
 export default function AdminLayout({ children }) {
     const pathname = usePathname();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const isActive = (path) => pathname === path;
 
+    // Close sidebar on path change (mobile)
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [pathname]);
+
     const NavItem = ({ href, icon: Icon, label }) => (
-        <Link href={href} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${isActive(href)
-            ? "bg-blue-600/10 text-blue-500"
-            : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
-            }`}>
+        <Link
+            href={href}
+            onClick={() => setIsSidebarOpen(false)}
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 group ${isActive(href)
+                ? "bg-blue-600/10 text-blue-500"
+                : "text-gray-400 hover:bg-white/5 hover:text-gray-200"
+                }`}
+        >
             <Icon className={`w-5 h-5 ${isActive(href) ? "text-blue-500" : "text-gray-500 group-hover:text-gray-300 transition-colors"}`} />
             {label}
         </Link>
     );
 
+    if (pathname === "/admin/login") {
+        return <div className="admin-login-standalone">{children}</div>;
+    }
+
     return (
         <div className="admin-dashboard min-h-screen bg-[#06080d] text-[#F9FAFB] font-sans selection:bg-blue-500/30">
             <div className="flex h-screen overflow-hidden">
+                {/* Mobile Backdrop */}
+                {isSidebarOpen && (
+                    <div
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300"
+                        onClick={() => setIsSidebarOpen(false)}
+                    />
+                )}
+
                 {/* Sidebar */}
-                <aside className="w-[280px] bg-[#0a0e17] border-r border-white/5 flex-shrink-0 flex flex-col relative z-20 shadow-2xl shadow-black/50">
-                    <div className="h-[73px] flex items-center px-6 border-b border-white/5 bg-[#0a0e17]/80 backdrop-blur-xl shrink-0">
+                <aside className={`fixed inset-y-0 left-0 w-[280px] bg-[#0a0e17] border-r border-white/5 flex-shrink-0 flex flex-col z-40 lg:z-20 shadow-2xl shadow-black/50 transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    }`}>
+                    <div className="h-[73px] flex items-center justify-between px-6 border-b border-white/5 bg-[#0a0e17]/80 backdrop-blur-xl shrink-0">
                         <Link href="/admin/dashboard" className="flex items-center gap-3 group">
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all">
                                 W
@@ -53,6 +78,12 @@ export default function AdminLayout({ children }) {
                                 WEBSTACK Admin
                             </span>
                         </Link>
+                        <button
+                            className="lg:hidden p-1 text-gray-400 hover:text-white"
+                            onClick={() => setIsSidebarOpen(false)}
+                        >
+                            <X className="w-6 h-6" />
+                        </button>
                     </div>
 
                     <div className="flex-1 overflow-y-auto px-4 py-6 space-y-8 scrollbar-thin scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
@@ -93,7 +124,10 @@ export default function AdminLayout({ children }) {
                     {/* Top Navbar */}
                     <header className="h-[73px] bg-[#0a0e17]/80 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-6 flex-shrink-0 sticky top-0 z-10 w-full">
                         <div className="flex items-center flex-1 gap-6">
-                            <button className="text-gray-400 hover:text-white lg:hidden">
+                            <button
+                                className="text-gray-400 hover:text-white lg:hidden"
+                                onClick={() => setIsSidebarOpen(true)}
+                            >
                                 <Menu className="w-6 h-6" />
                             </button>
 

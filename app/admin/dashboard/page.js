@@ -20,8 +20,8 @@ export default function AdminDashboardPage() {
             {/* Page Header */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white tracking-tight">Dashboard Overview</h1>
-                    <p className="text-gray-400 text-sm mt-1">Real-time metrics and activity for Webstack ICT Global.</p>
+                    <h1 className="text-3xl font-bold text-white tracking-tight">Dashboard Overview</h1>
+                    <p className="text-gray-400 text-base mt-2">Real-time metrics and activity for Webstack ICT Global.</p>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2 bg-[#0a0e17] border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300">
@@ -200,7 +200,7 @@ export default function AdminDashboardPage() {
                         </h3>
                         <a href="#" className="text-xs text-blue-400 hover:text-blue-300">View All</a>
                     </div>
-                    <div className="flex-1 overflow-y-auto pr-2 space-y-4 scrollbar-thin scrollbar-thumb-white/10">
+                    <div className="flex-1 overflow-y-auto pr-2 space-y-6 scrollbar-thin scrollbar-thumb-white/10">
                         {[
                             { name: "Sarah Jenkins", prog: "Full Stack Dev", status: "Pending", color: "orange" },
                             { name: "Michael Chen", prog: "Data Science", status: "Approved", color: "emerald" },
@@ -208,14 +208,14 @@ export default function AdminDashboardPage() {
                             { name: "David Okafor", prog: "Cybersecurity", status: "Pending", color: "orange" },
                             { name: "Lisa Thompson", prog: "Product Mgt", status: "Rejected", color: "red" }
                         ].map((app, i) => (
-                            <div key={i} className="flex flex-col gap-1 pb-3 border-b border-white/5 last:border-0">
-                                <div className="flex justify-between items-start">
-                                    <span className="text-sm font-medium text-gray-200">{app.name}</span>
-                                    <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-${app.color}-500/10 text-${app.color}-400 border border-${app.color}-500/20`}>
+                            <div key={i} className="flex flex-col gap-2 pb-4 border-b border-white/5 last:border-0">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-sm font-semibold text-gray-100">{app.name}</span>
+                                    <span className={`text-[11px] uppercase font-bold tracking-wider px-3 py-1 rounded-md bg-${app.color}-500/10 text-${app.color}-400 border border-${app.color}-500/20 shadow-sm`}>
                                         {app.status}
                                     </span>
                                 </div>
-                                <span className="text-xs text-gray-500">{app.prog}</span>
+                                <span className="text-xs text-gray-400 font-medium">{app.prog}</span>
                             </div>
                         ))}
                     </div>
@@ -228,7 +228,7 @@ export default function AdminDashboardPage() {
                             <CreditCard className="w-4 h-4 text-emerald-400" /> Latest Payments
                         </h3>
                     </div>
-                    <div className="flex-1 overflow-y-auto pr-2 space-y-4 scrollbar-thin scrollbar-thumb-white/10">
+                    <div className="flex-1 overflow-y-auto pr-2 space-y-5 scrollbar-thin scrollbar-thumb-white/10">
                         {[
                             { name: "James Anderson", amount: "$1,200", date: "2 mins ago" },
                             { name: "TechNova Inc.", amount: "$4,500", date: "1 hr ago" },
@@ -236,15 +236,15 @@ export default function AdminDashboardPage() {
                             { name: "Global Systems", amount: "$12,000", date: "Yesterday" },
                             { name: "Robert Taylor", amount: "$1,200", date: "Yesterday" }
                         ].map((payment, i) => (
-                            <div key={i} className="flex items-center gap-3 pb-3 border-b border-white/5 last:border-0">
-                                <div className="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                                    <DollarSign className="w-4 h-4" />
+                            <div key={i} className="flex items-center gap-4 pb-4 border-b border-white/5 last:border-0">
+                                <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
+                                    <DollarSign className="w-5 h-5" />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-medium text-gray-200 truncate">{payment.name}</div>
-                                    <div className="text-xs text-gray-500">{payment.date}</div>
+                                    <div className="text-sm font-semibold text-gray-100">{payment.name}</div>
+                                    <div className="text-xs text-gray-400 mt-1">{payment.date}</div>
                                 </div>
-                                <div className="text-sm font-bold text-white">{payment.amount}</div>
+                                <div className="text-sm font-bold text-white tabular-nums">{payment.amount}</div>
                             </div>
                         ))}
                     </div>
@@ -257,20 +257,20 @@ export default function AdminDashboardPage() {
                             <TrendingUp className="w-4 h-4 text-purple-400" /> Program Popularity
                         </h3>
                     </div>
-                    <div className="flex-1 flex flex-col justify-center space-y-5">
+                    <div className="flex-1 flex flex-col justify-center space-y-7">
                         {[
                             { name: "Full Stack Development", percent: 85, color: "blue" },
                             { name: "Data Science & AI", percent: 65, color: "purple" },
                             { name: "UI/UX UI Design", percent: 45, color: "pink" },
                             { name: "Cybersecurity", percent: 30, color: "emerald" }
                         ].map((prog, i) => (
-                            <div key={i} className="space-y-1.5">
-                                <div className="flex justify-between text-xs font-medium">
-                                    <span className="text-gray-300">{prog.name}</span>
-                                    <span className="text-gray-500">{prog.percent}%</span>
+                            <div key={i} className="space-y-2">
+                                <div className="flex justify-between text-xs font-semibold">
+                                    <span className="text-gray-200">{prog.name}</span>
+                                    <span className="text-gray-400">{prog.percent}%</span>
                                 </div>
-                                <div className="w-full h-1.5 rounded-full bg-white/5 overflow-hidden">
-                                    <div className={`h-full rounded-full bg-${prog.color}-500/80 shadow-[0_0_10px_rgba(currentColor,0.5)]`} style={{ width: `${prog.percent}%` }}></div>
+                                <div className="w-full h-2 rounded-full bg-white/5 overflow-hidden">
+                                    <div className={`h-full rounded-full bg-${prog.color}-500/80 shadow-[0_0_10px_rgba(currentColor,0.4)]`} style={{ width: `${prog.percent}%` }}></div>
                                 </div>
                             </div>
                         ))}
@@ -285,8 +285,8 @@ export default function AdminDashboardPage() {
                         </h3>
                     </div>
                     <div className="flex-1 overflow-y-auto pr-2 relative scrollbar-thin scrollbar-thumb-white/10">
-                        <div className="absolute left-[11px] top-2 bottom-2 w-px bg-white/10"></div>
-                        <div className="space-y-4">
+                        <div className="absolute left-[11px] top-2 bottom-2 w-px bg-white/5"></div>
+                        <div className="space-y-6">
                             {[
                                 { user: "Super Admin", action: "Updated CMS settings", time: "10:42 AM" },
                                 { user: "Finance Team", action: "Exported Q3 revenue", time: "09:15 AM" },
@@ -294,15 +294,15 @@ export default function AdminDashboardPage() {
                                 { user: "Super Admin", action: "Added new instructor", time: "Yesterday" },
                                 { user: "Marketing", action: "Sent newsletter batch", time: "2 days ago" }
                             ].map((log, i) => (
-                                <div key={i} className="relative pl-7">
-                                    <div className="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-[#0a0e17] border-2 border-white/20 flex items-center justify-center z-10">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>
+                                <div key={i} className="relative pl-8">
+                                    <div className="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-[#0a0e17] border-2 border-white/10 flex items-center justify-center z-10">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
                                     </div>
-                                    <div className="text-sm text-gray-300">
-                                        <span className="font-medium text-white">{log.user}</span> {log.action}
+                                    <div className="text-sm text-gray-300 leading-relaxed">
+                                        <span className="font-semibold text-white">{log.user}</span> {log.action}
                                     </div>
-                                    <div className="text-[10px] text-gray-500 mt-0.5 flex items-center gap-1">
-                                        <Clock className="w-3 h-3" /> {log.time}
+                                    <div className="text-[11px] text-gray-400 mt-1.5 flex items-center gap-1.5 font-medium">
+                                        <Clock className="w-3.5 h-3.5" /> {log.time}
                                     </div>
                                 </div>
                             ))}

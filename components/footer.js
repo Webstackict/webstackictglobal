@@ -11,6 +11,7 @@ import {
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "./ui/logo";
 import { useState, useEffect } from "react";
 
 export default function Footer() {
@@ -26,21 +27,7 @@ export default function Footer() {
         <div className={classes.grid}>
           <div className={classes.brandSection}>
             <Link href="/" className={classes.brandTitle}>
-              <Image
-                src="/logo/webstack-logo-white.png"
-                alt="Webstack ICT Global Logo"
-                width={1600}
-                height={400}
-                quality={100}
-                priority
-                unoptimized
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'contain',
-                  objectPosition: 'left'
-                }}
-              />
+              <Logo width="auto" height="100%" style={{ color: "white" }} />
             </Link>
             <p className={classes.brandText}>
               Empowering Africa&apos;s next generation of tech professionals

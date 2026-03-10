@@ -22,62 +22,64 @@ const programs = [
         name: "Web Development",
         slug: "web-development",
         description: "Learn HTML, CSS, JavaScript, React, and backend development with Node.js and Databases.",
-        tagline: "Full-Stack Software Engineering",
-        icon: "monitor",
+        icon: "computer",
         fee: 250000,
-
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "Cybersecurity",
         slug: "cybersecurity",
         description: "Master ethical hacking, network security, threat intelligence, and digital forensics.",
-        tagline: "Network & Information Security",
-        icon: "shieldCheck",
+        icon: "security",
         fee: 250000,
-
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "Data Analytics",
         slug: "data-analytics",
         description: "Analyze complex data sets using Python, SQL, Tableau, and statistical modeling techniques.",
-        tagline: "Data Science & Analytics",
         icon: "barChart",
         fee: 250000,
-
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "UI/UX Design",
         slug: "ui-ux-design",
         description: "Design stunning user interfaces and research user experiences using Figma and Adobe XD.",
-        tagline: "Digital Product Design",
         icon: "palette",
         fee: 200000,
-
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "AI Automation",
         slug: "ai-automation",
         description: "Build intelligent systems using Generative AI, LLMs, and automation workflows.",
-        tagline: "Artificial Intelligence Engineering",
-        icon: "chip",
+        icon: "brain",
         fee: 300000,
-
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "Digital Marketing",
         slug: "digital-marketing",
         description: "Dominate SEO, SEM, content strategy, and social media advertising to grow businesses.",
-        tagline: "Growth Marketing & SEO",
         icon: "trendingUp",
         fee: 150000,
+        curriculum: [],
+        additional_skills: []
     },
     {
         name: "Forex Trading",
         slug: "forex-trading",
         description: "Master market analysis, risk management, and trading strategies in the global currency markets.",
-        tagline: "Global Financial Markets",
-        icon: "currencyDollar",
+        icon: "dollarCoin",
         fee: 150000,
+        curriculum: [],
+        additional_skills: []
     }
 ];
 
@@ -114,7 +116,17 @@ async function seedPrograms() {
             console.log(`✅ Inserted missing program: ${prog.name}`);
             deptId = inserted.id;
         } else {
-            console.log(`✓ Program already exists: ${prog.name}`);
+            // Update icon and other fields for existing programs
+            const { error: updateError } = await supabase
+                .from('departments')
+                .update({ icon: prog.icon, description: prog.description })
+                .eq('id', existing.id);
+
+            if (updateError) {
+                console.error(`Error updating ${prog.name}:`, updateError.message);
+            } else {
+                console.log(`✓ Updated program: ${prog.name}`);
+            }
             deptId = existing.id;
         }
 

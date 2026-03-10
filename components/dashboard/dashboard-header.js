@@ -30,7 +30,7 @@ export default function DashboardHeader({
   const { user } = use(UserContext);
   const { displayName, fullName, email } = user;
 
-  const firsrName = fullName.split(" ")[0];
+  const firstName = fullName.split(" ")[0];
   const emailDisplay = email.split("@")[0];
 
   useEffect(() => {
@@ -61,9 +61,9 @@ export default function DashboardHeader({
       <ProgressBar />
       <header className={classes.header}>
         <div>
-          <h2>
+          <h2 className="truncate max-w-[calc(100vw-120px)] lg:max-w-none">
             {title ||
-              `👋 Welcome, ${displayName || firsrName || emailDisplay}!`}
+              `👋 Welcome, ${displayName || firstName || emailDisplay}!`}
           </h2>
           <p>{subtitle}</p>
         </div>
