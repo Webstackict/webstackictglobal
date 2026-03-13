@@ -24,6 +24,11 @@ export default function Cohortscard({
   const isStatus = spotsLeft === 0;
   const isDeparmentsPage = label === "departments";
 
+  // Safely extract theme class
+  const themeClass = typeof departmentTheme === 'object' && departmentTheme !== null
+    ? departmentTheme.background || departmentTheme.color || "blue"
+    : departmentTheme || "blue";
+
   const computedLabel = nextCohort
     ? new Date(nextCohort).toLocaleString("default", { month: "long" }) + " Cohort"
     : "Upcoming Cohort";
@@ -34,7 +39,7 @@ export default function Cohortscard({
   return (
     <div className={classes.card}>
       <div className={classes.cardHeader}>
-        <div className={`${classes.iconBox} ${departmentTheme || "blue"}`}>
+        <div className={`${classes.iconBox} ${themeClass}`}>
           <IconRenderer iconName={departmentIcon || "rocket"} />
         </div>
         <Badge title={status} />
@@ -53,7 +58,7 @@ export default function Cohortscard({
         <div className={classes.detailItem}>
           <span className={classes.detailLabel}>Program Fee:</span>
           <span className={`${classes.detailValue} ${classes.fee}`}>
-            ₦250,000
+            {currencyFormatter.format(fee || 250000)}
           </span>
         </div>
       </div>
@@ -71,7 +76,7 @@ export default function Cohortscard({
 
       <LinkWithProgress
         href={`/enroll?cohortId=${id}&label=${encodeURIComponent(computedLabel)}`}
-        className={`${!isStatus ? classes.btn : classes.disabledBtn} ${departmentTheme || "blue"}`}
+        className={`${!isStatus ? classes.btn : classes.disabledBtn} ${themeClass}`}
       >
         {!isStatus ? "Enroll Now" : "Cohort Full"}
       </LinkWithProgress>

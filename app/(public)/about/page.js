@@ -19,7 +19,7 @@ import ValueQuote from "@/components/cards/value-quote";
 import SuccessStatsGrid from "@/components/cards/success-stats-grid";
 import SuccessQuote from "@/components/about/success-quote";
 import CTASection from "@/components/cta/call-to-action-section";
-import { ctaABoutHighlights } from "@/lib/contents/call-to-actionData";
+import { ctaAboutHighlights } from "@/lib/contents/call-to-actionData";
 import { activities } from "@/lib/contents/activitiesData";
 import { Suspense } from "react";
 import PastEventsWrapper from "@/components/serverWrappers/past-events-wrapper";

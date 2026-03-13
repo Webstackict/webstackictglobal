@@ -57,6 +57,8 @@
 }
 
 .avatar {
+    width: auto;
+    height: auto;
     object-fit: cover;
 }
 

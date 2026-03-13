@@ -38,7 +38,7 @@ export default function Gallery() {
           </>
         }
         primaryBtnText="View Gallery"
-        secondaryBtnText="See Video Higlights"
+        secondaryBtnText="See Video Highlights"
         primaryBtnRoute="event-gallery"
         secondaryBtnRoute="video-gallery"
       />
@@ -65,7 +65,7 @@ export default function Gallery() {
           </>
         }
         subtitle="Immerse yourself in the energy and innovation of WEBSTACK events through our comprehensive photo gallery."
-        // sectionBgColor="sectionLightBlue"
+      // sectionBgColor="sectionLightBlue"
       >
         <Suspense fallback={<p>Loading Featured Event</p>}>
           <GalleryWrapper />

@@ -12,7 +12,7 @@ export default function Logo({ className, height = 50, width, variant = "white",
                 position: 'relative',
                 width: typeof width === 'number' ? `${width}px` : (width || 'auto'),
                 height: typeof height === 'number' ? `${height}px` : (height || 'auto'),
-                aspectRatio: '220 / 60',
+                aspectRatio: props.style?.aspectRatio || '220 / 60',
                 display: 'flex',
                 alignItems: 'center',
                 ...props.style

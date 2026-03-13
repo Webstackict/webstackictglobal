@@ -78,7 +78,7 @@ export default function Services() {
         label="testimonials"
         title={
           <>
-            Successs <span className="gradientText">Stories</span>
+            Success <span className="gradientText">Stories</span>
           </>
         }
         subtitle="Real transformations from our alumni who are now leading tech innovation across Africa and beyond."
@@ -133,7 +133,7 @@ export default function Services() {
             </span>
           </>
         }
-        subtitle="Join thousands of professionals and companies whohave accelerated their growth with WEBSTACK. Let's build the future of African tech together."
+        subtitle="Join thousands of professionals and companies who have accelerated their growth with WEBSTACK. Let's build the future of African tech together."
         ctaHighlights={ctaServicesHighlights}
         primaryBtnText="See Pricing"
         primaryBtnRoute="pricing"

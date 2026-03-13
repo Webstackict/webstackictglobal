@@ -98,7 +98,7 @@ function MainHeader({ user }) {
             <div className={classes.left}>
               <LinkWithProgress href="/" className={classes.logoLink}>
                 <div className={classes.logo}>
-                  <Logo height={95} variant="white" />
+                  <Logo height={190} variant="white" style={{ aspectRatio: '1/1' }} />
                 </div>
               </LinkWithProgress>
 
