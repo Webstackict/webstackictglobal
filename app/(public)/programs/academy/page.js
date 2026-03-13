@@ -12,6 +12,7 @@ import CTASection from "@/components/cta/call-to-action-section";
 import LearningModesGrid from "@/components/academy/learning-modes";
 import ValueQuote from "@/components/cards/value-quote";
 import { ctaHomeHighlights } from "@/lib/contents/call-to-actionData";
+import ProgramsGrid from "@/components/cards/programs-grid";
 import DepartmentWrapper from "@/components/serverWrappers/department-wrapper";
 import ActiveCohortsWrapper from "@/components/serverWrappers/active-cohorts-wrapper";
 import { DepartmentsGridSkeleton, CohortSkeleton } from "@/components/ui/loading-skeleton";
@@ -62,6 +63,19 @@ export default function Academy() {
             label="departments"
           />
         </Suspense>
+      </Section>
+
+      <Section
+        label="available-programs"
+        title={
+          <>
+            Available <span className="gradientText">Programs</span>
+          </>
+        }
+        subtitle="Choose from our comprehensive list of high-income tech skills."
+        sectionBgColor="sectionLightBlue"
+      >
+        <ProgramsGrid featuredTitles={["Data Analytics", "Cybersecurity", "UI/UX Design", "Web Development", "Mobile App Development", "Forex Trading", "AI Automation", "Digital Marketing"]} />
       </Section>
       <Section
         label="active-cohorts"

@@ -1,6 +1,5 @@
 import ScholarshipForm from '@/components/scholarships/scholarship-form';
 import Section from '@/components/section';
-import ProgramsGrid from '@/components/cards/programs-grid';
 import PageBanner from '@/components/hero/page-banner';
 import Tagline from '@/components/ui/tagline';
 import ValueQuote from '@/components/cards/value-quote';
@@ -64,18 +63,6 @@ export default function ScholarshipPage() {
                 </div>
             </Section>
 
-            <Section
-                label="available-programs"
-                title={
-                    <>
-                        Available <span className="gradientText">Programs</span>
-                    </>
-                }
-                subtitle="Choose from our comprehensive list of high-income tech skills."
-                sectionBgColor="sectionLightBlue"
-            >
-                <ProgramsGrid featuredTitles={["Data Analytics", "Cybersecurity", "UI/UX Design", "Web Development", "Mobile App Development", "Forex Trading", "AI Automation", "Digital Marketing"]} />
-            </Section>
 
             <Section
                 label="eligibility"
