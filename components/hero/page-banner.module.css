@@ -82,7 +82,7 @@
 
 @media (max-width: 768px) {
   .pageBannerSection {
-    padding: 6rem 1.5rem 3rem;
+    padding: 9rem 1.5rem 3rem;
   }
 
   .container {
@@ -99,7 +99,7 @@
 
 @media (max-width: 480px) {
   .pageBannerSection {
-    padding: 5rem 1rem 2rem;
+    padding: 8rem 1rem 2rem;
   }
 
   .container {
