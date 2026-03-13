@@ -74,7 +74,7 @@ export default function ScholarshipPage() {
                 subtitle="Choose from our comprehensive list of high-income tech skills."
                 sectionBgColor="sectionLightBlue"
             >
-                <ProgramsGrid featuredTitles={["Data Analytics", "Cybersecurity", "UI/UX Design", "Web Development", "Mobile App Development", "Forex Trading"]} />
+                <ProgramsGrid featuredTitles={["Data Analytics", "Cybersecurity", "UI/UX Design", "Web Development", "Mobile App Development", "Forex Trading", "AI Automation", "Digital Marketing"]} />
             </Section>
 
             <Section
