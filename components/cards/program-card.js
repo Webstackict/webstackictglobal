@@ -17,11 +17,11 @@ export default function ProgramCard({ title, duration, description, icon, price,
                 <div className={classes.priceContainer}>
                     {discountPrice ? (
                         <>
-                            <span className={classes.discountPrice}>${discountPrice}</span>
-                            <span className={classes.originalPrice}>${price}</span>
+                            <span className={classes.discountPrice}>₦{discountPrice.toLocaleString()}</span>
+                            <span className={classes.originalPrice}>₦{price.toLocaleString()}</span>
                         </>
                     ) : (
-                        <span className={classes.price}>${price}</span>
+                        <span className={classes.price}>₦{price.toLocaleString()}</span>
                     )}
                 </div>
             )}

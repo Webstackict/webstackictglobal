@@ -123,7 +123,7 @@ export default async function GeneralLayout({ children }) {
   return (
     <html lang="en" className={inter.className}>
       <head />
-      <body>
+      <body suppressHydrationWarning>
         <UserContextProvider userDetails={userDetails}>
           <NotificationsContextProvider
             items={notifications}

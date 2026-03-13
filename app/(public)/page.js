@@ -66,6 +66,11 @@ export default async function Home() {
         subtitle="Master in-demand tech skills with our industry-led training programs designed for global opportunities."
       >
         <ProgramsGrid featuredTitles={["Web Development", "Cybersecurity", "Data Analytics", "Forex Trading"]} />
+        <div className={classes.viewAllContainer}>
+          <LinkWithProgress href="/programs/academy" className={classes.viewAllBtn}>
+            Explore More Programs <ArrowForwardIcon />
+          </LinkWithProgress>
+        </div>
       </Section>
 
       <Section

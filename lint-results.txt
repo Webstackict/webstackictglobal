@@ -1,0 +1,68 @@
+
+> webstack@0.1.0 lint
+> eslint
+
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/(private)/dashboard/referrals/page.js
+  100:85   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  142:112  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  161:37   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  161:114  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  164:138  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/(public)/auth/email-verify/page.js
+  34:8   error  'AutoRefreshIfVerified' is not defined  react/jsx-no-undef
+  49:16  error  'ResendButton' is not defined           react/jsx-no-undef
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/admissions/page.js
+  24:8  warning  React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/instructors/page.js
+  195:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/layout.js
+  167:37  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/programs/page.js
+  279:30  error  'BarChart3' is not defined  react/jsx-no-undef
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/scholarship-applications/page.js
+  39:8  warning  React Hook useEffect has a missing dependency: 'fetchApplications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/admin/users/page.js
+  152:65  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/auth/reset-password-request/page.js
+  28:43  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/macbookpro/webstackorg/webstackictglobal/app/login/page.js
+  75:31  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/admin/TestimonialsTable.js
+  102:49  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  137:41  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+  137:65  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                          react/no-unescaped-entities
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/cards/TestimonialCarousel.js
+  106:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/dashboard/dashboard-header.js
+  57:6  warning  React Hook useEffect has a missing dependency: 'setNotifications'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/dashboard/my-profile-form.js
+  122:48  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/dashboard/security-settings.js
+  118:89  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/macbookpro/webstackorg/webstackictglobal/components/ui/MultiStepEnrollmentForm.js
+  58:8  warning  React Hook useEffect has a missing dependency: 'supabase'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/macbookpro/webstackorg/webstackictglobal/postcss.config.mjs
+  1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+/Users/macbookpro/webstackorg/webstackictglobal/tailwind.config.mjs
+  2:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+✖ 25 problems (13 errors, 12 warnings)
+

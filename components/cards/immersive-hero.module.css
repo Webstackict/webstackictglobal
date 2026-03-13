@@ -5,6 +5,9 @@
   border: var(--card-border);
   transition: all 0.3s ease;
   box-shadow: var(--box-shadow-blue);
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 
   &:hover {
     box-shadow: var(--box-shadow-hover);
