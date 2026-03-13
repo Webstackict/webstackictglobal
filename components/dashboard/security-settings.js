@@ -115,7 +115,7 @@ export default function SecuritySettings() {
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                     <div className="bg-[#0f172a] border border-white/10 p-8 rounded-3xl max-w-md w-full shadow-2xl">
                         <div className="mb-6 text-center">
-                            <h2 className="text-2xl font-bold text-white mb-2">Verify it's you</h2>
+                            <h2 className="text-2xl font-bold text-white mb-2">Verify it&apos;s you</h2>
                             <p className="text-gray-400 text-sm">Please enter your current password to continue with this sensitive action.</p>
                         </div>
                         <form onSubmit={handleReauth} className="space-y-4">

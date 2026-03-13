@@ -1,11 +1,8 @@
 "use server";
 
-import { createServerClient } from "@supabase/ssr";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const Next_Base_URL = process.env.NEXT_PUBLIC_SITE_URL;
 export async function signup(prevState, formData) {
   const email = formData.get("email");
@@ -31,45 +28,10 @@ export async function signup(prevState, formData) {
     };
   }
 
-  const cookieStore = await cookies();
-
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set(name, value, options);
-        });
-      },
-    },
-  });
+  const supabase = await createClient();
 
   try {
-    const { data: userRaw, error: listError } =
-      await supabase.auth.admin.listUsers({
-        filter: `email=eq.${email}`,
-      });
-
-    const users = userRaw.users;
-    const user = users.find((u) => u.email === email);
-
-    if (user) {
-      return { errors: { email: "User already registered! Sign in instead" } };
-    }
-
-    // Use anon key for sign up to ensure correct session handling and rate limits
-    const supabaseAnon = createServerClient(supabaseURL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: (cookiesToSet) => {
-          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-        },
-      },
-    });
-
-    const { data, error: signUpError } = await supabaseAnon.auth.signUp({
+    const { data, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -101,18 +63,10 @@ export async function signin(prevState, formData) {
   if (!email || !email.includes("@")) return { errors: { email: "Invalid email" } };
   if (!password) return { errors: { password: "Password required" } };
 
-  const cookieStore = await cookies();
-  const supabaseAnon = createServerClient(supabaseURL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   try {
-    const { error: signinError } = await supabaseAnon.auth.signInWithPassword({
+    const { error: signinError } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -131,15 +85,7 @@ export async function completeOnboarding(prevState, formData) {
   const fullName = formData.get("fullName");
   if (!fullName) return { errors: { fullName: "Full Name is required" } };
 
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    }
-  });
+  const supabase = await createClient();
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { errors: { global: "Authentication required" } };
@@ -175,15 +121,7 @@ export async function signinWithMagicLink(prevState, formData) {
     return { errors: { email: "Please enter a valid email address" } };
   }
 
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithOtp({
     email,
@@ -203,15 +141,7 @@ export async function resetPasswordForEmail(prevState, formData) {
     return { errors: { email: "Please enter a valid email address" } };
   }
 
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${Next_Base_URL}/reset-password`,
@@ -233,15 +163,7 @@ export async function updatePassword(prevState, formData) {
     return { errors: { confirmPassword: "Passwords must match" } };
   }
 
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.updateUser({ password });
 
@@ -251,15 +173,7 @@ export async function updatePassword(prevState, formData) {
 }
 
 export async function inviteUser(email) {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.admin.inviteUserByEmail(email, {
     redirectTo: `${Next_Base_URL}/auth/callback`,
@@ -270,15 +184,7 @@ export async function inviteUser(email) {
 }
 
 export async function reauthenticate(password) {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.reauthenticate({ password });
 
@@ -287,15 +193,7 @@ export async function reauthenticate(password) {
 }
 
 export async function changeEmail(newEmail) {
-  const cookieStore = await cookies();
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-      },
-    },
-  });
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.updateUser({ email: newEmail }, {
     emailRedirectTo: `${Next_Base_URL}/dashboard`

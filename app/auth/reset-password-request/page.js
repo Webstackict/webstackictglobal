@@ -25,7 +25,7 @@ export default function ResetPasswordRequestPage() {
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1>Forgot Password?</h1>
-                <p>Enter your email and we'll send you a reset link</p>
+                <p>Enter your email and we&apos;ll send you a reset link</p>
             </div>
 
             <form action={handleAction} className={styles.form}>

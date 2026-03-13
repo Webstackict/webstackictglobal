@@ -10,7 +10,7 @@ export default async function EventHighlightsWrapper({ eventId }) {
 
   // console.log(highlights);
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
+  if (error || !highlights) return <p className="data-fetching-error">Something went wrong</p>;
   return <ActivitiesGrid activities={highlights} />;
   // return <div>EventHighlightsWrapper</div>;
 }

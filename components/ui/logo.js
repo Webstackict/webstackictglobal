@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Logo({ className, height = 60, width = 220, variant = "white", ...props }) {
+export default function Logo({ className, height = 50, width, variant = "white", ...props }) {
     const logoSrc = variant === "white" ? "/logo/webstack-logo-white.png" : "/logo/webstack-logo-dark.png";
 
     return (
@@ -23,7 +23,7 @@ export default function Logo({ className, height = 60, width = 220, variant = "w
                 alt="Webstack ICT Global Logo"
                 fill
                 priority
-                sizes="500px"
+                sizes="(max-width: 768px) 200px, 400px"
                 style={{
                     objectFit: 'contain',
                     objectPosition: 'left'

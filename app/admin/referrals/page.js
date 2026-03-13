@@ -78,7 +78,7 @@ export default function AdminReferralsPage() {
                         <UsersIcon className="w-24 h-24 text-white -rotate-12 translate-x-4 -translate-y-4" />
                     </div>
                     <div className="relative z-10">
-                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Total Network Size</p>
+                        <p className="text-xs font-black text-gray-500 uppercase tracking-[0.2em] mb-3">Total Network Size</p>
                         <h3 className="text-4xl font-black text-white tracking-tighter">{stats.total_referrals}</h3>
                         <p className="text-xs text-gray-500 mt-2 font-medium">Registered affiliate partners</p>
                     </div>
@@ -89,7 +89,7 @@ export default function AdminReferralsPage() {
                         <Coins className="w-24 h-24 text-white rotate-12 translate-x-4 -translate-y-4" />
                     </div>
                     <div className="relative z-10">
-                        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">System-wide Yield</p>
+                        <p className="text-xs font-black text-gray-500 uppercase tracking-[0.2em] mb-3">System-wide Yield</p>
                         <h3 className="text-4xl font-black text-emerald-400 tracking-tighter">
                             ₦{Number(stats.total_commissions).toLocaleString()}
                         </h3>
@@ -137,7 +137,7 @@ export default function AdminReferralsPage() {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] bg-white/[0.01]">
+                                <tr className="text-xs font-black text-gray-500 uppercase tracking-[0.2em] bg-white/[0.01]">
                                     <th className="px-8 py-5">Partner Name</th>
                                     <th className="px-8 py-5">Ref Code</th>
                                     <th className="px-8 py-5 text-center">Conversions</th>

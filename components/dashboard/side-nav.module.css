@@ -54,13 +54,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.875rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     color: var(--gray-text-500);
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     font-weight: 500;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
 
     & .iconBox {
       display: flex;

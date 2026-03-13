@@ -6,62 +6,27 @@ import { redirect } from "next/navigation";
 import DashboardSidebarContextProvider from "@/store/dashboard-sidebar-context";
 import SideNavMobile from "@/components/dashboard/sideNavMobile";
 import Main from "@/components/dashboard/main";
-export default async function PublicLayout({ children }) {
+export default async function DashboardLayout({ children }) {
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/auth");
+    redirect("/login");
   }
 
-  let userDetails;
+  // No need to fetch userDetails here as it's provided by the root layout's UserContextProvider
 
-  if (user?.id) {
-    try {
-      const { data, error } = await supabase
-        .from("user_profile")
-        .select("full_name, display_name, phone")
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-      if (error) {
-        console.error("Supabase user_profile fetch error:", {
-          message: error.message,
-          code: error.code,
-          details: error.details,
-        });
-        throw error;
-      }
-
-      const profile = data || {};
-      userDetails = {
-        id: user.id,
-        email: user.email,
-        phone: profile.phone || "",
-        fullName: profile.full_name || user.user_metadata?.full_name || "",
-        displayName: profile.display_name || "",
-        authProviders: user.app_metadata.providers,
-      };
-    } catch (err) {
-      console.error("From supabase", err);
-      userDetails = null;
-    }
-  }
-
-  // console.log("details", userDetails);
   return (
     <>
-      <UserContextProvider userDetails={userDetails}>
-        <DashboardSidebarContextProvider>
-          <SideNav />
-          <SideNavMobile />
-          <div className={classes.dashboard}>
-            <Main>{children}</Main>
-          </div>
-        </DashboardSidebarContextProvider>
-      </UserContextProvider>
+      <DashboardSidebarContextProvider>
+        <SideNav />
+        <SideNavMobile />
+        <div className={classes.dashboard}>
+          <Main>{children}</Main>
+        </div>
+      </DashboardSidebarContextProvider>
     </>
   );
 }

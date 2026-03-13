@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { isAdmin } from '@/lib/admin-auth';
 
 export async function POST(request) {
     try {
@@ -92,6 +93,9 @@ export async function POST(request) {
     }
 }
 export async function GET(request) {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const { searchParams } = new URL(request.url);
         const status = searchParams.get('status');

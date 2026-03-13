@@ -1,15 +1,15 @@
 "use client";
+
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import Badge from "../ui/badge";
 import classes from "./current-enrollments-grid.module.css";
 import { calculateProgress, formatDate } from "@/util/util";
 import Button from "./button";
-
 import EmptyState from "./empty-state";
 
 export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
-  // console.log(enrollments);
-
   if (enrollments.length < 1) {
     return (
       <EmptyState
@@ -25,7 +25,7 @@ export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
   return (
     <div className={classes.departmentsGrid}>
       {enrollments.map((enrollment) => {
-        const Icon = iconsConfig[enrollment.icon];
+        const Icon = iconsConfig[enrollment.icon] || iconsConfig['laptop-code'];
         const cohortYear = new Date(enrollment.start_date).getFullYear();
         const { progressPercent, totalWeeks, currentWeek, isFinalWeek } =
           calculateProgress(enrollment.start_date, enrollment.graduation_date);
@@ -40,7 +40,7 @@ export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
                 </div>
                 <div className={classes.contents}>
                   <div className={classes.departmentTitle}>
-                    <h4>{enrollment.department_name}</h4>
+                    <h4>{enrollment.program_name}</h4>
                     <Badge
                       title={badgeText}
                       eventBagdeStyle="blue-badge"
@@ -61,9 +61,9 @@ export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
                       <p>{progressPercent}%</p>
                     </div>
                     <div className={classes.statCard}>
-                      <p>Start Date</p>
+                      <p>Cohort</p>
                       <p>
-                        C - {enrollment.cohort_number} - {cohortYear}
+                        {enrollment.cohort_code}
                       </p>
                     </div>
                     <div className={classes.statCard}>
@@ -88,26 +88,14 @@ export default function CurrentEnrollmentsGrid({ enrollments = [] }) {
                     </div>
                   </div>
 
-                  {/* <div className={classes.departmentFooter}>
-                    <div className={classes.mentorInfo}>
-                      <img
-                        src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
-                        alt="Mentor"
-                        className={classes.mentorAvatar}
-                      />
-                      <div>
-                        <p style={{ color: "#fff", fontWeight: 600 }}>
-                          Dr. Emmanuel Chibueze
-                        </p>
-                        <p style={{ color: "#aaa", fontSize: "0.75rem" }}>
-                          Lead Instructor
-                        </p>
-                      </div>
-                    </div>
-                    <button className={classes.viewDetailsButton}>
-                      View Details <ArrowRight />
-                    </button>
-                  </div> */}
+                  <div className={classes.departmentFooter}>
+                    <Link
+                      href={`/dashboard/courses/${enrollment.id}`}
+                      className={classes.viewDetailsButton}
+                    >
+                      Access Resources <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

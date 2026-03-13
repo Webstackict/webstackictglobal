@@ -12,8 +12,7 @@ import { useRouter } from "next/navigation";
 
 function PasswordChangeForm() {
   const router = useRouter();
-  const { user } = use(UserContext);
-  const { id: userId, authProviders } = user;
+  const { authProviders } = user;
 
   const [inputs, setInputs] = useState({
     newPassword: "",
@@ -28,7 +27,7 @@ function PasswordChangeForm() {
   const [formState, formAction] = useActionState(
     async (prevState, formData) => {
       try {
-        const res = await updatePassword(userId, prevState, formData);
+        const res = await updatePassword(prevState, formData);
         // console.log("res", res);
 
         if (!res.errors) {

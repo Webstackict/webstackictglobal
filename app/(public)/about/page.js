@@ -154,7 +154,7 @@ export default function About() {
           </>
         }
         subtitle="Take the first step towards transforming your career and becoming part of Africa's most dynamic tech community. Your future in technology starts here."
-        ctaHighlights={ctaABoutHighlights}
+        ctaHighlights={ctaAboutHighlights}
         primaryBtnText="Checkout Our Community"
         primaryBtnRoute="community"
       />

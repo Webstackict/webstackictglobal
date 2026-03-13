@@ -6,14 +6,15 @@ export default async function GalleryWrapper() {
   const { data: galleryData, error } = await supabase
     .from("gallery_data_flat")
     .select("*");
-    // console.log('gdata',galleryData);
-    
+  // console.log('gdata',galleryData);
+
+
+  if (error || !galleryData) return <p className="data-fetching-error">Something went wrong</p>;
 
   const galleryWithLayout = galleryData.map((item, index) => ({
     ...item,
     span: index % 2 === 0 ? Math.floor(Math.random() * 5) : 0,
   }));
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
   return <GalleryGrid galleryData={galleryWithLayout} />;
 }

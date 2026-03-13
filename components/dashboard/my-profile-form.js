@@ -9,7 +9,7 @@ import { updateNames } from "@/actions/update-names";
 
 export default function MyProfileForm({ affiliateData }) {
     const { user, setUser } = use(UserContext);
-    const { id: userId, displayName, fullName, phone, email, photoUrl } = user;
+    const { displayName, fullName, phone, email, photoUrl } = user;
 
     const [inputs, setInputs] = useState({
         fullName: fullName || "",
@@ -36,7 +36,7 @@ export default function MyProfileForm({ affiliateData }) {
     const [formState, formAction] = useActionState(
         async (prevState, formData) => {
             try {
-                const res = await updateNames(userId, prevState, formData);
+                const res = await updateNames(prevState, formData);
 
                 if (!res.errors) {
                     setUser((prev) => ({
@@ -117,14 +117,20 @@ export default function MyProfileForm({ affiliateData }) {
                 </div>
                 <div className={classes.field}>
                     <label htmlFor="photoUrl">Profile Photo URL</label>
-                    <input
-                        type="text"
-                        id="photoUrl"
-                        name="photoUrl"
-                        value={inputs.photoUrl}
-                        placeholder="https://example.com/photo.jpg"
-                        onChange={(e) => handleInputChange(e, "photoUrl")}
-                    />
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <div style={{ width: '3rem', height: '3rem', borderRadius: '50%', background: '#1f2937', overflow: 'hidden', flexShrink: 0 }}>
+                            {inputs.photoUrl ? <img src={inputs.photoUrl} alt="Preview" style={{ width: '100%', height: '100%', objectCover: 'cover' }} /> : null}
+                        </div>
+                        <input
+                            type="text"
+                            id="photoUrl"
+                            name="photoUrl"
+                            value={inputs.photoUrl}
+                            placeholder="https://example.com/photo.jpg"
+                            onChange={(e) => handleInputChange(e, "photoUrl")}
+                            style={{ flex: 1 }}
+                        />
+                    </div>
                     <small className={classes.note}>Provide a link to your profile picture </small>
                 </div>
             </div>

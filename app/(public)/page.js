@@ -19,7 +19,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import BenefitsGrid from "@/components/cards/benefits-grid";
 import AuthorityGrid from "@/components/cards/authority-grid";
 import ProgramsGrid from "@/components/cards/programs-grid";
-import OngoingCohorts from "@/components/home/OngoingCohorts";
 import { Suspense } from "react";
 import CohortSkeleton from "@/components/ui/cohort-skeleton";
 
@@ -67,24 +66,8 @@ export default async function Home() {
         subtitle="Master in-demand tech skills with our industry-led training programs designed for global opportunities."
       >
         <ProgramsGrid featuredTitles={["Web Development", "Cybersecurity", "Data Analytics", "Forex Trading"]} />
-        <div className={classes.viewAllContainer}>
-          <LinkWithProgress href="/programs/academy" className={classes.viewAllBtn}>
-            View All Programs <ArrowForwardIcon />
-          </LinkWithProgress>
-        </div>
       </Section>
 
-      <Section
-        label="enroll"
-        title={
-          <>
-            Ongoing Cohorts <span className="gradientText">Enrollments</span>
-          </>
-        }
-        subtitle="Join our ongoing programs and start your journey to becoming a tech professional. Limited seats available."
-      >
-        <OngoingCohorts />
-      </Section>
       <Section
         label="why-choose-us-authority"
         title={

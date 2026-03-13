@@ -8,6 +8,7 @@ import {
     BarChart3,
     Users,
     BookOpen,
+    Calendar,
     LayoutTemplate,
     Megaphone,
     Briefcase,
@@ -23,6 +24,7 @@ import {
     GraduationCap,
     Share2,
     UserPlus,
+    MessageSquare,
     X
 } from "lucide-react";
 
@@ -99,7 +101,10 @@ export default function AdminLayout({ children }) {
                             <NavItem href="/admin/admissions" icon={Users} label="Admissions" />
                             <NavItem href="/admin/scholarship-applications" icon={GraduationCap} label="Scholarships" />
                             <NavItem href="/admin/programs" icon={BookOpen} label="Programs" />
+                            <NavItem href="/admin/instructors" icon={UserPlus} label="Instructors" />
+                            <NavItem href="/admin/cohorts" icon={Calendar} label="Cohorts" />
                             <NavItem href="/admin/cms" icon={LayoutTemplate} label="Website CMS" />
+                            <NavItem href="/admin/testimonials" icon={MessageSquare} label="Testimonials" />
                             <NavItem href="/admin/marketing" icon={Megaphone} label="Marketing" />
                             <NavItem href="/admin/referrals" icon={Share2} label="Referrals" />
                             <NavItem href="/admin/referrals/requests" icon={Users} label="Affiliate Requests" />

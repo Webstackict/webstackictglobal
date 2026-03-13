@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/admin-auth";
 
 export async function GET() {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const commissions = await prisma.referral_activities.findMany({
             include: {
@@ -29,6 +33,9 @@ export async function GET() {
 }
 
 export async function PUT(request) {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const { activityId, status } = await request.json();
 

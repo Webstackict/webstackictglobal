@@ -1,36 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     Users, Shield, Key, History, Plus,
     Search, Filter, MoreVertical, CheckCircle2,
-    XCircle, Mail, Clock
+    XCircle, Mail, Clock, Loader2
 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function UsersPage() {
     const [searchQuery, setSearchQuery] = useState("");
+    const [admins, setAdmins] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const admins = [
-        { name: "John Doe", email: "john@webstackict.com", role: "Super Admin", status: "Active", lastLogin: "2 mins ago", avatar: "JD" },
-        { name: "Sarah Jenkins", email: "sarah@webstackict.com", role: "Admissions Manager", status: "Active", lastLogin: "1 hour ago", avatar: "SJ" },
-        { name: "Michael Chang", email: "michael@webstackict.com", role: "Finance Admin", status: "Active", lastLogin: "3 hours ago", avatar: "MC" },
-        { name: "Elena Rodriguez", email: "elena@webstackict.com", role: "Marketing Lead", status: "Inactive", lastLogin: "2 days ago", avatar: "ER" },
-        { name: "David Kim", email: "david@webstackict.com", role: "Operations Staff", status: "Active", lastLogin: "5 days ago", avatar: "DK" },
-    ];
+    useEffect(() => {
+        const fetchAdmins = async () => {
+            try {
+                const res = await fetch('/api/admin/users');
+                const data = await res.json();
+                if (res.ok) {
+                    setAdmins(data.staff || []);
+                } else {
+                    toast.error(data.error || "Failed to load staff");
+                }
+            } catch (err) {
+                console.error(err);
+                toast.error("Error loading administration staff");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchAdmins();
+    }, []);
 
     const roles = [
-        { name: "Super Admin", users: 1, color: "rose" },
-        { name: "Admissions", users: 3, color: "blue" },
-        { name: "Finance", users: 2, color: "emerald" },
-        { name: "Marketing", users: 4, color: "purple" }
+        { name: "Super Admin", users: admins.filter(a => a.role === 'Super Admin').length, color: "rose" },
+        { name: "Staff", users: admins.filter(a => a.role !== 'Super Admin').length, color: "blue" },
     ];
 
     const activityLogs = [
-        { user: "John Doe", action: "Updated System Settings", time: "10 mins ago" },
-        { user: "Sarah Jenkins", action: "Approved Application #APP-2024", time: "1 hour ago" },
-        { user: "Michael Chang", action: "Generated Q3 Revenue Report", time: "3 hours ago" },
-        { user: "Elena Rodriguez", action: "Created Email Campaign", time: "1 day ago" },
+        { user: "System", action: "Session logs ready", time: "Now" },
     ];
+
+    const filteredAdmins = admins.filter(admin =>
+        admin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        admin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        admin.role.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <div className="space-y-6 pb-12">
@@ -64,7 +80,7 @@ export default function UsersPage() {
                             </div>
                         </div>
                         <div className="relative z-10 flex items-end gap-2">
-                            <span className="text-3xl font-bold text-white">{role.users}</span>
+                            <span className="text-3xl font-bold text-white">{isLoading ? "..." : role.users}</span>
                             <span className="text-sm font-medium text-gray-500 mb-1">Users</span>
                         </div>
                     </div>
@@ -102,7 +118,7 @@ export default function UsersPage() {
                         <div className="overflow-x-auto min-h-[300px]">
                             <table className="w-full text-left border-collapse whitespace-nowrap">
                                 <thead>
-                                    <tr className="bg-[#0d1320]/50 border-b border-white/5 text-[11px] uppercase tracking-wider text-gray-500">
+                                    <tr className="bg-[#0d1320]/50 border-b border-white/5 text-xs uppercase tracking-wider text-gray-500">
                                         <th className="px-6 py-4 font-semibold">User Details</th>
                                         <th className="px-6 py-4 font-semibold">Role & Access</th>
                                         <th className="px-6 py-4 font-semibold">Status</th>
@@ -111,46 +127,67 @@ export default function UsersPage() {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5 text-sm">
-                                    {admins.map((admin, i) => (
-                                        <tr key={i} className="hover:bg-white/[0.02] transition-colors group">
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-800 to-gray-700 flex items-center justify-center text-white font-bold border border-white/10 shrink-0">
-                                                        {admin.avatar}
-                                                    </div>
-                                                    <div>
-                                                        <div className="font-semibold text-gray-200 group-hover:text-rose-400 transition-colors">{admin.name}</div>
-                                                        <div className="text-[11px] text-gray-500 flex items-center gap-1 mt-0.5">
-                                                            <Mail className="w-3 h-3" /> {admin.email}
-                                                        </div>
-                                                    </div>
+                                    {isLoading ? (
+                                        <tr>
+                                            <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <Loader2 className="w-4 h-4 animate-spin text-rose-500" />
+                                                    Loading staff members...
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg border
-                                                    ${admin.role === 'Super Admin' ? 'text-rose-400 border-rose-400/30 bg-rose-400/10' :
-                                                        admin.role.includes('Finance') ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10' :
-                                                            'text-blue-400 border-blue-400/30 bg-blue-400/10'}`}>
-                                                    <Key className="w-3.5 h-3.5" />
-                                                    {admin.role}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider border ${admin.status === 'Active' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-gray-400 bg-gray-500/10 border-gray-500/20'}`}>
-                                                    {admin.status === 'Active' ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                                                    {admin.status}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 text-gray-400 flex items-center gap-2 mt-2">
-                                                <Clock className="w-3.5 h-3.5" /> {admin.lastLogin}
-                                            </td>
-                                            <td className="px-6 py-4 text-right">
-                                                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                                    <MoreVertical className="w-4 h-4" />
-                                                </button>
+                                        </tr>
+                                    ) : filteredAdmins.length === 0 ? (
+                                        <tr>
+                                            <td colSpan="5" className="px-6 py-12 text-center text-gray-500 italic">
+                                                No staff members found.
                                             </td>
                                         </tr>
-                                    ))}
+                                    ) : (
+                                        filteredAdmins.map((admin, i) => (
+                                            <tr key={i} className="hover:bg-white/[0.02] transition-colors group">
+                                                <td className="px-6 py-4">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-gray-800 to-gray-700 flex items-center justify-center text-white font-bold border border-white/10 shrink-0 overflow-hidden text-sm uppercase">
+                                                            {admin.avatar ? (
+                                                                <img src={admin.avatar} alt={admin.name} className="w-full h-full object-cover" />
+                                                            ) : admin.initials}
+                                                        </div>
+                                                        <div>
+                                                            <div className="font-semibold text-gray-200 group-hover:text-rose-400 transition-colors">{admin.name}</div>
+                                                            <div className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
+                                                                <Mail className="w-3 h-3" /> {admin.email}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg border
+                                                        ${admin.role === 'Super Admin' ? 'text-rose-400 border-rose-400/30 bg-rose-400/10' :
+                                                            admin.role.includes('Finance') ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10' :
+                                                                'text-blue-400 border-blue-400/30 bg-blue-400/10'}`}>
+                                                        <Shield className="w-3.5 h-3.5" />
+                                                        {admin.role}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4">
+                                                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider border ${admin.status === 'Active' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 'text-gray-400 bg-gray-500/10 border-gray-500/20'}`}>
+                                                        {admin.status === 'Active' ? <CheckCircle2 className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
+                                                        {admin.status}
+                                                    </span>
+                                                </td>
+                                                <td className="px-6 py-4 text-gray-400">
+                                                    <div className="flex items-center gap-2">
+                                                        <Clock className="w-3.5 h-3.5" />
+                                                        {admin.lastLogin ? new Date(admin.lastLogin).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Never"}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 text-right">
+                                                    <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                                                        <MoreVertical className="w-4 h-4" />
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )))}
                                 </tbody>
                             </table>
                         </div>
@@ -173,7 +210,7 @@ export default function UsersPage() {
                                 <div key={i} className="relative pl-5">
                                     <div className="absolute -left-1.5 top-1 w-3 h-3 rounded-full bg-[#111623] border-2 border-rose-500"></div>
                                     <div className="font-medium text-sm text-gray-200 mb-0.5"><span className="text-rose-400 mr-1">{log.user}</span>{log.action}</div>
-                                    <div className="text-[10px] text-gray-500 flex items-center gap-1"><Clock className="w-3 h-3" /> {log.time}</div>
+                                    <div className="text-xs text-gray-500 flex items-center gap-1"><Clock className="w-3 h-3" /> {log.time}</div>
                                 </div>
                             ))}
                         </div>

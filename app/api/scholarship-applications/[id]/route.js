@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { processScholarshipApproval } from '@/lib/actions/scholarship-approval';
+import { isAdmin } from '@/lib/admin-auth';
 
 export async function PATCH(request, { params }) {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const { id } = await params;
         const body = await request.json();

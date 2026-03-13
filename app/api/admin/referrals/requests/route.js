@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/admin-auth";
 
 export async function GET() {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const requests = await prisma.affiliate_requests.findMany({
             include: {
@@ -27,6 +31,9 @@ export async function GET() {
 }
 
 export async function PUT(request) {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
         const { requestId, status, userId } = await request.json();
 
@@ -60,9 +67,9 @@ export async function PUT(request) {
                 prefix = userEmail.email.split("@")[0].toUpperCase().replace(/[^A-Z]/g, '').substring(0, 5);
             }
 
-            const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
-            const year = new Date().getFullYear();
-            const referralCode = `WST-${prefix}-${randomStr}-${year}`;
+            const randomNum = Math.floor(100 + Math.random() * 900); // 3 digits
+            const randomChar = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 1 letter
+            const referralCode = `Webstack-${randomNum}${randomChar}`;
 
             // Atomic update using transaction
             await prisma.$transaction([

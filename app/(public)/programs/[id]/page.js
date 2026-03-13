@@ -13,7 +13,6 @@ export async function generateMetadata({ params }) {
     try {
         const cohort = await prisma.cohorts.findUnique({
             where: { id },
-            include: { departments: true },
         });
 
         if (!cohort) {
@@ -23,8 +22,8 @@ export async function generateMetadata({ params }) {
         }
 
         return {
-            title: `${cohort.label || cohort.departments.name} - Cohort ${cohort.cohort_number} | Webstack ICT Global`,
-            description: `Enroll in our ${cohort.label || cohort.departments.name} program (Cohort ${cohort.cohort_number}). Starting ${formatDate(cohort.start_date)}. Secure your spot today!`,
+            title: `${cohort.label || cohort.name} - Cohort ${cohort.cohort_number} | Webstack ICT Global`,
+            description: `Enroll in our ${cohort.label || cohort.name} program (Cohort ${cohort.cohort_number}). Starting ${formatDate(cohort.start_date)}. Secure your spot today!`,
         };
     } catch (error) {
         return {
@@ -40,7 +39,6 @@ export default async function ProgramDetailPage({ params }) {
     try {
         cohort = await prisma.cohorts.findUnique({
             where: { id },
-            include: { departments: true },
         });
     } catch (error) {
         console.error("Error fetching cohort detail:", error);
@@ -53,12 +51,12 @@ export default async function ProgramDetailPage({ params }) {
 
     const {
         label,
+        name,
         cohort_number,
         start_date,
         graduation_date,
         enrollment_deadline,
         max_size,
-        departments,
     } = cohort;
 
     return (
@@ -66,11 +64,11 @@ export default async function ProgramDetailPage({ params }) {
             <PageBanner
                 title={
                     <>
-                        {label || `${departments.name} Program`} <span className="gradientText">Cohort {cohort_number}</span>
+                        {label || name || "Program"} <span className="gradientText">Cohort {cohort_number}</span>
                     </>
                 }
-                subtitle={`${departments.description || `Master ${departments.name} with our hands-on industry-led training program. Join a community of tech excellence.`}`}
-                tagline={<Tagline text={departments.name} icon="school" />}
+                subtitle={cohort.description || `Master ${label || name} with our hands-on industry-led training program. Join a community of tech excellence.`}
+                tagline={<Tagline text={label || name} icon="school" />}
                 primaryBtnText="Enroll Now"
                 primaryBtnRoute="#apply-form"
             />
@@ -120,7 +118,7 @@ export default async function ProgramDetailPage({ params }) {
                 <div id="apply-form">
                     <ProgramApplicationForm
                         cohortId={id}
-                        cohortLabel={label || `${departments.name} Program`}
+                        cohortLabel={label || name || "Program"}
                     />
                 </div>
             </Section>

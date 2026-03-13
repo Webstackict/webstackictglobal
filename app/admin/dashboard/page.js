@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
     Users,
     BookOpen,
@@ -11,10 +12,47 @@ import {
     Activity,
     CreditCard,
     Target,
-    Clock
+    Clock,
+    RefreshCw
 } from "lucide-react";
+import { toast } from "sonner";
+import { formatDate } from "@/util/util";
 
 export default function AdminDashboardPage() {
+    const [data, setData] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const res = await fetch('/api/admin/dashboard/stats');
+                const result = await res.json();
+                if (res.ok) {
+                    setData(result);
+                } else {
+                    toast.error(result.error || "Failed to fetch dashboard data");
+                }
+            } catch (err) {
+                console.error("Dashboard fetch error:", err);
+                toast.error("An error occurred while loading dashboard data");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchStats();
+    }, []);
+
+    const stats = data?.stats || {
+        totalStudents: 0,
+        activePrograms: 0,
+        monthlyRevenue: 0,
+        newLeads: 0,
+        appsToday: 0
+    };
+
+    const recentApplications = data?.recentApplications || [];
+    const latestPayments = data?.latestPayments || [];
     return (
         <div className="space-y-8 pb-12">
             {/* Page Header */}
@@ -44,11 +82,13 @@ export default function AdminDashboardPage() {
                             <Users className="w-4 h-4" />
                         </div>
                         <span className="text-xs font-medium text-emerald-400 flex items-center bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                            <ArrowUpRight className="w-3 h-3 mr-1" /> +12.5%
+                            <ArrowUpRight className="w-3 h-3 mr-1" /> Live
                         </span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-3xl font-bold text-white tracking-tight">2,845</div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                            {isLoading ? <RefreshCw className="w-6 h-6 animate-spin opacity-20" /> : stats.totalStudents.toLocaleString()}
+                        </div>
                         <div className="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wider">Total Students</div>
                     </div>
                 </div>
@@ -60,12 +100,11 @@ export default function AdminDashboardPage() {
                         <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20">
                             <BookOpen className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-medium text-gray-500 flex items-center bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20">
-                            Constant
-                        </span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-3xl font-bold text-white tracking-tight">18</div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                            {isLoading ? <RefreshCw className="w-6 h-6 animate-spin opacity-20" /> : stats.activePrograms}
+                        </div>
                         <div className="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wider">Active Programs</div>
                     </div>
                 </div>
@@ -77,12 +116,14 @@ export default function AdminDashboardPage() {
                         <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                             <DollarSign className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-medium text-emerald-400 flex items-center bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                            <ArrowUpRight className="w-3 h-3 mr-1" /> +8.2%
+                        <span className="text-xs font-medium text-gray-400 flex items-center bg-gray-500/10 px-2 py-0.5 rounded-full border border-gray-500/20">
+                            last 30d
                         </span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-3xl font-bold text-white tracking-tight">$84.2K</div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                            {isLoading ? <RefreshCw className="w-6 h-6 animate-spin opacity-20" /> : `₦${(stats.monthlyRevenue / 1000).toFixed(1)}K`}
+                        </div>
                         <div className="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wider">Monthly Revenue</div>
                     </div>
                 </div>
@@ -94,12 +135,11 @@ export default function AdminDashboardPage() {
                         <div className="p-2 rounded-lg bg-orange-500/10 text-orange-400 border border-orange-500/20">
                             <Target className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-medium text-emerald-400 flex items-center bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                            <ArrowUpRight className="w-3 h-3 mr-1" /> +24%
-                        </span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-3xl font-bold text-white tracking-tight">142</div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                            {isLoading ? <RefreshCw className="w-6 h-6 animate-spin opacity-20" /> : stats.newLeads}
+                        </div>
                         <div className="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wider">New Leads</div>
                     </div>
                 </div>
@@ -111,12 +151,11 @@ export default function AdminDashboardPage() {
                         <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20">
                             <FileText className="w-4 h-4" />
                         </div>
-                        <span className="text-xs font-medium text-red-400 flex items-center bg-red-500/10 px-2 py-0.5 rounded-full border border-red-500/20">
-                            <ArrowDownRight className="w-3 h-3 mr-1" /> -4%
-                        </span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-3xl font-bold text-white tracking-tight">38</div>
+                        <div className="text-3xl font-bold text-white tracking-tight">
+                            {isLoading ? <RefreshCw className="w-6 h-6 animate-spin opacity-20" /> : stats.appsToday}
+                        </div>
                         <div className="text-xs font-medium text-gray-400 mt-1 uppercase tracking-wider">Apps Today</div>
                     </div>
                 </div>
@@ -198,26 +237,31 @@ export default function AdminDashboardPage() {
                         <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                             <FileText className="w-4 h-4 text-blue-400" /> Recent Apps
                         </h3>
-                        <a href="#" className="text-xs text-blue-400 hover:text-blue-300">View All</a>
+                        <a href="/admin/admissions" className="text-xs text-blue-400 hover:text-blue-300">View All</a>
                     </div>
-                    <div className="flex-1 overflow-y-auto pr-2 space-y-6 scrollbar-thin scrollbar-thumb-white/10">
-                        {[
-                            { name: "Sarah Jenkins", prog: "Full Stack Dev", status: "Pending", color: "orange" },
-                            { name: "Michael Chen", prog: "Data Science", status: "Approved", color: "emerald" },
-                            { name: "Emma Wilson", prog: "UI/UX Design", status: "Under Review", color: "blue" },
-                            { name: "David Okafor", prog: "Cybersecurity", status: "Pending", color: "orange" },
-                            { name: "Lisa Thompson", prog: "Product Mgt", status: "Rejected", color: "red" }
-                        ].map((app, i) => (
-                            <div key={i} className="flex flex-col gap-2 pb-4 border-b border-white/5 last:border-0">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-sm font-semibold text-gray-100">{app.name}</span>
-                                    <span className={`text-[11px] uppercase font-bold tracking-wider px-3 py-1 rounded-md bg-${app.color}-500/10 text-${app.color}-400 border border-${app.color}-500/20 shadow-sm`}>
-                                        {app.status}
-                                    </span>
-                                </div>
-                                <span className="text-xs text-gray-400 font-medium">{app.prog}</span>
+                    <div className="flex-1 overflow-y-auto pr-2 space-y-6 scrollbar-thin scrollbar-thumb-white/10 text-sm">
+                        {isLoading ? (
+                            <div className="flex items-center justify-center h-full">
+                                <RefreshCw className="w-6 h-6 animate-spin text-blue-500/50" />
                             </div>
-                        ))}
+                        ) : recentApplications.length === 0 ? (
+                            <div className="text-center text-gray-500 text-xs mt-10">No recent applications</div>
+                        ) : (
+                            recentApplications.map((app, i) => (
+                                <div key={i} className="flex flex-col gap-2 pb-4 border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors rounded-lg p-1">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-sm font-semibold text-gray-100 truncate max-w-[120px]">{app.full_name || 'Anonymous'}</span>
+                                        <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md border shadow-sm
+                                            ${app.payment_status === 'successful' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+                                                app.payment_status === 'pending' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
+                                                    'bg-red-500/10 text-red-400 border-red-500/20'}`}>
+                                            {app.payment_status}
+                                        </span>
+                                    </div>
+                                    <span className="text-[11px] text-gray-400 font-medium truncate">{app.program.name}</span>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
 
@@ -229,24 +273,26 @@ export default function AdminDashboardPage() {
                         </h3>
                     </div>
                     <div className="flex-1 overflow-y-auto pr-2 space-y-5 scrollbar-thin scrollbar-thumb-white/10">
-                        {[
-                            { name: "James Anderson", amount: "$1,200", date: "2 mins ago" },
-                            { name: "TechNova Inc.", amount: "$4,500", date: "1 hr ago" },
-                            { name: "Sophia Martinez", amount: "$850", date: "3 hrs ago" },
-                            { name: "Global Systems", amount: "$12,000", date: "Yesterday" },
-                            { name: "Robert Taylor", amount: "$1,200", date: "Yesterday" }
-                        ].map((payment, i) => (
-                            <div key={i} className="flex items-center gap-4 pb-4 border-b border-white/5 last:border-0">
-                                <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
-                                    <DollarSign className="w-5 h-5" />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <div className="text-sm font-semibold text-gray-100">{payment.name}</div>
-                                    <div className="text-xs text-gray-400 mt-1">{payment.date}</div>
-                                </div>
-                                <div className="text-sm font-bold text-white tabular-nums">{payment.amount}</div>
+                        {isLoading ? (
+                            <div className="flex items-center justify-center h-full">
+                                <RefreshCw className="w-6 h-6 animate-spin text-emerald-500/50" />
                             </div>
-                        ))}
+                        ) : latestPayments.length === 0 ? (
+                            <div className="text-center text-gray-500 text-xs mt-10">No recent payments</div>
+                        ) : (
+                            latestPayments.map((payment, i) => (
+                                <div key={i} className="flex items-center gap-4 pb-4 border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors rounded-lg p-1">
+                                    <div className="w-9 h-9 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 shrink-0">
+                                        <DollarSign className="w-4 h-4" />
+                                    </div>
+                                    <div className="flex-1 min-w-0">
+                                        <div className="text-[11px] font-semibold text-gray-100 truncate">{payment.enrollment?.full_name || 'Anonymous'}</div>
+                                        <div className="text-[10px] text-gray-500 mt-0.5">{formatDate(payment.created_at)}</div>
+                                    </div>
+                                    <div className="text-[11px] font-bold text-white tabular-nums shrink-0">₦{Number(payment.amount).toLocaleString()}</div>
+                                </div>
+                            ))
+                        )}
                     </div>
                 </div>
 

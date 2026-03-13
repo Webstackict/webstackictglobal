@@ -27,11 +27,11 @@ export default function DashboardHeader({
     DashboardSidebarContext
   );
 
-  const { user } = use(UserContext);
-  const { displayName, fullName, email } = user;
+  const { user = {} } = use(UserContext) || {};
+  const { displayName = "", fullName = "", email = "" } = user || {};
 
-  const firstName = fullName.split(" ")[0];
-  const emailDisplay = email.split("@")[0];
+  const firstName = fullName?.split?.(" ")?.[0] || "";
+  const emailDisplay = email?.split?.("@")?.[0] || "";
 
   useEffect(() => {
     const channel = supabase

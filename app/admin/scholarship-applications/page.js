@@ -121,7 +121,7 @@ export default function ScholarshipApplicationsPage() {
                 <div className="overflow-x-auto min-h-[400px]">
                     <table className="w-full text-left border-collapse whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#0b0f19] border-b border-white/5 text-[11px] uppercase tracking-wider text-gray-500">
+                            <tr className="bg-[#0b0f19] border-b border-white/5 text-xs uppercase tracking-wider text-gray-500">
                                 <th className="px-6 py-4 font-semibold">Applicant</th>
                                 <th className="px-6 py-4 font-semibold">Contact Info</th>
                                 <th className="px-6 py-4 font-semibold">Program & Date</th>
@@ -161,11 +161,11 @@ export default function ScholarshipApplicationsPage() {
                                                     < GraduationCap className="w-3.5 h-3.5 text-blue-400" />
                                                     {app.program}
                                                 </span>
-                                                <span className="text-xs text-gray-500">{formatDate(app.created_at)}</span>
+                                                <span className="text-xs text-gray-500">{formatDate(app.submitted_at)}</span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] uppercase tracking-wider font-bold rounded-full border
+                                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs uppercase tracking-wider font-bold rounded-full border
                                                 ${app.status === 'approved' ? 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10' :
                                                     app.status === 'pending' ? 'text-orange-400 border-orange-400/30 bg-orange-400/10' :
                                                         'text-red-400 border-red-400/30 bg-red-400/10'
@@ -195,14 +195,14 @@ export default function ScholarshipApplicationsPage() {
                                                         <button
                                                             disabled={isUpdating}
                                                             onClick={() => handleUpdateStatus(app.id, 'approved')}
-                                                            className="text-[11px] font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                                                            className="text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
                                                         >
                                                             Approve
                                                         </button>
                                                         <button
                                                             disabled={isUpdating}
                                                             onClick={() => handleUpdateStatus(app.id, 'rejected')}
-                                                            className="text-[11px] font-semibold text-white bg-red-600/20 hover:bg-red-600/40 border border-red-600/30 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                                                            className="text-xs font-semibold text-white bg-red-600/20 hover:bg-red-600/40 border border-red-600/30 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
                                                         >
                                                             Reject
                                                         </button>

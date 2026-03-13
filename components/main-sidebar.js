@@ -11,6 +11,8 @@ import Link from "next/link";
 import { MainSidebarContext } from "@/store/main-sidebar-context";
 import Backdrop from "./ui/backdrop";
 
+import Logo from "./ui/logo";
+
 const AngleDown = motion.create(iconsConfig["angleDown"]);
 const CloseIcon = motion.create(iconsConfig["close"]);
 
@@ -67,35 +69,42 @@ export default function MainSidebar() {
           opacity: 0.5,
         }}
       >
-        <button
-          className={classes.closeButton}
-          onClick={() => setIsMainSidebar(false)}
-          aria-label="Close navigation menu"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            width: "fit-content",
-          }}
-        >
-          <CloseIcon
-            whileHover={{
-              scale: 1.1,
-              rotate: 180,
-              transition: {
-                type: "spring",
-                duration: 0.3,
-              },
+        <div className={classes.sidebarHeader}>
+          <Link href="/" className={classes.logoLink} onClick={() => setIsMainSidebar(false)}>
+            <Logo height={60} variant="white" />
+          </Link>
+
+          <button
+            className={classes.closeButton}
+            onClick={() => setIsMainSidebar(false)}
+            aria-label="Close navigation menu"
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              display: "flex",
+              alignItems: "center",
+              width: "fit-content",
             }}
-            whileTap={{
-              scale: 1,
-              rotate: 90,
-            }}
-          />
-        </button>
+          >
+            <CloseIcon
+              whileHover={{
+                scale: 1.1,
+                rotate: 180,
+                transition: {
+                  type: "spring",
+                  duration: 0.3,
+                },
+              }}
+              whileTap={{
+                scale: 1,
+                rotate: 90,
+              }}
+            />
+          </button>
+        </div>
+
         <div className={classes.links}>
           <LinkWithProgress href="/" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Home

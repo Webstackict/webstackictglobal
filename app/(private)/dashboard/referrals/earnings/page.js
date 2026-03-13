@@ -60,11 +60,11 @@ export default async function EarningsPage() {
                     <div key={i} className={`premium-card p-5 lg:p-6 flex flex-col justify-between min-h-[140px] ${stat.highlight ? 'border-emerald-500/20' : ''}`}>
                         <div className="flex justify-between items-start mb-4">
                             <stat.icon className={`w-6 h-6 ${stat.color} opacity-80`} />
-                            <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.label}</div>
+                            <div className="pro-stat-label">{stat.label}</div>
                         </div>
                         <div>
                             <div className="text-xl lg:text-2xl font-black text-white tracking-tighter mb-1">{stat.val}</div>
-                            <div className="text-[10px] font-medium text-gray-500 uppercase">{stat.sub}</div>
+                            <div className="pro-stat-label !normal-case !text-gray-500">{stat.sub}</div>
                         </div>
                     </div>
                 ))}
@@ -81,7 +81,7 @@ export default async function EarningsPage() {
                             <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center border border-emerald-500/30">
                                 <Coins className="w-5 h-5 text-emerald-500" />
                             </div>
-                            <h2 className="text-2xl font-bold text-white tracking-tight">Payout Information</h2>
+                            <h2 className="text-2xl pro-heading text-white uppercase">Payout Information</h2>
                         </div>
 
                         <div className="space-y-4">
@@ -89,7 +89,7 @@ export default async function EarningsPage() {
                                 <Zap className="w-4 h-4 text-blue-500" />
                                 Weekly Commission Cycle
                             </h3>
-                            <p className="text-gray-400 text-base leading-relaxed font-medium">
+                            <p className="pro-subtext text-base">
                                 Commissions are processed every <span className="text-white font-bold">Friday</span> for all verified referrals. Funds are settled directly to your connected bank account.
                             </p>
                         </div>
@@ -102,7 +102,7 @@ export default async function EarningsPage() {
                     </div>
 
                     <div className="bg-white/5 border border-white/10 rounded-2xl p-8 space-y-6 backdrop-blur-sm">
-                        <div className="text-sm font-bold text-gray-500 uppercase tracking-[0.2em]">Partner Compliance</div>
+                        <div className="pro-stat-label">Partner Compliance</div>
                         <ul className="space-y-4">
                             {[
                                 "KYC verification must be complete",

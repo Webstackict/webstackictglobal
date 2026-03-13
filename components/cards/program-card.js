@@ -3,7 +3,7 @@ import classes from "./program-card.module.css";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import LinkWithProgress from "../ui/Link-with-progress";
 
-export default function ProgramCard({ title, duration, description, icon }) {
+export default function ProgramCard({ title, duration, description, icon, price, discountPrice }) {
     return (
         <div className={classes.card}>
             <div className={classes.iconWrapper}>
@@ -12,6 +12,20 @@ export default function ProgramCard({ title, duration, description, icon }) {
             <div className={classes.durationBadge}>{duration}</div>
             <h3 className={classes.title}>{title}</h3>
             <p className={classes.description}>{description}</p>
+
+            {(price || discountPrice) && (
+                <div className={classes.priceContainer}>
+                    {discountPrice ? (
+                        <>
+                            <span className={classes.discountPrice}>${discountPrice}</span>
+                            <span className={classes.originalPrice}>${price}</span>
+                        </>
+                    ) : (
+                        <span className={classes.price}>${price}</span>
+                    )}
+                </div>
+            )}
+
             <div className={classes.buttonContainer}>
                 <LinkWithProgress href="/programs/academy" className={classes.curriculumBtn}>
                     View Curriculum <ArrowForwardIcon sx={{ fontSize: 16 }} />

@@ -79,3 +79,36 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .pageBannerSection {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .container {
+    & h1 {
+      font-size: 2.5rem !important;
+    }
+
+    & p {
+      font-size: 1.1rem !important;
+      margin-bottom: 2rem !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .pageBannerSection {
+    padding: 5rem 1rem 2rem;
+  }
+
+  .container {
+    & h1 {
+      font-size: 2rem !important;
+    }
+
+    & p {
+      font-size: 1rem !important;
+    }
+  }
+}

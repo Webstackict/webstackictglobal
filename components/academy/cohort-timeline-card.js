@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./cohort-timeline-card.module.css";
 import CohortTimelineItem from "./cohort-timeline-item";
+import { formatDate } from "@/util/util";
 
 const FireIcon = iconsConfig["fire"];
 
@@ -43,7 +44,7 @@ export default function CohortTimelineCard({
             <span>Registeration is Ongoing</span>
           </div>
           <p className={classes.earlyBirdText}>
-            Enroll before {department.enrollment_deadline}!
+            Enroll before {formatDate(department.enrollment_deadline)}!
           </p>
 
           {/* <button></button> */}

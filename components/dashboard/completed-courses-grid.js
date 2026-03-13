@@ -43,7 +43,7 @@ export default function CompletedCoursesGrid({ enrollments = [] }) {
               </div>
               <div className={classes.courseInfo}>
                 <div className={classes.courseTitleWrapper}>
-                  <h4>{enrollment.department_name}</h4>
+                  <h4>{enrollment.program_name}</h4>
                   <Badge title="completed" eventBagdeStyle="green-badge" />
                 </div>
                 <p className={classes.courseDesc}>

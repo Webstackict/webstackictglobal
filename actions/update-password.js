@@ -1,16 +1,19 @@
 "use server";
 
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
 
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+export async function updatePassword(prevState, formData) {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
 
-export async function updatePassword(userId, prevState, formData) {
+  if (authError || !authUser) {
+    throw new Error("Unauthorized");
+  }
+
+  const userId = authUser.id;
   const newPassword = formData.get("newPassword")?.trim() || "";
   const confirmPassword = formData.get("confirmPassword")?.trim() || "";
-
-  const cookieStore = await cookies();
 
   let errors = {};
 
@@ -20,26 +23,15 @@ export async function updatePassword(userId, prevState, formData) {
   if (newPassword !== confirmPassword) {
     errors.confirmPassword = "Password must match with new password.";
   }
-  
+
   if (Object.keys(errors).length > 0) {
     return { errors };
   }
 
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set(name, value, options);
-        });
-      },
-    },
-  });
+  const adminClient = await createAdminClient();
 
   try {
-    const { error: pwdError } = await supabase.auth.admin.updateUserById(
+    const { error: pwdError } = await adminClient.auth.admin.updateUserById(
       userId,
       {
         password: newPassword,
@@ -48,7 +40,7 @@ export async function updatePassword(userId, prevState, formData) {
 
     if (pwdError) throw pwdError;
 
-    const { error: metaError } = await supabase.auth.admin.updateUserById(
+    const { error: metaError } = await adminClient.auth.admin.updateUserById(
       userId,
       {
         app_metadata: {

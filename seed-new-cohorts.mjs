@@ -38,30 +38,42 @@ async function seed() {
         {
             department_id: dept.id,
             cohort_number: 1, // March
+            label: "March Cohort - Software Engineering",
             start_date: "2026-03-10",
             graduation_date: "2026-06-10",
             enrollment_deadline: "2026-03-05",
             status: "enrolling",
+            duration: 3,
+            onsite_seats: 50,
+            online_seats: 80,
             max_size: 130,
             footer: "March Cohort"
         },
         {
             department_id: dept.id,
             cohort_number: 2, // April
+            label: "April Cohort - Software Engineering",
             start_date: "2026-04-10",
             graduation_date: "2026-07-10",
             enrollment_deadline: "2026-04-05",
             status: "enrolling",
+            duration: 3,
+            onsite_seats: 50,
+            online_seats: 80,
             max_size: 130,
             footer: "April Cohort"
         },
         {
             department_id: dept.id,
             cohort_number: 3, // May
+            label: "May Cohort - Software Engineering",
             start_date: "2026-05-10",
             graduation_date: "2026-08-10",
             enrollment_deadline: "2026-05-05",
             status: "enrolling",
+            duration: 3,
+            onsite_seats: 50,
+            online_seats: 80,
             max_size: 130,
             footer: "May Cohort"
         }

@@ -1,8 +1,16 @@
 "use server";
 
-import { supabase } from "@/lib/db/supabaseClient";
+import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
 
-export async function updateNames(userId, prevState, formData) {
+export async function updateNames(prevState, formData) {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !authUser) {
+    throw new Error("Unauthorized");
+  }
+
+  const userId = authUser.id;
   const fullName = formData.get("fullName")?.trim() || "";
   const displayName = formData.get("displayName")?.trim() || "";
   const phone = formData.get("phone")?.trim() || "";

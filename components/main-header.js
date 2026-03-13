@@ -5,11 +5,8 @@ import { useEffect, useState, use } from "react";
 import nProgress from "nprogress";
 import { motion, AnimatePresence } from "framer-motion";
 
-
-
 import classes from "./main-header.module.css";
 import Logo from "./ui/logo";
-
 import ProgressBar from "./ui/progress-bar";
 import LinkWithProgress from "./ui/Link-with-progress";
 
@@ -32,8 +29,6 @@ function MainHeader({ user }) {
   const userId = user?.id || "";
   const path = usePathname();
 
-  // console.log(user);
-
   const [isDropdown, setIsDropdown] = useState(false);
   const [isDashboardDropdown, setIsDashboardDropdown] = useState(false);
 
@@ -45,13 +40,8 @@ function MainHeader({ user }) {
     setUnreadNotifications,
   } = use(NotificationsContext);
 
-
   function handleDropdownClick() {
-    if (isDropdown) {
-      setIsDropdown(false);
-    } else {
-      setIsDropdown(true);
-    }
+    setIsDropdown((prev) => !prev);
   }
 
   useEffect(() => {
@@ -75,7 +65,7 @@ function MainHeader({ user }) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [userId, setUnreadNotifications]);
+  }, [userId, setNotifications, setUnreadNotifications]);
 
   useEffect(() => {
     function handleClick(event) {
@@ -90,11 +80,12 @@ function MainHeader({ user }) {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, [setIsDropdown]);
+  }, []);
 
   useEffect(() => {
     nProgress.done();
   }, []);
+
   return (
     <>
       <ProgressBar />
@@ -105,40 +96,27 @@ function MainHeader({ user }) {
         <nav>
           <div>
             <div className={classes.left}>
-              <LinkWithProgress href="/">
+              <LinkWithProgress href="/" className={classes.logoLink}>
                 <div className={classes.logo}>
-                  <Logo width="auto" height="100%" style={{ color: "white" }} />
+                  <Logo height={95} variant="white" />
                 </div>
               </LinkWithProgress>
+
               <div className={classes.links}>
-                {path === "/" ? (
-                  <LinkWithProgress
-                    href="/"
-                    className={classes.link}
-                    style={{ color: "var(--teal-400)" }}
-                  >
-                    Home
-                  </LinkWithProgress>
-                ) : (
-                  <LinkWithProgress
-                    href="/"
-                    className={classes.link}
-                  >
-                    Home
-                  </LinkWithProgress>
-                )}
+                <LinkWithProgress
+                  href="/"
+                  className={classes.link}
+                  style={path === "/" ? { color: "var(--teal-400)" } : null}
+                >
+                  Home
+                </LinkWithProgress>
 
                 <motion.div
                   className={classes.dropdownWrapper}
-                  onHoverStart={handleDropdownClick}
-                  onHoverEnd={handleDropdownClick}
-                  transition={{
-                    type: "spring",
-                    duration: 0.5,
-                  }}
+                  onHoverStart={() => setIsDropdown(true)}
+                  onHoverEnd={() => setIsDropdown(false)}
                 >
-                  {/* Button */}
-                  <motion.button
+                  <button
                     className={classes.dropdownBtn}
                     onClick={handleDropdownClick}
                     aria-expanded={isDropdown}
@@ -150,57 +128,31 @@ function MainHeader({ user }) {
                         : null
                     }
                   >
-                    <motion.span transition={{ duration: 1 }}>
-                      Programs
-                    </motion.span>
+                    <span>Programs</span>
                     <AngleDown animate={isDropdown ? { rotate: 180 } : null} />
-                  </motion.button>
-
-                  {/* Dropdown */}
+                  </button>
 
                   <AnimatePresence>
                     {isDropdown && (
                       <motion.ul
                         className={classes.dropdown}
                         initial={{ y: -10, opacity: 0 }}
-                        animate={
-                          isDropdown
-                            ? { y: 0, opacity: 1 }
-                            : { y: -10, opacity: 0 }
-                        }
-                        transition={{
-                          type: "spring",
-                          duration: 0.5,
-                        }}
+                        animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
+                        transition={{ type: "spring", duration: 0.5 }}
                       >
                         <li>
                           <LinkWithProgress
                             href="/programs/academy"
-                            style={
-                              path.includes("/academy")
-                                ? {
-                                  color: "var(--white)",
-                                  background: "var(--charcoal-blue-500)",
-                                }
-                                : null
-                            }
+                            style={path.includes("/academy") ? { color: "var(--white)", background: "var(--charcoal-blue-500)" } : null}
                           >
                             Academy
                           </LinkWithProgress>
                         </li>
-
                         <li>
                           <LinkWithProgress
                             href="/programs/events"
-                            style={
-                              path.includes("/events")
-                                ? {
-                                  color: "var(--white)",
-                                  background: "var(--charcoal-blue-500)",
-                                }
-                                : null
-                            }
+                            style={path.includes("/events") ? { color: "var(--white)", background: "var(--charcoal-blue-500)" } : null}
                           >
                             Events
                           </LinkWithProgress>
@@ -213,11 +165,7 @@ function MainHeader({ user }) {
                 <LinkWithProgress
                   href="/scholarships"
                   className={classes.link}
-                  style={
-                    path.includes("/scholarships")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/scholarships") ? { color: "var(--teal-400)" } : null}
                 >
                   Scholarships
                 </LinkWithProgress>
@@ -225,11 +173,7 @@ function MainHeader({ user }) {
                 <LinkWithProgress
                   href="/services"
                   className={classes.link}
-                  style={
-                    path.includes("/services")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/services") ? { color: "var(--teal-400)" } : null}
                 >
                   Services
                 </LinkWithProgress>
@@ -237,190 +181,119 @@ function MainHeader({ user }) {
                 <LinkWithProgress
                   href="/about"
                   className={classes.link}
-                  style={
-                    path.includes("/about")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/about") ? { color: "var(--teal-400)" } : null}
                 >
                   About
                 </LinkWithProgress>
+
                 <LinkWithProgress
                   href="/contact"
                   className={classes.link}
-                  style={
-                    path.includes("/contact")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/contact") ? { color: "var(--teal-400)" } : null}
                 >
                   Contact
                 </LinkWithProgress>
+
                 <LinkWithProgress
                   href="/gallery"
                   className={classes.link}
-                  style={
-                    path.includes("/gallery")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/gallery") ? { color: "var(--teal-400)" } : null}
                 >
                   Gallery
                 </LinkWithProgress>
+
                 <LinkWithProgress
                   href="/enroll"
                   className={classes.link}
-                  style={
-                    path.includes("/enroll")
-                      ? { color: "var(--teal-400)" }
-                      : null
-                  }
+                  style={path.includes("/enroll") ? { color: "var(--teal-400)" } : null}
                 >
                   Enroll
                 </LinkWithProgress>
               </div>
             </div>
 
-            {/* Right Side */}
-            {!isLoggedIn ? (
-              <div className={classes.right}>
-                {!path.includes("auth") && (
-                  <LinkWithProgress href="/auth" className={classes.link}>
-                    Sign In
+            <div className={classes.right}>
+              {!isLoggedIn ? (
+                <>
+                  {!path.includes("auth") && (
+                    <LinkWithProgress href="/auth" className={classes.link}>
+                      Sign In
+                    </LinkWithProgress>
+                  )}
+                  {path.includes("auth") && (
+                    <SmallButton className={classes.getStarted} href="/">
+                      Get Started
+                    </SmallButton>
+                  )}
+                </>
+              ) : (
+                <>
+                  <motion.div
+                    className={classes.dropdownWrapper}
+                    onHoverStart={() => setIsDashboardDropdown(true)}
+                    onHoverEnd={() => setIsDashboardDropdown(false)}
+                  >
+                    <LinkWithProgress href="/dashboard">
+                      <div className={classes.avatarContainer}>
+                        <Image
+                          src={user.user_metadata?.avatar_url || "/avatar.png"}
+                          alt="avatar"
+                          fill
+                          sizes="50px"
+                        />
+                      </div>
+                    </LinkWithProgress>
+
+                    <AnimatePresence>
+                      {isDashboardDropdown && (
+                        <motion.ul
+                          className={classes.dropdown}
+                          initial={{ y: -10, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -10, opacity: 0 }}
+                          transition={{ type: "spring", duration: 0.5 }}
+                        >
+                          <li>
+                            <LinkWithProgress href="/dashboard">
+                              <Dashboard /> Dashboard
+                            </LinkWithProgress>
+                          </li>
+                          <li>
+                            <LinkWithProgress href="/account-settings">
+                              <Settings /> Account Settings
+                            </LinkWithProgress>
+                          </li>
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                  <LinkWithProgress
+                    href="/notifications"
+                    className={classes.notificationContainer}
+                    aria-label={`View notifications${unreadNotifications ? " - You have unread messages" : ""}`}
+                  >
+                    {unreadNotifications && <div className="notify-banner"></div>}
+                    <NotificationIcon className={classes.notificationIcon} />
                   </LinkWithProgress>
-                )}
-                {path.includes("auth") && (
-                  <SmallButton className={classes.getStarted} href="/">
-                    Get Started
-                  </SmallButton>
-                )}
+                </>
+              )}
 
-                <button
-                  className={classes.hamburgerMenuButton}
-                  onClick={() => setIsMainSidebar(true)}
-                  aria-label="Open navigation menu"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Menu
-                    className={classes.hamburgerMenu}
-                    whileHover={{
-                      scale: 1.1,
-                      transition: {
-                        type: "spring",
-                        duration: 0.3,
-                      },
-                    }}
-                    whileTap={{
-                      scale: 1,
-                      rotate: 180,
-                    }}
-                  />
-                </button>
-              </div>
-            ) : (
-              <div className={classes.right}>
-                <motion.div
-                  className={classes.dropdownWrapper}
-                  onHoverStart={() => setIsDashboardDropdown(true)}
-                  onHoverEnd={() => setIsDashboardDropdown(false)}
-                  transition={{
-                    type: "spring",
-                    duration: 0.5,
-                  }}
-
-                >
-                  <LinkWithProgress href="/dashboard">
-                    <div className={classes.avatarContainer}>
-                      <Image
-                        src={user.user_metadata.avatar_url || "/avatar.png"}
-                        alt="avatar"
-                        fill
-                        sizes="50px"
-                      />
-                    </div>
-                  </LinkWithProgress>
-
-                  <AnimatePresence>
-                    {isDashboardDropdown && (
-                      <motion.ul
-                        className={classes.dropdown}
-                        initial={{ y: -10, opacity: 0 }}
-                        animate={
-                          isDashboardDropdown
-                            ? { y: 0, opacity: 1 }
-                            : { y: -10, opacity: 0 }
-                        }
-                        transition={{
-                          type: "spring",
-                          duration: 0.5,
-                        }}
-                        exit={{ y: -10, opacity: 0 }}
-                      >
-                        <li>
-                          <LinkWithProgress href="/dashboard">
-                            <Dashboard /> Dashboard
-                          </LinkWithProgress>
-                        </li>
-
-                        <li>
-                          <LinkWithProgress href="/account-settings">
-                            <Settings /> Account Settings
-                          </LinkWithProgress>
-                        </li>
-                      </motion.ul>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-
-                <LinkWithProgress
-                  href="/notifications"
-                  className={classes.notificationContainer}
-                  aria-label={`View notifications${unreadNotifications ? ' - You have unread messages' : ''}`}
-                >
-                  {unreadNotifications && <div className="notify-banner"></div>}
-                  <NotificationIcon className={classes.notificationIcon} />
-                </LinkWithProgress>
-
-                <button
-                  className={classes.hamburgerMenuButton}
-                  onClick={() => setIsMainSidebar(true)}
-                  aria-label="Open navigation menu"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Menu
-                    className={classes.hamburgerMenu}
-                    whileHover={{
-                      scale: 1.1,
-                      transition: {
-                        type: "spring",
-                        duration: 0.3,
-                      },
-                    }}
-                    whileTap={{
-                      scale: 1,
-                      rotate: 180,
-                    }}
-                  />
-                </button>
-              </div>
-            )}
+              <button
+                className={classes.hamburgerMenuButton}
+                onClick={() => setIsMainSidebar(true)}
+                aria-label="Open navigation menu"
+              >
+                <Menu
+                  className={classes.hamburgerMenu}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9, rotate: 180 }}
+                />
+              </button>
+            </div>
           </div>
         </nav>
-      </header>
+      </header >
     </>
   );
 }

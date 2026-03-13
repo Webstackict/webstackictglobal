@@ -92,7 +92,7 @@ export default function EnrollmentForm({ cohorts = [] }) {
                         <option value="">Choose a cohort</option>
                         {cohorts.map((cohort) => (
                             <option key={cohort.id} value={cohort.id}>
-                                {cohort.department?.name || "Premium Program"} - {cohort.label} - Starts {cohort.start_date}
+                                {cohort.department?.name || "Program"} - {cohort.label || cohort.footer} - Starts {new Date(cohort.start_date).toLocaleDateString()}
                             </option>
                         ))}
                     </select>

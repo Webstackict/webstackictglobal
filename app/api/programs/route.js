@@ -3,8 +3,15 @@ import { prisma } from '@/lib/prisma';
 
 export async function GET() {
     try {
-        const programs = await prisma.program.findMany({
-            orderBy: { createdAt: 'desc' },
+        const programs = await prisma.programs.findMany({
+            include: {
+                instructors: {
+                    include: {
+                        instructor: true
+                    }
+                }
+            },
+            orderBy: { created_at: 'desc' },
         });
         return NextResponse.json(programs, { status: 200 });
     } catch (error) {
@@ -18,23 +25,34 @@ export async function POST(request) {
         const data = await request.json();
 
         // Basic validation
-        if (!data.title || !data.slug || !data.description || !data.duration) {
+        if (!data.name || !data.slug || !data.short_description || !data.duration) {
             return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        const newProgram = await prisma.program.create({
+        const newProgram = await prisma.programs.create({
             data: {
-                title: data.title,
+                name: data.name,
                 slug: data.slug,
-                description: data.description,
+                short_description: data.short_description,
+                full_description: data.full_description || null,
                 duration: data.duration,
                 price: parseFloat(data.price) || 0,
-                startDate: data.startDate ? new Date(data.startDate) : null,
-                instructor: data.instructor || null,
-                imageUrl: data.imageUrl || null,
-                status: data.status || 'ACTIVE',
+                discount_price: data.discount_price ? parseFloat(data.discount_price) : null,
+                image_url: data.image_url || null,
+                is_active: data.is_active !== undefined ? data.is_active : true,
+                certification: data.certification || "industry recognized",
             },
         });
+
+        // Handle instructor assignment if provided
+        if (data.instructorIds && Array.isArray(data.instructorIds)) {
+            await prisma.program_instructors.createMany({
+                data: data.instructorIds.map(instructorId => ({
+                    program_id: newProgram.id,
+                    instructor_id: instructorId
+                }))
+            });
+        }
 
         return NextResponse.json(newProgram, { status: 201 });
     } catch (error) {

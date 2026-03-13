@@ -1,12 +1,8 @@
 "use server";
 
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createAdminClient } from "@/lib/supabase/admin";
 
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-export async function resendVerification(email, lastResend, userId) {
+export async function resendVerification(email, lastResend) {
   const now = Date.now();
   const last = lastResend ? new Date(lastResend).getTime() : 0;
 
@@ -17,18 +13,7 @@ export async function resendVerification(email, lastResend, userId) {
     };
   }
 
-  const cookieStore = await cookies();
-
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll: () => cookieStore.getAll(),
-      setAll: (cookiesToSet) => {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set(name, value, options);
-        });
-      },
-    },
-  });
+  const supabase = await createAdminClient();
 
   const { data, error } = await supabase.auth.resend({
     type: "signup",

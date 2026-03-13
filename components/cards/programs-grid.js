@@ -16,6 +16,8 @@ export default function ProgramsGrid({ featuredTitles = [] }) {
                     duration={program.duration}
                     description={program.description}
                     icon={program.icon}
+                    price={program.price}
+                    discountPrice={program.discount_price}
                 />
             ))}
         </div>

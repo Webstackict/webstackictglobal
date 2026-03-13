@@ -70,11 +70,11 @@ export default async function ReferralHistoryPage() {
                     <div className="hidden md:block">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] bg-white/[0.01]">
-                                    <th className="px-8 py-5">Referred User</th>
-                                    <th className="px-8 py-5">Program Domain</th>
-                                    <th className="px-8 py-5">Verification</th>
-                                    <th className="px-8 py-5 text-right">Settlement</th>
+                                <tr className="pro-table-header bg-white/[0.01]">
+                                    <th className="px-8 py-4">Referred User</th>
+                                    <th className="px-8 py-4">Program Domain</th>
+                                    <th className="px-8 py-4">Verification</th>
+                                    <th className="px-8 py-4 text-right">Settlement</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5 text-sm text-gray-300">
@@ -92,7 +92,7 @@ export default async function ReferralHistoryPage() {
                                         <tr key={act.id} className="hover:bg-white/[0.03] transition-colors group">
                                             <td className="px-8 py-6">
                                                 <div className="font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">{act.referred_user?.user_profile?.[0]?.full_name || act.referred_user?.email || "Ghost User"}</div>
-                                                <div className="text-[10px] text-gray-500 font-bold mt-1 uppercase">
+                                                <div className="pro-stat-label mt-1 !text-[9px] !normal-case opacity-70">
                                                     {new Date(act.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
                                                 </div>
                                             </td>

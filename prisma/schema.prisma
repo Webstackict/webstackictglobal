@@ -444,14 +444,15 @@ model users {
   oauth_consents              oauth_consents[]
   one_time_tokens             one_time_tokens[]
   sessions                    sessions[]
+  affiliate_requests          affiliate_requests[]
   enrollments                 enrollments[]
   event_registered_attendees  event_registered_attendees[]
   notifications               notifications[]
-  user_profile                user_profile?
-  referrals                   referrals?
-  referrals_given             referral_activities[]        @relation("referrer")
+  testimonials                testimonials[]
   referrals_received          referral_activities?         @relation("referred_user")
-  affiliate_requests          affiliate_requests[]
+  referrals_given             referral_activities[]        @relation("referrer")
+  referrals                   referrals?
+  user_profile                user_profile?
 
   @@index([instance_id])
   @@index([is_anonymous])
@@ -468,54 +469,110 @@ model categories_events {
   @@schema("public")
 }
 
+model departments {
+  id                String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String      @db.VarChar(100)
+  slug              String      @unique @db.VarChar(100)
+  theme             Json?       @default("{}")
+  icon              String?     @db.VarChar(50)
+  description       String?     @db.Text
+  fee               Decimal?    @db.Decimal(12, 2)
+  duration          Int?        @default(3)
+  job_placement     Int?        @default(100)
+  created_at        DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at        DateTime?   @default(now()) @db.Timestamp(6)
+  cohorts           cohorts[]
+  enrollments       enrollments[]
+
+  @@schema("public")
+}
+
 model cohorts {
   id                       String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                     String?                    @db.VarChar(100)
+  cohort_code              String?                    @unique @db.VarChar(50)
   cohort_number            Int
-  department_id            String                     @db.Uuid
+  department_id            String?                    @db.Uuid
   event_id                 String?                    @db.Uuid
   start_date               DateTime                   @db.Date
   graduation_date          DateTime                   @db.Date
   enrollment_deadline      DateTime                   @db.Date
-  max_size                 Int                        @default(30)
+  max_size                 Int                        @default(100)
   status                   status_enum                @default(enrolling)
-  footer                   String
+  visibility_logic         String                     @default("public") @db.VarChar(50)
+  banner_url               String?
+  description              String?                    @db.Text
+  footer                   String?
   created_at               DateTime?                  @default(now()) @db.Timestamp(6)
   updated_at               DateTime?                  @default(now()) @db.Timestamp(6)
   label                    String?
-  departments              departments                @relation(fields: [department_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  duration                 Int                        @default(3)
+  online_seats             Int                        @default(0)
+  onsite_seats             Int                        @default(0)
   events                   events?                    @relation(fields: [event_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  departments              departments?               @relation(fields: [department_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
   enrollments              enrollments[]
-  scholarship_applications scholarship_applications[]
   referral_activities      referral_activities[]
+  scholarship_applications scholarship_applications[]
 
   @@schema("public")
 }
 
-model departments {
+model programs {
   id                       String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   slug                     String                     @unique
   name                     String                     @unique @db.VarChar(50)
-  description              String                     @db.VarChar(250)
-  fee                      Decimal                    @default(250000) @db.Decimal(12, 2)
-  curriculum               Json
+  short_description        String                     @db.VarChar(250)
+  full_description         String?                    @db.Text
+  price                    Decimal                    @default(250000) @db.Decimal(12, 2)
+  discount_price           Decimal?                   @db.Decimal(12, 2)
+  duration                 String                     @default("3 months") @db.VarChar(50)
+  image_url                String?
+  is_active                Boolean                    @default(true)
+  curriculum               Json?
   additional_skills        Json?
-  theme                    String?                    @db.VarChar(50)
-  icon                     String?                    @db.VarChar(20)
-  job_placement            Int?
   certification            String                     @default("industry recognized") @db.VarChar(50)
   created_at               DateTime?                  @default(now()) @db.Timestamp(6)
   updated_at               DateTime?                  @default(now()) @db.Timestamp(6)
-  cohorts                  cohorts[]
   enrollments              enrollments[]
+  instructors              program_instructors[]
   scholarship_applications scholarship_applications[]
 
+  @@schema("public")
+}
+
+model instructors {
+  id              String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  full_name       String               @db.VarChar(100)
+  title           String?              @db.VarChar(100)
+  photo_url       String?
+  bio             String?              @db.Text
+  expertise       String?              @db.VarChar(255)
+  socials         Json?                @default("{}")
+  is_active       Boolean              @default(true)
+  created_at      DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at      DateTime?            @default(now()) @db.Timestamp(6)
+  programs        program_instructors[]
+
+  @@schema("public")
+}
+
+model program_instructors {
+  program_id    String      @db.Uuid
+  instructor_id String      @db.Uuid
+  program       programs    @relation(fields: [program_id], references: [id], onDelete: Cascade)
+  instructor    instructors @relation(fields: [instructor_id], references: [id], onDelete: Cascade)
+
+  @@id([program_id, instructor_id])
   @@schema("public")
 }
 
 model enrollments {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id            String?              @db.Uuid
-  department_id      String               @db.Uuid
+  program_id         String               @db.Uuid
   cohort_id          String               @db.Uuid
+  department_id      String?              @db.Uuid
   payment_status     payment_status_enum  @default(pending)
   paystack_reference String?              @unique
   paystack_auth_url  String?              @unique
@@ -524,12 +581,31 @@ model enrollments {
   full_name          String?
   email              String?
   phone              String?
-  program            String?
-  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  cohorts            cohorts              @relation(fields: [cohort_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  departments        departments          @relation(fields: [department_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  gender             String?
+  address            String?
+  profile_details    Json?                @default("{}")
+  program            programs             @relation(fields: [program_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  cohort             cohorts              @relation(fields: [cohort_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  departments        departments?         @relation(fields: [department_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
   users              users?               @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
   referral_activity  referral_activities?
+  payments           payments[]
+
+  @@schema("public")
+}
+
+model payments {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  enrollment_id      String               @db.Uuid
+  amount             Decimal              @db.Decimal(12, 2)
+  currency           String               @default("NGN")
+  status             payment_status_enum  @default(pending)
+  reference          String?              @unique
+  provider           String               @default("paystack")
+  metadata           Json?
+  created_at         DateTime?            @default(now()) @db.Timestamp(6)
+  updated_at         DateTime?            @default(now()) @db.Timestamp(6)
+  enrollment         enrollments          @relation(fields: [enrollment_id], references: [id], onDelete: Cascade)
 
   @@schema("public")
 }
@@ -677,55 +753,106 @@ model scholarship_applications {
   phone            String
   country          String?                 @default("Nigeria")
   state            String
-  department_id    String                  @db.Uuid
+  program_id       String                  @db.Uuid
   experience_level experience_level_enum
-  motivation       String                  @db.Text
+  motivation       String
   portfolio_url    String?
   linkedin_url     String?
   status           scholarship_status_enum @default(pending)
   score            Int?
-  review_notes     String?                 @db.Text
+  review_notes     String?
   cohort_id        String?                 @db.Uuid
   submitted_at     DateTime                @default(now()) @db.Timestamptz(6)
   reviewed_at      DateTime?               @db.Timestamptz(6)
   referral_code    String?
-
-  departments departments @relation(fields: [department_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  cohorts     cohorts?    @relation(fields: [cohort_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cohorts          cohorts?                @relation(fields: [cohort_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  programs         programs                @relation(fields: [program_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([email])
   @@index([status])
-  @@index([department_id])
+  @@index([program_id])
   @@schema("public")
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model testimonials {
-  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  id               String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id          String?                 @db.Uuid
   name             String
-  student_photo    String?
-  role_at_company  String?
-  program_studied  String?
-  testimonial_text String
+  email            String?                 @db.VarChar(255)
+  avatar_url       String?
+  video_url        String?
+  rating           Int                     @default(5)
+  program          String?                 @db.VarChar(100)
+  role_at_company  String?                 @db.VarChar(100)
+  review_message   String                  @db.Text
+  status           testimonial_status_enum @default(pending)
+  created_at       DateTime?               @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime?               @default(now()) @db.Timestamptz(6)
+  users            users?                  @relation(fields: [user_id], references: [id], onDelete: SetNull, onUpdate: NoAction)
 
   @@schema("public")
 }
 
 model user_profile {
-  user_id      String    @id @db.Uuid
-  full_name    String?   @db.VarChar(150)
-  display_name String?   @db.VarChar(50)
-  phone        String?   @db.VarChar(20)
-  created_at   DateTime? @default(now()) @db.Timestamp(6)
-  updated_at       DateTime?                @default(now()) @db.Timestamp(6)
-  affiliate_status affiliate_status_enum    @default(none)
-  bank_name        String?                  @db.VarChar(100)
-  account_name     String?                  @db.VarChar(150)
-  account_number   String?                  @db.VarChar(20)
-  payout_method    String?                  @default("Bank Transfer") @db.VarChar(50)
+  user_id          String                @id @db.Uuid
+  full_name        String?               @db.VarChar(150)
+  display_name     String?               @db.VarChar(50)
+  phone            String?               @db.VarChar(20)
+  created_at       DateTime?             @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?             @default(now()) @db.Timestamp(6)
+  account_name     String?               @db.VarChar(150)
+  account_number   String?               @db.VarChar(20)
+  affiliate_status affiliate_status_enum @default(none)
+  bank_name        String?               @db.VarChar(100)
+  payout_method    String?               @default("Bank Transfer") @db.VarChar(50)
   photo_url        String?
-  users            users                    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users            users                 @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+model referrals {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id         String   @unique @db.Uuid
+  referral_code   String   @unique
+  commission_rate Decimal  @default(10.0) @db.Decimal(5, 2)
+  total_earned    Decimal  @default(0) @db.Decimal(12, 2)
+  total_referrals Int      @default(0)
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime @default(now()) @db.Timestamptz(6)
+  users           users    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+model referral_activities {
+  id                String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  referrer_id       String                 @db.Uuid
+  referred_user_id  String                 @unique @db.Uuid
+  cohort_id         String                 @db.Uuid
+  enrollment_id     String                 @unique @db.Uuid
+  commission_amount Decimal                @db.Decimal(12, 2)
+  created_at        DateTime               @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime               @default(now()) @db.Timestamptz(6)
+  payment_amount    Decimal                @db.Decimal(12, 2)
+  referral_type     referral_type_enum     @default(enrollment)
+  status            commission_status_enum @default(pending)
+  cohorts           cohorts                @relation(fields: [cohort_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  enrollments       enrollments            @relation(fields: [enrollment_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  referred_user     users                  @relation("referred_user", fields: [referred_user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  referrer          users                  @relation("referrer", fields: [referrer_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+model affiliate_requests {
+  id         String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id    String                @db.Uuid
+  status     affiliate_status_enum @default(pending)
+  created_at DateTime              @default(now()) @db.Timestamptz(6)
+  updated_at DateTime              @default(now()) @db.Timestamptz(6)
+  users      users                 @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@schema("public")
 }
@@ -817,7 +944,9 @@ enum notifications_status_enum {
 
 enum payment_status_enum {
   pending
-  paid
+  successful
+  failed
+  cancelled
 
   @@schema("public")
 }
@@ -848,42 +977,6 @@ enum scholarship_status_enum {
   @@schema("public")
 }
 
-model referrals {
-  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id         String   @unique @db.Uuid
-  referral_code   String   @unique
-  commission_rate Decimal  @default(10.0) @db.Decimal(5, 2)
-  total_earned    Decimal  @default(0) @db.Decimal(12, 2)
-  total_referrals Int      @default(0)
-  created_at      DateTime @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime @default(now()) @db.Timestamptz(6)
-
-  users users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@schema("public")
-}
-
-model referral_activities {
-  id                String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  referrer_id       String                 @db.Uuid
-  referred_user_id  String                 @unique @db.Uuid
-  cohort_id         String                 @db.Uuid
-  enrollment_id     String                 @unique @db.Uuid
-  commission_amount Decimal                @db.Decimal(12, 2)
-  payment_amount    Decimal                @db.Decimal(12, 2)
-  referral_type     referral_type_enum     @default(enrollment)
-  status            commission_status_enum @default(pending)
-  created_at        DateTime               @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime               @default(now()) @db.Timestamptz(6)
-
-  referrer      users       @relation("referrer", fields: [referrer_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  referred_user users       @relation("referred_user", fields: [referred_user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  cohorts       cohorts     @relation(fields: [cohort_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  enrollments   enrollments @relation(fields: [enrollment_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-
-  @@schema("public")
-}
-
 enum affiliate_status_enum {
   none
   pending
@@ -908,14 +1001,11 @@ enum commission_status_enum {
   @@schema("public")
 }
 
-model affiliate_requests {
-  id         String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id    String                @db.Uuid
-  status     affiliate_status_enum @default(pending)
-  created_at DateTime              @default(now()) @db.Timestamptz(6)
-  updated_at DateTime              @default(now()) @db.Timestamptz(6)
-
-  users users @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+enum testimonial_status_enum {
+  pending
+  approved
+  declined
 
   @@schema("public")
 }
+

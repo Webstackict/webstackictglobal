@@ -59,45 +59,61 @@ export const metadata = {
   },
 };
 
+import { prisma } from "@/lib/prisma";
+
 export default async function GeneralLayout({ children }) {
   const supabase = await createSupabaseServerClient();
 
-  // NOTE: These fetches are sequential. If scale permits, consider Promise.all 
-  // or moving notifications to a client component with SWR/React Query 
-  // if this layout becomes a bottleneck.
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  let notifications;
-  let userDetails;
-  let isUnread;
+  let notifications = [];
+  let userDetails = null;
+  let isUnread = false;
 
   if (user) {
     try {
-      const { data, error } = await supabase
-        .from("notifications")
-        .select("*")
-        .eq("user_id", user.id);
-      if (error) throw error;
+      // 1. Fetch user profile and notifications via Prisma for stability
+      const [profile, userNotifications] = await Promise.all([
+        prisma.user_profile.findUnique({
+          where: { user_id: user.id }
+        }),
+        prisma.notifications.findMany({
+          where: { user_id: user.id },
+          orderBy: { created_at: 'desc' },
+          take: 20
+        })
+      ]);
 
-      notifications = data;
+      // Convert BigInt IDs and DateTime objects from Prisma for safe serialization
+      notifications = userNotifications.map(n => ({
+        ...n,
+        id: n.id.toString(), // BigInt to String
+        created_at: n.created_at?.toISOString(),
+        updated_at: n.updated_at?.toISOString()
+      }));
 
-      isUnread = data.some((n) => n.status === "pending");
+      isUnread = notifications.some((n) => n.status === "pending");
 
       userDetails = {
         id: user.id,
         email: user.email,
-        phone: user.phone || "",
-        fullName: user.full_name || user.user_metadata?.full_name || "",
-        displayName: user.display_name || "",
+        phone: profile?.phone || "",
+        fullName: profile?.full_name || user.user_metadata?.full_name || "User",
+        displayName: profile?.display_name || "",
         authProviders: user.app_metadata.providers,
       };
     } catch (error) {
-      console.error("Supabase data fetch error:", error.message);
-      // Fallback UI for internal data errors while keeping layout intact
+      console.error("Prisma/Supabase layout fetch error:", error.message);
+      // Fallback UI
       notifications = [];
-      userDetails = null;
+      userDetails = {
+        id: user.id,
+        email: user.email,
+        fullName: user.user_metadata?.full_name || "User",
+        authProviders: user.app_metadata.providers,
+      };
       isUnread = false;
     }
   }

@@ -1,9 +1,10 @@
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 import classes from "./cohort-timeline-item.module.css";
+import { formatDate } from "@/util/util";
 
 export default function CohortTimelineItem({ title, date, info, icon, theme }) {
   const isDeadline = title.toLowerCase().includes("deadline");
- 
+
   const TimelineIcon = iconsConfig[icon];
   return (
     <div className={classes.cohortItem}>
@@ -13,7 +14,7 @@ export default function CohortTimelineItem({ title, date, info, icon, theme }) {
       <div className={classes.details}>
         <h4 className={classes.cohortTitle}>{title}</h4>
         <p className={isDeadline ? `${classes.date} red` : classes.date}>
-          {date}
+          {formatDate(date)}
         </p>
         <p className={classes.info}>{info}</p>
       </div>

@@ -1,35 +1,14 @@
-"use server";
-
-// import { createSupabaseServerClient } from "@/lib/db/supabaseServer";
-import classes from "../page.module.css";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { redirect } from "next/navigation";
-import LinkWithProgress from "@/components/ui/Link-with-progress";
-import ResendButton from "@/components/ui/resend-link-button";
+import classes from "../page.module.css";
 import AutoRefreshIfVerified from "@/components/poll/autorefreshVerification";
-
-const supabaseURL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+import ResendButton from "@/components/ui/resend-link-button";
 
 export default async function VerifyEmail({ searchParams }) {
   const params = await searchParams;
   const email = params.email;
 
-  const cookieStore = await cookies();
-
-  const supabase = createServerClient(supabaseURL, serviceRoleKey, {
-    cookies: {
-      getAll() {
-        return cookieStore.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          cookieStore.set(name, value, options);
-        });
-      },
-    },
-  });
+  const supabase = await createAdminClient();
 
   const { data: userRaw, error: listError } =
     await supabase.auth.admin.listUsers({

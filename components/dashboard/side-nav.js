@@ -39,6 +39,11 @@ const links = [
     href: "/dashboard/referrals/earnings",
   },
   {
+    name: "Share Your Experience",
+    icon: "copywriting",
+    href: "/dashboard/reviews",
+  },
+  {
     name: "Notifications",
     icon: "notification",
     href: "/notifications",

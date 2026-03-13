@@ -1,4 +1,4 @@
-import { calculateProgress } from "@/util/util";
+import { calculateProgress, formatDate } from "@/util/util";
 import Badge from "../ui/badge";
 import classes from "./ongoing-cohorts-grid.module.css";
 
@@ -31,7 +31,7 @@ export default function OngoingCohortsGrid({ ongoingCohorts = [] }) {
             <div className={classes.infoSection}>
               <div className={classes.infoRow}>
                 <span className={classes.label}>Started:</span>
-                <span>{cohort.start_date}</span>
+                <span>{formatDate(cohort.start_date)}</span>
               </div>
               <div className={classes.infoRow}>
                 <span className={classes.label}>Students</span>

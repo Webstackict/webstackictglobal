@@ -14,11 +14,29 @@ export default function AdminLoginPage() {
         e.preventDefault();
         setIsLoading(true);
 
-        // Simulate API call for JWT login
-        setTimeout(() => {
-            document.cookie = "admin_token=demo-jwt-token; path=/";
+        try {
+            const response = await fetch('/api/admin/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Show error message from API
+                alert(data.error || 'Login failed');
+                return;
+            }
+
+            // Success!
             router.push("/admin/dashboard");
-        }, 1500);
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('An unexpected error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

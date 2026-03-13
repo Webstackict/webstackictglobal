@@ -33,9 +33,9 @@ export async function POST(request) {
             prefix = user.email.split("@")[0].toUpperCase().replace(/[^A-Z]/g, '').substring(0, 5);
         }
 
-        const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
-        const year = new Date().getFullYear();
-        const referralCode = `WEBSTACK-${prefix}-${randomStr}-${year}`;
+        const randomNum = Math.floor(100 + Math.random() * 900); // 3 digits
+        const randomChar = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 1 letter
+        const referralCode = `Webstack-${randomNum}${randomChar}`;
 
         const newReferral = await prisma.referrals.create({
             data: {

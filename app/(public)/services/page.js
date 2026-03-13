@@ -37,7 +37,7 @@ export default function Services() {
         subtitle="Empowering Africa's Tech Ecosystem through comprehensive training, incubation, and cutting-edge technology solutions"
         tagline={
           <>
-            <Tagline text="Premuim Tech Services" icon="services" />
+            <Tagline text="Premium Tech Services" icon="services" />
           </>
         }
         primaryBtnText="Explore Our Services"
@@ -49,10 +49,11 @@ export default function Services() {
         label="services"
         title={
           <>
-            Our <span className="gradientText">Premuim Services</span>
+            Our <span className="gradientText">Premium Services</span>
           </>
         }
-        subtitle="Comprehensive tech solutions designed to accelerate your growth and success in the digital economy."
+        subtitle="WEBSTACK offers world-class technology services designed to empower individuals and organizations across Africa. 
+                     From our elite training programs to professional consulting, discover our premium suite of digital solutions."
         sectionBgColor="sectionLightBlue"
       >
         <ServicesCardGrid />
@@ -126,9 +127,9 @@ export default function Services() {
       <CTASection
         title={
           <>
-            Ready{" "}
-            <span className="gradientText">
-              To Transform Your <br /> Business / Career?
+            Professional{" "}
+            <span>
+              Premium Tech <br /> Services
             </span>
           </>
         }

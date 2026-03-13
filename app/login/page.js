@@ -72,7 +72,7 @@ export default function LoginPage() {
                     </button>
 
                     <div className={classes.signupRedirect}>
-                        <p>Don't have an account? <Link href="/signup">Sign Up</Link></p>
+                        <p>Don&apos;t have an account? <Link href="/signup">Sign Up</Link></p>
                     </div>
                 </div>
             </div>

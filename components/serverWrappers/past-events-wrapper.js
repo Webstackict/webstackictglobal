@@ -23,6 +23,6 @@ export default async function PastEventsWrapper() {
     .order("event_date", { ascending: false })
     .limit(10);
 
-  if (error) return <p className="data-fetching-error">Something went wrong</p>;
+  if (error || !events) return <p className="data-fetching-error">Something went wrong</p>;
   return <ActivitiesGrid activities={events} href="event-gallery" />;
 }
