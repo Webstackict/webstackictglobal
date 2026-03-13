@@ -3,12 +3,10 @@ import classes from "./page.module.css";
 
 import React, { Suspense } from "react";
 import Tagline from "@/components/ui/tagline";
-import { graduateTestiomnials } from "@/lib/contents/testimonialData";
 import { faqData } from "@/lib/contents/faqData";
 
 import Section from "@/components/section";
 import ImmersiveCardGrid from "@/components/cards/immersive-card-grid";
-import TestimonialGrid from "@/components/cards/testimonial-grid";
 import FaqSection from "@/components/FAQ/faq";
 import CTASection from "@/components/cta/call-to-action-section";
 import LearningModesGrid from "@/components/academy/learning-modes";
@@ -108,18 +106,6 @@ export default function Academy() {
         />
       </Section>
 
-      <Section
-        label="testimonials"
-        title={
-          <>
-            Success <span className="gradientText">Stories</span>
-          </>
-        }
-        subtitle="Real transformations from our alumni who are now leading tech innovation across Africa and beyond."
-        sectionBgColor="sectionLightBlue"
-      >
-        <TestimonialGrid testimonials={graduateTestiomnials} />
-      </Section>
 
       <Section
         label="FAQ "
