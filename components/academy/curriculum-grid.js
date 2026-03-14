@@ -8,7 +8,7 @@ import { iconsConfig } from "@/lib/icons/iconsConfig";
 export default function CurriculumGrid({ items, department }) {
   return (
     <div className={classes.grid}>
-      {items.map((curriculum, idx) => {
+      {(items || []).map((curriculum, idx) => {
         const CurriculumIcon = iconsConfig[curriculum.icon] || iconsConfig["code"];
         const gradient = curriculum.gradient && Array.isArray(curriculum.gradient)
           ? curriculum.gradient

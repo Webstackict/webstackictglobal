@@ -4,12 +4,13 @@ import { containerVarients, childVarients } from "@/lib/animations";
 import { use, useEffect, useState, useTransition } from "react";
 import AcademyPricingCard from "./academy-pricing-card";
 import CohortTimelineCard from "./cohort-timeline-card";
-import classes from "./pricing-&-timeline-grid.module.css";
+import classes from "./pricing-and-timeline-grid.module.css";
 import { pricingData, cohortDetails } from "@/lib/contents/academy-pricingData";
 import { UserContext } from "@/store/user-context";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { supabase } from "@/lib/db/supabaseClient";
+import { safeQuerySelector } from "@/util/util";
 
 export default function PricingAndTimelineGrid({
   department,
@@ -28,8 +29,8 @@ export default function PricingAndTimelineGrid({
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
+    if (hash && hash !== "#") {
+      const element = safeQuerySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
         element.classList.add("highlight-section");
@@ -45,13 +46,18 @@ export default function PricingAndTimelineGrid({
       return;
     }
 
+    if (!nextCohortId) {
+      toast.error("Enrollment for this program is currently closed. Please check back later.");
+      return;
+    }
+
     setLoading(true);
     try {
       const { count, error } = await supabase
         .from("enrollments")
         .select("*", { count: "exact", head: true })
         .eq("cohort_id", nextCohortId)
-        .eq("payment_status", "paid");
+        .eq("payment_status", "PAID");
 
       if (error) throw error;
 
@@ -93,13 +99,18 @@ export default function PricingAndTimelineGrid({
       return;
     }
 
+    if (!nextCohortId) {
+      toast.error("Enrollment for this program is currently closed. Please check back later.");
+      return;
+    }
+
     setLoading(true);
     try {
       const { count, error } = await supabase
         .from("enrollments")
         .select("*", { count: "exact", head: true })
         .eq("cohort_id", nextCohortId)
-        .eq("payment_status", "paid");
+        .eq("payment_status", "PAID");
 
       if (error) throw error;
 
@@ -114,7 +125,7 @@ export default function PricingAndTimelineGrid({
           .eq("user_id", userId)
           .eq("department_id", departmentId)
           .eq("cohort_id", nextCohortId)
-          .eq("payment_status", "pending");
+          .eq("payment_status", "PENDING");
 
         if (deleteDataError) throw deleteDataError;
 
@@ -156,7 +167,7 @@ export default function PricingAndTimelineGrid({
           .eq("user_id", userId)
           .eq("department_id", departmentId)
           .eq("cohort_id", nextCohortId)
-          .eq("payment_status", "pending");
+          .eq("payment_status", "PENDING");
 
         if (deleteDataError) throw deleteDataError;
 

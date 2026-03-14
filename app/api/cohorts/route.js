@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getFirstMonday, getLastMonday } from '@/lib/util/cohort-dates';
 
 export async function GET(request) {
     try {
@@ -13,12 +14,35 @@ export async function GET(request) {
 
         const cohorts = await prisma.cohorts.findMany({
             where,
+            include: {
+                _count: {
+                    select: { enrollments: true }
+                }
+            },
             orderBy: {
-                start_date: 'desc',
+                start_date: "desc",
             },
         });
 
-        return NextResponse.json(cohorts, { status: 200 });
+        // Enrich with pricing stats
+        const data = await Promise.all(cohorts.map(async (cohort) => {
+            const enrollments = await prisma.enrollments.findMany({
+                where: { cohort_id: cohort.id, payment_status: 'PAID' },
+                select: { applied_price: true }
+            });
+
+            const earlyBirdCount = enrollments.filter(e => Number(e.applied_price) === 200000).length;
+            const regularCount = enrollments.filter(e => Number(e.applied_price) === 250000).length;
+
+            return {
+                ...cohort,
+                total_enrollments: cohort._count.enrollments,
+                early_bird_count: earlyBirdCount,
+                regular_count: regularCount,
+            };
+        }));
+
+        return NextResponse.json(data, { status: 200 });
     } catch (error) {
         console.error('Error fetching cohorts:', error);
         return NextResponse.json({
@@ -28,42 +52,79 @@ export async function GET(request) {
     }
 }
 
-export async function POST(request) {
+export async function POST(req) {
     try {
-        const data = await request.json();
+        const body = await req.json();
+        let {
+            name, cohort_code, cohort_number, start_date, graduation_date,
+            enrollment_deadline, max_size, status, visibility_logic,
+            description, label, duration, month, year, registration_start
+        } = body;
 
-        // Basic validation
-        if (!data.name || !data.cohort_code || !data.start_date || !data.enrollment_deadline) {
-            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        // Auto-calculate dates if month/year provided
+        if (month && year) {
+            const m = parseInt(month);
+            const y = parseInt(year);
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            name = `${monthNames[m - 1]} ${y} Cohort`;
+            cohort_code = `WS-${y}-${monthNames[m - 1].substring(0, 3).toUpperCase()}`;
+
+            const firstMon = getFirstMonday(m - 1, y);
+            const lastMon = getLastMonday(m - 1, y);
+
+            registration_start = firstMon;
+            start_date = firstMon;
+            enrollment_deadline = lastMon;
+
+            // Auto-calculate graduation
+            const grad = new Date(firstMon);
+            grad.setMonth(grad.getMonth() + parseInt(duration || 3));
+            graduation_date = grad;
         }
 
-        const newCohort = await prisma.cohorts.create({
+        const cohort = await prisma.cohorts.create({
             data: {
-                name: data.name,
-                cohort_code: data.cohort_code,
-                cohort_number: parseInt(data.cohort_number) || 0,
-                start_date: new Date(data.start_date),
-                graduation_date: new Date(data.graduation_date),
-                enrollment_deadline: new Date(data.enrollment_deadline),
-                max_size: parseInt(data.max_size) || 100,
-                status: data.status || 'enrolling',
-                visibility_logic: data.visibility_logic || 'public',
-                banner_url: data.banner_url || null,
-                description: data.description || null,
-                footer: data.footer || null,
-                label: data.label || null,
-                duration: parseInt(data.duration) || 3,
-                online_seats: parseInt(data.online_seats) || 0,
-                onsite_seats: parseInt(data.onsite_seats) || 0,
-            },
+                name,
+                cohort_code,
+                cohort_number: parseInt(cohort_number) || 0,
+                start_date: new Date(start_date),
+                graduation_date: new Date(graduation_date),
+                enrollment_deadline: new Date(enrollment_deadline),
+                registration_start: registration_start ? new Date(registration_start) : null,
+                month: month ? parseInt(month) : null,
+                year: year ? parseInt(year) : null,
+                max_size: parseInt(max_size) || 100,
+                status: status || 'enrolling',
+                visibility_logic: visibility_logic || 'public',
+                description: description || null,
+                label: label || null,
+                duration: parseInt(duration) || 3
+            }
         });
 
-        return NextResponse.json(newCohort, { status: 201 });
+        // Auto-link active programs
+        const activePrograms = await prisma.programs.findMany({
+            where: { is_active: true }
+        });
+
+        if (activePrograms.length > 0) {
+            await prisma.cohort_programs.createMany({
+                data: activePrograms.map(p => ({
+                    cohort_id: cohort.id,
+                    program_id: p.id,
+                    seat_limit: 50,
+                    enrolled_count: 0
+                }))
+            });
+        }
+
+        return NextResponse.json(cohort, { status: 201 });
     } catch (error) {
-        console.error('Error creating cohort:', error);
+        console.error("Cohort creation error:", error);
         if (error.code === 'P2002') {
             return NextResponse.json({ error: 'A cohort with this code already exists' }, { status: 409 });
         }
-        return NextResponse.json({ error: 'Failed to create cohort' }, { status: 500 });
+        return NextResponse.json({ error: "Failed to create cohort", details: error.message }, { status: 500 });
     }
 }

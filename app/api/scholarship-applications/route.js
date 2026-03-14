@@ -76,6 +76,34 @@ export async function POST(request) {
             }
         }));
 
+        // 5. Handle referral tracking (10% for scholarships)
+        try {
+            const referralCode = body.referral_code || request.cookies.get('webstack_referral_code')?.value;
+            const programPrice = 250000; // Default price for scholarship commission calculation if program not found
+
+            if (referralCode) {
+                const referral = await executeWithRetry(() => prisma.referrals.findUnique({
+                    where: { referral_code: referralCode }
+                }));
+
+                if (referral) {
+                    const commissionAmount = programPrice * 0.10; // 10% for scholarship applicants
+
+                    await executeWithRetry(() => prisma.referral_activities.create({
+                        data: {
+                            referrer_id: referral.user_id,
+                            referred_user_id: null, // Applicants might not have a user_id yet
+                            scholarship_application_id: application.id,
+                            commission_amount: commissionAmount,
+                            status: 'pending'
+                        }
+                    }));
+                }
+            }
+        } catch (refError) {
+            console.error('Scholarship Referral Processing Error:', refError);
+        }
+
         return NextResponse.json({
             message: 'Application submitted successfully',
             applicationId: application.id

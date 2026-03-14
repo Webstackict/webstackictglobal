@@ -53,12 +53,32 @@ export default function AdmissionsPage() {
         }
     };
 
+    const handleStatusUpdate = async (id, payment_status, approval_status) => {
+        try {
+            const res = await fetch('/api/admin/admissions', {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id, payment_status, approval_status })
+            });
+
+            if (res.ok) {
+                toast.success("Status updated successfully");
+                fetchData();
+            } else {
+                toast.error("Failed to update status");
+            }
+        } catch (err) {
+            toast.error("An error occurred");
+        }
+    };
+
     const getStatusColor = (status) => {
         switch (status) {
-            case 'successful': return 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10';
-            case 'pending': return 'text-orange-400 border-orange-400/30 bg-orange-400/10';
-            case 'failed': return 'text-red-400 border-red-400/30 bg-red-400/10';
-            case 'cancelled': return 'text-gray-400 border-gray-400/30 bg-gray-400/10';
+            case 'PAID': return 'text-emerald-400 border-emerald-400/30 bg-emerald-400/10';
+            case 'PENDING': return 'text-orange-400 border-orange-400/30 bg-orange-400/10';
+            case 'AWAITING_VERIFICATION': return 'text-purple-400 border-purple-400/30 bg-purple-400/10';
+            case 'FAILED': return 'text-red-400 border-red-400/30 bg-red-400/10';
+            case 'REJECTED': return 'text-gray-400 border-gray-400/30 bg-gray-400/10';
             default: return 'text-gray-400 border-gray-400/30 bg-gray-400/10';
         }
     };
@@ -131,10 +151,10 @@ export default function AdmissionsPage() {
                             className="bg-[#111623] border border-white/10 text-gray-300 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500/50 shadow-inner appearance-none cursor-pointer pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3Ryb2tlPSIjOWNhM2FmIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZD0iTTE5IDlsLTcgNy03LTciLz48L3N2Zz4=')] bg-no-repeat bg-[right_0.75rem_center] bg-[length:1.25em_1.25em]"
                         >
                             <option value="">Status: Any</option>
-                            <option value="successful">Paid</option>
-                            <option value="pending">Pending</option>
-                            <option value="failed">Failed</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option value="PAID">Paid</option>
+                            <option value="AWAITING_VERIFICATION">Verify Bank</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="FAILED">Failed</option>
                         </select>
                     </div>
                 </div>
@@ -192,21 +212,41 @@ export default function AdmissionsPage() {
                                                         <GraduationCap className="w-3.5 h-3.5 text-blue-400" />
                                                         {row.program.name}
                                                     </div>
-                                                    <span className="text-xs text-gray-500">{row.cohort.name} ({row.cohort.code})</span>
+                                                    <span className="text-xs text-gray-500">{row.cohort.name} ({row.cohort.cohort_code})</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] uppercase tracking-wider font-bold rounded-full border ${getStatusColor(row.payment_status)}`}>
-                                                    {row.payment_status === 'successful' && <CheckCircle2 className="w-3 h-3" />}
-                                                    {row.payment_status === 'pending' && <Clock className="w-3 h-3" />}
-                                                    {row.payment_status === 'failed' && <XCircle className="w-3 h-3" />}
-                                                    {row.payment_status}
+                                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] uppercase tracking-wider font-bold rounded-full border ${getStatusColor(row.approval_status === 'AWAITING_VERIFICATION' ? 'AWAITING_VERIFICATION' : (row.approval_status === 'APPROVED' ? 'PAID' : row.payment_status))}`}>
+                                                    {row.payment_status === 'PAID' && <CheckCircle2 className="w-3 h-3" />}
+                                                    {row.approval_status === 'AWAITING_VERIFICATION' && <Clock className="w-3 h-3 text-purple-400" />}
+                                                    {row.payment_status === 'PENDING' && row.approval_status !== 'AWAITING_VERIFICATION' && <Clock className="w-3 h-3" />}
+                                                    {row.payment_status === 'FAILED' && <XCircle className="w-3 h-3" />}
+                                                    {row.approval_status === 'AWAITING_VERIFICATION' ? 'Awaiting Verification' : (row.approval_status === 'APPROVED' ? 'PAID' : row.payment_status)}
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4 text-right">
-                                                <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-                                                    <MoreVertical className="w-4 h-4" />
-                                                </button>
+                                                {row.approval_status === 'AWAITING_VERIFICATION' ? (
+                                                    <div className="flex justify-end gap-2">
+                                                        <button
+                                                            onClick={() => handleStatusUpdate(row.id, 'PAID', 'APPROVED')}
+                                                            className="p-1.5 text-emerald-500 hover:bg-emerald-500/10 rounded-lg transition-colors"
+                                                            title="Approve & Verify Payment"
+                                                        >
+                                                            <CheckCircle2 className="w-5 h-5" />
+                                                        </button>
+                                                        <button
+                                                            onClick={() => handleStatusUpdate(row.id, 'FAILED', 'REJECTED')}
+                                                            className="p-1.5 text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                                                            title="Reject Payment"
+                                                        >
+                                                            <XCircle className="w-5 h-5" />
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                                                        <MoreVertical className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </td>
                                         </tr>
                                     ))

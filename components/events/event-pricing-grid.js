@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import classes from "./event-pricing-grid.module.css";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
-import { currencyFormatter } from "@/util/util";
+import { currencyFormatter, safeQuerySelector } from "@/util/util";
 import {
   checkChildVarients,
   childVarients,
@@ -40,8 +40,8 @@ export default function EventPricingGrid({ event, isPassed, isRegistered }) {
   useEffect(() => {
     const hash = window.location.hash;
 
-    if (hash) {
-      const element = document.querySelector(hash);
+    if (hash && hash !== "#") {
+      const element = safeQuerySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
         element.classList.add("highlight-section");

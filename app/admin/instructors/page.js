@@ -31,21 +31,29 @@ export default function InstructorsPage() {
         }
     });
 
+    const [programs, setPrograms] = useState([]);
+
     useEffect(() => {
-        fetchInstructors();
+        fetchData();
     }, []);
 
-    const fetchInstructors = async () => {
+    const fetchData = async () => {
         setIsLoading(true);
         try {
-            const res = await fetch('/api/instructors');
-            if (res.ok) {
-                const data = await res.json();
-                setInstructors(data);
+            const [insRes, progRes] = await Promise.all([
+                fetch('/api/instructors'),
+                fetch('/api/programs')
+            ]);
+
+            if (insRes.ok && progRes.ok) {
+                const insData = await insRes.json();
+                const progData = await progRes.json();
+                setInstructors(insData);
+                setPrograms(progData);
             }
         } catch (error) {
-            console.error("Failed to fetch instructors", error);
-            toast.error("Failed to load instructors");
+            console.error("Failed to fetch data", error);
+            toast.error("Failed to load instructors and programs");
         } finally {
             setIsLoading(false);
         }
@@ -61,7 +69,8 @@ export default function InstructorsPage() {
             bio: "",
             photo_url: "",
             is_active: true,
-            socials: { linkedin: "", twitter: "", website: "" }
+            socials: { linkedin: "", twitter: "", website: "" },
+            programIds: []
         });
         setIsCreateModalOpen(true);
     };
@@ -69,6 +78,8 @@ export default function InstructorsPage() {
     const handleOpenEditModal = (instructor) => {
         setIsEditMode(true);
         setActiveInstructorId(instructor.id);
+        const assignedProgramIds = instructor.programs?.map(p => p.program_id) || [];
+
         setFormData({
             full_name: instructor.full_name,
             title: instructor.title || "",
@@ -80,9 +91,19 @@ export default function InstructorsPage() {
                 linkedin: instructor.socials?.linkedin || "",
                 twitter: instructor.socials?.twitter || "",
                 website: instructor.socials?.website || ""
-            }
+            },
+            programIds: assignedProgramIds
         });
         setIsCreateModalOpen(true);
+    };
+
+    const toggleProgram = (id) => {
+        setFormData(prev => ({
+            ...prev,
+            programIds: prev.programIds.includes(id)
+                ? prev.programIds.filter(p => p !== id)
+                : [...prev.programIds, id]
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -100,7 +121,7 @@ export default function InstructorsPage() {
             if (res.ok) {
                 toast.success(`Instructor ${isEditMode ? 'updated' : 'created'} successfully!`);
                 setIsCreateModalOpen(false);
-                fetchInstructors();
+                fetchData();
             } else {
                 const err = await res.json();
                 toast.error(err.error || "Failed to save instructor");
@@ -318,6 +339,26 @@ export default function InstructorsPage() {
                             <div className="flex items-center gap-3">
                                 <input type="checkbox" id="is_active" checked={formData.is_active} onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })} className="w-4 h-4 rounded border-white/10 bg-[#1a2333] text-blue-600 focus:ring-blue-500" />
                                 <label htmlFor="is_active" className="text-sm font-medium text-gray-300">Active status (publicly visible)</label>
+                            </div>
+
+                            {/* Program Assignment */}
+                            <div className="space-y-3 pt-4 border-t border-white/5">
+                                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wide block">Assigned Programs</label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    {programs.map(prog => (
+                                        <button
+                                            key={prog.id}
+                                            type="button"
+                                            onClick={() => toggleProgram(prog.id)}
+                                            className={`p-3 rounded-xl border text-xs font-bold text-left transition-all ${formData.programIds.includes(prog.id)
+                                                ? 'bg-blue-600/20 border-blue-500 text-blue-400'
+                                                : 'bg-white/[0.02] border-white/5 text-gray-500 hover:border-white/10'
+                                                }`}
+                                        >
+                                            {prog.name}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="pt-6 border-t border-white/5 flex gap-3 justify-end">

@@ -18,7 +18,7 @@ export default async function ReviewsPage() {
     const enrollments = await prisma.enrollments.findMany({
         where: {
             user_id: user.id,
-            payment_status: 'successful'
+            payment_status: 'PAID'
         },
         include: {
             program: {

@@ -29,10 +29,20 @@ export default function AcademyPricingCard({
 
         <div className={classes.priceSection}>
           <div className={classes.priceRow}>
-            <span className={classes.price}>
-              {currencyFormatter.format(department.fee)}
-            </span>
-            {/* <span className={classes.currency}>NGN</span> */}
+            {department.discount_fee ? (
+              <>
+                <span className={classes.price}>
+                  {currencyFormatter.format(department.discount_fee)}
+                </span>
+                <span className={classes.originalPrice} style={{ textDecoration: 'line-through', opacity: 0.6, fontSize: '0.8em', marginLeft: '10px' }}>
+                  {currencyFormatter.format(department.fee)}
+                </span>
+              </>
+            ) : (
+              <span className={classes.price}>
+                {currencyFormatter.format(department.fee)}
+              </span>
+            )}
           </div>
           <p className={classes.priceSub}>
             Complete {department.duration} months intensive program
@@ -53,7 +63,7 @@ export default function AcademyPricingCard({
           <div className={classes.paymentGrid}>
             <button
               className={classes.paymentCard}
-              disabled={loading || (isEnrolled && paymentStatus)}
+              disabled={loading || !department.next_cohort_id || (isEnrolled && paymentStatus)}
               onClick={() => {
                 if (isEnrolled) {
                   if (paymentStatus) {
@@ -68,10 +78,16 @@ export default function AcademyPricingCard({
               type="button"
             >
               <p className={classes.paymentTitle}>
-                {loading ? "Processing..." : isEnrolled && paymentStatus ? "Enrolled & Secured" : "Full Payment"}
+                {loading
+                  ? "Processing..."
+                  : !department.next_cohort_id
+                    ? "Enrollment TBA"
+                    : isEnrolled && paymentStatus
+                      ? "Enrolled & Secured"
+                      : "Full Payment"}
               </p>
               <p className={classes.paymentHighlight}>
-                {currencyFormatter.format(department.fee)}
+                {currencyFormatter.format(department.discount_fee || department.fee)}
               </p>
             </button>
 

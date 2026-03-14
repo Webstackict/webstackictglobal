@@ -10,7 +10,7 @@ export async function GET() {
     try {
         // 1. Total Students (Successful Enrollments)
         const totalStudents = await prisma.enrollments.count({
-            where: { payment_status: 'successful' }
+            where: { payment_status: 'PAID' }
         });
 
         // 2. Active Programs
@@ -24,7 +24,7 @@ export async function GET() {
 
         const monthlyRevenue = await prisma.payments.aggregate({
             where: {
-                status: 'successful',
+                status: 'PAID',
                 created_at: { gte: thirtyDaysAgo }
             },
             _sum: {

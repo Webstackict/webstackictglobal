@@ -12,12 +12,21 @@ export default function LinkWithProgress({ href, children, ...props }) {
 
   function handleClick(e) {
     e.preventDefault();
-    if (pathName === href) {
-      nProgress.done();
+    const isAnchor = href?.startsWith("#");
+    if (pathName === href || isAnchor || !href || href === "#") {
+      try {
+        nProgress.done();
+      } catch (err) {
+        // Ignore nProgress errors
+      }
       return;
     }
 
-    nProgress.start();
+    try {
+      nProgress.start();
+    } catch (err) {
+      console.warn("nProgress failed to start:", err);
+    }
 
     startTransition(() => {
       router.push(href);

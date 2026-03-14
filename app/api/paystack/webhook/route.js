@@ -42,7 +42,7 @@ export async function POST(req) {
           return;
         }
 
-        if (payment.status === 'successful') {
+        if (payment.status === 'PAID') {
           console.log(`Payment ${reference} already processed`);
           return;
         }
@@ -50,7 +50,7 @@ export async function POST(req) {
         await tx.payments.update({
           where: { id: payment.id },
           data: {
-            status: 'successful',
+            status: 'PAID',
             updated_at: new Date()
           }
         });
@@ -59,7 +59,8 @@ export async function POST(req) {
         const enrollment = await tx.enrollments.update({
           where: { id: payment.enrollment_id },
           data: {
-            payment_status: 'successful',
+            payment_status: 'PAID',
+            approval_status: 'AWAITING_APPROVAL',
             updated_at: new Date()
           },
           include: {
@@ -76,7 +77,7 @@ export async function POST(req) {
         if (referralActivity) {
           await tx.referral_activities.update({
             where: { id: referralActivity.id },
-            data: { status: 'approved' } // Mark as approved after payment
+            data: { status: 'approved' } // Keep lowercase for referral status if schema not updated
           });
         }
 

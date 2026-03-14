@@ -23,7 +23,7 @@ async function seed() {
     const { data: dept } = await supabase
         .from('departments')
         .select('id')
-        .eq('slug', 'software-engineering')
+        .eq('slug', 'web-development')
         .maybeSingle();
 
     if (!dept) {
@@ -38,7 +38,7 @@ async function seed() {
         {
             department_id: dept.id,
             cohort_number: 1, // March
-            label: "March Cohort - Software Engineering",
+            label: "March Cohort - Web Development",
             start_date: "2026-03-10",
             graduation_date: "2026-06-10",
             enrollment_deadline: "2026-03-05",
@@ -52,7 +52,7 @@ async function seed() {
         {
             department_id: dept.id,
             cohort_number: 2, // April
-            label: "April Cohort - Software Engineering",
+            label: "April Cohort - Web Development",
             start_date: "2026-04-10",
             graduation_date: "2026-07-10",
             enrollment_deadline: "2026-04-05",
@@ -66,7 +66,7 @@ async function seed() {
         {
             department_id: dept.id,
             cohort_number: 3, // May
-            label: "May Cohort - Software Engineering",
+            label: "May Cohort - Web Development",
             start_date: "2026-05-10",
             graduation_date: "2026-08-10",
             enrollment_deadline: "2026-05-05",

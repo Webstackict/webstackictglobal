@@ -224,6 +224,83 @@
     text-decoration: line-through;
 }
 
+/* Pricing Engine UI */
+.pricingSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.priceRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceLabel {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+.priceValue {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #3b82f6;
+}
+
+.oldPriceValue {
+    font-size: 0.9rem;
+    color: #64748b;
+    text-decoration: line-through;
+    font-weight: 600;
+}
+
+.earlyBirdAlert {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fbbf24;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding-top: 0.25rem;
+    border-top: 1px solid rgba(251, 191, 36, 0.1);
+    margin-top: 0.25rem;
+}
+
+.offerClosed {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    padding-top: 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* Form Styling */
 .form {
     display: flex;
@@ -526,5 +603,34 @@
     color: #64748b;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+}
+
+.summaryBox {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.summaryRow:last-child {
+    margin-bottom: 0;
+    padding-top: 0.75rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.summaryRow span:first-child {
+    color: #94a3b8;
+}
+
+.summaryRow span:last-child {
+    font-weight: 700;
+    color: white;
 }

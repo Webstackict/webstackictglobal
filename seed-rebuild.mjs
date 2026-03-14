@@ -32,7 +32,7 @@ async function main() {
 
     // 2. Create Programs
     const programData = [
-        { name: 'Website Development', slug: 'website-development', short_description: 'Master modern full-stack web development from HTML/CSS to React and Next.js.' },
+        { name: 'Web Development', slug: 'web-development', short_description: 'Master Fullstack Development with modern web technologies.' },
         { name: 'Data Analysis', slug: 'data-analysis', short_description: 'Learn to extract insights from complex datasets using Python, SQL, and PowerBI.' },
         { name: 'Cybersecurity', slug: 'cybersecurity', short_description: 'Protect digital assets and defend against sophisticated cyber threats.' },
         { name: 'Forex Trading', slug: 'forex-trading', short_description: 'Advanced strategies for technical and fundamental analysis in currency markets.' },

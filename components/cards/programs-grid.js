@@ -13,6 +13,7 @@ export default function ProgramsGrid({ featuredTitles = [] }) {
                 <ProgramCard
                     key={program.title}
                     title={program.title}
+                    slug={program.slug}
                     duration={program.duration}
                     description={program.description}
                     icon={program.icon}

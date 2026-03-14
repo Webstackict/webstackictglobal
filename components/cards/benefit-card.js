@@ -5,7 +5,7 @@ import classes from "./benefit-card.module.css";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 
 export default function BenefitCard({ content, ...props }) {
-  let Icon = iconsConfig[content.icon && content.icon];
+  const Icon = iconsConfig[content.icon] || iconsConfig["code"];
   let borders = content.theme.color && content.theme.color;
   return (
     <motion.div className={`${classes.benefitCard} ${borders}`} {...props}>

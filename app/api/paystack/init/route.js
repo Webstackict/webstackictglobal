@@ -26,7 +26,7 @@ export async function POST(req) {
     }
 
     const email = enrollment.email;
-    const amount = enrollment.program.discount_price || enrollment.program.price;
+    const amount = enrollment.applied_price || enrollment.program.discount_price || enrollment.program.price;
 
     if (!email || !amount) {
       return NextResponse.json({ error: "Email and amount are missing from enrollment" }, { status: 400 });
@@ -45,7 +45,7 @@ export async function POST(req) {
           enrollment_id: enrollment.id,
           amount: amount,
           reference: mockReference,
-          status: 'pending',
+          status: 'PENDING',
           provider: 'paystack_mock',
           metadata: { mock: true }
         }
@@ -94,7 +94,7 @@ export async function POST(req) {
         enrollment_id: enrollment.id,
         amount: amount,
         reference: initData.data.reference,
-        status: 'pending',
+        status: 'PENDING',
         provider: 'paystack',
         metadata: initData.data
       }

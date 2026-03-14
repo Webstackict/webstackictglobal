@@ -7,9 +7,17 @@ import {
     X, Clock, Users, Globe, Eye, EyeOff
 } from "lucide-react";
 import { toast } from "sonner";
+import { getFirstMonday, getLastMonday } from "@/lib/util/cohort-dates";
 
 // Native replacement for date-fns format
-const formatDateISO = (date) => new Date(date).toISOString().split('T')[0];
+// Native replacement for date-fns format - STAY IN LOCAL TIME
+const formatDateISO = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
 const formatDatePretty = (date) => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
 export default function CohortsPage() {
@@ -67,6 +75,9 @@ export default function CohortsPage() {
             start_date: "",
             graduation_date: "",
             enrollment_deadline: "",
+            registration_start: "",
+            month: new Date().getMonth() + 1,
+            year: new Date().getFullYear(),
             max_size: 100,
             status: "enrolling",
             visibility_logic: "public",
@@ -79,25 +90,44 @@ export default function CohortsPage() {
         setIsModalOpen(true);
     };
 
-    const handleOpenEdit = (cohort) => {
+    const handleOpenEdit = async (cohort) => {
         setIsEditMode(true);
         setActiveId(cohort.id);
-        setFormData({
-            name: cohort.name || "",
-            cohort_code: cohort.cohort_code || "",
-            cohort_number: cohort.cohort_number || "",
-            start_date: cohort.start_date ? formatDateISO(cohort.start_date) : "",
-            graduation_date: cohort.graduation_date ? formatDateISO(cohort.graduation_date) : "",
-            enrollment_deadline: cohort.enrollment_deadline ? formatDateISO(cohort.enrollment_deadline) : "",
-            max_size: cohort.max_size,
-            status: cohort.status,
-            visibility_logic: cohort.visibility_logic,
-            description: cohort.description || "",
-            label: cohort.label || "",
-            duration: cohort.duration,
-            online_seats: cohort.online_seats,
-            onsite_seats: cohort.onsite_seats
-        });
+
+        // Fetch full cohort details including programs
+        try {
+            const res = await fetch(`/api/cohorts/${cohort.id}`);
+            if (res.ok) {
+                const fullCohort = await res.json();
+                setFormData({
+                    name: fullCohort.name || "",
+                    cohort_code: fullCohort.cohort_code || "",
+                    cohort_number: fullCohort.cohort_number || "",
+                    start_date: fullCohort.start_date ? formatDateISO(fullCohort.start_date) : "",
+                    graduation_date: fullCohort.graduation_date ? formatDateISO(fullCohort.graduation_date) : "",
+                    enrollment_deadline: fullCohort.enrollment_deadline ? formatDateISO(fullCohort.enrollment_deadline) : "",
+                    registration_start: fullCohort.registration_start ? formatDateISO(fullCohort.registration_start) : "",
+                    month: fullCohort.month || "",
+                    year: fullCohort.year || "",
+                    max_size: fullCohort.max_size,
+                    status: fullCohort.status,
+                    visibility_logic: fullCohort.visibility_logic,
+                    description: fullCohort.description || "",
+                    label: fullCohort.label || "",
+                    duration: fullCohort.duration,
+                    online_seats: fullCohort.online_seats,
+                    onsite_seats: fullCohort.onsite_seats,
+                    program_overrides: fullCohort.cohort_programs?.map(cp => ({
+                        program_id: cp.program_id,
+                        name: cp.program.name,
+                        seat_limit: cp.seat_limit,
+                        enrolled_count: cp.enrolled_count
+                    })) || []
+                });
+            }
+        } catch (error) {
+            toast.error("Failed to fetch full cohort details");
+        }
         setIsModalOpen(true);
     };
 
@@ -217,12 +247,19 @@ export default function CohortsPage() {
                                 <div className="flex gap-4">
                                     <div className="flex flex-col">
                                         <span className="text-[10px] text-gray-500 uppercase font-bold">Seats</span>
-                                        <span className="text-sm text-gray-300 font-medium">{c.max_size}</span>
+                                        <span className="text-sm text-gray-300 font-medium">{c.total_enrollments} / {c.max_size}</span>
                                     </div>
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col border-l border-white/5 pl-4">
+                                        <span className="text-[10px] text-purple-500 uppercase font-bold">Early Bird</span>
+                                        <span className="text-sm text-gray-300 font-medium">{c.early_bird_count}</span>
+                                    </div>
+                                    <div className="flex flex-col border-l border-white/5 pl-4">
+                                        <span className="text-[10px] text-gray-500 uppercase font-bold">Regular</span>
+                                        <span className="text-sm text-gray-300 font-medium">{c.regular_count}</span>
+                                    </div>
+                                    <div className="flex flex-col border-l border-white/5 pl-4">
                                         <span className="text-[10px] text-gray-500 uppercase font-bold">Status</span>
-                                        <span className={`text-[10px] font-bold uppercase mt-1 px-2 py-0.5 rounded-full ${c.status === 'enrolling' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-gray-500/10 text-gray-400'
-                                            }`}>
+                                        <span className={`text-[10px] font-bold uppercase mt-1 px-2 py-0.5 rounded-full ${c.status === 'enrolling' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-gray-500/10 text-gray-400'}`}>
                                             {c.status}
                                         </span>
                                     </div>
@@ -253,16 +290,96 @@ export default function CohortsPage() {
                         <form onSubmit={handleSubmit} className="p-8 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Intake Name *</label>
-                                    <input required type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" placeholder="e.g. April 2026 Shift" />
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Intake Month (1-12) *</label>
+                                    <select
+                                        required
+                                        value={formData.month}
+                                        onChange={(e) => {
+                                            const m = parseInt(e.target.value);
+                                            const y = parseInt(formData.year);
+                                            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                            const newName = `${monthNames[m - 1]} ${y} Cohort`;
+                                            const newCode = `WS-${y}-${monthNames[m - 1].substring(0, 3).toUpperCase()}`;
+
+                                            // Auto-calculate dates
+                                            const firstMon = getFirstMonday(m - 1, y);
+                                            const lastMon = getLastMonday(m - 1, y);
+                                            const gradDate = new Date(firstMon);
+                                            gradDate.setMonth(gradDate.getMonth() + parseInt(formData.duration || 3));
+
+                                            setFormData({
+                                                ...formData,
+                                                month: m,
+                                                name: newName,
+                                                cohort_code: newCode,
+                                                registration_start: formatDateISO(firstMon),
+                                                start_date: formatDateISO(firstMon),
+                                                enrollment_deadline: formatDateISO(lastMon),
+                                                graduation_date: formatDateISO(gradDate)
+                                            });
+                                        }}
+                                        className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50"
+                                    >
+                                        <option value="">Select Month</option>
+                                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(m => (
+                                            <option key={m} value={m}>{new Date(2024, m - 1).toLocaleString('en-US', { month: 'long' })}</option>
+                                        ))}
+                                    </select>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Cohort Code *</label>
-                                    <input required type="text" value={formData.cohort_code} onChange={(e) => setFormData({ ...formData, cohort_code: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" placeholder="WS-2026-APR" />
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Intake Year *</label>
+                                    <input
+                                        required
+                                        type="number"
+                                        value={formData.year}
+                                        onChange={(e) => {
+                                            const y = parseInt(e.target.value);
+                                            const m = parseInt(formData.month);
+                                            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                                            const newName = m ? `${monthNames[m - 1]} ${y} Cohort` : "";
+                                            const newCode = m ? `WS-${y}-${monthNames[m - 1].substring(0, 3).toUpperCase()}` : "";
+
+                                            // Auto-calculate dates
+                                            let updates = { year: y, name: newName, cohort_code: newCode };
+                                            if (m) {
+                                                const firstMon = getFirstMonday(m - 1, y);
+                                                const lastMon = getLastMonday(m - 1, y);
+                                                const gradDate = new Date(firstMon);
+                                                gradDate.setMonth(gradDate.getMonth() + parseInt(formData.duration || 3));
+
+                                                updates.registration_start = formatDateISO(firstMon);
+                                                updates.start_date = formatDateISO(firstMon);
+                                                updates.enrollment_deadline = formatDateISO(lastMon);
+                                                updates.graduation_date = formatDateISO(gradDate);
+                                            }
+
+                                            setFormData({ ...formData, ...updates });
+                                        }}
+                                        className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50"
+                                    />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Automatic Intake Name</label>
+                                    <input disabled type="text" value={formData.name} className="w-full bg-[#0a0e17] border border-white/5 rounded-xl px-4 py-3 text-gray-500 cursor-not-allowed" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Automatic Cohort Code</label>
+                                    <input disabled type="text" value={formData.cohort_code} className="w-full bg-[#0a0e17] border border-white/5 rounded-xl px-4 py-3 text-gray-500 cursor-not-allowed" />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Registration Start *</label>
+                                    <input required type="date" value={formData.registration_start} onChange={(e) => setFormData({ ...formData, registration_start: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Deadline *</label>
+                                    <input required type="date" value={formData.enrollment_deadline} onChange={(e) => setFormData({ ...formData, enrollment_deadline: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" />
+                                </div>
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold text-gray-500 uppercase">Start Date *</label>
                                     <input required type="date" value={formData.start_date} onChange={(e) => setFormData({ ...formData, start_date: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" />
@@ -270,10 +387,6 @@ export default function CohortsPage() {
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold text-gray-500 uppercase">Graduation *</label>
                                     <input required type="date" value={formData.graduation_date} onChange={(e) => setFormData({ ...formData, graduation_date: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Deadline *</label>
-                                    <input required type="date" value={formData.enrollment_deadline} onChange={(e) => setFormData({ ...formData, enrollment_deadline: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500/50" />
                                 </div>
                             </div>
 
@@ -304,6 +417,38 @@ export default function CohortsPage() {
                                     <input type="number" value={formData.duration} onChange={(e) => setFormData({ ...formData, duration: e.target.value })} className="w-full bg-[#1a2333] border border-white/10 rounded-xl px-4 py-3 text-white" />
                                 </div>
                             </div>
+
+                            {isEditMode && formData.program_overrides?.length > 0 && (
+                                <div className="space-y-4 pt-4 border-t border-white/5">
+                                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                                        <Users className="w-4 h-4 text-purple-500" />
+                                        Program Seat Management
+                                    </h3>
+                                    <div className="grid grid-cols-1 gap-4">
+                                        {formData.program_overrides.map((override, idx) => (
+                                            <div key={override.program_id} className="bg-[#141b2d] border border-white/5 rounded-2xl p-4 flex items-center justify-between">
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-bold text-white">{override.name}</span>
+                                                    <span className="text-[10px] text-gray-500 uppercase">Enrolled: {override.enrolled_count}</span>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <label className="text-xs text-gray-500">Seat Limit:</label>
+                                                    <input
+                                                        type="number"
+                                                        className="w-20 bg-[#0a0e17] border border-white/10 rounded-lg px-2 py-1.5 text-sm text-center text-white"
+                                                        value={override.seat_limit}
+                                                        onChange={(e) => {
+                                                            const newOverrides = [...formData.program_overrides];
+                                                            newOverrides[idx].seat_limit = e.target.value;
+                                                            setFormData({ ...formData, program_overrides: newOverrides });
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             <div className="pt-8 flex gap-4 justify-end">
                                 <button type="button" onClick={() => setIsModalOpen(false)} className="px-8 py-3 rounded-xl text-sm font-bold text-gray-500 hover:text-white transition-all">Cancel</button>

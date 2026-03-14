@@ -41,10 +41,12 @@ export default function CohortTimelineCard({
         <div className={classes.earlyBird}>
           <div className={classes.earlyBirdHeader}>
             <FireIcon />
-            <span>Registeration is Ongoing</span>
+            <span>{department.next_cohort_id ? "Registration is Ongoing" : "Registration Coming Soon"}</span>
           </div>
           <p className={classes.earlyBirdText}>
-            Enroll before {formatDate(department.enrollment_deadline)}!
+            {department.next_cohort_id
+              ? `Enroll before ${formatDate(department.enrollment_deadline)}!`
+              : "We're currently preparing for the next cohort. Stay tuned!"}
           </p>
 
           {/* <button></button> */}

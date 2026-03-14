@@ -5,6 +5,7 @@ import { useActionState, useEffect, useState } from "react";
 import FormSubmitButton from "../ui/form-submit-button";
 import submitInquiryAction from "@/actions/submit-inquiry-action";
 import { toast } from "sonner";
+import { safeQuerySelector } from "@/util/util";
 import { iconsConfig } from "@/lib/icons/iconsConfig";
 
 const AngleDown = iconsConfig["angleDown"];
@@ -54,8 +55,8 @@ export default function ContactForm() {
   useEffect(() => {
     const hash = window.location.hash;
 
-    if (hash) {
-      const element = document.querySelector(hash);
+    if (hash && hash !== "#") {
+      const element = safeQuerySelector(hash);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
         element.classList.add("highlight-section");

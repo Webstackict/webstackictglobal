@@ -14,6 +14,22 @@ import {
   mobileAppDevCurriculum,
   mobileDevAppAdditionalSkills,
 } from "@/lib/contents/curriculum/mobile-app-dev-curriculum";
+import {
+  uiUxCurriculum,
+  uiUxAdditionalSkills,
+} from "@/lib/contents/curriculum/ui-ux-curriculum";
+import {
+  aiAutomationCurriculum,
+  aiAutomationAdditionalSkills,
+} from "@/lib/contents/curriculum/ai-automation-curriculum";
+import {
+  digitalMarketingCurriculum,
+  digitalMarketingAdditionalSkills,
+} from "@/lib/contents/curriculum/digital-marketing-curriculum";
+import {
+  forexCurriculum,
+  forexAdditionalSkills,
+} from "@/lib/contents/curriculum/forex-curriculum";
 
 export function separateDepartmentName(deptName, delta) {
   let firstDeptName = deptName;
@@ -100,7 +116,33 @@ export function getDepartmentCurriculum(departmentName) {
       curriculum: mobileAppDevCurriculum,
       additionalSkills: mobileDevAppAdditionalSkills,
     };
+  } else if (dept === "ai automation" || dept === "ai & automation") {
+    return {
+      curriculum: aiAutomationCurriculum,
+      additionalSkills: aiAutomationAdditionalSkills,
+    };
+  } else if (dept === "ui/ux design" || dept === "product design") {
+    return {
+      curriculum: uiUxCurriculum,
+      additionalSkills: uiUxAdditionalSkills,
+    };
+  } else if (dept.includes("digital marketing")) {
+    return {
+      curriculum: digitalMarketingCurriculum,
+      additionalSkills: digitalMarketingAdditionalSkills,
+    };
+  } else if (dept === "forex trading" || dept === "forex") {
+    return {
+      curriculum: forexCurriculum,
+      additionalSkills: forexAdditionalSkills,
+    };
   }
+
+  // Final fallback to avoid undefined
+  return {
+    curriculum: webDevCurriculum,
+    additionalSkills: webDevAdditionalSkills,
+  };
 }
 
 export const currencyFormatter = new Intl.NumberFormat("en-NG", {
@@ -109,7 +151,10 @@ export const currencyFormatter = new Intl.NumberFormat("en-NG", {
 });
 
 export function formatDate(dateStr) {
+  if (!dateStr || dateStr === "TBA") return "TBA";
+
   const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return dateStr;
 
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "short",
@@ -179,4 +224,14 @@ export function formatTimeAgo(createdAt) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
+}
+
+export function safeQuerySelector(selector) {
+  if (!selector || selector === "#") return null;
+  try {
+    return document.querySelector(selector);
+  } catch (err) {
+    console.warn("Invalid selector caught in safeQuerySelector:", selector);
+    return null;
+  }
 }

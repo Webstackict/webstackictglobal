@@ -30,7 +30,11 @@ export default function HeroButtons({
       return;
     }
 
-    const element = document.getElementById(primaryBtnRoute);
+    const targetId = primaryBtnRoute?.startsWith("#")
+      ? primaryBtnRoute.substring(1)
+      : primaryBtnRoute;
+
+    const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
@@ -47,7 +51,11 @@ export default function HeroButtons({
       return;
     }
 
-    const element = document.getElementById(secondaryBtnRoute);
+    const targetId = secondaryBtnRoute?.startsWith("#")
+      ? secondaryBtnRoute.substring(1)
+      : secondaryBtnRoute;
+
+    const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",

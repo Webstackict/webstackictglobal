@@ -15,7 +15,7 @@ export default function PartnershipsGrid({ label = null, items = [] }) {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        {(items || []).map((logo, index) => (
+        {(Array.isArray(items) ? items : []).map((logo, index) => (
           <PartnershipLogoCard key={index} logo={logo} label={label} variants={childVarients} />
         ))}
       </motion.div>

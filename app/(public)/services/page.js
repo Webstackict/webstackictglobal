@@ -109,7 +109,7 @@ export default function Services() {
         }
         subtitle="Cutting-edge technologies and frameworks we master across all our services."
       >
-        <PartnershipsGrid items={techStacks} label="tech-stack" />
+        <PartnershipsGrid items={techStacks["services"]} label="tech-stack" />
       </Section>
       <Section
         label="FAQ "

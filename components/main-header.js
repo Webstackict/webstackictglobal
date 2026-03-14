@@ -69,11 +69,12 @@ function MainHeader({ user }) {
 
   useEffect(() => {
     function handleClick(event) {
-      if (
-        !event.target.closest(`.${classes.dropdown}`) &&
-        !event.target.closest(`.${classes.dropdownBtn}`)
-      )
+      const isDropdownClick = classes.dropdown && event.target.closest(`.${classes.dropdown}`);
+      const isDropdownBtnClick = classes.dropdownBtn && event.target.closest(`.${classes.dropdownBtn}`);
+
+      if (!isDropdownClick && !isDropdownBtnClick) {
         setIsDropdown(false);
+      }
     }
     document.addEventListener("click", handleClick);
 

@@ -21,9 +21,9 @@ async function seed() {
     let { data: dept, error: deptError } = await supabase
         .from('departments')
         .insert([{
-            name: 'Software Engineering',
-            slug: 'software-engineering',
-            description: 'Learn to build modern web applications with React, Next.js, and Node.js.',
+            name: 'Web Development',
+            slug: 'web-development',
+            description: 'Master Fullstack Development with modern web technologies.',
             curriculum: 'Module 1: HTML & CSS, Module 2: JavaScript, Module 3: React',
             additional_skills: 'Git, GitHub, Deployment',
             theme: 'blue',
@@ -35,7 +35,7 @@ async function seed() {
 
     if (deptError) {
         if (deptError.code === '23505') {
-            const { data: existingDept } = await supabase.from('departments').select('id').eq('slug', 'software-engineering').maybeSingle();
+            const { data: existingDept } = await supabase.from('departments').select('id').eq('slug', 'web-development').maybeSingle();
             dept = existingDept;
         } else {
             console.error("Error creating department:", deptError);

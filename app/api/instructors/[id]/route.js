@@ -44,6 +44,24 @@ export async function PUT(request, { params }) {
             },
         });
 
+        // Sync programs if provided
+        if (data.programIds && Array.isArray(data.programIds)) {
+            // Delete existing assignments
+            await prisma.program_instructors.deleteMany({
+                where: { instructor_id: id }
+            });
+
+            // Create new ones
+            if (data.programIds.length > 0) {
+                await prisma.program_instructors.createMany({
+                    data: data.programIds.map(progId => ({
+                        instructor_id: id,
+                        program_id: progId
+                    }))
+                });
+            }
+        }
+
         return NextResponse.json(updatedInstructor, { status: 200 });
     } catch (error) {
         console.error('Error updating instructor:', error);

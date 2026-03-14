@@ -84,11 +84,10 @@ export default function SideNavMobile() {
 
   useEffect(() => {
     function handleClick(event) {
-      if (
-        isDashboardSidebar &&
-        !event.target.closest(`.${classes.dashboardSideNavMobile}`)
-      ) {
-        setIsDashboardSidebar(false);
+      if (isDashboardSidebar && classes.dashboardSideNavMobile) {
+        if (!event.target.closest(`.${classes.dashboardSideNavMobile}`)) {
+          setIsDashboardSidebar(false);
+        }
       }
     }
     document.addEventListener("click", handleClick);

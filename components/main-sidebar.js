@@ -37,7 +37,9 @@ export default function MainSidebar() {
 
   useEffect(() => {
     function handleClick(event) {
-      if (!event.target.closest(`.${classes.sidebar}`)) setIsMainSidebar(false);
+      if (classes.sidebar && !event.target.closest(`.${classes.sidebar}`)) {
+        setIsMainSidebar(false);
+      }
     }
     document.addEventListener("click", handleClick);
 

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getEnrollingCohorts, getActivePrograms } from "@/lib/db/get-active-cohorts";
+import { getActiveCohorts, getEnrollingCohorts, getActivePrograms } from "@/lib/db/get-active-cohorts";
 import MultiStepEnrollmentForm from "@/components/ui/MultiStepEnrollmentForm";
 import classes from "./page.module.css";
 
@@ -11,10 +11,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function EnrollmentPage() {
-    const [{ data: cohorts }, { data: programs }] = await Promise.all([
-        getEnrollingCohorts(),
-        getActivePrograms()
-    ]);
+    const { data: cohorts } = await getActiveCohorts();
 
     return (
         <main className={classes.pageWrapper}>
@@ -30,7 +27,6 @@ export default async function EnrollmentPage() {
                 <Suspense fallback={<div style={{ textAlign: 'center', padding: '2rem' }}>Loading enrollment form...</div>}>
                     <MultiStepEnrollmentForm
                         cohorts={cohorts || []}
-                        programs={programs || []}
                     />
                 </Suspense>
             </div>
