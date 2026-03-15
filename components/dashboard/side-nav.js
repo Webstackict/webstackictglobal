@@ -22,6 +22,7 @@ const {
 
 const links = [
   { name: "Dashboard Overview", icon: "chart", href: "/dashboard" },
+  { name: "My Enrollments", icon: "book", href: "/dashboard/enrollments" },
   { name: "My Profile", icon: "person", href: "/dashboard/profile" },
   {
     name: "Affiliate / Referral Program",
@@ -89,7 +90,7 @@ export default function SideNav() {
       <motion.aside className={classes.dashboardSideNav}>
         <div className={classes.sidebarHeader}>
           <LinkWithProgress href="/">
-            <Logo />
+            <Logo height={200} />
           </LinkWithProgress>
         </div>
 

@@ -66,7 +66,7 @@ export default function SecuritySettings() {
             {/* Email Change Section */}
             <div className="p-6 bg-[#0a0e17] border border-white/5 rounded-2xl">
                 <h3 className="text-lg font-semibold text-white mb-4">Change Email Address</h3>
-                <form onSubmit={triggerEmailChange} className="flex gap-4 items-end">
+                <form onSubmit={triggerEmailChange} className="flex flex-col md:flex-row gap-4 items-stretch md:items-end">
                     <div className="flex-1 space-y-2">
                         <label className="text-xs text-gray-400">New Email Address</label>
                         <input
@@ -85,26 +85,28 @@ export default function SecuritySettings() {
             {/* Password Change Section */}
             <div className="p-6 bg-[#0a0e17] border border-white/5 rounded-2xl">
                 <h3 className="text-lg font-semibold text-white mb-4">Update Password</h3>
-                <form onSubmit={triggerPasswordChange} className="grid grid-cols-2 gap-4 items-end">
-                    <div className="space-y-2">
-                        <label className="text-xs text-gray-400">New Password</label>
-                        <input
-                            type="password"
-                            name="newPassword"
-                            required
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white"
-                        />
+                <form onSubmit={triggerPasswordChange} className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <label className="text-xs text-gray-400">New Password</label>
+                            <input
+                                type="password"
+                                name="newPassword"
+                                required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs text-gray-400">Confirm New Password</label>
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white"
+                            />
+                        </div>
                     </div>
-                    <div className="space-y-2">
-                        <label className="text-xs text-gray-400">Confirm New Password</label>
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            required
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white"
-                        />
-                    </div>
-                    <button className="col-span-2 bg-blue-600 hover:bg-blue-500 py-2 rounded-xl text-white font-semibold transition-all">
+                    <button className="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-xl text-white font-semibold transition-all shadow-lg active:scale-[0.98]">
                         Update Password
                     </button>
                 </form>

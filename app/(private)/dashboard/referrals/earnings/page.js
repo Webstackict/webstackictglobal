@@ -70,6 +70,13 @@ export default async function EarningsPage() {
                 ))}
             </div>
 
+            {(!activities || activities.length === 0) && (
+                <div className="premium-card p-12 text-center text-gray-500">
+                    <Coins className="w-12 h-12 mx-auto mb-4 opacity-10" />
+                    <p className="font-medium tracking-tight">No earnings recorded in your settlement ledger yet.</p>
+                </div>
+            )}
+
             <div className="premium-card p-8 lg:p-12 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity duration-500">
                     <ShieldCheck className="w-64 h-64 text-white -rotate-12 transform translate-x-20 -translate-y-20" />

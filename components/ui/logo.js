@@ -26,7 +26,7 @@ export default function Logo({ className, height = 50, width, variant = "white",
                 sizes="(max-width: 768px) 200px, 400px"
                 style={{
                     objectFit: 'contain',
-                    objectPosition: 'left'
+                    objectPosition: 'center'
                 }}
             />
         </div>

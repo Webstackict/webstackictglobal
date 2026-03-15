@@ -61,11 +61,11 @@ export default function DashboardHeader({
       <ProgressBar />
       <header className={classes.header}>
         <div>
-          <h2 className="truncate max-w-[calc(100vw-120px)] lg:max-w-none">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold leading-tight">
             {title ||
               `👋 Welcome, ${displayName || firstName || emailDisplay}!`}
           </h2>
-          <p>{subtitle}</p>
+          <p className="text-sm md:text-base opacity-70 mt-1">{subtitle}</p>
         </div>
         {!isDashboardSidebar ? (
           <Menu

@@ -12,7 +12,8 @@ import { useRouter } from "next/navigation";
 
 function PasswordChangeForm() {
   const router = useRouter();
-  const { authProviders } = user;
+  const { user } = use(UserContext);
+  const authProviders = user?.authProviders || [];
 
   const [inputs, setInputs] = useState({
     newPassword: "",
