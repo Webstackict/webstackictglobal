@@ -222,6 +222,30 @@
   object-fit: cover;
 }
 
+.notificationContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.notificationContainer:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--teal-400);
+}
+
+.notificationIcon {
+  width: 24px;
+  height: 24px;
+}
+
 .header .getStarted {
   background-color: var(--blue-400);
   font-size: 1rem;
@@ -255,7 +279,8 @@
   }
 
   .logo>div {
-    transform: none !important;
+    transform: scale(1.5) !important;
+    transform-origin: left center !important;
     width: 60px !important;
     height: 60px !important;
   }

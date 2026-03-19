@@ -2,151 +2,94 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAdmin } from '@/lib/admin-auth';
 
+// Create a new unpaid application
 export async function POST(request) {
     try {
         const body = await request.json();
-        const {
-            full_name,
-            email,
-            phone,
-            country,
-            state,
-            preferred_department,
-            motivation,
-            experience_level
-        } = body;
+        const { full_name, email, phone, program_id, short_about_you, referral_code } = body;
 
-        // Basic validation
-        if (!full_name || !email || !phone || !preferred_department) {
-            return NextResponse.json({
-                error: 'Missing required fields (full_name, email, phone, preferred_department)'
-            }, { status: 400 });
+        if (!full_name || !email || !phone || !program_id || !short_about_you) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
         }
 
-        // Email format validation
+        // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
         }
 
-        // Retry logic for database operations (resilience)
-        const executeWithRetry = async (fn, retries = 3, delay = 1000) => {
-            for (let i = 0; i < retries; i++) {
-                try {
-                    return await fn();
-                } catch (err) {
-                    const isConnectionError = err.message.includes("Can't reach database server") ||
-                        err.message.includes("Timed out") ||
-                        err.message.includes("Connection error");
+        const program = await prisma.scholarship_programs.findUnique({
+            where: { id: program_id }
+        });
 
-                    if (isConnectionError && i < retries - 1) {
-                        console.warn(`Database connection attempt ${i + 1} failed. Retrying in ${delay}ms...`);
-                        await new Promise(resolve => setTimeout(resolve, delay));
-                        continue;
-                    }
-                    throw err;
-                }
-            }
-        };
-
-        // Check for Existing Application by email
-        const existingApplication = await executeWithRetry(() => prisma.scholarship_applications.findFirst({
-            where: { email: email.toLowerCase() }
-        }));
-
-        if (existingApplication) {
-            return NextResponse.json({
-                error: 'An application with this email already exists.'
-            }, { status: 409 });
+        if (!program) {
+            return NextResponse.json({ error: 'Selected scholarship program does not exist' }, { status: 404 });
         }
 
-        // Create Scholarship Application
-        const application = await executeWithRetry(() => prisma.scholarship_applications.create({
+        // Prevent duplicate application for the same program by the same email
+        const existingApp = await prisma.scholarship_applications.findFirst({
+            where: { email: email.toLowerCase(), program_id }
+        });
+
+        if (existingApp) {
+            return NextResponse.json({ error: 'You have already applied for this program.' }, { status: 409 });
+        }
+
+        const appRef = `WS-SCH-${Date.now().toString().slice(-6)}-${Math.random().toString(36).substring(2, 6)}`.toUpperCase();
+
+        const application = await prisma.scholarship_applications.create({
             data: {
                 full_name,
                 email: email.toLowerCase(),
                 phone,
-                country: country || 'Nigeria',
-                state,
-                program: preferred_department,
-                reason: motivation,
-                experience_level: experience_level || 'Beginner',
-                referral_code: request.cookies.get('webstack_referral_code')?.value || null,
-                status: 'pending'
+                program_id,
+                short_about_you,
+                referral_code: referral_code || request.cookies.get('webstack_referral_code')?.value || null,
+                application_fee: program.application_fee,
+                payment_method: null,
+                payment_status: 'unpaid',
+                application_reference: appRef
             }
-        }));
-
-        // 5. Handle referral tracking (10% for scholarships)
-        try {
-            const referralCode = body.referral_code || request.cookies.get('webstack_referral_code')?.value;
-            const programPrice = 250000; // Default price for scholarship commission calculation if program not found
-
-            if (referralCode) {
-                const referral = await executeWithRetry(() => prisma.referrals.findUnique({
-                    where: { referral_code: referralCode }
-                }));
-
-                if (referral) {
-                    const commissionAmount = programPrice * 0.10; // 10% for scholarship applicants
-
-                    await executeWithRetry(() => prisma.referral_activities.create({
-                        data: {
-                            referrer_id: referral.user_id,
-                            referred_user_id: null, // Applicants might not have a user_id yet
-                            scholarship_application_id: application.id,
-                            commission_amount: commissionAmount,
-                            status: 'pending'
-                        }
-                    }));
-                }
-            }
-        } catch (refError) {
-            console.error('Scholarship Referral Processing Error:', refError);
-        }
+        });
 
         return NextResponse.json({
-            message: 'Application submitted successfully',
-            applicationId: application.id
+            message: 'Application initiated successfully',
+            applicationId: application.id,
+            applicationReference: application.application_reference
         }, { status: 201 });
 
     } catch (error) {
-        console.error('Scholarship API Error:', {
-            message: error.message,
-            stack: error.stack
-        });
-        return NextResponse.json({
-            error: 'Failed to process scholarship application',
-            details: error.message
-        }, { status: 500 });
+        console.error('Scholarship API POST Error:', error);
+        return NextResponse.json({ error: 'Failed to initiate application', details: error.message }, { status: 500 });
     }
 }
+
+// Get all applications for Admin
 export async function GET(request) {
     if (!await isAdmin()) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
     try {
         const { searchParams } = new URL(request.url);
         const status = searchParams.get('status');
 
         const where = {};
         if (status && status !== 'All') {
-            where.status = status.toLowerCase();
+            where.payment_status = status.toLowerCase();
         }
 
         const applications = await prisma.scholarship_applications.findMany({
             where,
+            include: {
+                program: true
+            },
             orderBy: { submitted_at: 'desc' }
         });
 
         return NextResponse.json(applications);
     } catch (error) {
-        console.error('Scholarship API GET Error:', {
-            message: error.message,
-            stack: error.stack
-        });
-        return NextResponse.json({
-            error: 'Failed to fetch scholarship applications',
-            details: error.message
-        }, { status: 500 });
+        console.error('Scholarship API GET Error:', error);
+        return NextResponse.json({ error: 'Failed' }, { status: 500 });
     }
 }

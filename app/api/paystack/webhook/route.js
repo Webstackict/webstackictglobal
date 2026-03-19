@@ -30,6 +30,43 @@ export async function POST(req) {
     if (event === "charge.success") {
       const reference = eventData.reference;
 
+      // Handle Scholarship Application Payments
+      if (reference.startsWith("WS-SCH-")) {
+        const application = await prisma.scholarship_applications.findUnique({
+          where: { application_reference: reference }
+        });
+
+        if (!application) {
+          console.error(`Scholarship Application not found for reference: ${reference}`);
+          return NextResponse.json({ success: false, message: "Application not found" }, { status: 404 });
+        }
+
+        if (application.payment_status === 'paid') {
+          console.log(`Scholarship Payment ${reference} already processed`);
+          return NextResponse.json({ success: true, message: "Already processed" }, { status: 200 });
+        }
+
+        await prisma.scholarship_applications.update({
+          where: { id: application.id },
+          data: {
+            payment_status: 'paid',
+            payment_verified_at: new Date()
+          }
+        });
+
+        // Trigger potential automation hooks without blocking payment resolution
+        try {
+          const { processScholarshipApproval } = await import('@/lib/actions/scholarship-approval');
+          processScholarshipApproval(application.id).catch(e => console.error("Webhook automation error:", e));
+        } catch (e) {
+          console.error("Failed to run webhook automation module:", e);
+        }
+
+        revalidatePath("/admin/scholarship-applications");
+        return NextResponse.json({ success: true }, { status: 200 });
+      }
+
+      // Handle Standard Enrollment Payments
       // Use a transaction to ensure atomic updates
       await prisma.$transaction(async (tx) => {
         // 1. Find and update the payment record

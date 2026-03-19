@@ -99,7 +99,6 @@ export default function AdminLayout({ children }) {
                         <div className="space-y-2">
                             <div className="px-3 text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Modules</div>
                             <NavItem href="/admin/admissions" icon={Users} label="Admissions" />
-                            <NavItem href="/admin/scholarship-applications" icon={GraduationCap} label="Scholarships" />
                             <NavItem href="/admin/programs" icon={BookOpen} label="Programs" />
                             <NavItem href="/admin/instructors" icon={UserPlus} label="Instructors" />
                             <NavItem href="/admin/cohorts" icon={Calendar} label="Cohorts" />
@@ -112,6 +111,13 @@ export default function AdminLayout({ children }) {
                             <NavItem href="/admin/users/invite" icon={UserPlus} label="Invite User" />
                             <NavItem href="/admin/operations" icon={Briefcase} label="Operations" />
                             <NavItem href="/admin/finance" icon={CreditCard} label="Finance" />
+                        </div>
+
+                        {/* SCHOLARSHIPS */}
+                        <div className="space-y-2">
+                            <div className="px-3 text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Scholarship</div>
+                            <NavItem href="/admin/scholarship-programs" icon={BookOpen} label="Programs" />
+                            <NavItem href="/admin/scholarship-applications" icon={GraduationCap} label="Applications" />
                         </div>
 
                         {/* SETTINGS */}
