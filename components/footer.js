@@ -26,9 +26,6 @@ export default function Footer() {
       <div className={classes.container}>
         <div className={classes.grid}>
           <div className={classes.brandSection}>
-            <Link href="/" className={classes.brandTitle}>
-              <Logo width="auto" height="100%" style={{ color: "white" }} />
-            </Link>
             <p className={classes.brandText}>
               Empowering Africa&apos;s next generation of tech professionals
               with world-class training, mentorship, and career opportunities.
