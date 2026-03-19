@@ -107,23 +107,44 @@ export default async function ScholarshipPage() {
                     </>
                 }
             >
-                <div className="card !p-8 lg:!p-10 max-w-3xl mx-auto">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-gray-400">
-                        <li className="flex gap-4">
-                            <span className="text-blue-500 mt-1"><CheckCircle2 size={18} /></span>
-                            <span>Must be at least <strong className="text-white">16 years old</strong>.</span>
+                <div className="card !p-8 lg:!p-12 max-w-4xl mx-auto backdrop-blur-md bg-white/[0.02] border-white/5 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/5 blur-3xl -mr-16 -mt-16 group-hover:bg-blue-600/10 transition-colors duration-700" />
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-8 text-gray-400 relative z-10">
+                        <li className="flex gap-4 items-start">
+                            <div className="bg-blue-500/10 text-blue-400 p-2 rounded-xl flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                <CheckCircle2 size={20} />
+                            </div>
+                            <div className="pt-1">
+                                <span className="text-white font-medium block mb-1">Age Limit</span>
+                                <span className="text-sm">Must be at least <strong className="text-blue-400">16 years old</strong> to apply.</span>
+                            </div>
                         </li>
-                        <li className="flex gap-4">
-                            <span className="text-blue-500 mt-1"><CheckCircle2 size={18} /></span>
-                            <span>Must have access to a <strong className="text-white">smartphone or computer</strong>.</span>
+                        <li className="flex gap-4 items-start">
+                            <div className="bg-blue-500/10 text-blue-400 p-2 rounded-xl flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                <Smartphone size={20} />
+                            </div>
+                            <div className="pt-1">
+                                <span className="text-white font-medium block mb-1">Tech Access</span>
+                                <span className="text-sm">Must have access to a <strong className="text-blue-400">smartphone or computer</strong>.</span>
+                            </div>
                         </li>
-                        <li className="flex gap-4">
-                            <span className="text-blue-500 mt-1"><CheckCircle2 size={18} /></span>
-                            <span>Highly committed to intensive training.</span>
+                        <li className="flex gap-4 items-start">
+                            <div className="bg-blue-500/10 text-blue-400 p-2 rounded-xl flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                <GraduationCap size={20} />
+                            </div>
+                            <div className="pt-1">
+                                <span className="text-white font-medium block mb-1">Commitment</span>
+                                <span className="text-sm">Highly committed to <strong className="text-blue-400">intensive technical training</strong>.</span>
+                            </div>
                         </li>
-                        <li className="flex gap-4">
-                            <span className="text-blue-500 mt-1"><CheckCircle2 size={18} /></span>
-                            <span>Complete official application process.</span>
+                        <li className="flex gap-4 items-start">
+                            <div className="bg-blue-500/10 text-blue-400 p-2 rounded-xl flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                                <CheckCircle2 size={20} />
+                            </div>
+                            <div className="pt-1">
+                                <span className="text-white font-medium block mb-1">Application</span>
+                                <span className="text-sm">Must complete the <strong className="text-blue-400">official application</strong> process.</span>
+                            </div>
                         </li>
                     </ul>
                 </div>
