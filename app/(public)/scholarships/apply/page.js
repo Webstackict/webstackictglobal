@@ -8,11 +8,31 @@ import PageBanner from '@/components/hero/page-banner';
 import Tagline from '@/components/ui/tagline';
 import { toast } from 'sonner';
 import { useSearchParams } from 'next/navigation';
+import { Facebook, MessageCircle, Copy, Share2, Check } from 'lucide-react';
 
 export default function ScholarshipApplyPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const preselectedProgramSlug = searchParams.get('program');
+
+    const [isCopied, setIsCopied] = useState(false);
+    const scholarshipUrl = typeof window !== 'undefined' ? `${window.location.origin}/scholarships` : '';
+
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(scholarshipUrl);
+        setIsCopied(true);
+        toast.success("Link copied to clipboard!");
+        setTimeout(() => setIsCopied(false), 2000);
+    };
+
+    const shareToWhatsApp = () => {
+        const text = encodeURIComponent(`Apply for the 2026 Webstack ICT Global Scholarship! Get 100% tuition coverage for in-demand tech skills. Check it out here: ${scholarshipUrl}`);
+        window.open(`https://wa.me/?text=${text}`, '_blank');
+    };
+
+    const shareToFacebook = () => {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(scholarshipUrl)}`, '_blank');
+    };
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [programs, setPrograms] = useState([]);
     const [isLoadingPrograms, setIsLoadingPrograms] = useState(true);
@@ -102,6 +122,40 @@ export default function ScholarshipApplyPage() {
                 subtitle="Please provide accurate information. Your scholarship evaluation depends on it."
                 sectionBgColor="sectionDark"
             >
+                <div className="max-w-[45rem] mx-auto mb-10">
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-sm">
+                        <div className="flex items-center gap-4">
+                            <div className="bg-blue-600/20 p-3 rounded-xl text-blue-400">
+                                <Share2 size={24} />
+                            </div>
+                            <div>
+                                <h4 className="text-white font-bold text-lg leading-tight uppercase tracking-wider">Spread the Word</h4>
+                                <p className="text-gray-400 text-sm">Know someone who needs this scholarship? Share it!</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3 w-full md:w-auto">
+                            <button
+                                onClick={shareToWhatsApp}
+                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-white px-5 py-3 rounded-xl font-bold transition-all duration-300 border border-[#25D366]/20"
+                            >
+                                <MessageCircle size={18} /> <span className="md:hidden">WhatsApp</span>
+                            </button>
+                            <button
+                                onClick={shareToFacebook}
+                                className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white px-5 py-3 rounded-xl font-bold transition-all duration-300 border border-[#1877F2]/20"
+                            >
+                                <Facebook size={18} /> <span className="md:hidden">Facebook</span>
+                            </button>
+                            <button
+                                onClick={handleCopyLink}
+                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold transition-all duration-300 border ${isCopied ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'}`}
+                            >
+                                {isCopied ? <Check size={18} /> : <Copy size={18} />} <span className="md:hidden">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="form-container" className="card premium-glow-blue" style={{ maxWidth: '45rem', margin: '0 auto' }}>
                     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
                         {errorMsg && <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm">{errorMsg}</div>}
