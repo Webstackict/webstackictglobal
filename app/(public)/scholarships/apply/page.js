@@ -204,61 +204,55 @@ export default function ScholarshipApplyPage() {
                         </div>
                     </form>
 
-                    <div className="mt-10 pt-10 border-t border-white/5">
-                        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-                            <div className="flex items-center gap-4 text-center lg:text-left">
-                                <div className="bg-blue-600/20 p-3 rounded-xl text-blue-400 hidden sm:block">
-                                    <Share2 size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="text-white font-bold text-lg leading-tight uppercase tracking-wider">Spread the Word</h4>
-                                    <p className="text-gray-400 text-sm">Know someone who needs this? Share it!</p>
-                                </div>
+                    <div className="mt-8 pt-6 border-t border-white/5">
+                        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+                            <div className="text-center lg:text-left">
+                                <h4 className="text-white font-bold text-sm uppercase tracking-wider">Spread the Word</h4>
+                                <p className="text-gray-500 text-xs">Know someone who needs this? Share it!</p>
                             </div>
 
-                            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 w-full lg:w-auto">
+                            <div className="grid grid-cols-6 gap-2 w-full lg:w-auto">
                                 <button
                                     onClick={shareToWhatsApp}
                                     title="Share on WhatsApp"
-                                    className="flex items-center justify-center bg-[#25D366]/10 hover:bg-[#25D366] text-[#25D366] hover:text-white p-4 rounded-xl transition-all duration-300 border border-[#25D366]/20 group"
+                                    className="flex items-center justify-center bg-[#25D366]/5 hover:bg-[#25D366] text-[#25D366] hover:text-white p-2.5 rounded-lg transition-all duration-300 border border-[#25D366]/10 group"
                                 >
-                                    <MessageCircle size={22} className="group-hover:scale-110 transition-transform" />
+                                    <MessageCircle size={18} className="group-hover:scale-110 transition-transform" />
                                 </button>
                                 <button
                                     onClick={shareToFacebook}
                                     title="Share on Facebook"
-                                    className="flex items-center justify-center bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white p-4 rounded-xl transition-all duration-300 border border-[#1877F2]/20 group"
+                                    className="flex items-center justify-center bg-[#1877F2]/5 hover:bg-[#1877F2] text-[#1877F2] hover:text-white p-2.5 rounded-lg transition-all duration-300 border border-[#1877F2]/10 group"
                                 >
-                                    <Facebook size={22} className="group-hover:scale-110 transition-transform" />
+                                    <Facebook size={18} className="group-hover:scale-110 transition-transform" />
                                 </button>
                                 <button
                                     onClick={shareToLinkedIn}
                                     title="Share on LinkedIn"
-                                    className="flex items-center justify-center bg-[#0A66C2]/10 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white p-4 rounded-xl transition-all duration-300 border border-[#0A66C2]/20 group"
+                                    className="flex items-center justify-center bg-[#0A66C2]/5 hover:bg-[#0A66C2] text-[#0A66C2] hover:text-white p-2.5 rounded-lg transition-all duration-300 border border-[#0A66C2]/10 group"
                                 >
-                                    <Linkedin size={22} className="group-hover:scale-110 transition-transform" />
+                                    <Linkedin size={18} className="group-hover:scale-110 transition-transform" />
                                 </button>
                                 <button
                                     onClick={() => shareToSocial('Instagram')}
                                     title="Share on Instagram"
-                                    className="flex items-center justify-center bg-[#E1306C]/10 hover:bg-[#E1306C] text-[#E1306C] hover:text-white p-4 rounded-xl transition-all duration-300 border border-[#E1306C]/20 group"
+                                    className="flex items-center justify-center bg-[#E1306C]/5 hover:bg-[#E1306C] text-[#E1306C] hover:text-white p-2.5 rounded-lg transition-all duration-300 border border-[#E1306C]/10 group"
                                 >
-                                    <Instagram size={22} className="group-hover:scale-110 transition-transform" />
+                                    <Instagram size={18} className="group-hover:scale-110 transition-transform" />
                                 </button>
                                 <button
                                     onClick={() => shareToSocial('TikTok')}
                                     title="Share on TikTok"
-                                    className="flex items-center justify-center bg-white/5 hover:bg-black text-white hover:text-[#EE1D52] p-4 rounded-xl transition-all duration-300 border border-white/10 group overflow-hidden relative"
+                                    className="flex items-center justify-center bg-white/5 hover:bg-black text-white hover:text-[#EE1D52] p-2.5 rounded-lg transition-all duration-300 border border-white/10 group overflow-hidden relative"
                                 >
-                                    <Music size={22} className="group-hover:scale-110 transition-transform z-10" />
-                                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <Music size={18} className="group-hover:scale-110 transition-transform z-10" />
                                 </button>
                                 <button
                                     onClick={handleCopyLink}
                                     title="Copy Link"
-                                    className={`flex items-center justify-center p-4 rounded-xl transition-all duration-300 border group ${isCopied ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'}`}
+                                    className={`flex items-center justify-center p-2.5 rounded-lg transition-all duration-300 border group ${isCopied ? 'bg-green-500/20 border-green-500/30 text-green-400' : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'}`}
                                 >
-                                    {isCopied ? <Check size={22} /> : <Copy size={22} className="group-hover:scale-110 transition-transform" />}
+                                    {isCopied ? <Check size={18} /> : <Copy size={18} className="group-hover:scale-110 transition-transform" />}
                                 </button>
                             </div>
                         </div>
