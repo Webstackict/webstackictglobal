@@ -14,30 +14,45 @@ export default function PaymentPage() {
     const [paymentMethod, setPaymentMethod] = useState("card");
     const [isProcessing, setIsProcessing] = useState(false);
     const [hasSubmittedTransfer, setHasSubmittedTransfer] = useState(false);
+    const [publicBankDetails, setPublicBankDetails] = useState({
+        bank_name: "KUDA BANK",
+        bank_account_name: "WEBSTACK ICT GLOBAL",
+        bank_account_number: "2044813585"
+    });
 
-    // Bank Details
+    // Bank Details dynamically populated
     const bankDetails = {
-        name: "KUDA BANK",
-        accountName: "WEBSTACK ICT GLOBAL",
-        accountNumber: "2044813585",
+        name: publicBankDetails.bank_name,
+        accountName: publicBankDetails.bank_account_name,
+        accountNumber: publicBankDetails.bank_account_number,
         narration: enrollment ? `ENR-${enrollment.id.slice(0, 8).toUpperCase()}` : "ENR-PAYMENT"
     };
 
     useEffect(() => {
         const fetchEnrollment = async () => {
             try {
-                const res = await fetch(`/api/enrollments/${id}`);
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error || "Enrollment not found");
+                // Fetch enrollment side-by-side with public bank details
+                const [enrollmentRes, settingsRes] = await Promise.all([
+                    fetch(`/api/enrollments/${id}`),
+                    fetch(`/api/settings/public`)
+                ]);
+
+                const enrollmentData = await enrollmentRes.json();
+                if (!enrollmentRes.ok) throw new Error(enrollmentData.error || "Enrollment not found");
+
+                const settingsData = await settingsRes.json();
+                if (settingsRes.ok && settingsData.settings) {
+                    setPublicBankDetails(settingsData.settings);
+                }
 
                 // Redirect if already PAID or APPROVED
-                if (data.payment_status === 'PAID' || data.approval_status === 'APPROVED') {
+                if (enrollmentData.payment_status === 'PAID' || enrollmentData.approval_status === 'APPROVED') {
                     router.push(`/dashboard/enrollments`);
                     return;
                 }
 
-                setEnrollment(data);
-                if (data.approval_status === 'AWAITING_VERIFICATION') {
+                setEnrollment(enrollmentData);
+                if (enrollmentData.approval_status === 'AWAITING_VERIFICATION') {
                     setHasSubmittedTransfer(true);
                 }
             } catch (err) {

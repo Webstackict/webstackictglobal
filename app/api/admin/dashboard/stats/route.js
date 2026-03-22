@@ -34,7 +34,7 @@ export async function GET() {
 
         // 4. New Leads (Scholarship Applications)
         const newLeads = await prisma.scholarship_applications.count({
-            where: { status: 'pending' }
+            where: { payment_status: 'unpaid' }
         });
 
         // 5. Apps Today (Enrollments created today)

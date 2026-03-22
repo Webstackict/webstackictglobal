@@ -17,6 +17,11 @@ function PaymentPortalContent() {
     const [isProcessingPaystack, setIsProcessingPaystack] = useState(false);
     const [isVerifyingTransfer, setIsVerifyingTransfer] = useState(false);
     const [activeTab, setActiveTab] = useState('card'); // 'card' or 'transfer'
+    const [publicBankDetails, setPublicBankDetails] = useState({
+        bank_name: "KUDA BANK",
+        bank_account_name: "WEBSTACK ICT GLOBAL",
+        bank_account_number: "2044813585"
+    });
 
     useEffect(() => {
         if (!ref) {
@@ -26,7 +31,16 @@ function PaymentPortalContent() {
 
         const fetchApplication = async () => {
             try {
-                const res = await fetch(`/api/scholarship-applications/by-ref/${ref}`);
+                const [res, settingsRes] = await Promise.all([
+                    fetch(`/api/scholarship-applications/by-ref/${ref}`),
+                    fetch(`/api/settings/public`)
+                ]);
+
+                const settingsData = await settingsRes.json();
+                if (settingsRes.ok && settingsData.settings) {
+                    setPublicBankDetails(settingsData.settings);
+                }
+
                 if (res.ok) {
                     const data = await res.json();
                     setApplication(data);
@@ -247,22 +261,22 @@ function PaymentPortalContent() {
                                     <div className="bg-black/20 border border-white/10 rounded-2xl p-6 lg:p-8 space-y-6">
                                         <div>
                                             <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1.5">Bank Name</p>
-                                            <p className="text-xl text-white font-bold">Trove Finance / Providus Bank</p>
+                                            <p className="text-xl text-white font-bold">{publicBankDetails.bank_name}</p>
                                         </div>
                                         <div>
                                             <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2 flex justify-between items-center">
                                                 Account Number
                                             </p>
                                             <div className="flex justify-between items-center bg-white/5 p-4 rounded-xl border border-white/5">
-                                                <p className="text-3xl lg:text-4xl text-blue-400 font-bold tracking-tight font-mono">1100000000</p>
-                                                <button onClick={() => copyToClipboard('1100000000', 'Account Number')} className="flex items-center gap-2 px-4 py-2 text-sm font-bold bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
+                                                <p className="text-3xl lg:text-4xl text-blue-400 font-bold tracking-tight font-mono">{publicBankDetails.bank_account_number}</p>
+                                                <button onClick={() => copyToClipboard(publicBankDetails.bank_account_number, 'Account Number')} className="flex items-center gap-2 px-4 py-2 text-sm font-bold bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors">
                                                     <Copy size={16} /> Copy
                                                 </button>
                                             </div>
                                         </div>
                                         <div>
                                             <p className="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1.5">Account Name</p>
-                                            <p className="text-xl text-white font-bold flex items-center gap-2">Webstack ICT Global <CheckCircle2 size={20} className="text-emerald-500" /></p>
+                                            <p className="text-xl text-white font-bold flex items-center gap-2">{publicBankDetails.bank_account_name} <CheckCircle2 size={20} className="text-emerald-500" /></p>
                                         </div>
 
                                         <div className="pt-5 border-t border-white/10 mt-5">

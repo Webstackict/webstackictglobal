@@ -47,3 +47,40 @@ export async function GET() {
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
+
+export async function POST(req) {
+    if (!await isAdmin()) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    try {
+        const body = await req.json();
+        const { email, role, name } = body;
+
+        if (!email || !role) {
+            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        }
+
+        // Just mocked for the MVP / mockup. Real Supabase auth invite requires admin-auth setup.
+        // We will create a dummy record to simulate the invite being sent and user created.
+        const dummyId = crypto.randomUUID();
+
+        // Simulating the user being added
+        const user = await prisma.users.create({
+            data: {
+                id: dummyId,
+                email: email,
+                role: role,
+                is_super_admin: role === 'Super Admin',
+                raw_user_meta_data: { full_name: name || email.split('@')[0] },
+                created_at: new Date(),
+                updated_at: new Date()
+            }
+        });
+
+        return NextResponse.json({ success: true, message: "Invitation sent", user });
+    } catch (error) {
+        console.error("Invite admin error:", error);
+        return NextResponse.json({ error: "Failed to invite admin" }, { status: 500 });
+    }
+}

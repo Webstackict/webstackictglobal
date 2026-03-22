@@ -44,7 +44,7 @@ export default async function Home() {
       <div style={{ background: 'var(--charcoal-blue-500)', padding: '4rem 1.5rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at center, rgba(45, 212, 191, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem', color: 'var(--white)' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', lineHeight: '1.2', marginBottom: '1rem', color: 'var(--white)' }}>
             2026 <span className="gradientText">Scholarship Program</span>
           </h2>
           <p style={{ marginBottom: '2rem', color: 'var(--gray-text-400)', fontSize: '1.2rem', lineHeight: '1.6' }}>

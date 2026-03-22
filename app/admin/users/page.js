@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
     Users, Shield, Key, History, Plus,
     Search, Filter, MoreVertical, CheckCircle2,
-    XCircle, Mail, Clock, Loader2
+    XCircle, Mail, Clock, Loader2, X, UserPlus, ShieldAlert, Trash2
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,6 +12,42 @@ export default function UsersPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [admins, setAdmins] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+    const [isInviting, setIsInviting] = useState(false);
+    const [inviteData, setInviteData] = useState({ name: "", email: "", role: "Staff" });
+    const [activeDropdown, setActiveDropdown] = useState(null);
+
+    const toggleDropdown = (id) => {
+        if (activeDropdown === id) setActiveDropdown(null);
+        else setActiveDropdown(id);
+    };
+
+    const handleInvite = async (e) => {
+        e.preventDefault();
+        setIsInviting(true);
+        try {
+            const res = await fetch('/api/admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(inviteData)
+            });
+            const data = await res.json();
+            if (res.ok) {
+                toast.success("Admin invited successfully!");
+                setIsInviteModalOpen(false);
+                setInviteData({ name: "", email: "", role: "Staff" });
+                // Refresh list
+                const res2 = await fetch('/api/admin/users');
+                if (res2.ok) setAdmins((await res2.json()).staff || []);
+            } else {
+                toast.error(data.error || "Failed to invite admin");
+            }
+        } catch (err) {
+            toast.error("Network error");
+        } finally {
+            setIsInviting(false);
+        }
+    };
 
     useEffect(() => {
         const fetchAdmins = async () => {
@@ -61,7 +97,7 @@ export default function UsersPage() {
                         <History className="w-4 h-4" />
                         Full Audit Log
                     </button>
-                    <button className="h-10 px-4 py-2 bg-gradient-to-r from-rose-600 to-red-500 hover:from-red-500 hover:to-red-400 rounded-lg text-sm font-medium text-white shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all flex items-center gap-2">
+                    <button onClick={() => setIsInviteModalOpen(true)} className="h-10 px-4 py-2 bg-gradient-to-r from-rose-600 to-red-500 hover:from-red-500 hover:to-red-400 rounded-lg text-sm font-medium text-white shadow-[0_0_15px_rgba(225,29,72,0.3)] transition-all flex items-center gap-2">
                         <Plus className="w-4 h-4" />
                         Invite Admin
                     </button>
@@ -181,10 +217,24 @@ export default function UsersPage() {
                                                         {admin.lastLogin ? new Date(admin.lastLogin).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : "Never"}
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4 text-right">
-                                                    <button className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
+                                                <td className="px-6 py-4 text-right relative">
+                                                    <button onClick={() => toggleDropdown(admin.id)} className="p-1.5 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:bg-white/10">
                                                         <MoreVertical className="w-4 h-4" />
                                                     </button>
+                                                    {activeDropdown === admin.id && (
+                                                        <div className="absolute right-6 top-10 w-48 bg-[#111623] border border-white/10 rounded-xl shadow-2xl py-2 z-50 animate-in fade-in zoom-in-95 duration-200">
+                                                            <button onClick={() => { setActiveDropdown(null); toast("Change Role clicked"); }} className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white flex items-center gap-2 transition-colors">
+                                                                <Shield className="w-4 h-4 text-blue-400" /> Change Role
+                                                            </button>
+                                                            <button onClick={() => { setActiveDropdown(null); toast("Suspend Account clicked"); }} className="w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white flex items-center gap-2 transition-colors">
+                                                                <ShieldAlert className="w-4 h-4 text-amber-500" /> Suspend Account
+                                                            </button>
+                                                            <div className="my-1 border-t border-white/10"></div>
+                                                            <button onClick={() => { setActiveDropdown(null); toast("Revoke Access clicked"); }} className="w-full text-left px-4 py-2 text-sm text-rose-400 hover:bg-white/5 hover:text-rose-300 flex items-center gap-2 transition-colors">
+                                                                <Trash2 className="w-4 h-4" /> Revoke Access
+                                                            </button>
+                                                        </div>
+                                                    )}
                                                 </td>
                                             </tr>
                                         )))}
@@ -217,6 +267,47 @@ export default function UsersPage() {
                     </div>
                 </div>
             </div>
+
+            {/* Invite Modal */}
+            {isInviteModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-[#0a0e17] border border-white/10 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
+                        <div className="flex justify-between items-center p-6 border-b border-white/5 bg-white/[0.02]">
+                            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                                <UserPlus className="w-5 h-5 text-rose-500" /> Invite Staff
+                            </h2>
+                            <button onClick={() => setIsInviteModalOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+                        <form onSubmit={handleInvite} className="p-6 space-y-5">
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-semibold text-gray-300">Full Name</label>
+                                <input required type="text" value={inviteData.name} onChange={e => setInviteData({ ...inviteData, name: e.target.value })} placeholder="e.g. Jane Doe" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-rose-500/50 transition-all shadow-inner" />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-semibold text-gray-300">Email Address</label>
+                                <input required type="email" value={inviteData.email} onChange={e => setInviteData({ ...inviteData, email: e.target.value })} placeholder="e.g. jane@company.com" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-rose-500/50 transition-all shadow-inner" />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-semibold text-gray-300">Role & Access Level</label>
+                                <select value={inviteData.role} onChange={e => setInviteData({ ...inviteData, role: e.target.value })} className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-rose-500/50 transition-all shadow-inner appearance-none cursor-pointer">
+                                    <option value="Staff">Staff (Basic Access)</option>
+                                    <option value="Finance Admin">Finance Admin</option>
+                                    <option value="Course Manager">Course Manager</option>
+                                    <option value="Super Admin">Super Admin (Full Control)</option>
+                                </select>
+                            </div>
+                            <div className="pt-4 flex gap-3">
+                                <button type="button" onClick={() => setIsInviteModalOpen(false)} className="flex-1 py-2.5 bg-transparent border border-white/10 hover:bg-white/5 rounded-xl text-gray-300 font-semibold transition-all">Cancel</button>
+                                <button type="submit" disabled={isInviting} className="flex-1 py-2.5 bg-gradient-to-r from-rose-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70 flex items-center justify-center gap-2">
+                                    {isInviting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Send Invite"}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
