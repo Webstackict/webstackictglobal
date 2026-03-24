@@ -1078,3 +1078,27 @@ enum price_type_enum {
 
   @@schema("public")
 }
+
+model StudentLedger {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  student_id          String    @unique
+  full_name           String
+  phone               String
+  email               String?
+  program             String
+  gender              String?
+  date_of_birth       DateTime?
+  address             String?
+  learning_mode       String?
+  start_date          DateTime? @db.Date
+  end_date            DateTime? @db.Date
+  status              String    @default("active")
+  registration_date   DateTime  @default(now()) @db.Timestamp(6)
+  created_at          DateTime  @default(now()) @db.Timestamp(6)
+  updated_at          DateTime  @default(now()) @db.Timestamp(6)
+  deleted_at          DateTime? @db.Timestamp(6)
+
+  @@index([student_id])
+  @@index([phone])
+  @@schema("public")
+}

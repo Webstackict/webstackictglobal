@@ -158,6 +158,14 @@ function MainHeader({ user }) {
                             Events
                           </LinkWithProgress>
                         </li>
+                        <li>
+                          <LinkWithProgress
+                            href="/enroll"
+                            style={path.includes("/enroll") ? { color: "var(--white)", background: "var(--charcoal-blue-500)" } : null}
+                          >
+                            Enroll
+                          </LinkWithProgress>
+                        </li>
                       </motion.ul>
                     )}
                   </AnimatePresence>
@@ -204,12 +212,14 @@ function MainHeader({ user }) {
                 </LinkWithProgress>
 
                 <LinkWithProgress
-                  href="/enroll"
+                  href="/verify-student"
                   className={classes.link}
-                  style={path.includes("/enroll") ? { color: "var(--teal-400)" } : null}
+                  style={path.includes("/verify-student") ? { color: "var(--teal-400)" } : null}
                 >
-                  Enroll
+                  Verify
                 </LinkWithProgress>
+
+
               </div>
             </div>
 

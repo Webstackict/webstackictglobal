@@ -113,6 +113,13 @@ export default function AdminLayout({ children }) {
                             <NavItem href="/admin/finance" icon={CreditCard} label="Finance" />
                         </div>
 
+                        {/* STUDENT LEDGER */}
+                        <div className="space-y-2">
+                            <div className="px-3 text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Student Ledger</div>
+                            <NavItem href="/admin/students" icon={Users} label="All Students" />
+                            <NavItem href="/admin/students/register" icon={UserPlus} label="Register Student" />
+                        </div>
+
                         {/* SCHOLARSHIPS */}
                         <div className="space-y-2">
                             <div className="px-3 text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-3">Scholarship</div>

@@ -163,6 +163,11 @@ export default function MainSidebar() {
                       Events
                     </LinkWithProgress>
                   </li>
+                  <li>
+                    <LinkWithProgress href="/enroll" onClick={() => setIsMainSidebar(false)}>
+                      Enroll
+                    </LinkWithProgress>
+                  </li>
                 </motion.ul>
               )}
             </AnimatePresence>
@@ -184,6 +189,9 @@ export default function MainSidebar() {
           </LinkWithProgress>
           <LinkWithProgress href="/gallery" className={classes.link} onClick={() => setIsMainSidebar(false)}>
             Gallery
+          </LinkWithProgress>
+          <LinkWithProgress href="/verify-student" className={classes.link} onClick={() => setIsMainSidebar(false)}>
+            Verify
           </LinkWithProgress>
         </div>
         {/* <div className={classes.right}>
