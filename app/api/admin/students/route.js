@@ -10,7 +10,7 @@ export async function POST(req) {
     try {
         const body = await req.json();
         const {
-            full_name, phone, email, program, gender, date_of_birth, address, learning_mode, start_date, end_date, registration_date
+            full_name, phone, email, program, gender, date_of_birth, address, learning_mode, start_date, end_date, registration_date, amount_paid, payment_status, balance
         } = body;
 
         if (!full_name || !phone || !program) {
@@ -51,6 +51,9 @@ export async function POST(req) {
                     start_date: start_date ? new Date(start_date) : null,
                     end_date: end_date ? new Date(end_date) : null,
                     registration_date: registration_date ? new Date(registration_date) : new Date(),
+                    amount_paid: amount_paid ? parseFloat(amount_paid) : 0,
+                    balance: balance ? parseFloat(balance) : 0,
+                    payment_status: payment_status || "Unpaid",
                     status: "active"
                 }
             });

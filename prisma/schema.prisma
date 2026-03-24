@@ -1092,6 +1092,9 @@ model StudentLedger {
   learning_mode       String?
   start_date          DateTime? @db.Date
   end_date            DateTime? @db.Date
+  amount_paid         Float?    @default(0)
+  balance             Float?    @default(0)
+  payment_status      String    @default("Unpaid")
   status              String    @default("active")
   registration_date   DateTime  @default(now()) @db.Timestamp(6)
   created_at          DateTime  @default(now()) @db.Timestamp(6)

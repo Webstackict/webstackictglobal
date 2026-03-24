@@ -21,7 +21,10 @@ export default function RegisterStudentPage() {
         learning_mode: "Hybrid",
         start_date: "",
         end_date: "",
-        registration_date: new Date().toISOString().split('T')[0]
+        registration_date: new Date().toISOString().split('T')[0],
+        amount_paid: 0,
+        payment_status: "Unpaid",
+        balance: 0
     });
 
     const handleChange = (e) => {
@@ -216,6 +219,53 @@ export default function RegisterStudentPage() {
                                     className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-400 focus:text-gray-200 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner [color-scheme:dark]"
                                 />
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Payment Section */}
+                    <div className="p-6 md:p-8 border-t border-white/5">
+                        <h2 className="text-lg font-bold text-white flex items-center gap-2 mb-6">
+                            <span className="w-5 h-5 flex items-center justify-center bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold">$</span> Payment Tracking
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-semibold text-gray-300">Amount Paid (NGN)</label>
+                                <input
+                                    type="number"
+                                    name="amount_paid"
+                                    value={formData.amount_paid}
+                                    onChange={handleChange}
+                                    placeholder="e.g. 150000"
+                                    className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-200 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner"
+                                />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label className="text-sm font-semibold text-gray-300">Payment Status</label>
+                                <select
+                                    name="payment_status"
+                                    value={formData.payment_status}
+                                    onChange={handleChange}
+                                    className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-200 focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition-all shadow-inner appearance-none cursor-pointer"
+                                >
+                                    <option>Unpaid</option>
+                                    <option>Part Payment</option>
+                                    <option>Full Payment</option>
+                                    <option>Scholarship</option>
+                                </select>
+                            </div>
+                            {formData.payment_status === "Part Payment" && (
+                                <div className="space-y-1.5 md:col-span-2">
+                                    <label className="text-sm font-semibold text-orange-300">Outstanding Balance (NGN)</label>
+                                    <input
+                                        type="number"
+                                        name="balance"
+                                        value={formData.balance || 0}
+                                        onChange={handleChange}
+                                        placeholder="Enter remaining balance"
+                                        className="w-full bg-[#111623] border border-orange-500/30 rounded-xl px-4 py-3 text-sm text-orange-200 focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/50 transition-all shadow-inner"
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
 

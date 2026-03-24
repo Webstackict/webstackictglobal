@@ -42,7 +42,7 @@ export async function PUT(req, { params }) {
     try {
         const { id } = await params;
         const body = await req.json();
-        const { student_id, full_name, phone, email, program, gender, date_of_birth, address, learning_mode, status, start_date, end_date, registration_date } = body;
+        const { student_id, full_name, phone, email, program, gender, date_of_birth, address, learning_mode, status, start_date, end_date, registration_date, amount_paid, payment_status, balance } = body;
 
         const updateData = {
             full_name,
@@ -56,6 +56,9 @@ export async function PUT(req, { params }) {
             start_date: start_date ? new Date(start_date) : null,
             end_date: end_date ? new Date(end_date) : null,
             registration_date: registration_date ? new Date(registration_date) : undefined,
+            amount_paid: amount_paid !== undefined && amount_paid !== "" ? parseFloat(amount_paid) || 0 : undefined,
+            balance: balance !== undefined && balance !== "" ? parseFloat(balance) || 0 : undefined,
+            payment_status,
             status
         };
 

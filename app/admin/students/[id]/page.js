@@ -238,6 +238,25 @@ export default function StudentDetailsPage() {
                                         <input type="date" name="registration_date" value={formData.registration_date ? formData.registration_date.split('T')[0] : ""} onChange={handleChange} className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-400 focus:text-gray-200 focus:border-blue-500/50 transition-all shadow-inner [color-scheme:dark]" />
                                     </div>
                                     <div className="space-y-1.5">
+                                        <label className="text-sm font-semibold text-gray-300">Amount Paid (NGN)</label>
+                                        <input type="number" name="amount_paid" value={formData.amount_paid || 0} onChange={handleChange} className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:border-blue-500/50 transition-all shadow-inner" />
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-sm font-semibold text-gray-300">Payment Status</label>
+                                        <select name="payment_status" value={formData.payment_status || "Unpaid"} onChange={handleChange} className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:border-blue-500/50 transition-all shadow-inner">
+                                            <option>Unpaid</option>
+                                            <option>Part Payment</option>
+                                            <option>Full Payment</option>
+                                            <option>Scholarship</option>
+                                        </select>
+                                    </div>
+                                    {formData.payment_status === "Part Payment" && (
+                                        <div className="space-y-1.5 md:col-span-2">
+                                            <label className="text-sm font-semibold text-orange-300">Outstanding Balance (NGN)</label>
+                                            <input type="number" name="balance" value={formData.balance || 0} onChange={handleChange} className="w-full bg-[#111623] border border-orange-500/30 rounded-xl px-4 py-2.5 text-sm text-orange-200 focus:border-orange-500/50 transition-all shadow-inner" />
+                                        </div>
+                                    )}
+                                    <div className="space-y-1.5">
                                         <label className="text-sm font-semibold text-gray-300">Start Date</label>
                                         <input type="date" name="start_date" value={formData.start_date ? formData.start_date.split('T')[0] : ""} onChange={handleChange} className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-400 focus:text-gray-200 focus:border-blue-500/50 transition-all shadow-inner [color-scheme:dark]" />
                                     </div>
@@ -277,6 +296,24 @@ export default function StudentDetailsPage() {
                                     <div className="md:col-span-2">
                                         <div className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Residential Address</div>
                                         <div className="text-sm font-medium text-gray-200 bg-white/5 p-4 rounded-xl border border-white/5">{student.address || <span className="text-gray-600 italic">No physical address on record</span>}</div>
+                                    </div>
+                                    <div className="md:col-span-2 pt-4 border-t border-white/5 grid grid-cols-2 gap-4">
+                                        <div>
+                                            <div className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Amount Paid</div>
+                                            <div className="text-lg font-bold text-emerald-400">₦{student.amount_paid?.toLocaleString() || 0}</div>
+                                        </div>
+                                        <div>
+                                            <div className="text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Payment Status</div>
+                                            <div className="text-sm font-medium text-gray-200 inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 border border-white/10 rounded-lg">
+                                                {student.payment_status || "Unpaid"}
+                                            </div>
+                                        </div>
+                                        {student.payment_status === "Part Payment" && (
+                                            <div className="col-span-2">
+                                                <div className="text-[11px] font-bold text-orange-500/70 uppercase tracking-widest mb-1.5">Outstanding Balance</div>
+                                                <div className="text-lg font-bold text-orange-400">₦{student.balance?.toLocaleString() || 0}</div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
