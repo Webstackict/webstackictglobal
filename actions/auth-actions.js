@@ -101,7 +101,6 @@ export async function completeOnboarding(prevState, formData) {
     const { error: profileError } = await supabase.from('user_profile').upsert({
       user_id: user.id,
       full_name: fullName,
-      email: user.email,
       updated_at: new Date().toISOString()
     });
     if (profileError) throw profileError;
