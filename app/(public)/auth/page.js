@@ -102,9 +102,15 @@ export default function Login() {
   );
 
   async function handleSigninWithGoogleClick() {
-    const url = await signInWithGoogle();
-
-    if (url) window.location.href = url;
+    try {
+      toast.loading("Connecting to Google...", { id: "google-oauth" });
+      await signInWithGoogle();
+      setTimeout(() => toast.dismiss("google-oauth"), 3000);
+    } catch (error) {
+      toast.dismiss("google-oauth");
+      toast.error(error.message || "Server rejected Google OAuth connection");
+      console.error("Google Auth error:", error);
+    }
   }
   return (
     <section id="login-main" className={classes.authSection}>
@@ -131,6 +137,7 @@ export default function Login() {
 
           <div id="social-login" className={classes.socialLogin}>
             <button
+              type="button"
               className={classes.socialBtn}
               onClick={handleSigninWithGoogleClick}
             >
