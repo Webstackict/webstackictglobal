@@ -12,8 +12,8 @@ function SuccessContent() {
     const ref = searchParams.get('ref');
     const method = searchParams.get('method');
 
-    // Paystack returns reference instead of ref sometimes, or we passed ref manually
-    const reference = ref || searchParams.get('reference');
+    // Flutterwave returns tx_ref, Paystack returned reference
+    const reference = ref || searchParams.get('reference') || searchParams.get('tx_ref') || searchParams.get('transaction_id');
 
     if (!reference) {
         return (

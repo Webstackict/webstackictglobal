@@ -192,6 +192,10 @@ export default function ScholarshipApplicationsPage() {
                                                 <span className="inline-flex items-center gap-1.5 text-blue-400 bg-blue-500/10 px-2 py-1 rounded text-xs">
                                                     <CreditCard className="w-3.5 h-3.5" /> Paystack
                                                 </span>
+                                            ) : app.payment_method === 'flutterwave' ? (
+                                                <span className="inline-flex items-center gap-1.5 text-orange-400 bg-orange-500/10 px-2 py-1 rounded text-xs">
+                                                    <CreditCard className="w-3.5 h-3.5" /> Flutterwave
+                                                </span>
                                             ) : app.payment_method === 'bank_transfer' ? (
                                                 <span className="inline-flex items-center gap-1.5 text-yellow-400 bg-yellow-500/10 px-2 py-1 rounded text-xs">
                                                     <Banknote className="w-3.5 h-3.5" /> Bank Trf

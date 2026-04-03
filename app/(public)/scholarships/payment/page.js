@@ -14,7 +14,7 @@ function PaymentPortalContent() {
 
     const [application, setApplication] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [isProcessingPaystack, setIsProcessingPaystack] = useState(false);
+    const [isProcessingFlutterwave, setIsProcessingFlutterwave] = useState(false);
     const [isVerifyingTransfer, setIsVerifyingTransfer] = useState(false);
     const [activeTab, setActiveTab] = useState('card'); // 'card' or 'transfer'
     const [publicBankDetails, setPublicBankDetails] = useState({
@@ -62,10 +62,10 @@ function PaymentPortalContent() {
         fetchApplication();
     }, [ref, router]);
 
-    const handlePaystackCheckout = async () => {
-        setIsProcessingPaystack(true);
+    const handleFlutterwaveCheckout = async () => {
+        setIsProcessingFlutterwave(true);
         try {
-            const res = await fetch('/api/paystack/scholarship-init', {
+            const res = await fetch('/api/flutterwave/scholarship-init', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ applicationReference: ref })
@@ -76,11 +76,11 @@ function PaymentPortalContent() {
                 window.location.href = data.url;
             } else {
                 toast.error(data.message || "Failed to initialize secure checkout");
-                setIsProcessingPaystack(false);
+                setIsProcessingFlutterwave(false);
             }
         } catch (err) {
             toast.error("Network error analyzing checkout");
-            setIsProcessingPaystack(false);
+            setIsProcessingFlutterwave(false);
         }
     };
 
@@ -232,7 +232,7 @@ function PaymentPortalContent() {
                             {activeTab === 'card' && (
                                 <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
                                     <div className="p-5 border border-blue-500/20 bg-blue-500/5 rounded-xl text-blue-100/80 leading-relaxed text-sm">
-                                        You will be redirected to Paystack&apos;s highly secure payment gateway where you can pay via <strong>Debit Card, USSD, or Bank Transfer</strong>. Your scholarship application will be automatically approved immediately upon successful payment.
+                                        You will be redirected to Flutterwave&apos;s highly secure payment gateway where you can pay via <strong>Debit Card, USSD, or Bank Transfer</strong>. Your scholarship application will be automatically approved immediately upon successful payment.
                                     </div>
 
                                     <div className="flex items-center gap-3 text-sm text-gray-400 justify-center mb-6">
@@ -241,12 +241,12 @@ function PaymentPortalContent() {
                                     </div>
 
                                     <button
-                                        onClick={handlePaystackCheckout}
-                                        disabled={isProcessingPaystack}
+                                        onClick={handleFlutterwaveCheckout}
+                                        disabled={isProcessingFlutterwave}
                                         className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold rounded-xl shadow-xl shadow-blue-500/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 text-lg"
                                     >
-                                        {isProcessingPaystack ? <RefreshCw className="animate-spin" size={20} /> : <CreditCard size={20} />}
-                                        {isProcessingPaystack ? "Initializing Secure Gateway..." : `Pay ₦${Number(application.application_fee).toLocaleString()} Now`}
+                                        {isProcessingFlutterwave ? <RefreshCw className="animate-spin" size={20} /> : <CreditCard size={20} />}
+                                        {isProcessingFlutterwave ? "Initializing Secure Gateway..." : `Pay ₦${Number(application.application_fee).toLocaleString()} Now`}
                                     </button>
                                 </div>
                             )}

@@ -23,12 +23,13 @@ export async function GET() {
                     seo_title: "Webstack ICT Global | Premier Tech Academy",
                     seo_description: "Learn web development, cloud computing, and more.",
                     og_image_url: "",
-                    paystack_public_key: "",
-                    paystack_secret_key: "",
+                    flutterwave_public_key: "",
+                    flutterwave_secret_key: "",
+                    flutterwave_secret_hash: "",
                     sendgrid_api_key: "",
                     admin_notification_emails: "admin@webstackict.com",
                     enable_registration_emails: true,
-                    enable_paystack: true,
+                    enable_flutterwave: true,
                     enable_bank_transfer: true,
                     maintenance_mode: false
                 }
@@ -50,9 +51,9 @@ export async function POST(req) {
             bank_name, bank_account_name, bank_account_number,
             primary_logo_url, favicon_url,
             seo_title, seo_description, og_image_url,
-            paystack_public_key, paystack_secret_key, sendgrid_api_key,
+            flutterwave_public_key, flutterwave_secret_key, flutterwave_secret_hash, sendgrid_api_key,
             admin_notification_emails, enable_registration_emails,
-            enable_paystack, enable_bank_transfer, maintenance_mode
+            enable_flutterwave, enable_bank_transfer, maintenance_mode
         } = body;
 
         // Note: Using raw SQL update for extra columns to avoid Prisma Client mismatch if schema push was skipped
@@ -70,14 +71,15 @@ export async function POST(req) {
                 seo_title = $10,
                 seo_description = $11,
                 og_image_url = $12,
-                paystack_public_key = $13,
-                paystack_secret_key = $14,
-                sendgrid_api_key = $15,
-                admin_notification_emails = $16,
-                enable_registration_emails = $17,
-                enable_paystack = $18,
-                enable_bank_transfer = $19,
-                maintenance_mode = $20,
+                flutterwave_public_key = $13,
+                flutterwave_secret_key = $14,
+                flutterwave_secret_hash = $15,
+                sendgrid_api_key = $16,
+                admin_notification_emails = $17,
+                enable_registration_emails = $18,
+                enable_flutterwave = $19,
+                enable_bank_transfer = $20,
+                maintenance_mode = $21,
                 updated_at = NOW()
             WHERE id = 'global'
             RETURNING *;
@@ -88,9 +90,9 @@ export async function POST(req) {
             bank_name, bank_account_name, bank_account_number,
             primary_logo_url, favicon_url,
             seo_title, seo_description, og_image_url,
-            paystack_public_key, paystack_secret_key, sendgrid_api_key,
+            flutterwave_public_key, flutterwave_secret_key, flutterwave_secret_hash, sendgrid_api_key,
             admin_notification_emails, typeof enable_registration_emails === 'boolean' ? enable_registration_emails : true,
-            typeof enable_paystack === 'boolean' ? enable_paystack : true,
+            typeof enable_flutterwave === 'boolean' ? enable_flutterwave : true,
             typeof enable_bank_transfer === 'boolean' ? enable_bank_transfer : true,
             typeof maintenance_mode === 'boolean' ? maintenance_mode : false
         ];

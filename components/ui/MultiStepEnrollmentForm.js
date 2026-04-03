@@ -370,7 +370,7 @@ export default function MultiStepEnrollmentForm({ cohorts = [] }) {
                                 <div onClick={() => setPaymentMethod("card")} className={`${classes.selectionCard} ${paymentMethod === "card" ? classes.cardActive : ""}`}>
                                     <CreditCard className="w-6 h-6 mb-2" />
                                     <h3>Pay Online (Secure)</h3>
-                                    <p className={classes.cardDesc}>Instant activation via Paystack (Card, Transfer, USSD)</p>
+                                    <p className={classes.cardDesc}>Instant activation via Flutterwave (Card, Transfer, USSD)</p>
                                 </div>
                                 <div onClick={() => setPaymentMethod("bank")} className={`${classes.selectionCard} ${paymentMethod === "bank" ? classes.cardActive : ""}`}>
                                     <Landmark className="w-6 h-6 mb-2" />

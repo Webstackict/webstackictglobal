@@ -74,7 +74,7 @@ export default function PaymentPage() {
     const initCardPayment = async () => {
         setIsProcessing(true);
         try {
-            const res = await fetch('/api/paystack/init', {
+            const res = await fetch('/api/flutterwave/init', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ enrollmentId: id })
@@ -230,9 +230,9 @@ export default function PaymentPage() {
                     <div className={classes.methodContent}>
                         {paymentMethod === 'card' ? (
                             <div className={classes.infoBox}>
-                                <h3><ShieldCheck size={20} /> Paystack Security</h3>
+                                <h3><ShieldCheck size={20} /> Flutterwave Security</h3>
                                 <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                                    Your transaction is secured by Paystack. Pay via debit card, transfer, or USSD. Your enrollment will be activated instantly upon payment.
+                                    Your transaction is secured by Flutterwave. Pay via debit card, bank transfer, or USSD. Your enrollment will be activated instantly upon successful payment.
                                 </p>
                                 <button
                                     onClick={initCardPayment}

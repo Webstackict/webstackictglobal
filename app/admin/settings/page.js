@@ -15,9 +15,9 @@ export default function SettingsPage() {
         bank_name: "", bank_account_name: "", bank_account_number: "",
         primary_logo_url: "", favicon_url: "",
         seo_title: "", seo_description: "", og_image_url: "",
-        paystack_public_key: "", paystack_secret_key: "", sendgrid_api_key: "",
+        flutterwave_public_key: "", flutterwave_secret_key: "", flutterwave_secret_hash: "", sendgrid_api_key: "",
         admin_notification_emails: "", enable_registration_emails: true,
-        enable_paystack: true, enable_bank_transfer: true, maintenance_mode: false
+        enable_flutterwave: true, enable_bank_transfer: true, maintenance_mode: false
     });
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
@@ -277,23 +277,27 @@ export default function SettingsPage() {
                             </div>
 
                             <div className="space-y-8">
-                                {/* Paystack Settings */}
+                                {/* Flutterwave Settings */}
                                 <div>
                                     <div className="flex items-center gap-3 mb-4 bg-[#111623] border border-white/5 p-3 rounded-xl">
-                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-[#0ba4db] shadow-inner text-xl">P</div>
+                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-[#f5a623] shadow-inner text-xl">F</div>
                                         <div>
-                                            <h4 className="text-sm font-bold text-white">Paystack Initialization</h4>
+                                            <h4 className="text-sm font-bold text-white">Flutterwave Initialization</h4>
                                             <p className="text-xs text-gray-500">Connect your African payment gateway.</p>
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pl-2">
                                         <div className="space-y-1.5">
                                             <label className="text-xs font-semibold text-gray-400 block uppercase tracking-wider">Public Key</label>
-                                            <input type={showKeys ? "text" : "password"} name="paystack_public_key" value={formData.paystack_public_key || ''} onChange={handleChange} placeholder="pk_live_xxxx" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500/50 transition-all font-mono shadow-inner" />
+                                            <input type={showKeys ? "text" : "password"} name="flutterwave_public_key" value={formData.flutterwave_public_key || ''} onChange={handleChange} placeholder="FLWPUBK_TEST-xxxx" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500/50 transition-all font-mono shadow-inner" />
                                         </div>
                                         <div className="space-y-1.5">
                                             <label className="text-xs font-semibold text-gray-400 block uppercase tracking-wider">Secret Key</label>
-                                            <input type={showKeys ? "text" : "password"} name="paystack_secret_key" value={formData.paystack_secret_key || ''} onChange={handleChange} placeholder="sk_live_xxxx" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500/50 transition-all font-mono shadow-inner" />
+                                            <input type={showKeys ? "text" : "password"} name="flutterwave_secret_key" value={formData.flutterwave_secret_key || ''} onChange={handleChange} placeholder="FLWSECK_TEST-xxxx" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500/50 transition-all font-mono shadow-inner" />
+                                        </div>
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-semibold text-gray-400 block uppercase tracking-wider">Secret Hash</label>
+                                            <input type={showKeys ? "text" : "password"} name="flutterwave_secret_hash" value={formData.flutterwave_secret_hash || ''} onChange={handleChange} placeholder="Your Custom Webhook Hash" className="w-full bg-[#111623] border border-white/10 rounded-xl px-4 py-2.5 text-sm text-gray-200 focus:outline-none focus:border-amber-500/50 transition-all font-mono shadow-inner" />
                                         </div>
                                     </div>
                                 </div>
@@ -360,14 +364,14 @@ export default function SettingsPage() {
                             <div className="space-y-6">
                                 <div className="flex items-center justify-between p-4 bg-[#111623] border border-white/5 rounded-xl">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-[#0ba4db] shadow-inner text-xl">P</div>
+                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-bold text-[#f5a623] shadow-inner text-xl">F</div>
                                         <div>
-                                            <h4 className="text-sm font-bold text-white mb-0.5">Paystack Checkout</h4>
+                                            <h4 className="text-sm font-bold text-white mb-0.5">Flutterwave Checkout</h4>
                                             <p className="text-xs text-gray-500">Accept automated Cards, Bank Transfers, and USSD via the frontend popup.</p>
                                         </div>
                                     </div>
                                     <label className="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="enable_paystack" checked={formData.enable_paystack !== false} onChange={handleChange} className="sr-only peer" />
+                                        <input type="checkbox" name="enable_flutterwave" checked={formData.enable_flutterwave !== false} onChange={handleChange} className="sr-only peer" />
                                         <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
                                     </label>
                                 </div>
