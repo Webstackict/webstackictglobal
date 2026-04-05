@@ -34,6 +34,7 @@ export default function AcademyPricingCard({
                 <span className={classes.price}>
                   {currencyFormatter.format(department.discount_fee)}
                 </span>
+                {' '}
                 <span className={classes.originalPrice} style={{ textDecoration: 'line-through', opacity: 0.6, fontSize: '0.8em', marginLeft: '10px' }}>
                   {currencyFormatter.format(department.fee)}
                 </span>

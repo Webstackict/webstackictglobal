@@ -18,6 +18,7 @@ export default function ProgramCard({ title, slug, duration, description, icon, 
                     {discountPrice ? (
                         <>
                             <span className={classes.discountPrice}>₦{discountPrice.toLocaleString()}</span>
+                            {' '}
                             <span className={classes.originalPrice}>₦{price.toLocaleString()}</span>
                         </>
                     ) : (

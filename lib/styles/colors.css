@@ -39,18 +39,14 @@
 
   /* hero */
   --hero-bg: linear-gradient(135deg, #110f37 0%, #1a1850 50%, #2a2870 100%);
-  --hero-overlay: linear-gradient(
-    to right,
-    rgb(30 58 138 / 0.5),
-    rgb(88 28 135 / 0.3)
-  );
+  --hero-overlay: linear-gradient(to right,
+      rgb(30 58 138 / 0.5),
+      rgb(88 28 135 / 0.3));
 
   /* cohorts card */
-  --cohorts-card-bg: linear-gradient(
-    135deg,
-    rgba(17, 15, 55, 0.9) 0%,
-    rgba(26, 24, 80, 0.8) 100%
-  );
+  --cohorts-card-bg: linear-gradient(135deg,
+      rgba(17, 15, 55, 0.9) 0%,
+      rgba(26, 24, 80, 0.8) 100%);
   --cohorts-card-box-shadow: 0 0 10px rgba(59, 130, 246, 0.15);
 
   /* contact */
@@ -60,12 +56,10 @@
   --contact-box-shadow-hover: 0 0 35px rgba(60, 166, 252, 0.4);
 
   /* sections */
-  --light-section-bg: linear-gradient(
-    to bottom right,
-    #111827,
-    rgb(30 58 138 / 0.2),
-    rgb(88 28 135 / 0.2)
-  );
+  --light-section-bg: linear-gradient(to bottom right,
+      #111827,
+      rgb(30 58 138 / 0.2),
+      rgb(88 28 135 / 0.2));
 
   /* progres-bar bg */
   --gray-bg: #374151;
@@ -80,4 +74,16 @@
   --cta-down-btn: rgba(255, 255, 255, 0.05);
   --cta-down-btn-color: rgba(255, 255, 255, 0.755);
   --cta-down-btn-hover: rgba(59, 130, 246, 0.5);
+}
+
+.blue-bg {
+  background: var(--blue-400);
+}
+
+.green-bg {
+  background: var(--green-400);
+}
+
+.purple-bg {
+  background: var(--purple-400);
 }
