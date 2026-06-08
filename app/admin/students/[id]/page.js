@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-import { ArrowLeft, Edit, Trash2, CheckCircle2, Copy, Loader2, Save, XCircle } from "lucide-react";
+import { ArrowLeft, Edit, Trash2, CheckCircle2, Copy, Loader2, Save, XCircle, QrCode, Download, Check } from "lucide-react";
 import { toast } from "sonner";
 import { programs } from "@/lib/contents/programs-data";
 
@@ -97,6 +97,43 @@ export default function StudentDetailsPage() {
         toast.success("WTG ID Copied");
     };
 
+    const [copied, setCopied] = useState(false);
+    const [verificationUrl, setVerificationUrl] = useState("");
+
+    useEffect(() => {
+        if (student?.student_id) {
+            setVerificationUrl(`${window.location.origin}/verify-student?student_id=${student.student_id}`);
+        }
+    }, [student]);
+
+    const handleCopyVerificationLink = () => {
+        if (!verificationUrl) return;
+        navigator.clipboard.writeText(verificationUrl);
+        setCopied(true);
+        toast.success("Verification link copied to clipboard!");
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    const handleDownloadQR = async () => {
+        if (!verificationUrl) return;
+        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(verificationUrl)}&color=06080d&bgcolor=ffffff`;
+        try {
+            const response = await fetch(qrApiUrl);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `verify_${student.student_id}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            toast.success("QR Code downloaded successfully!");
+        } catch (err) {
+            window.open(qrApiUrl, "_blank");
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
@@ -182,6 +219,75 @@ export default function StudentDetailsPage() {
                                     {student.end_date ? new Date(student.end_date).toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' }) : "TBA"}
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Verification QR Code Card */}
+                    <div className="bg-[#0a0e17]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6 shadow-xl flex flex-col items-center text-center relative overflow-hidden">
+                        <style>{`
+                            @keyframes scan {
+                                0% { top: 0%; }
+                                50% { top: 100%; }
+                                100% { top: 0%; }
+                            }
+                            .scanner-line {
+                                animation: scan 3s linear infinite;
+                            }
+                        `}</style>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl"></div>
+                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+                        
+                        <h3 className="text-md font-bold text-white mb-6 flex items-center gap-2">
+                            <QrCode className="w-5 h-5 text-blue-400" /> Verification QR Code
+                        </h3>
+
+                        {/* Viewfinder outer wrapper - corners extend outside */}
+                        <div className="relative inline-block mb-6">
+                            {/* Blue corner crop marks */}
+                            <div className="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-[3px] border-l-[3px] border-blue-500 rounded-tl-md z-10"></div>
+                            <div className="absolute -top-1.5 -right-1.5 w-5 h-5 border-t-[3px] border-r-[3px] border-blue-500 rounded-tr-md z-10"></div>
+                            <div className="absolute -bottom-1.5 -left-1.5 w-5 h-5 border-b-[3px] border-l-[3px] border-blue-500 rounded-bl-md z-10"></div>
+                            <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 border-b-[3px] border-r-[3px] border-blue-500 rounded-br-md z-10"></div>
+
+                            {/* White QR frame with scanner laser inside */}
+                            <div className="bg-white p-3 rounded-2xl shadow-xl relative overflow-hidden select-none">
+                                {/* Animated laser scan line */}
+                                <div className="scanner-line"></div>
+
+                                {verificationUrl ? (
+                                    <img
+                                        src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
+                                            verificationUrl
+                                        )}&color=06080d&bgcolor=ffffff`}
+                                        alt="Student Verification QR"
+                                        className="w-[140px] h-[140px] object-contain block"
+                                    />
+                                ) : (
+                                    <div className="w-[140px] h-[140px] flex items-center justify-center bg-gray-50 rounded-lg">
+                                        <Loader2 className="w-5 h-5 text-gray-400 animate-spin" />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <p className="text-xs text-gray-400 mb-6 max-w-[200px] leading-relaxed">
+                            Scan to instantly verify this student's enrollment and credentials.
+                        </p>
+
+                        <div className="flex gap-3 w-full">
+                            <button
+                                onClick={handleCopyVerificationLink}
+                                className="flex-1 h-10 px-3 bg-[#111623] hover:bg-white/5 border border-white/10 active:scale-95 rounded-xl text-xs font-semibold text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                            >
+                                {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                                {copied ? "Copied" : "Copy Link"}
+                            </button>
+                            <button
+                                onClick={handleDownloadQR}
+                                className="flex-1 h-10 px-3 bg-blue-600 hover:bg-blue-500 active:scale-95 rounded-xl text-xs font-semibold text-white transition-all flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(59,130,246,0.2)] cursor-pointer"
+                            >
+                                <Download className="w-4 h-4" /> Save QR
+                            </button>
                         </div>
                     </div>
                 </div>

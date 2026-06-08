@@ -452,3 +452,23 @@ ul {
   letter-spacing: 0.1em;
   color: #64748b;
 }
+
+/* QR Code scanner laser animation */
+@keyframes scan {
+  0%   { top: 0%; }
+  50%  { top: calc(100% - 2px); }
+  100% { top: 0%; }
+}
+
+.scanner-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  box-shadow: 0 0 8px 2px rgba(59, 130, 246, 0.7);
+  animation: scan 2.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0.85;
+}
